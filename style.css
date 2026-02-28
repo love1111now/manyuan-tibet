@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 滿願藏庫專屬美學與動畫 */
+body { background-color: #FCFCFA; }
+.tibetan-texture { background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23d4af37' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); }
+.wind-horse-thread { height: 2px; width: 100%; background: linear-gradient(90deg, rgba(24,69,139,0.7) 0%, rgba(255,255,255,0.7) 25%, rgba(189,32,49,0.7) 50%, rgba(35,126,68,0.7) 75%, rgba(240,168,36,0.7) 100%); opacity: 0.6; }
+.wind-horse-divider { height: 1px; width: 60%; margin: 0 auto; background: linear-gradient(90deg, transparent, rgba(24,69,139,0.4), rgba(255,255,255,0.4), rgba(189,32,49,0.4), rgba(35,126,68,0.4), rgba(240,168,36,0.4), transparent); }
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+.animate-fade-in { animation: fadeIn 1s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+.delay-100 { animation-delay: 0.1s; opacity: 0; }
+.delay-200 { animation-delay: 0.2s; opacity: 0; }
+.delay-300 { animation-delay: 0.3s; opacity: 0; }
+
+@keyframes breathingGlow { 0%, 100% { box-shadow: 0 0 15px rgba(212, 175, 55, 0.2); } 50% { box-shadow: 0 0 35px rgba(212, 175, 55, 0.5); } }
+.breathing-glow { animation: breathingGlow 3s ease-in-out infinite; }
+
+details > summary { list-style: none; }
+details > summary::-webkit-details-marker { display: none; }
