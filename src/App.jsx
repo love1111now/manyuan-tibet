@@ -3,27 +3,74 @@ import React, { useState } from 'react';
 export default function App() {
   // --- 能量傾聽 React State ---
   const [selectedOracle, setSelectedOracle] = useState(null);
+  
+  // --- 收費方案頁籤 React State ---
+  const [activePricingTab, setActivePricingTab] = useState('black');
 
   const oracleData = {
     black: {
       title: '您當下的正法本尊：【黑財神】',
       desc: '您正承受著巨大的業力與財務壓迫。您需要黑財神以雷霆萬鈞之勢，為您強力斬斷漏財惡緣，催動爆發性收入以度過危機。',
-      link: 'black-dzambhala.html',
+      link: '#pricing-section',
     },
     ganapati: {
       title: '您當下的正法本尊：【象頭財神】',
       desc: '您的財富正處於容易流失的盲區。象頭神將為您開啟清明智慧，為您的重大決策與資產築起最堅固的護城河。',
-      link: 'ganapati.html',
+      link: '#pricing-section',
     },
     yellow: {
       title: '您當下的正法本尊：【黃財神】',
       desc: '您不缺努力，缺的是福德基石。黃財神的水供將洗滌您的匱乏意識，為您穩固本業，讓加薪與客源自然湧現。',
-      link: 'yellow-dzambhala.html',
+      link: '#pricing-section',
     },
     kurukulla: {
       title: '您當下的正法本尊：【作明佛母】',
       desc: '您的問題不在專業，而在人際磁場。佛母的紅蓮懷愛法將為您轉化人際磁場，讓關鍵貴人、客戶不由自主地向您靠攏。',
-      link: 'kurukulla.html',
+      link: '#pricing-section',
+    }
+  };
+
+  // 16組綠界收費連結資料
+  const pricingData = {
+    black: {
+      name: '黑財神',
+      subtitle: '化解危機・強力破障',
+      plans: [
+        { price: '3,680', url: 'https://cart.cashier.ecpay.com.tw/qp/z4V8', title: '頂級專屬・壇城修法' },
+        { price: '1,860', url: 'https://cart.cashier.ecpay.com.tw/qp/z4Q7', title: '進階破障・專屬迴向' },
+        { price: '980', url: 'https://cart.cashier.ecpay.com.tw/qp/z4PD', title: '穩固本源・祈福迴向' },
+        { price: '490', url: 'https://cart.cashier.ecpay.com.tw/qp/z4ND', title: '隨喜結緣・清淨祝禱' }
+      ]
+    },
+    yellow: {
+      name: '黃財神',
+      subtitle: '豐盛安心・穩固本源',
+      plans: [
+        { price: '3,680', url: 'https://cart.cashier.ecpay.com.tw/qp/z4Z5', title: '頂級專屬・壇城修法' },
+        { price: '1,860', url: 'https://cart.cashier.ecpay.com.tw/qp/z4Y3', title: '進階破障・專屬迴向' },
+        { price: '980', url: 'https://cart.cashier.ecpay.com.tw/qp/z4XF', title: '穩固本源・祈福迴向' },
+        { price: '490', url: 'https://cart.cashier.ecpay.com.tw/qp/z4W0', title: '隨喜結緣・清淨祝禱' }
+      ]
+    },
+    kurukulla: {
+      name: '作明佛母',
+      subtitle: '貴人滿盈・懷愛善緣',
+      plans: [
+        { price: '3,680', url: 'https://cart.cashier.ecpay.com.tw/qp/z5d7', title: '頂級專屬・壇城修法' },
+        { price: '1,860', url: 'https://cart.cashier.ecpay.com.tw/qp/z5c3', title: '進階破障・專屬迴向' },
+        { price: '980', url: 'https://cart.cashier.ecpay.com.tw/qp/z5bF', title: '穩固本源・祈福迴向' },
+        { price: '490', url: 'https://cart.cashier.ecpay.com.tw/qp/z5a8', title: '隨喜結緣・清淨祝禱' }
+      ]
+    },
+    ganapati: {
+      name: '象頭財神',
+      subtitle: '智慧守護・決策清明',
+      plans: [
+        { price: '3,680', url: 'https://cart.cashier.ecpay.com.tw/qp/z4U2', title: '頂級專屬・壇城修法' },
+        { price: '1,860', url: 'https://cart.cashier.ecpay.com.tw/qp/z4T1', title: '進階破障・專屬迴向' },
+        { price: '980', url: 'https://cart.cashier.ecpay.com.tw/qp/z4S8', title: '穩固本源・祈福迴向' },
+        { price: '490', url: 'https://cart.cashier.ecpay.com.tw/qp/z4R5', title: '隨喜結緣・清淨祝禱' }
+      ]
     }
   };
 
@@ -104,7 +151,13 @@ export default function App() {
                 <p className="text-gray-300 mb-8 leading-loose text-lg tracking-wide max-w-[90%] mx-auto">
                   {oracleData[selectedOracle].desc}
                 </p>
-                <a href={oracleData[selectedOracle].link} className="inline-block bg-gradient-to-br from-gold-base to-gold-deep text-white py-3 px-8 rounded-full font-medium text-lg tracking-widest transition-all duration-300 breathing-glow hover:text-white border border-white/20">
+                <a href={oracleData[selectedOracle].link} 
+                   onClick={(e) => {
+                     e.preventDefault();
+                     setActivePricingTab(selectedOracle);
+                     document.getElementById('pricing-section').scrollIntoView({ behavior: 'smooth' });
+                   }}
+                   className="inline-block bg-gradient-to-br from-gold-base to-gold-deep text-white py-3 px-8 rounded-full font-medium text-lg tracking-widest transition-all duration-300 breathing-glow hover:text-white border border-white/20">
                   讓清淨能量為您破局 ➔
                 </a>
                 <button onClick={() => setSelectedOracle(null)} className="block mx-auto mt-6 text-sm text-gray-500 hover:text-gold-base transition-colors underline">
@@ -242,12 +295,12 @@ export default function App() {
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-16 animate-fade-in">
               <h2 className="font-serif text-3xl md:text-4xl text-main font-semibold tracking-wide mb-4">正法本尊 專屬護持</h2>
-              <p className="text-muted text-lg tracking-wide">點擊查看各法門專屬痛點解析與祈願方案</p>
+              <p className="text-muted text-lg tracking-wide">了解各法門專屬痛點解析與祈願方向</p>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
               <article className="group relative w-full h-[280px] md:h-[360px] rounded-2xl overflow-hidden bg-dark shadow-lg transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-gold-base/20 animate-fade-in delay-100">
-                <a href="black-dzambhala.html" className="block w-full h-full" aria-label="了解黑財神祈願方案">
+                <a href="#pricing-section" onClick={(e) => { e.preventDefault(); setActivePricingTab('black'); document.getElementById('pricing-section').scrollIntoView({ behavior: 'smooth' }); }} className="block w-full h-full" aria-label="了解黑財神祈願方案">
                   <img src="/images/image_2.webp" alt="黑財神" loading="lazy" className="w-full h-full object-cover opacity-85 transition-all duration-700 group-hover:scale-105 group-hover:opacity-100" />
                   <div className="absolute inset-0 bg-gradient-to-t from-dark/95 via-dark/30 to-transparent flex flex-col justify-end p-8 md:p-10">
                     <h3 className="font-serif text-2xl text-white mb-2 font-medium tracking-wide">【化解危機】黑財神</h3>
@@ -257,7 +310,7 @@ export default function App() {
               </article>
               
               <article className="group relative w-full h-[280px] md:h-[360px] rounded-2xl overflow-hidden bg-dark shadow-lg transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-gold-base/20 animate-fade-in delay-200">
-                <a href="ganapati.html" className="block w-full h-full" aria-label="了解象頭財神祈願方案">
+                <a href="#pricing-section" onClick={(e) => { e.preventDefault(); setActivePricingTab('ganapati'); document.getElementById('pricing-section').scrollIntoView({ behavior: 'smooth' }); }} className="block w-full h-full" aria-label="了解象頭財神祈願方案">
                   <img src="/images/image_3.webp" alt="象神精靈主" loading="lazy" className="w-full h-full object-cover object-top opacity-85 transition-all duration-700 group-hover:scale-105 group-hover:opacity-100" />
                   <div className="absolute inset-0 bg-gradient-to-t from-dark/95 via-dark/30 to-transparent flex flex-col justify-end p-8 md:p-10">
                     <h3 className="font-serif text-2xl text-white mb-2 font-medium tracking-wide">【智慧守護】象頭財神</h3>
@@ -267,7 +320,7 @@ export default function App() {
               </article>
 
               <article className="group relative w-full h-[280px] md:h-[360px] rounded-2xl overflow-hidden bg-dark shadow-lg transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-gold-base/20 animate-fade-in delay-100">
-                <a href="yellow-dzambhala.html" className="block w-full h-full" aria-label="了解黃財神祈願方案">
+                <a href="#pricing-section" onClick={(e) => { e.preventDefault(); setActivePricingTab('yellow'); document.getElementById('pricing-section').scrollIntoView({ behavior: 'smooth' }); }} className="block w-full h-full" aria-label="了解黃財神祈願方案">
                   <img src="/images/image_4.webp" alt="黃財神" loading="lazy" className="w-full h-full object-cover opacity-85 transition-all duration-700 group-hover:scale-105 group-hover:opacity-100" />
                   <div className="absolute inset-0 bg-gradient-to-t from-dark/95 via-dark/30 to-transparent flex flex-col justify-end p-8 md:p-10">
                     <h3 className="font-serif text-2xl text-white mb-2 font-medium tracking-wide">【豐盛安心】黃財神</h3>
@@ -277,7 +330,7 @@ export default function App() {
               </article>
 
               <article className="group relative w-full h-[280px] md:h-[360px] rounded-2xl overflow-hidden bg-dark shadow-lg transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-gold-base/20 animate-fade-in delay-200">
-                <a href="kurukulla.html" className="block w-full h-full" aria-label="了解作明佛母祈願方案">
+                <a href="#pricing-section" onClick={(e) => { e.preventDefault(); setActivePricingTab('kurukulla'); document.getElementById('pricing-section').scrollIntoView({ behavior: 'smooth' }); }} className="block w-full h-full" aria-label="了解作明佛母祈願方案">
                   <img src="/images/image_5.webp" alt="作明佛母" loading="lazy" className="w-full h-full object-cover opacity-85 transition-all duration-700 group-hover:scale-105 group-hover:opacity-100" />
                   <div className="absolute inset-0 bg-gradient-to-t from-dark/95 via-dark/30 to-transparent flex flex-col justify-end p-8 md:p-10">
                     <h3 className="font-serif text-2xl text-white mb-2 font-medium tracking-wide">【貴人滿盈】作明佛母</h3>
@@ -288,6 +341,63 @@ export default function App() {
             </div>
           </div>
         </section>
+
+        {/* --- 全新：線上護持・收費方案區塊 --- */}
+        <section id="pricing-section" className="py-24 px-5 bg-bgBase border-b border-gray-200">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-12 animate-fade-in">
+              <div className="font-serif text-gold-deep tracking-[0.2em] text-sm mb-4">【 線上護持・預約修法 】</div>
+              <h2 className="font-serif text-3xl md:text-4xl text-main font-semibold tracking-wide mb-6">點擊選擇對應本尊，開始如法結緣</h2>
+            </div>
+
+            {/* 頁籤按鈕 */}
+            <div className="flex flex-wrap justify-center gap-3 md:gap-6 mb-12">
+              {Object.keys(pricingData).map((key) => (
+                <button
+                  key={key}
+                  onClick={() => setActivePricingTab(key)}
+                  className={`px-6 py-3 rounded-full font-serif text-lg md:text-xl transition-all duration-300 border ${
+                    activePricingTab === key
+                      ? 'bg-gold-base text-white border-gold-base shadow-lg shadow-gold-base/30'
+                      : 'bg-white text-muted border-gray-300 hover:border-gold-base hover:text-gold-deep'
+                  }`}
+                >
+                  {pricingData[key].name}
+                </button>
+              ))}
+            </div>
+
+            {/* 收費卡片內容 */}
+            <div className="animate-fade-in">
+              <div className="text-center mb-8">
+                <h3 className="font-serif text-2xl text-main font-medium">{pricingData[activePricingTab].subtitle}</h3>
+              </div>
+              
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                {pricingData[activePricingTab].plans.map((plan, index) => (
+                  <div key={index} className="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col h-full">
+                    <div className="font-serif text-gold-deep text-xl mb-4 font-medium">{plan.title}</div>
+                    <div className="text-4xl font-light text-main mb-8">
+                      <span className="text-lg">NT$</span> {plan.price}
+                    </div>
+                    <div className="mt-auto">
+                      <a 
+                        href={plan.url}
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="block w-full text-center bg-[#b89b5e] hover:bg-[#a3884f] text-white px-6 py-3 rounded-md transition-colors font-medium tracking-wide"
+                      >
+                        立刻結緣
+                      </a>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <p className="text-center text-sm text-muted mt-8">※ 點擊按鈕將導向綠界安全付款閘道。付款完成後請留意信箱通知。</p>
+            </div>
+          </div>
+        </section>
+        {/* --- 收費方案區塊結束 --- */}
 
         <section className="py-24 px-5 bg-[#FAF8F4] border-y-4 border-gold-base">
             <div className="max-w-5xl mx-auto animate-fade-in">
@@ -385,7 +495,7 @@ export default function App() {
             以設計的美學，傳遞清淨的能量。
           </p>
           <p className="text-sm tracking-wide">
-            任何祈願疑問：<a href="mailto:love1111now@gmail.com" className="text-gold-base hover:text-white transition-colors">love1111now@gmail.com</a>
+            任何祈願疑問：<a href="mailto:maggokao@gmail.com" className="text-gold-base hover:text-white transition-colors">maggokao@gmail.com</a>
           </p>
         </div>
 
@@ -396,7 +506,7 @@ export default function App() {
       </footer>
 
       <a href="https://lin.ee/您的專屬連結" target="_blank" rel="noopener noreferrer" aria-label="聯繫專人 LINE 客服" className="group fixed bottom-6 right-6 md:bottom-8 md:right-8 w-[55px] h-[55px] md:w-[60px] md:h-[60px] bg-[#06C755] text-white rounded-full flex items-center justify-center shadow-lg hover:shadow-[0_15px_30px_rgba(6,199,85,0.4)] hover:-translate-y-1 transition-all duration-300 z-50">
-        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0c4.411 0 8 2.912 8 6.492 0 3.143-2.673 5.891-6.236 6.425-.575.086-1.355.421-1.553 1.056-.05.158-.094.6-.149 1.096-.067.618-.328 1.54 1.34 1.157 2.083-.48 6.59-3.92 6.59-9.734C16 2.912 12.411 0 8 0zM2.872 7.15h1.964c.142 0 .256-.114.256-.256V6.52c0-.142-.114-.256-.256-.256H2.872c-.142 0-.256.114-.256.256v.373c0 .142.114.256.256.256zm1.708 1.25H2.607c-.142 0-.256-.114-.256-.256V5.424c0-.142.114-.256.256-.256h.374c.142 0 .256.114.256.256v2.346h1.343c.142 0 .256.114.256.256v.374c0 .142-.114.256-.256-.256zm2.71-2.97h-.373c-.142 0-.256.114-.256.256v2.719c0 .142.114.256.256.256h.373c.142 0 .256-.114.256-.256V5.686c0-.142-.114-.256-.256-.256zm2.215 0h-.374c-.142 0-.256.114-.256.256v2.719c0 .142.114.256.256.256h.374c.142 0 .256-.114.256-.256V6.86h.884c.142 0 .256-.114.256-.256v-.373c0-.142-.114-.256-.256-.256h-.884V5.686c0-.142-.114-.256-.256-.256z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0c4.411 0 8 2.912 8 6.492 0 3.143-2.673 5.891-6.236 6.425-.575.086-1.355.421-1.553 1.056-.05.158-.094.6-.149 1.096-.067.618-.328 1.54 1.34 1.157 2.083-.48 6.59-3.92 6.59-9.734C16 2.912 12.411 0 8 0zM2.872 7.15h1.964c.142 0 .256-.114.256-.256V6.52c0-.142-.114-.256-.256-.256H2.872c-.142 0-.256.114-.256.256v.373c0 .142.114.256.256.256zm1.708 1.25H2.607c-.142 0-.256-.114-.256-.256V5.424c0-.142.114-.256.256-.256h.374c.142 0 .256.114.256.256v2.346h1.343c.142 0 .256.114.256.256v.374c0 .142-.114.256-.256-.256zm2.71-2.97h-.373c-.142 0-.256.114-.256.256v2.719c0 .142.114.256.256.256h.373c.142 0 .256-.114.256-.256V5.686c0-.142-.114-.256-.256-.256zm2.215 0h-.374c-.142 0-.256.114-.256.256v2.719c0 .142.114.256.256.256h.374c.142 0 .256-.114.256.256V6.86h.884c.142 0 .256-.114.256-.256v-.373c0-.142-.114-.256-.256-.256h-.884V5.686c0-.142-.114-.256-.256-.256z"/></svg>
       </a>
     </>
   );
