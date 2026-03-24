@@ -1,0 +1,36 @@
+import { Link } from "wouter";
+import { ArrowRight } from "lucide-react";
+import Seo from "@/components/Seo";
+import SiteHeader from "@/components/SiteHeader";
+import SiteFooter from "@/components/SiteFooter";
+import { Button } from "@/components/ui/button";
+
+export default function NotFound() {
+  return (
+    <div className="min-h-screen bg-background">
+      <Seo title="找不到頁面" noIndex />
+      <SiteHeader />
+      <main className="mx-auto max-w-5xl px-4 pt-14 pb-24">
+        <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">404</div>
+        <h1 className="mt-2 font-display text-4xl md:text-6xl">你走到一條沒有路的路</h1>
+        <p className="mt-4 readable text-muted-foreground max-w-prose">
+          沒關係。回到首頁用「困境對位」重新選一尊，或直接去付款入口完成護持。
+        </p>
+        <div className="mt-8 flex flex-col sm:flex-row gap-3">
+          <Link href="/" className="shrink-0">
+            <Button className="h-12 px-6 font-black tracking-[0.22em] uppercase gold-border">
+              回首頁 <ArrowRight className="h-4 w-4" />
+            </Button>
+          </Link>
+          <Link
+            href="/pay"
+            className="h-12 px-6 inline-flex items-center justify-center rounded-md border bg-card gold-border readable"
+          >
+            去付款入口
+          </Link>
+        </div>
+      </main>
+      <SiteFooter />
+    </div>
+  );
+}
