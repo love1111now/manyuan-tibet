@@ -187,6 +187,22 @@ export default function DeityPage({ deityKey }: { deityKey: string }) {
           </Card>
         </section>
 
+        {/* Wealth story */}
+        <section className="mt-12">
+          <h2 className="font-display text-3xl md:text-4xl">經典裡，這尊如何給你『財』</h2>
+          <Card className="mt-6 p-7 gold-border bg-card paper-grain">
+            <div className="text-xs tracking-[0.24em] uppercase text-muted-foreground">{d.wealthStory.source}</div>
+            <div className="mt-2 font-display text-2xl md:text-3xl">{d.wealthStory.title}</div>
+            <div className="mt-5 grid gap-4">
+              {d.wealthStory.paragraphs.map((p) => (
+                <p key={p} className="readable text-muted-foreground">
+                  {p}
+                </p>
+              ))}
+            </div>
+          </Card>
+        </section>
+
         {/* Testimonials */}
         <section className="mt-12">
           <h2 className="font-display text-3xl md:text-4xl">三則見證回饋</h2>

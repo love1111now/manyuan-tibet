@@ -48,7 +48,10 @@ export default function Pay() {
               </div>
             </div>
 
-            
+            <div className="mt-6 text-sm readable text-muted-foreground">
+              <span className="text-foreground font-semibold">急迫性提醒：</span>
+              你想要的改善通常很具體——睡得著、止得住、做決定不後悔。越早把護持排進行程，越少把今天的耗損拖成明天的洞。
+            </div>
           </Card>
         </div>
 

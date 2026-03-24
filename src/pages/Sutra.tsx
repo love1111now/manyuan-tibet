@@ -52,6 +52,25 @@ export default function Sutra() {
           </Card>
         </section>
 
+        <section className="mt-10 grid gap-4">
+          <Card className="p-7 gold-border bg-card">
+            <div className="text-xs tracking-[0.24em] uppercase text-muted-foreground">觀念：財佈施為什麼快</div>
+            <div className="mt-3 readable text-muted-foreground">
+              很多人求財只會『抓緊』，但經典與祖師都反覆提醒：真正讓資糧續得起來的，是佈施與供養。
+              《金光明最勝王經》在〈大吉祥天女增長財物品〉甚至直說：得財之後要以上分供養三寶，並「時時給濟貧乏，不應慳惜，獨為己身」。
+              近代傳承中，Lama Zopa Rinpoche 也開示：就算做財神法，日常仍要修佈施，這才是成功與資糧的基本因。
+            </div>
+          </Card>
+
+          <Card className="p-7 gold-border bg-card paper-grain">
+            <div className="text-xs tracking-[0.24em] uppercase text-muted-foreground">急迫性：你想要的改善，其實很明確</div>
+            <div className="mt-3 readable">
+              你想要的通常不是抽象的『變有錢』，而是更具體的：睡得著、決策不後悔、支出止得住、關係不再一直耗損。
+              這些改善越早開始，越少把今天的耗損拖成明天的洞。拖延本身，就是匱乏感在收利息。
+            </div>
+          </Card>
+        </section>
+
         <section className="mt-10">
           <div className="flex flex-col sm:flex-row gap-3">
             <Link href="/puja" className="h-12 px-6 inline-flex items-center justify-center rounded-md border bg-card gold-border readable">
