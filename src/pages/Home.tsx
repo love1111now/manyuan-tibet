@@ -33,15 +33,15 @@ const ICON_BY_KEY: Record<string, string> = {
 export default function Home() {
   return (
     <div className="min-h-screen bg-background">
-      <Seo title="滿願藏庫｜招財護持法事" path="/" />
+      <Seo title="滿願藏庫｜密法能量校正・運財法事" path="/" />
       <SiteHeader />
 
-      {/* Home notice (do not add global scripts; keep analytics untouched) */}
+      {/* Home notice */}
       <div className="border-b border-border bg-card/70 backdrop-blur">
         <div className="mx-auto max-w-6xl px-4 py-3 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
           <div className="readable text-sm text-foreground">
-            <span className="font-semibold text-primary">慶祝 FB 粉絲團開張</span>
-            <span className="text-muted-foreground">，法事限時優惠結緣。</span>
+            <span className="font-semibold text-primary">法流啟動告急</span>
+            <span className="text-muted-foreground">：慶祝 FB 旗艦店落成，法事開啟「法財滿願」限定結緣價。</span>
           </div>
           <a
             href={SITE.fb}
@@ -49,7 +49,7 @@ export default function Home() {
             rel="noreferrer"
             className="inline-flex h-10 px-4 items-center justify-center rounded-md bg-primary text-primary-foreground font-black tracking-[0.18em] uppercase gold-border"
           >
-            立即追蹤
+            快去追蹤FB領取各種優惠
           </a>
         </div>
       </div>
@@ -72,54 +72,53 @@ export default function Home() {
               <div>
                 <div className="inline-flex items-center gap-2 text-xs tracking-[0.26em] uppercase text-muted-foreground">
                   <Sparkles className="h-4 w-4" />
-                  求財不是賭運，是把路走正
+                  別在錯誤的頻率裡空轉，讓財富重新校正
                 </div>
 
                 <h1 className="mt-4 font-display text-4xl sm:text-5xl md:text-7xl leading-[1.05]">
-                  你不是缺錢。
+                  你很努力。
                   <br />
                   你是缺一場
-                  <span className="text-primary">把耗損停下來</span>
+                  <br />
+                  <span className="text-primary">運行增益</span>
                   的護持。
                 </h1>
 
                 <p className="mt-6 readable text-muted-foreground max-w-prose">
-                  我們做的不是誇張保證，而是用經典脈絡與清楚流程，幫你把四條招財路徑分清楚：
-                  <span className="text-foreground">穩財／守財／清明／貴人</span>。
-                  你只要選對一尊、先完成一次護持——很多人最先回來說的，是睡得著、決策不後悔、
-                  生活開始能延續。
+                  盲目追逐增益，不如先截斷虧損。我們不給誇張保證，只用經典脈絡幫你精準切割四種困局：
+                  <span className="text-foreground">穩財／補庫／斷惑／聚人</span>。
+                  只要選對儀軌、完成一次能量校正——你會發現最先回來的，是決策的清明、不再流失的財氣與久違的掌控感。
                 </p>
 
                 <div className="mt-8 flex flex-col sm:flex-row gap-3">
                   <Link href="/puja">
                     <Button className="h-12 px-6 font-black tracking-[0.24em] uppercase gold-border">
-                      30 秒困境對位 <ArrowRight className="h-4 w-4" />
+                      30 秒精準對位困境 <ArrowRight className="h-4 w-4" />
                     </Button>
                   </Link>
                   <Link
                     href="/pay"
                     className="h-12 px-6 inline-flex items-center justify-center rounded-md bg-primary text-primary-foreground font-black tracking-[0.22em] uppercase gold-border"
                   >
-                    我今天就要先安排
+                    立刻啟動能量護持
                   </Link>
                 </div>
 
                 <div className="mt-6 text-xs text-muted-foreground leading-relaxed max-w-prose">
-                  提醒：本站不提供投資建議或報酬承諾；此為宗教護持與回向之安排。結果因人而異，
-                  請以清淨發心與可承擔的行動作為落地。
+                  提醒：本站僅提供如法之宗教護持與功德回向，非金融投資建議。真正的豐盛來自於清淨發心與精準行動的能量顯化。
                 </div>
               </div>
 
               <Card className="p-7 gold-border bg-card/75 backdrop-blur paper-grain">
-                <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">你現在最需要的改善</div>
+                <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">顯化跡象：財氣歸位</div>
                 <div className="mt-3 grid gap-2 readable text-muted-foreground">
-                  <div>• 睡得著，不再半夜盤算</div>
-                  <div>• 支出止得住，財務節奏回來</div>
-                  <div>• 決策不後悔，不再一直翻本</div>
-                  <div>• 關係不耗損，貴人與助力進得來</div>
+                  <div>• 心神歸財，不再為未知感到匱乏</div>
+                  <div>• 截斷滲漏，莫名開支與損耗消失</div>
+                  <div>• 決策不後悔，精準抓牢事業轉機</div>
+                  <div>• 關係不耗損，貴人與助力自動合鳴</div>
                 </div>
                 <div className="mt-6 text-sm text-primary/90">
-                  急迫性：拖一天，耗損多一天。你想要的改善，其實很具體。
+                  拖延一天，能量就多滲漏一天。你應得的豐盛，不該被卡點阻礙。
                 </div>
               </Card>
             </div>
@@ -130,14 +129,14 @@ export default function Home() {
         <section className="mx-auto max-w-6xl px-4 pt-12 pb-6" id="deities">
           <div className="flex items-end justify-between gap-6 flex-wrap">
             <div>
-              <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">困境對位</div>
-              <h2 className="mt-2 font-display text-3xl md:text-4xl">四條路徑，不混走</h2>
+              <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">精準校正</div>
+              <h2 className="mt-2 font-display text-3xl md:text-4xl">四大路徑，不再徒勞</h2>
               <p className="mt-3 readable text-muted-foreground max-w-prose">
-                哪一句最刺痛，就是你現在的卡點。點進去，看清楚『經典故事』『方案』與『流程』。
+                找出最令你不安的痛點，即是當前最需校正的頻率。點擊看見『經典邏輯』與『儀軌方案』。
               </p>
             </div>
             <Link href="/pay" className="underline underline-offset-4 text-primary text-sm">
-              我已選好，直接去付款入口
+              我已選定，直接進入預定入口
             </Link>
           </div>
 
@@ -159,9 +158,9 @@ export default function Home() {
                         <div className="font-display text-2xl">{d.name}</div>
                         <Badge className="gold-border bg-accent/35 text-accent-foreground">{d.subtitle}</Badge>
                       </div>
-                      <div className="mt-2 readable text-muted-foreground">{d.promise}</div>
-                      <div className="mt-4 inline-flex items-center gap-2 text-sm font-semibold">
-                        看經典故事與方案 <ArrowRight className="h-4 w-4" />
+                      <div className="mt-2 readable text-muted-foreground">「{d.promise}」</div>
+                      <div className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-primary">
+                        解鎖古老智慧與方案 <ArrowRight className="h-4 w-4" />
                       </div>
                     </div>
                   </div>
@@ -177,22 +176,22 @@ export default function Home() {
             <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">
               經典背書｜{SUTRA_QUOTES.protectionSource}
             </div>
-            <div className="mt-3 font-display text-2xl md:text-3xl">先護念，再增益</div>
-            <blockquote className="mt-4 border-l-2 border-border pl-4 readable text-foreground">
-              {SUTRA_QUOTES.protection}
+            <div className="mt-3 font-display text-2xl md:text-3xl">先護守，後增益</div>
+            <blockquote className="mt-4 border-l-2 border-border pl-4 readable text-foreground italic">
+              「{SUTRA_QUOTES.protection}」
             </blockquote>
             <div className="mt-5 flex flex-col sm:flex-row gap-3">
               <Link
                 href="/sutra"
                 className="h-12 px-6 inline-flex items-center justify-center rounded-md border bg-background/40 gold-border readable"
               >
-                我想先看經典主軸
+                探尋法流核心邏輯
               </Link>
               <Link
                 href="/pay"
                 className="h-12 px-6 inline-flex items-center justify-center rounded-md bg-primary text-primary-foreground font-black tracking-[0.22em] uppercase gold-border"
               >
-                我已理解，直接去預定
+                理解真理，啟動預定
               </Link>
             </div>
           </Card>
@@ -202,23 +201,23 @@ export default function Home() {
         <section className="mx-auto max-w-6xl px-4 pt-8 pb-16">
           <div className="flex items-end justify-between gap-6 flex-wrap">
             <div>
-              <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">見證</div>
-              <h2 className="mt-2 font-display text-3xl md:text-4xl">你就是下一個回來感恩的人</h2>
+              <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">翻轉實證</div>
+              <h2 className="mt-2 font-display text-3xl md:text-4xl">下一個拿回人生主導權的人</h2>
               <p className="mt-3 readable text-muted-foreground max-w-prose">
-                我們不靠誇張保證，靠的是清楚路徑、如法護持與你願意落地的一步。
+                我們不靠奇蹟，靠的是如法儀軌、精準路徑與你願意踏出的那一步。
               </p>
             </div>
             <Link href="/proof" className="underline underline-offset-4 text-primary text-sm">
-              看更多回饋
+              參閱更多真實回饋
             </Link>
           </div>
 
           <div className="mt-7 grid gap-4 md:grid-cols-3">
             {HOME_TESTIMONIALS.map((t) => (
               <Card key={t.title} className="p-7 gold-border bg-card">
-                <div className="font-semibold">{t.title}</div>
-                <div className="mt-3 readable text-muted-foreground">{t.body}</div>
-                <div className="mt-4 text-xs tracking-[0.2em] uppercase text-muted-foreground">{t.by}</div>
+                <div className="font-semibold text-primary/90">{t.title}</div>
+                <div className="mt-3 readable text-muted-foreground leading-relaxed">{t.body}</div>
+                <div className="mt-4 text-xs tracking-[0.2em] uppercase text-muted-foreground border-t pt-3 border-border/50">{t.by}</div>
               </Card>
             ))}
           </div>
@@ -226,14 +225,14 @@ export default function Home() {
           <div className="mt-10 flex flex-col sm:flex-row gap-3">
             <Link href="/puja">
               <Button className="h-12 px-6 font-black tracking-[0.24em] uppercase gold-border">
-                帶我去選一尊 <ArrowRight className="h-4 w-4" />
+                對位適合我的儀軌 <ArrowRight className="h-4 w-4" />
               </Button>
             </Link>
             <Link
               href="/pay"
               className="h-12 px-6 inline-flex items-center justify-center rounded-md bg-primary text-primary-foreground font-black tracking-[0.22em] uppercase gold-border"
             >
-              我不再拖，直接安排
+              不再等待，直接安排
             </Link>
           </div>
         </section>
