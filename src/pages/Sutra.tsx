@@ -36,7 +36,7 @@ export default function Sutra() {
             <div className="mt-3 readable text-muted-foreground">
               我們把路徑拆成可理解的三步：
               <ul className="mt-3 list-disc list-inside grid gap-1">
-                <li>先對位：你到底是穩財、守財、清明、還是貴人卡住？</li>
+                <li>先對位：你到底是穩財、守財、思緒清明、還是貴人（戀情）卡住？</li>
                 <li>再護持：以如法供養與回向，讓心行回到正位。</li>
                 <li>最後行動：完成護持，不再只是焦慮地看內容。</li>
               </ul>
@@ -47,7 +47,7 @@ export default function Sutra() {
             <div className="text-xs tracking-[0.24em] uppercase text-muted-foreground">我們的立場：很重要</div>
             <div className="mt-3 readable text-muted-foreground">
               我們不做「保證中獎」式的承諾，也不把宗教話術包裝成投資建議。
-              你在這裡做的是護持與回向；我們負責把流程與選擇講清楚。
+              你在這裡做的是正法護持與迴向；我們負責把流程與選擇講清楚。
             </div>
           </Card>
         </section>
@@ -56,7 +56,7 @@ export default function Sutra() {
           <Card className="p-7 gold-border bg-card">
             <div className="text-xs tracking-[0.24em] uppercase text-muted-foreground">觀念：財佈施為什麼快</div>
             <div className="mt-3 readable text-muted-foreground">
-              很多人求財只會『抓緊』，但經典與祖師都反覆提醒：真正讓資糧續得起來的，是佈施與供養。
+              很多人求財只會『抓緊』，但經典與教義都反覆提醒：真正讓資糧續得起來的，是佈施與供養。
               《金光明最勝王經》在〈大吉祥天女增長財物品〉甚至直說：得財之後要以上分供養三寶，並「時時給濟貧乏，不應慳惜，獨為己身」。
               近代傳承中，Lama Zopa Rinpoche 也開示：就算做財神法，日常仍要修佈施，這才是成功與資糧的基本因。
             </div>

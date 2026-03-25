@@ -17,10 +17,10 @@ export default function Proof() {
 
       <main className="mx-auto max-w-5xl px-4 pt-10 pb-24">
         <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">Proof</div>
-        <h1 className="mt-2 font-display text-4xl md:text-5xl">你就是下一個回來感恩的人</h1>
+        <h1 className="mt-2 font-display text-4xl md:text-5xl">或許你就是下一個回來感恩的人</h1>
         <p className="mt-4 readable text-muted-foreground max-w-prose">
           我們不主張保證式承諾；我們把路徑與流程講清楚，讓你能做一次不再後悔的決定。
-          很多人最先想要的改善其實很具體：睡得著、支出止得住、決策不後悔、關係不再一直耗損。
+          很多人最先想要的改善其實很具體：睡得著、支出止得住、決策不後悔、親密關係不再一直耗損。
           這些越早開始，越少把今天的耗損拖成明天的洞。
         </p>
 

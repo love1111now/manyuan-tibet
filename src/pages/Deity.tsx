@@ -114,7 +114,7 @@ export default function DeityPage({ deityKey }: { deityKey: string }) {
             <div className="text-xs tracking-[0.24em] uppercase text-muted-foreground">你可能感受到</div>
             <div className="mt-2 font-display text-2xl">心比較定、路比較清楚</div>
             <p className="mt-3 readable text-muted-foreground">
-              我們不寫「保證」。比較常見的是：焦慮下降、猶豫變少、做事更能延續——這種細微但會累積的改變。
+              我們不寫「保證」。比較常見的是：焦慮下降、猶豫變少、迅速且細微但會累積的改變。
             </p>
           </Card>
         </section>
@@ -205,7 +205,7 @@ export default function DeityPage({ deityKey }: { deityKey: string }) {
 
         {/* Testimonials */}
         <section className="mt-12">
-          <h2 className="font-display text-3xl md:text-4xl">三則見證回饋</h2>
+          <h2 className="font-display text-3xl md:text-4xl">最近的回饋</h2>
           <div className="mt-6 grid gap-4 md:grid-cols-3">
             {d.testimonials.slice(0, 3).map((t) => (
               <Card key={t.title} className="p-7 gold-border bg-card">

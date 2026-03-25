@@ -67,9 +67,9 @@ export default function Home() {
 
                 <p className="mt-6 readable text-muted-foreground max-w-prose">
                   我們做的不是誇張保證，而是用經典脈絡與清楚流程，幫你把四條招財路徑分清楚：
-                  <span className="text-foreground">穩財／守財／清明／貴人</span>。
-                  你只要選對一尊、先完成一次護持——很多人最先回來說的，是睡得著、決策不後悔、
-                  生活開始能延續。
+                  <span className="text-foreground">穩財／運財／理財／貴人</span>。
+                  你只要選對一尊——很多人最先回來說的，是睡得著、決策不後悔、
+                  停止匱乏感，善念對象開始出現。
                 </p>
 
                 <div className="mt-8 flex flex-col sm:flex-row gap-3">
@@ -87,7 +87,7 @@ export default function Home() {
                 </div>
 
                 <div className="mt-6 text-xs text-muted-foreground leading-relaxed max-w-prose">
-                  提醒：本站不提供投資建議或報酬承諾；此為宗教護持與回向之安排。結果因人而異，
+                  提醒：本站不提供投資建議或報酬承諾；此為宗教護持與迴向之安排。結果因人而異，
                   請以清淨發心與可承擔的行動作為落地。
                 </div>
               </div>
@@ -95,13 +95,13 @@ export default function Home() {
               <Card className="p-7 gold-border bg-card/75 backdrop-blur paper-grain">
                 <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">你現在最需要的改善</div>
                 <div className="mt-3 grid gap-2 readable text-muted-foreground">
-                  <div>• 睡得著，不再半夜盤算</div>
-                  <div>• 支出止得住，財務節奏回來</div>
-                  <div>• 決策不後悔，不再一直翻本</div>
-                  <div>• 關係不耗損，貴人與助力進得來</div>
+                  <div>• 睡得著，不再半夜盤算財富失去感</div>
+                  <div>• 建立庫房，進財節奏出現</div>
+                  <div>• 決策不後悔，清晰的投資觀念</div>
+                  <div>• 關係不耗損，貴人與戀情進得來</div>
                 </div>
                 <div className="mt-6 text-sm text-primary/90">
-                  急迫性：拖一天，耗損多一天。你想要的改善，其實很具體。
+                  拖一天，耗損多一天。你想要的改善，其實很具體。
                 </div>
               </Card>
             </div>
