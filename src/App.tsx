@@ -1,5 +1,7 @@
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import LiveRegistrations from "@/components/LiveRegistrations";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { Router, Route, Switch } from "wouter";
 import { useHashLocation } from "wouter/use-hash-location";
 import ErrorBoundary from "@/components/ErrorBoundary";
@@ -12,6 +14,7 @@ import Proof from "@/pages/Proof";
 import Sutra from "@/pages/Sutra";
 import About from "@/pages/About";
 import Terms from "@/pages/Terms";
+import Wallpaper from "@/pages/Wallpaper";
 import Topic from "@/pages/Topic";
 import DeityPage from "@/pages/Deity";
 import NotFound from "@/pages/NotFound";
@@ -36,6 +39,7 @@ function AppRouter() {
         <Route path="/sutra" component={Sutra} />
         <Route path="/about" component={About} />
         <Route path="/terms" component={Terms} />
+        <Route path="/wallpaper" component={Wallpaper} />
 
         <Route path="/topics/:slug">{(params) => <Topic slug={params.slug} />}</Route>
         <Route path="/deities/:deityKey">{(params) => <DeityPage deityKey={params.deityKey} />}</Route>
@@ -53,11 +57,14 @@ function AppRouter() {
 }
 
 export default function App() {
+  const isMobile = useIsMobile();
+
   return (
     <ErrorBoundary>
       <ThemeProvider defaultTheme="dark">
         <TooltipProvider>
-          <Toaster />
+          <Toaster position={isMobile ? "top-center" : "bottom-right"} />
+          <LiveRegistrations />
           <AppRouter />
         </TooltipProvider>
       </ThemeProvider>

@@ -12,16 +12,18 @@ import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import FloatingFb from "@/components/FloatingFb";
 import StickyCta from "@/components/StickyCta";
+import TreasuryQuiz from "@/components/TreasuryQuiz";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { DEITIES, HOME_TESTIMONIALS, SUTRA_QUOTES, SITE } from "@/lib/siteData";
 
-import heroBrocade from "@/assets/visuals/generated/hero-brocade.jpg";
-import iconYellow from "@/assets/visuals/generated/image_w1024_h1024_icon-yellow-water-offering.jpeg";
-import iconMahashri from "@/assets/visuals/generated/image_w1024_h1024_icon-mahashri-home.jpeg";
-import iconGanapati from "@/assets/visuals/generated/image_w1024_h1024_icon-ganapati-clarity.jpeg";
-import iconKurukulla from "@/assets/visuals/generated/image_w1024_h1024_icon-kurukulla-magnetize.jpeg";
+import heroBrocade from "@/assets/visuals/generated/zen-wealth-hero.jpeg";
+import iconYellow from "@/assets/visuals/generated/image_w1024_h1024_icon-yellow-water-offering.webp";
+import iconMahashri from "@/assets/visuals/generated/image_w1024_h1024_icon-mahashri-home.webp";
+import iconGanapati from "@/assets/visuals/generated/image_w1024_h1024_icon-ganapati-clarity.webp";
+import iconKurukulla from "@/assets/visuals/generated/image_w1024_h1024_icon-kurukulla-magnetize.webp";
+import quizArt from "@/assets/visuals/generated/treasury-quiz-illustration.jpeg";
 
 const ICON_BY_KEY: Record<string, string> = {
   yellow: iconYellow,
@@ -40,17 +42,27 @@ export default function Home() {
       <div className="border-b border-border bg-card/70 backdrop-blur">
         <div className="mx-auto max-w-6xl px-4 py-3 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
           <div className="readable text-sm text-foreground">
-            <span className="font-semibold text-primary">法流啟動告急</span>
-            <span className="text-muted-foreground">：慶祝 FB 旗艦店落成，法事開啟「法財滿願」限定結緣價。</span>
+            <span className="font-semibold text-primary">慶祝 FB 粉絲團成立</span>
+            <span className="text-muted-foreground">：立即領取「黃財神手機桌布」｜下載頁將另開分頁。</span>
           </div>
-          <a
-            href={SITE.fb}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex h-10 px-4 items-center justify-center rounded-md bg-primary text-primary-foreground font-black tracking-[0.18em] uppercase gold-border"
-          >
-            快去追蹤FB領取各種優惠
-          </a>
+          <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
+            <a
+              href="#/wallpaper"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex h-10 px-4 w-full sm:w-auto items-center justify-center rounded-md bg-primary text-primary-foreground font-black uppercase gold-border text-xs sm:text-sm tracking-[0.14em] sm:tracking-[0.18em]"
+            >
+              <span className="sm:hidden">領取桌布</span><span className="hidden sm:inline">立即領取黃財神桌布</span>
+            </a>
+            <a
+              href={SITE.fb}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex h-10 px-4 w-full sm:w-auto items-center justify-center rounded-md border bg-background/40 gold-border text-xs sm:text-sm tracking-[0.14em] sm:tracking-[0.18em]"
+            >
+              <span className="sm:hidden">追蹤FB</span><span className="hidden sm:inline">順手追蹤粉絲團</span>
+            </a>
+          </div>
         </div>
       </div>
 
@@ -91,9 +103,16 @@ export default function Home() {
                 </p>
 
                 <div className="mt-8 flex flex-col sm:flex-row gap-3">
+                  <Button
+                    variant="outline"
+                    className="h-12 px-6 gold-border bg-background/40"
+                    onClick={() => document.getElementById("quiz")?.scrollIntoView({ behavior: "smooth" })}
+                  >
+                    財庫能量檢測 <ArrowRight className="h-4 w-4" />
+                  </Button>
                   <Link href="/puja">
                     <Button className="h-12 px-6 font-black tracking-[0.24em] uppercase gold-border">
-                      30 秒精準對位困境 <ArrowRight className="h-4 w-4" />
+                      直達四大本尊 <ArrowRight className="h-4 w-4" />
                     </Button>
                   </Link>
                   <Link
@@ -110,20 +129,32 @@ export default function Home() {
               </div>
 
               <Card className="p-7 gold-border bg-card/75 backdrop-blur paper-grain">
-                <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">顯化跡象：財氣歸位</div>
-                <div className="mt-3 grid gap-2 readable text-muted-foreground">
-                  <div>• 心神歸財，不再為未知感到匱乏</div>
-                  <div>• 截斷滲漏，莫名開支與損耗消失</div>
-                  <div>• 決策不後悔，精準抓牢事業轉機</div>
-                  <div>• 關係不耗損，貴人與助力自動合鳴</div>
+                <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">留存核心：財庫能量檢測</div>
+                <div className="mt-4 overflow-hidden rounded-2xl gold-border bg-background/40">
+                  <img src={quizArt} alt="" className="h-44 w-full object-cover opacity-95" loading="eager" />
                 </div>
-                <div className="mt-6 text-sm text-primary/90">
-                  拖延一天，能量就多滲漏一天。你應得的豐盛，不該被卡點阻礙。
+                <div className="mt-5 readable text-muted-foreground">
+                  你不用想太多，照直覺選五題。
+                  <span className="text-foreground">我們把你的卡點頻率抓出來</span>，
+                  直接帶你去最對位的本尊頁。
+                </div>
+                <div className="mt-6 flex flex-col sm:flex-row gap-3">
+                  <Button
+                    className="h-11 px-5 font-black tracking-[0.22em] uppercase gold-border"
+                    onClick={() => document.getElementById("quiz")?.scrollIntoView({ behavior: "smooth" })}
+                  >
+                    立刻開始檢測 <ArrowRight className="h-4 w-4" />
+                  </Button>
+                  <Link href="/pay" className="h-11 px-5 inline-flex items-center justify-center rounded-md border bg-background/40 gold-border readable">
+                    我已確定，直接去預定
+                  </Link>
                 </div>
               </Card>
             </div>
           </div>
         </section>
+
+        <TreasuryQuiz />
 
         {/* Deity selector */}
         <section className="mx-auto max-w-6xl px-4 pt-12 pb-6" id="deities">
