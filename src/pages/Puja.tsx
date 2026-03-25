@@ -21,7 +21,7 @@ export default function Puja() {
             <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">總覽</div>
             <h1 className="mt-2 font-display text-4xl md:text-5xl">四條路徑，不混走</h1>
             <p className="mt-4 readable text-muted-foreground max-w-prose">
-              我們不讓你在一堆神祕話術裡亂選。先把困境對位：穩財／增財／理財／貴人。
+              我們不讓你在一堆神祕話術裡亂選。先把困境對位：穩財／守財／清明／貴人。
               你只要選對路，然後用最短路徑完成護持。
             </p>
 

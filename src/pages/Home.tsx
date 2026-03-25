@@ -15,7 +15,7 @@ import StickyCta from "@/components/StickyCta";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { DEITIES, HOME_TESTIMONIALS, SUTRA_QUOTES } from "@/lib/siteData";
+import { DEITIES, HOME_TESTIMONIALS, SUTRA_QUOTES, SITE } from "@/lib/siteData";
 
 import heroBrocade from "@/assets/visuals/generated/hero-brocade.jpg";
 import iconYellow from "@/assets/visuals/generated/image_w1024_h1024_icon-yellow-water-offering.jpeg";
@@ -35,6 +35,24 @@ export default function Home() {
     <div className="min-h-screen bg-background">
       <Seo title="滿願藏庫｜招財護持法事" path="/" />
       <SiteHeader />
+
+      {/* Home notice (do not add global scripts; keep analytics untouched) */}
+      <div className="border-b border-border bg-card/70 backdrop-blur">
+        <div className="mx-auto max-w-6xl px-4 py-3 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+          <div className="readable text-sm text-foreground">
+            <span className="font-semibold text-primary">慶祝 FB 粉絲團開張</span>
+            <span className="text-muted-foreground">，法事限時優惠結緣。</span>
+          </div>
+          <a
+            href={SITE.fb}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex h-10 px-4 items-center justify-center rounded-md bg-primary text-primary-foreground font-black tracking-[0.18em] uppercase gold-border"
+          >
+            立即追蹤
+          </a>
+        </div>
+      </div>
 
       <main>
         {/* Hero */}
@@ -57,7 +75,7 @@ export default function Home() {
                   求財不是賭運，是把路走正
                 </div>
 
-                <h1 className="mt-4 font-display text-5xl md:text-7xl leading-[1.05]">
+                <h1 className="mt-4 font-display text-4xl sm:text-5xl md:text-7xl leading-[1.05]">
                   你不是缺錢。
                   <br />
                   你是缺一場
@@ -67,9 +85,9 @@ export default function Home() {
 
                 <p className="mt-6 readable text-muted-foreground max-w-prose">
                   我們做的不是誇張保證，而是用經典脈絡與清楚流程，幫你把四條招財路徑分清楚：
-                  <span className="text-foreground">穩財／運財／理財／貴人</span>。
-                  你只要選對一尊——很多人最先回來說的，是睡得著、決策不後悔、
-                  停止匱乏感，善念對象開始出現。
+                  <span className="text-foreground">穩財／守財／清明／貴人</span>。
+                  你只要選對一尊、先完成一次護持——很多人最先回來說的，是睡得著、決策不後悔、
+                  生活開始能延續。
                 </p>
 
                 <div className="mt-8 flex flex-col sm:flex-row gap-3">
@@ -87,7 +105,7 @@ export default function Home() {
                 </div>
 
                 <div className="mt-6 text-xs text-muted-foreground leading-relaxed max-w-prose">
-                  提醒：本站不提供投資建議或報酬承諾；此為宗教護持與迴向之安排。結果因人而異，
+                  提醒：本站不提供投資建議或報酬承諾；此為宗教護持與回向之安排。結果因人而異，
                   請以清淨發心與可承擔的行動作為落地。
                 </div>
               </div>
@@ -95,13 +113,13 @@ export default function Home() {
               <Card className="p-7 gold-border bg-card/75 backdrop-blur paper-grain">
                 <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">你現在最需要的改善</div>
                 <div className="mt-3 grid gap-2 readable text-muted-foreground">
-                  <div>• 睡得著，不再半夜盤算財富失去感</div>
-                  <div>• 建立庫房，進財節奏出現</div>
-                  <div>• 決策不後悔，清晰的投資觀念</div>
-                  <div>• 關係不耗損，貴人與戀情進得來</div>
+                  <div>• 睡得著，不再半夜盤算</div>
+                  <div>• 支出止得住，財務節奏回來</div>
+                  <div>• 決策不後悔，不再一直翻本</div>
+                  <div>• 關係不耗損，貴人與助力進得來</div>
                 </div>
                 <div className="mt-6 text-sm text-primary/90">
-                  拖一天，耗損多一天。你想要的改善，其實很具體。
+                  急迫性：拖一天，耗損多一天。你想要的改善，其實很具體。
                 </div>
               </Card>
             </div>
