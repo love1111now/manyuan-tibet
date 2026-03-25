@@ -43,7 +43,7 @@ export default function Home() {
         <div className="mx-auto max-w-6xl px-4 py-3 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
           <div className="readable text-sm text-foreground">
             <span className="font-semibold text-primary">慶祝 FB 粉絲團成立</span>
-            <span className="text-muted-foreground">：立即領取「黃財神手機桌布」｜下載頁將另開分頁。</span>
+            <span className="text-muted-foreground">：立即領取「黃財神手機桌布」。</span>
           </div>
           <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
             <a
@@ -60,7 +60,7 @@ export default function Home() {
               rel="noreferrer"
               className="inline-flex h-10 px-4 w-full sm:w-auto items-center justify-center rounded-md border bg-background/40 gold-border text-xs sm:text-sm tracking-[0.14em] sm:tracking-[0.18em]"
             >
-              <span className="sm:hidden">追蹤FB</span><span className="hidden sm:inline">順手追蹤粉絲團</span>
+              <span className="sm:hidden">追蹤FB</span><span className="hidden sm:inline">更多佛法財庫等著你</span>
             </a>
           </div>
         </div>
@@ -90,7 +90,7 @@ export default function Home() {
                 <h1 className="mt-4 font-display text-4xl sm:text-5xl md:text-7xl leading-[1.05]">
                   你很努力。
                   <br />
-                  你是缺一場
+                  就缺一場
                   <br />
                   <span className="text-primary">運行增益</span>
                   的護持。
@@ -98,8 +98,8 @@ export default function Home() {
 
                 <p className="mt-6 readable text-muted-foreground max-w-prose">
                   盲目追逐增益，不如先截斷虧損。我們不給誇張保證，只用經典脈絡幫你精準切割四種困局：
-                  <span className="text-foreground">穩財／補庫／斷惑／聚人</span>。
-                  只要選對儀軌、完成一次能量校正——你會發現最先回來的，是決策的清明、不再流失的財氣與久違的掌控感。
+                  <span className="text-foreground">集財／補庫／斷惑／聚人</span>。
+                  只要選對儀軌、完成一次能量校正——你會發現最先回來的，是決策的清明、不再流失的財氣與久違的掌控感與貴人相助，魅力啟動。
                 </p>
 
                 <div className="mt-8 flex flex-col sm:flex-row gap-3">
@@ -108,7 +108,7 @@ export default function Home() {
                     className="h-12 px-6 gold-border bg-background/40"
                     onClick={() => document.getElementById("quiz")?.scrollIntoView({ behavior: "smooth" })}
                   >
-                    財庫能量檢測 <ArrowRight className="h-4 w-4" />
+                    當下能量檢測 <ArrowRight className="h-4 w-4" />
                   </Button>
                   <Link href="/puja">
                     <Button className="h-12 px-6 font-black tracking-[0.24em] uppercase gold-border">
@@ -124,12 +124,12 @@ export default function Home() {
                 </div>
 
                 <div className="mt-6 text-xs text-muted-foreground leading-relaxed max-w-prose">
-                  提醒：本站僅提供如法之宗教護持與功德回向，非金融投資建議。真正的豐盛來自於清淨發心與精準行動的能量顯化。
+                  提醒：本站僅提供如法之宗教護持與功德迴向，非金融投資建議。真正的豐盛來自於上供下佈施與精準行動的能量顯化。
                 </div>
               </div>
 
               <Card className="p-7 gold-border bg-card/75 backdrop-blur paper-grain">
-                <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">留存核心：財庫能量檢測</div>
+                <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">留存核心：能量檢測</div>
                 <div className="mt-4 overflow-hidden rounded-2xl gold-border bg-background/40">
                   <img src={quizArt} alt="" className="h-44 w-full object-cover opacity-95" loading="eager" />
                 </div>
@@ -161,7 +161,7 @@ export default function Home() {
           <div className="flex items-end justify-between gap-6 flex-wrap">
             <div>
               <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">精準校正</div>
-              <h2 className="mt-2 font-display text-3xl md:text-4xl">四大路徑，不再徒勞</h2>
+              <h2 className="mt-2 font-display text-3xl md:text-4xl">四大正法，不再徒勞</h2>
               <p className="mt-3 readable text-muted-foreground max-w-prose">
                 找出最令你不安的痛點，即是當前最需校正的頻率。點擊看見『經典邏輯』與『儀軌方案』。
               </p>
@@ -191,7 +191,7 @@ export default function Home() {
                       </div>
                       <div className="mt-2 readable text-muted-foreground">「{d.promise}」</div>
                       <div className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-primary">
-                        解鎖古老智慧與方案 <ArrowRight className="h-4 w-4" />
+                        解鎖古老智慧與解決方案 <ArrowRight className="h-4 w-4" />
                       </div>
                     </div>
                   </div>
@@ -233,7 +233,7 @@ export default function Home() {
           <div className="flex items-end justify-between gap-6 flex-wrap">
             <div>
               <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">翻轉實證</div>
-              <h2 className="mt-2 font-display text-3xl md:text-4xl">下一個拿回人生主導權的人</h2>
+              <h2 className="mt-2 font-display text-3xl md:text-4xl">拿回人生主導權</h2>
               <p className="mt-3 readable text-muted-foreground max-w-prose">
                 我們不靠奇蹟，靠的是如法儀軌、精準路徑與你願意踏出的那一步。
               </p>

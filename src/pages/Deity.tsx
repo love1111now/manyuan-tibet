@@ -114,7 +114,7 @@ export default function DeityPage({ deityKey }: { deityKey: string }) {
             <div className="text-xs tracking-[0.24em] uppercase text-muted-foreground">你可能感受到</div>
             <div className="mt-2 font-display text-2xl">心比較定、路比較清楚</div>
             <p className="mt-3 readable text-muted-foreground">
-              我們不寫「保證」。比較常見的是：焦慮下降、猶豫變少、做事更能延續——這種細微但會累積的改變。
+              我們不寫「保證」。比較常見的是：焦慮下降、猶豫變少、開啟機會,這種細微但會累積的改變。
             </p>
           </Card>
         </section>
@@ -124,7 +124,7 @@ export default function DeityPage({ deityKey }: { deityKey: string }) {
           <div className="flex items-end justify-between gap-6 flex-wrap">
             <div>
               <h2 className="font-display text-3xl md:text-4xl">方案與價位</h2>
-              <p className="mt-2 readable text-muted-foreground">先從標示的首選方案開始，再依你的狀況往上加深；路徑不要混走。</p>
+              <p className="mt-2 readable text-muted-foreground">先從標示的首選方案開始，再依你的狀況往上加強護持。</p>
             </div>
             <Link href="/pay" className="text-sm tracking-[0.2em] uppercase underline underline-offset-4">
               想一次看完四尊方案，去總覽頁
@@ -157,7 +157,7 @@ export default function DeityPage({ deityKey }: { deityKey: string }) {
                 </div>
 
                 <div className="mt-4 text-[11px] text-muted-foreground leading-relaxed">
-                  開啟綠界後，依頁面提示填寫祈願姓名與事項，其餘依如法流程安排。
+                  開啟綠界後，依頁面提示填寫祈願姓名與事項，其餘依如法流程給您回應。
                 </div>
               </Card>
             ))}

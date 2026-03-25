@@ -43,12 +43,12 @@ export default function Puja() {
           <Card className="p-7 gold-border bg-card paper-grain">
             <div className="font-semibold">怎麼選：30 秒版</div>
             <ol className="mt-4 grid gap-3 text-sm readable text-muted-foreground list-decimal list-inside">
-              <li>先看四尊卡片：哪一句最刺痛，就是你現在的卡點。</li>
+              <li>感受四尊卡片：哪一句最有感，就是你現在的方向。</li>
               <li>進本尊頁，看標示的首選方案卡。</li>
               <li>點『前往綠界完成』，依提示填寫姓名與事項。</li>
             </ol>
             <div className="mt-6 text-xs text-muted-foreground">
-              你不用把全部看完；你只要做一次正確的選擇。
+              圓滿的開始；你只要做一次正確的選擇。
             </div>
           </Card>
         </div>

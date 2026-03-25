@@ -31,7 +31,7 @@ export default function Pay() {
               <div>
                 <div className="font-semibold">為什麼要跳轉第三方？</div>
                 <div className="mt-2 readable text-muted-foreground text-sm">
-                  為了降低本站接觸敏感個資的必要性，並讓付款流程由專業金流平台承接。
+                  我們沒有收集個資的必要性，敏感資訊由專業金流平台承接。
                 </div>
               </div>
             </div>
@@ -50,7 +50,7 @@ export default function Pay() {
 
             <div className="mt-6 text-sm readable text-muted-foreground">
               <span className="text-foreground font-semibold">良善提醒：</span>
-              你想要的改善通常很具體——睡得著、止得住、做決定不後悔。越早把護持排進行程，越少把今天的耗損拖成明天的洞。
+              你想要的改善通常很具體——睡得著、止得住、不後悔，得益處。越早把護持排進行程，別把今天的耗損拖成明天的巨洞。
             </div>
           </Card>
         </div>
