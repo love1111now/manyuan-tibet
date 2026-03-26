@@ -8,6 +8,9 @@ import ErrorBoundary from "@/components/ErrorBoundary";
 import { useEffect } from "react";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 
+// 👇 1. 引入我們新建的追蹤元件
+import AnalyticsTracker from "@/components/AnalyticsTracker"; 
+
 import Home from "@/pages/Home";
 import Puja from "@/pages/Puja";
 import Pay from "@/pages/Pay";
@@ -21,8 +24,6 @@ import DeityPage from "@/pages/Deity";
 import NotFound from "@/pages/NotFound";
 
 function Redirect({ to }: { to: string }) {
-  // wouter v3: setting location can be done via hash navigation by rendering <a> style.
-  // We'll just render Home with a side-effectless redirect via window.location.hash.
   if (typeof window !== "undefined") {
     window.location.hash = `#${to}`;
   }
@@ -42,6 +43,9 @@ function ScrollToTop() {
 function AppRouter() {
   return (
     <Router hook={useHashLocation}>
+      {/* 👇 2. 將追蹤器放在 Router 內部，這樣它才能監聽到 hash location 的變化 */}
+      <AnalyticsTracker /> 
+      
       <Switch>
         <Route path="/" component={Home} />
         <Route path="/puja" component={Puja} />
@@ -55,7 +59,6 @@ function AppRouter() {
         <Route path="/topics/:slug">{(params) => <Topic slug={params.slug} />}</Route>
         <Route path="/deities/:deityKey">{(params) => <DeityPage deityKey={params.deityKey} />}</Route>
 
-        {/* Legacy routes */}
         <Route path="/yellow-dzambhala">{() => <Redirect to="/deities/yellow" />}</Route>
         <Route path="/mahashri-devi">{() => <Redirect to="/deities/mahashri" />}</Route>
         <Route path="/ganapati">{() => <Redirect to="/deities/ganapati" />}</Route>
