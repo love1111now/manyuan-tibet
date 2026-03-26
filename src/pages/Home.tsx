@@ -21,7 +21,6 @@ import iconYellow from "@/assets/visuals/generated/image_w1024_h1024_icon-yellow
 import iconMahashri from "@/assets/visuals/generated/image_w1024_h1024_icon-mahashri-home.webp";
 import iconGanapati from "@/assets/visuals/generated/image_w1024_h1024_icon-ganapati-clarity.webp";
 import iconKurukulla from "@/assets/visuals/generated/image_w1024_h1024_icon-kurukulla-magnetize.webp";
-import quizArt from "@/assets/visuals/generated/treasury-quiz-illustration.jpeg";
 import wallpaperYellow from "@/assets/downloads/huangcaishen-wallpaper.jpg";
 
 const ICON_BY_KEY: Record<string, string> = {
@@ -32,32 +31,18 @@ const ICON_BY_KEY: Record<string, string> = {
 };
 
 export default function Home() {
+  // 點擊選項後，平滑捲動到完整的測驗元件
+  const handleQuizClick = () => {
+    document.getElementById("quiz")?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <Seo title="滿願藏庫｜密法能量校正・運財法事" path="/" />
       <SiteHeader />
 
-      {/* Bonus strip (不打斷首屏敘事，但提供立即回饋) */}
-      <div className="border-b border-border/60 bg-card/50 backdrop-blur">
-        <div className="mx-auto max-w-6xl px-4 py-3 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-          <div className="readable text-sm text-foreground">
-            <span className="font-semibold text-primary">Bonus</span>
-            <span className="text-muted-foreground">：領取「黃財神手機桌布」— 先把氣場立起來。</span>
-          </div>
-          <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
-            <a
-              href="#/wallpaper"
-              className="inline-flex h-10 px-4 w-full sm:w-auto items-center justify-center rounded-md bg-primary text-primary-foreground font-black uppercase gold-border text-xs sm:text-sm tracking-[0.14em] sm:tracking-[0.18em]"
-            >
-              立即領取
-            </a>
-           
-          </div>
-        </div>
-      </div>
-
       <main>
-        {/* 1) 停留率：Hero */}
+        {/* 1) 停留率：Hero (3秒內接住FB冷流量) */}
         <section className="relative overflow-hidden isolate">
           <div className="absolute inset-0 -z-10">
             <img
@@ -69,71 +54,100 @@ export default function Home() {
             <div className="absolute inset-0 hero-brocade opacity-80" />
           </div>
 
-          <div className="mx-auto max-w-6xl px-4 pt-14 pb-14 md:pt-20 md:pb-18">
+          <div className="mx-auto max-w-6xl px-4 pt-8 pb-14 md:pt-16 md:pb-18">
             <div className="grid gap-10 md:grid-cols-[1.05fr_.95fr] items-start">
-              <div>
+              
+              {/* 左側：痛點共鳴標題 */}
+              <div className="pt-2 md:pt-8">
                 <div className="inline-flex items-center gap-2 text-xs tracking-[0.26em] uppercase text-muted-foreground">
                   <Sparkles className="h-4 w-4" />
-                  30 秒對位卡點，直接走最短路
+                  30 秒精準能量對位
                 </div>
 
-                <h1 className="mt-4 font-display text-4xl sm:text-5xl md:text-7xl leading-[1.05]">
-                  豐補財庫
-                  <br />
-                  <strong className="text-primary font-black">迎來貴人</strong>。
+                <h1 className="mt-5 font-display text-4xl sm:text-5xl md:text-6xl leading-[1.15]">
+                  現在的狀態，<br />
+                  <strong className="text-primary font-black">哪裡卡住了？</strong>
                 </h1>
 
                 <p className="mt-6 readable text-muted-foreground max-w-prose">
-                  透過正法護持：
-                  <span className="text-foreground">穩財／補庫／清明／聚人</span>。
-                  你只要完成一次對位。
+                  努力總像石沉大海？關係一直耗損？<br />
+                  <span className="text-foreground">別把今天的耗損，養成明天的痛。</span><br />
+                  找對專屬本尊，你只需要完成一次正確的對位。
                 </p>
 
-                <div className="mt-8 flex flex-col sm:flex-row gap-3">
-                  <Button
-                    className="h-12 px-6 font-black tracking-[0.24em] uppercase gold-border"
-                    onClick={() => document.getElementById("quiz")?.scrollIntoView({ behavior: "smooth" })}
-                  >
-                    找到您的護持 <ArrowRight className="h-4 w-4" />
-                  </Button>
+                <div className="mt-8 flex flex-col sm:flex-row gap-3 hidden md:flex">
                   <Link
                     href="/puja"
                     className="h-12 px-6 inline-flex items-center justify-center rounded-md border bg-background/30 gold-border readable"
                   >
-                    直接看四大本尊
+                    直接看四大本尊路徑
                   </Link>
-                </div>
-
-                <div className="mt-6 text-xs text-muted-foreground leading-relaxed max-w-prose">
-                  提醒：本站內容屬宗教護持與迴向之資訊整理，不提供醫療、法律、投資報酬之保證或替代建議。
                 </div>
               </div>
 
-              <Card className="p-7 gold-border bg-card/75 backdrop-blur paper-grain">
-                <div className="text-xs tracking-[0.36em] uppercase text-muted-foreground">留存核心：能量檢測</div>
-                <div className="mt-4 overflow-hidden rounded-2xl gold-border bg-background/30">
-                  <img src={quizArt} alt="" className="h-44 w-full object-cover opacity-95" loading="eager" />
+              {/* 右側：超級鉤子 (測驗第一題直接裸露) */}
+              <Card className="p-6 md:p-8 gold-border bg-card/85 backdrop-blur paper-grain shadow-xl">
+                <div className="font-display text-xl md:text-2xl text-foreground">
+                  碰到錢或關係，你最常陷入哪種狀態？
                 </div>
-                <div className="mt-5 readable text-muted-foreground">
-                  不用想太多，照直覺選。
-                  <span className="text-foreground">我們會把你的卡點抓出來</span>，
-                  直接帶你去最對位的本尊頁。
+                <div className="mt-2 text-sm text-muted-foreground mb-6">
+                  請憑直覺點擊，我們帶你找答案：
                 </div>
-                <div className="mt-6 flex flex-col sm:flex-row gap-3">
-                  <Button
-                    className="h-11 px-5 font-black tracking-[0.22em] uppercase gold-border"
-                    onClick={() => document.getElementById("quiz")?.scrollIntoView({ behavior: "smooth" })}
+
+                <div className="flex flex-col gap-3">
+                  <Button 
+                    variant="outline" 
+                    className="h-auto py-4 px-5 justify-start text-left bg-background/50 hover:bg-accent/20 gold-border whitespace-normal"
+                    onClick={handleQuizClick}
                   >
-                    開始檢測 <ArrowRight className="h-4 w-4" />
+                    <span className="font-bold text-primary mr-3 text-lg">悶</span> 
+                    <span className="text-muted-foreground">錢進不來，努力總像石沉大海</span>
                   </Button>
+                  
+                  <Button 
+                    variant="outline" 
+                    className="h-auto py-4 px-5 justify-start text-left bg-background/50 hover:bg-accent/20 gold-border whitespace-normal"
+                    onClick={handleQuizClick}
+                  >
+                    <span className="font-bold text-primary mr-3 text-lg">漏</span> 
+                    <span className="text-muted-foreground">錢守不住，總有意外支出破財</span>
+                  </Button>
+
+                  <Button 
+                    variant="outline" 
+                    className="h-auto py-4 px-5 justify-start text-left bg-background/50 hover:bg-accent/20 gold-border whitespace-normal"
+                    onClick={handleQuizClick}
+                  >
+                    <span className="font-bold text-primary mr-3 text-lg">迷</span> 
+                    <span className="text-muted-foreground">遇不到對的人，關係一直耗損</span>
+                  </Button>
+
+                  <Button 
+                    variant="outline" 
+                    className="h-auto py-4 px-5 justify-start text-left bg-background/50 hover:bg-accent/20 gold-border whitespace-normal"
+                    onClick={handleQuizClick}
+                  >
+                    <span className="font-bold text-primary mr-3 text-lg">亂</span> 
+                    <span className="text-muted-foreground">總遇小人，關鍵時刻差臨門一腳</span>
+                  </Button>
+                </div>
+
+                {/* 秒級信任見證 */}
+                <div className="mt-6 pt-5 border-t border-border/60">
+                  <div className="text-sm italic text-muted-foreground leading-relaxed">
+                    「原本卡住半年的案子，能量對位後當週就動了。找回節奏的感覺真好。」
+                    <span className="block mt-1 text-xs not-italic tracking-wider uppercase opacity-70">—— 台北 郭先生</span>
+                  </div>
                 </div>
               </Card>
             </div>
           </div>
         </section>
 
-        {/* 1) 停留率：互動測驗 */}
-        <TreasuryQuiz />
+        {/* 1) 停留率：完整的互動測驗元件 (點擊上面按鈕會滑動到這裡) */}
+        <div id="quiz">
+          <TreasuryQuiz />
+        </div>
 
         {/* 2) 信任：經典主軸（證據） */}
         <section className="mx-auto max-w-6xl px-4 pt-10 pb-6">
@@ -235,7 +249,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 3) 衝動：四尊入口（選擇變簡單） */}
+        {/* 3) 衝動：四尊入口 */}
         <section className="mx-auto max-w-6xl px-4 pt-12 pb-6" id="deities">
           <div className="flex items-end justify-between gap-6 flex-wrap">
             <div>
@@ -275,12 +289,12 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 3) 衝動：Bonus 區塊（立即回饋） */}
+        {/* 3) 衝動：Bonus 區塊（原本的最上方橫條移到這裡，不干擾初次閱讀） */}
         <section className="mx-auto max-w-6xl px-4 pt-8 pb-6">
           <Card className="p-7 gold-border bg-card/70 backdrop-blur paper-grain">
             <div className="grid gap-6 md:grid-cols-[1fr_.9fr] items-center">
               <div>
-                <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">立即回饋</div>
+                <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">免費結緣</div>
                 <div className="mt-2 font-display text-2xl md:text-3xl">先把氣場立起來：黃財神桌布</div>
                 <p className="mt-3 readable text-muted-foreground max-w-prose">
                   不用等「全部都準備好」才開始。先把每天會看到的畫面換成對位的象徵，提醒自己：
