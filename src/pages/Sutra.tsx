@@ -7,6 +7,8 @@ import { Card } from "@/components/ui/card";
 import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
 
+import sutraPhoto from "@/assets/visuals/generated/sutra-closeup.jpeg";
+
 export default function Sutra() {
   return (
     <div className="min-h-screen bg-background">
@@ -21,6 +23,15 @@ export default function Sutra() {
           《金光明最勝王經》與財富佛法為您增益、除障、護持意象作為敘事主軸：
           讓你從危機止息，走到可行動的路。
         </p>
+
+        <Card className="mt-7 overflow-hidden gold-border bg-card/80 backdrop-blur paper-grain">
+          <img
+            src={sutraPhoto}
+            alt="經典與修持示意"
+            className="h-[280px] w-full object-cover"
+            loading="eager"
+          />
+        </Card>
 
         <section className="mt-10 grid gap-4">
           <Card className="p-7 gold-border bg-card paper-grain">

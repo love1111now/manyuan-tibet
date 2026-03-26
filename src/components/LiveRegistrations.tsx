@@ -29,7 +29,7 @@ export default function LiveRegistrations() {
     let cancelled = false;
 
     const schedule = () => {
-      const delayMs = randInt(22_000, 65_000); // 22–65 秒不定時
+      const delayMs = randInt(90_000, 240_000); // 90–240 秒不定時（降低頻率）
       timer = window.setTimeout(() => {
         if (cancelled) return;
 
@@ -37,20 +37,20 @@ export default function LiveRegistrations() {
         const name = randomMaskedName();
         const city = CITIES[randInt(0, CITIES.length - 1)];
 
-        const remain = randInt(1, 9);
-        const minutes = randInt(2, 18);
+        const remain = randInt(2, 16);
+        const days = randInt(1, 5);
 
         toast(`${name} 已完成護持登記`, {
-          description: `${city} · ${pick.deity} · ${pick.plan} · 剩餘名額 ${remain}（約 ${minutes} 分鐘內可能滿）`,
-          duration: randInt(5200, 7600),
+          description: `${city} · ${pick.deity} · ${pick.plan} · 剩餘名額 ${remain}（約 ${days} 天內可能額滿）`,
+          duration: randInt(4600, 6400),
         });
 
         schedule();
       }, delayMs);
     };
 
-    // 首次不要立刻跳，留 8–18 秒的「正常感」
-    timer = window.setTimeout(schedule, randInt(8000, 18000));
+    // 首次不要立刻跳，留 25–45 秒的「正常感」
+    timer = window.setTimeout(schedule, randInt(25_000, 45_000));
 
     return () => {
       cancelled = true;

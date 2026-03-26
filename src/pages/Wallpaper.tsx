@@ -5,15 +5,13 @@ Design philosophy: Neo-thangka noir
 - Typography: ZCOOL XiaoWei (display) + Noto Serif TC (body)
 */
 
-import { Download, ExternalLink } from "lucide-react";
+import { Download } from "lucide-react";
 import { Link } from "wouter";
 import Seo from "@/components/Seo";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
-import FloatingFb from "@/components/FloatingFb";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { SITE } from "@/lib/siteData";
 
 import wallpaperUrl from "@/assets/downloads/huangcaishen-wallpaper.jpg?url";
 
@@ -37,11 +35,6 @@ export default function Wallpaper() {
               <a href={wallpaperUrl} download>
                 <Button className="h-12 px-6 font-black tracking-[0.22em] uppercase gold-border">
                   下載桌布 <Download className="h-4 w-4" />
-                </Button>
-              </a>
-              <a href={SITE.fb} target="_blank" rel="noreferrer">
-                <Button variant="outline" className="h-12 px-6 gold-border">
-                  追蹤 FB 粉絲團 <ExternalLink className="h-4 w-4" />
                 </Button>
               </a>
             </div>
@@ -69,7 +62,6 @@ export default function Wallpaper() {
       </main>
 
       <SiteFooter />
-      <FloatingFb />
     </div>
   );
 }

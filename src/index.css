@@ -3,11 +3,25 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/*
+  珍珠通透雅緻 — Pearl & Brocade
+  - 非黑暗：珍珠白/米白底色，文字用溫暖茶棕
+  - 點綴：柔金（主色）+ 淡玉（輔色）
+  - 字體：Kaisei Tokumin（Display）+ Noto Serif TC（Body）
+  - 原則：留白、呼吸感、細緻層次；用「織紋/紙感」取代厚重暗底
+*/
+
 @theme inline {
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
+  --radius: 1.25rem;
+  --radius-sm: calc(var(--radius) - 8px);
+  --radius-md: calc(var(--radius) - 4px);
   --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
+  --radius-xl: calc(var(--radius) + 8px);
+
+  --font-display: "Kaisei Tokumin", ui-serif, Georgia, "Times New Roman", serif;
+  --font-body: "Noto Serif TC", ui-serif, Georgia, "Times New Roman", serif;
+
+  /* semantic tokens (shadcn/ui) */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -42,128 +56,138 @@
 }
 
 :root {
-  --radius: 0.75rem;
+  /* Pearl & Brocade palette */
+  --background: oklch(0.985 0.012 92);
+  --foreground: oklch(0.235 0.03 55);
 
-  /* Fonts (loaded in index.html) */
-  --font-display: "Noto Serif TC", "ZCOOL XiaoWei", ui-serif, serif;
-  --font-body: "Noto Serif TC", ui-serif, serif;
+  --card: oklch(0.992 0.01 92);
+  --card-foreground: oklch(0.235 0.03 55);
 
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
-}
+  --popover: oklch(0.992 0.01 92);
+  --popover-foreground: oklch(0.235 0.03 55);
 
-/* Neo-thangka noir */
-.dark {
-  /* Indigo night base */
-  --background: oklch(0.14 0.02 265);
-  --foreground: oklch(0.98 0.01 265);
+  /* refined soft gold */
+  --primary: oklch(0.72 0.11 86);
+  --primary-foreground: oklch(0.22 0.03 55);
 
-  --card: oklch(0.18 0.02 265);
-  --card-foreground: oklch(0.98 0.01 265);
-  --popover: oklch(0.18 0.02 265);
-  --popover-foreground: oklch(0.98 0.01 265);
+  --secondary: oklch(0.955 0.016 92);
+  --secondary-foreground: oklch(0.235 0.03 55);
 
-  /* Warm gold accent */
-  --primary: oklch(0.86 0.13 78);
-  --primary-foreground: oklch(0.16 0.02 265);
+  --muted: oklch(0.965 0.012 92);
+  --muted-foreground: oklch(0.5 0.03 58);
 
-  --secondary: oklch(0.22 0.02 265);
-  --secondary-foreground: oklch(0.98 0.01 265);
+  /* muted jade */
+  --accent: oklch(0.93 0.03 150);
+  --accent-foreground: oklch(0.235 0.03 55);
 
-  --muted: oklch(0.22 0.02 265);
-  --muted-foreground: oklch(0.74 0.02 265);
+  --destructive: oklch(0.63 0.2 28);
 
-  --accent: oklch(0.24 0.03 265);
-  --accent-foreground: oklch(0.98 0.01 265);
+  --border: oklch(0.84 0.02 92 / 75%);
+  --input: oklch(0.84 0.02 92 / 75%);
+  --ring: oklch(0.72 0.11 86 / 45%);
 
-  --border: oklch(0.86 0.13 78 / 18%);
-  --input: oklch(0.86 0.13 78 / 18%);
-  --ring: oklch(0.86 0.13 78 / 45%);
+  --chart-1: oklch(0.72 0.11 86);
+  --chart-2: oklch(0.66 0.07 150);
+  --chart-3: oklch(0.62 0.06 40);
+  --chart-4: oklch(0.75 0.07 115);
+  --chart-5: oklch(0.61 0.09 20);
 
-  --sidebar: oklch(0.18 0.02 265);
-  --sidebar-foreground: oklch(0.98 0.01 265);
-  --sidebar-primary: oklch(0.86 0.13 78);
-  --sidebar-primary-foreground: oklch(0.16 0.02 265);
-  --sidebar-accent: oklch(0.22 0.02 265);
-  --sidebar-accent-foreground: oklch(0.98 0.01 265);
-  --sidebar-border: oklch(0.86 0.13 78 / 18%);
-  --sidebar-ring: oklch(0.86 0.13 78 / 45%);
+  --sidebar: oklch(0.98 0.012 92);
+  --sidebar-foreground: oklch(0.235 0.03 55);
+  --sidebar-primary: oklch(0.72 0.11 86);
+  --sidebar-primary-foreground: oklch(0.22 0.03 55);
+  --sidebar-accent: oklch(0.955 0.016 92);
+  --sidebar-accent-foreground: oklch(0.235 0.03 55);
+  --sidebar-border: oklch(0.84 0.02 92 / 75%);
+  --sidebar-ring: oklch(0.72 0.11 86 / 45%);
 }
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
-  body {
-    font-family: var(--font-body);
-    @apply bg-background text-foreground;
-  }
-}
 
-@layer utilities {
+  html {
+    color-scheme: light;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: var(--font-body);
+  }
+
+  h1,
+  h2,
+  h3,
   .font-display {
     font-family: var(--font-display);
     letter-spacing: -0.01em;
   }
+}
 
+@layer utilities {
   .readable {
-    font-family: var(--font-body);
-    line-height: 1.8;
+    line-height: 1.9;
+    letter-spacing: 0.01em;
   }
 
-  /* Gold foil border + subtle glow */
+  /* legacy class name kept to avoid large refactors */
   .gold-border {
-    border: 1px solid color-mix(in oklab, var(--primary) 35%, transparent);
+    border: 1px solid var(--border);
     box-shadow:
-      0 0 0 1px color-mix(in oklab, var(--primary) 10%, transparent) inset,
-      0 12px 36px rgba(0, 0, 0, 0.32);
+      0 0 0 1px oklch(0.84 0.02 92 / 22%),
+      0 18px 50px -42px oklch(0.36 0.03 70 / 22%);
   }
 
-  /* Paper grain overlay */
-  .paper-grain {
-    background-image:
-      radial-gradient(circle at 10% 10%, rgba(255, 255, 255, 0.04) 0 1px, transparent 1px 100%),
-      radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.03) 0 1px, transparent 1px 100%),
-      radial-gradient(circle at 30% 80%, rgba(255, 255, 255, 0.025) 0 1px, transparent 1px 100%);
-    background-size: 220px 220px, 260px 260px, 300px 300px;
-    background-blend-mode: overlay;
+  .gold-glow {
+    box-shadow:
+      0 0 0 1px oklch(0.72 0.11 86 / 22%),
+      0 0 44px oklch(0.72 0.11 86 / 14%),
+      0 16px 42px -30px oklch(0.36 0.03 70 / 22%);
   }
 
-  /* Hero lacquer + vignette */
+  /* airy brocade overlay used in hero sections */
   .hero-brocade {
     background:
-      radial-gradient(60% 60% at 20% 20%, rgba(255, 221, 154, 0.22) 0%, transparent 55%),
-      radial-gradient(60% 60% at 70% 30%, rgba(120, 170, 255, 0.14) 0%, transparent 55%),
-      linear-gradient(180deg, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0.85) 70%, rgba(0, 0, 0, 0.95) 100%);
+      radial-gradient(circle at 18% 18%, oklch(0.93 0.03 150 / 24%), transparent 55%),
+      radial-gradient(circle at 80% 55%, oklch(0.72 0.11 86 / 20%), transparent 52%),
+      linear-gradient(180deg, oklch(0.985 0.012 92 / 85%), oklch(0.985 0.012 92 / 92%));
+    mix-blend-mode: screen;
+  }
+
+  .paper-grain {
+    position: relative;
+  }
+
+  /* rice paper + light brocade feel */
+  .paper-grain::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.22;
     mix-blend-mode: multiply;
+    background-image:
+      radial-gradient(circle at 18% 12%, oklch(0.93 0.03 150 / 26%), transparent 55%),
+      radial-gradient(circle at 82% 48%, oklch(0.72 0.11 86 / 18%), transparent 52%),
+      repeating-linear-gradient(0deg, oklch(0.99 0.004 90 / 22%) 0 1px, transparent 1px 4px),
+      repeating-linear-gradient(90deg, oklch(0.99 0.004 90 / 18%) 0 1px, transparent 1px 5px);
+  }
+
+  .vignette {
+    position: relative;
+  }
+
+  .vignette::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(
+      ellipse at center,
+      transparent 0 64%,
+      oklch(0.86 0.02 88 / 45%) 100%
+    );
+    opacity: 0.65;
   }
 }

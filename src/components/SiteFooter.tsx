@@ -28,7 +28,7 @@ export default function SiteFooter() {
           </div>
 
           <div className="mt-6 text-xs text-muted-foreground leading-relaxed">
-            提醒：本站內容屬宗教護持與回向之資訊整理，不提供醫療、法律、投資報酬之保證或替代建議；付款將導向第三方金流平台綠界完成。
+            提醒：本站內容屬宗教護持與迴向之資訊整理，不提供醫療、法律、投資報酬之保證或替代建議；付款將導向第三方金流平台綠界完成。
           </div>
 
           <div className="mt-4 text-xs text-muted-foreground leading-relaxed">

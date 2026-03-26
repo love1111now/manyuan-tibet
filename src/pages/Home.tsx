@@ -16,7 +16,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { DEITIES, HOME_TESTIMONIALS, SUTRA_QUOTES, SITE } from "@/lib/siteData";
 
-import heroBrocade from "@/assets/visuals/generated/zen-wealth-hero.jpeg";
+import heroBrocade from "@/assets/visuals/generated/hero-airy-brocade.jpeg";
 import iconYellow from "@/assets/visuals/generated/image_w1024_h1024_icon-yellow-water-offering.webp";
 import iconMahashri from "@/assets/visuals/generated/image_w1024_h1024_icon-mahashri-home.webp";
 import iconGanapati from "@/assets/visuals/generated/image_w1024_h1024_icon-ganapati-clarity.webp";
@@ -51,14 +51,7 @@ export default function Home() {
             >
               立即領取
             </a>
-            <a
-              href={SITE.fb}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex h-10 px-4 w-full sm:w-auto items-center justify-center rounded-md border bg-background/30 gold-border text-xs sm:text-sm tracking-[0.14em] sm:tracking-[0.18em]"
-            >
-              追蹤 FB
-            </a>
+           
           </div>
         </div>
       </div>
@@ -70,10 +63,10 @@ export default function Home() {
             <img
               src={heroBrocade}
               alt=""
-              className="h-full w-full object-cover opacity-55"
+              className="h-full w-full object-cover opacity-80"
               loading="eager"
             />
-            <div className="absolute inset-0 hero-brocade opacity-95" />
+            <div className="absolute inset-0 hero-brocade opacity-80" />
           </div>
 
           <div className="mx-auto max-w-6xl px-4 pt-14 pb-14 md:pt-20 md:pb-18">
@@ -85,15 +78,15 @@ export default function Home() {
                 </div>
 
                 <h1 className="mt-4 font-display text-4xl sm:text-5xl md:text-7xl leading-[1.05]">
-                  你卡的不是努力，
+                  豐補財庫
                   <br />
-                  是<strong className="text-primary font-black">頻率與路徑</strong>。
+                  <strong className="text-primary font-black">迎來貴人</strong>。
                 </h1>
 
                 <p className="mt-6 readable text-muted-foreground max-w-prose">
-                  我們用《金光明最勝王經》的敘事，把困局拆成四條路：
+                  透過正法護持：
                   <span className="text-foreground">穩財／補庫／清明／聚人</span>。
-                  你只要完成一次對位，後面就是照著流程走到預定入口。
+                  你只要完成一次對位。
                 </p>
 
                 <div className="mt-8 flex flex-col sm:flex-row gap-3">
@@ -101,23 +94,23 @@ export default function Home() {
                     className="h-12 px-6 font-black tracking-[0.24em] uppercase gold-border"
                     onClick={() => document.getElementById("quiz")?.scrollIntoView({ behavior: "smooth" })}
                   >
-                    立刻開始檢測 <ArrowRight className="h-4 w-4" />
+                    找到您的護持 <ArrowRight className="h-4 w-4" />
                   </Button>
                   <Link
                     href="/puja"
                     className="h-12 px-6 inline-flex items-center justify-center rounded-md border bg-background/30 gold-border readable"
                   >
-                    直接看四條路徑
+                    直接看四大本尊
                   </Link>
                 </div>
 
                 <div className="mt-6 text-xs text-muted-foreground leading-relaxed max-w-prose">
-                  提醒：本站內容屬宗教護持與回向之資訊整理，不提供醫療、法律、投資報酬之保證或替代建議。
+                  提醒：本站內容屬宗教護持與迴向之資訊整理，不提供醫療、法律、投資報酬之保證或替代建議。
                 </div>
               </div>
 
               <Card className="p-7 gold-border bg-card/75 backdrop-blur paper-grain">
-                <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">留存核心：能量檢測</div>
+                <div className="text-xs tracking-[0.36em] uppercase text-muted-foreground">留存核心：能量檢測</div>
                 <div className="mt-4 overflow-hidden rounded-2xl gold-border bg-background/30">
                   <img src={quizArt} alt="" className="h-44 w-full object-cover opacity-95" loading="eager" />
                 </div>
@@ -133,12 +126,6 @@ export default function Home() {
                   >
                     開始檢測 <ArrowRight className="h-4 w-4" />
                   </Button>
-                  <Link
-                    href="/pay"
-                    className="h-11 px-5 inline-flex items-center justify-center rounded-md border bg-background/30 gold-border readable"
-                  >
-                    我已確定，直接去預定
-                  </Link>
                 </div>
               </Card>
             </div>
@@ -184,7 +171,7 @@ export default function Home() {
                 <Check className="h-5 w-5 text-primary mt-0.5" />
                 <div>
                   <div className="font-semibold text-foreground">路徑透明</div>
-                  <div className="text-sm">選本尊 → 選方案 → 到緣界完成護持。</div>
+                  <div className="text-sm">選本尊 → 選方案 → 完成護持登記。</div>
                 </div>
               </div>
             </div>
@@ -194,7 +181,7 @@ export default function Home() {
                 href="/sutra"
                 className="h-12 px-6 inline-flex items-center justify-center rounded-md border bg-background/30 gold-border readable"
               >
-                先看經典主軸
+                先看增益經典
               </Link>
               <Link
                 href="/pay"

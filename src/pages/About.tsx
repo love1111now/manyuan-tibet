@@ -5,6 +5,8 @@ import StickyCta from "@/components/StickyCta";
 import Seo from "@/components/Seo";
 import { Card } from "@/components/ui/card";
 
+import bannerArt from "@/assets/visuals/generated/deity-page-banner-abstract.jpeg";
+
 export default function About() {
   return (
     <div className="min-h-screen bg-background">
@@ -19,6 +21,10 @@ export default function About() {
           我們用清楚的敘事與透明流程，把你從焦慮與資訊過載中拉回來：
           選對路徑、完成護持、回到可延續的生活節奏。
         </p>
+
+        <Card className="mt-7 overflow-hidden gold-border bg-card/80 backdrop-blur paper-grain">
+          <img src={bannerArt} alt="傳承與立場示意" className="h-[240px] w-full object-cover" loading="eager" />
+        </Card>
 
         <section className="mt-10 grid gap-4">
           <Card className="p-7 gold-border bg-card">

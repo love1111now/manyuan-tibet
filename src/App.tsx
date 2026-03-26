@@ -2,9 +2,10 @@ import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import LiveRegistrations from "@/components/LiveRegistrations";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { Router, Route, Switch } from "wouter";
+import { Router, Route, Switch, useLocation } from "wouter";
 import { useHashLocation } from "wouter/use-hash-location";
 import ErrorBoundary from "@/components/ErrorBoundary";
+import { useEffect } from "react";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 
 import Home from "@/pages/Home";
@@ -25,6 +26,16 @@ function Redirect({ to }: { to: string }) {
   if (typeof window !== "undefined") {
     window.location.hash = `#${to}`;
   }
+  return null;
+}
+
+function ScrollToTop() {
+  const [loc] = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [loc]);
+
   return null;
 }
 
@@ -61,10 +72,11 @@ export default function App() {
 
   return (
     <ErrorBoundary>
-      <ThemeProvider defaultTheme="dark">
+      <ThemeProvider defaultTheme="light">
         <TooltipProvider>
           <Toaster position={isMobile ? "top-center" : "bottom-right"} />
           <LiveRegistrations />
+          <ScrollToTop />
           <AppRouter />
         </TooltipProvider>
       </ThemeProvider>

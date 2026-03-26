@@ -21,7 +21,7 @@ export default function Terms() {
           <Card className="p-7 gold-border bg-card">
             <div className="font-semibold">1. 服務性質</div>
             <p className="mt-3 readable text-muted-foreground">
-              本站提供宗教護持與回向相關之資訊與導流，並不提供醫療、法律、投資建議或任何報酬保證。
+              本站提供宗教護持與迴向相關之資訊與導流，並不提供醫療、法律、投資建議或任何報酬保證。
               你在本站所做的行為，屬自願性之護持與發心。
             </p>
           </Card>

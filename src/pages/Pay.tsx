@@ -9,6 +9,8 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { DEITIES, money } from "@/lib/siteData";
 
+import altarPhoto from "@/assets/visuals/generated/altar-stilllife-offering-set.jpeg";
+
 export default function Pay() {
   return (
     <div className="min-h-screen bg-background">
@@ -23,9 +25,30 @@ export default function Pay() {
             <p className="mt-4 readable text-muted-foreground max-w-prose">
               付款會跳轉至第三方金流平台綠界完成。你只要依提示完成付款與必要欄位，其餘照如法流程安排。
             </p>
+
+            <Card className="mt-6 p-7 gold-border bg-accent/20 paper-grain">
+              <div className="text-xs tracking-[0.24em] uppercase text-muted-foreground">本期活動</div>
+              <div className="mt-2 font-display text-2xl">完成登記法事，即免費加入「煙供聖典」一次</div>
+              <p className="mt-3 readable text-muted-foreground">
+                這個法事之後才會正式開放；現在只要完成任一項護持登記，我們會把你加進本期的煙供名單，作為額外的善緣增上。
+              </p>
+              <div className="mt-3 text-sm text-muted-foreground">
+                你也可以替家人朋友登記（把善意往外放，福德迴流通常更大）。
+              </div>
+            </Card>
           </div>
 
-          <Card className="p-7 gold-border bg-card paper-grain">
+          <div className="grid gap-4">
+            <Card className="overflow-hidden gold-border bg-card/80 backdrop-blur paper-grain">
+              <img
+                src={altarPhoto}
+                alt="供養與儀軌示意"
+                className="h-[260px] w-full object-cover"
+                loading="eager"
+              />
+            </Card>
+
+            <Card className="p-7 gold-border bg-card paper-grain">
             <div className="flex items-start gap-3">
               <ShieldCheck className="h-5 w-5 text-primary" />
               <div>
@@ -42,7 +65,7 @@ export default function Pay() {
                 <div className="font-semibold">重要提醒</div>
                 <ul className="mt-2 readable text-muted-foreground text-sm list-disc list-inside grid gap-1">
                   <li>請以綠界頁面顯示之金額與資訊為準。</li>
-                  <li>請確認姓名／祈願事項填寫正確。</li>
+                  <li>請確認姓名／祈願事項填寫正確（可填你本人或你想護念的人）。</li>
                   <li>本站不提供投資/報酬之保證或承諾。</li>
                 </ul>
               </div>
@@ -53,6 +76,7 @@ export default function Pay() {
               你想要的改善通常很具體——睡得著、止得住、不後悔，得益處。越早把護持排進行程，別把今天的耗損拖成明天的巨洞。
             </div>
           </Card>
+        </div>
         </div>
 
         <section className="mt-12 grid gap-4">
