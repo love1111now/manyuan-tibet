@@ -100,14 +100,14 @@ export default function DeityPage({ deityKey }: { deityKey: string }) {
             <div className="text-xs tracking-[0.24em] uppercase text-muted-foreground">溫柔提醒</div>
             <div className="mt-2 font-display text-2xl">先把祈願寫成一句話</div>
             <p className="mt-3 readable text-muted-foreground">
-              不用寫很玄。用一句你看得懂、也願意承擔的話就好：例如「願我把財務節奏穩住」或「願我做一次清明的選擇」。
+              不用寫很玄。用一句你看得懂、也願意承擔的話就好：例如「願我把財務節奏穩住」或「願我做一次正確的選擇」。
             </p>
           </Card>
           <Card className="p-7 gold-border bg-card">
-            <div className="text-xs tracking-[0.24em] uppercase text-muted-foreground">完成後你要做的</div>
+            <div className="text-xs tracking-[0.24em] uppercase text-muted-foreground">完成法事後的你</div>
             <div className="mt-2 font-display text-2xl">把一件小事做完</div>
             <p className="mt-3 readable text-muted-foreground">
-              護持不是把責任丟出去。你可以選一件最小、最可行的事情：整理帳單、回一封訊息、把一個決策寫下來——讓路徑開始落地。
+              護持不是把責任丟出去。你可以選一件最小、最可行的事情：打包垃圾、回一封訊息、把一個決策寫下來——讓福氣開始。
             </p>
           </Card>
           <Card className="p-7 gold-border bg-card">
