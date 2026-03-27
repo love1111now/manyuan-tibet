@@ -30,7 +30,7 @@ import iconKurukulla from "@/assets/visuals/generated/image_w1024_h1024_icon-kur
 import iconWater from "@/assets/visuals/generated/icon-water-offering.jpeg";
 import iconIncense from "@/assets/visuals/generated/icon-incense-lamp.jpeg";
 
-// ✅ 漏掉的追蹤函數：解決報表數據空白問題
+// GA4 追蹤函數
 const trackEcPayClick = (planName: string, price: number, deityName: string) => {
   if (typeof window !== "undefined" && (window as any).gtag) {
     (window as any).gtag("event", "begin_checkout", {
@@ -69,11 +69,44 @@ type RitualVisual = {
   iconBTitle: string;
 };
 
+// ✅ 修正點：補齊 iconBLabel 確保符合 RitualVisual 型別要求
 const RITUAL_VISUAL_BY_KEY: Record<DeityKey, RitualVisual> = {
-  yellow: { photo: altarYellow, iconA: iconYellow, iconALabel: "Water offering", iconATitle: "黃財神水供", iconB: iconWater, iconBTitle: "清淨水器" },
-  mahashri: { photo: altarMahashri, iconA: iconMahashri, iconALabel: "Sutra & offerings", iconATitle: "護持資糧", iconB: iconIncense, iconBTitle: "香燈莊嚴" },
-  ganapati: { photo: altarGanapati, iconA: iconGanapati, iconALabel: "Obstacle removal", iconATitle: "除障清明", iconB: iconIncense, iconBTitle: "供香／供甜" },
-  kurukulla: { photo: altarKurukulla, iconA: iconKurukulla, iconALabel: "Magnetizing", iconATitle: "攝受善緣", iconB: iconIncense, iconBTitle: "花／香／燈供" },
+  yellow: {
+    photo: altarYellow,
+    iconA: iconYellow,
+    iconALabel: "Water offering",
+    iconATitle: "黃財神水供",
+    iconB: iconIncense,
+    iconBLabel: "Incense & lamp",
+    iconBTitle: "香／燈供",
+  },
+  mahashri: {
+    photo: altarMahashri,
+    iconA: iconMahashri,
+    iconALabel: "Sutra & offerings",
+    iconATitle: "護持資糧",
+    iconB: iconWater,
+    iconBLabel: "Water bowl offering",
+    iconBTitle: "清淨水供",
+  },
+  ganapati: {
+    photo: altarGanapati,
+    iconA: iconGanapati,
+    iconALabel: "Obstacle removal",
+    iconATitle: "除障清明",
+    iconB: iconIncense,
+    iconBLabel: "Offerings",
+    iconBTitle: "供香／供甜",
+  },
+  kurukulla: {
+    photo: altarKurukulla,
+    iconA: iconKurukulla,
+    iconALabel: "Magnetizing",
+    iconATitle: "攝受善緣",
+    iconB: iconIncense,
+    iconBLabel: "Offerings",
+    iconBTitle: "花／香／燈供",
+  },
 };
 
 const RITUAL_BY_KEY: Record<DeityKey, RitualBlock> = {
@@ -128,7 +161,10 @@ const RITUAL_BY_KEY: Record<DeityKey, RitualBlock> = {
 };
 
 export default function DeityPage({ deityKey }: { deityKey: string }) {
-  const d: Deity | undefined = DEITY_BY_KEY[deityKey as DeityKey];
+  const keys: readonly DeityKey[] = ["yellow", "mahashri", "ganapati", "kurukulla"];
+  const d: Deity | undefined = keys.includes(deityKey as DeityKey)
+    ? DEITY_BY_KEY[deityKey as DeityKey]
+    : undefined;
 
   if (!d) {
     return (
@@ -165,7 +201,7 @@ export default function DeityPage({ deityKey }: { deityKey: string }) {
             <Card className="mt-7 p-7 gold-border bg-card paper-grain shadow-sm">
               <div className="text-xs tracking-[0.24em] uppercase text-muted-foreground">精準對位卡點</div>
               <div className="mt-2 font-display text-2xl md:text-3xl">{d.oracle.question}</div>
-              <div className="mt-3 readable text-muted-foreground">{d.promise}</div>
+              <div className="mt-3 readable text-muted-foreground leading-relaxed">{d.promise}</div>
             </Card>
 
             <div className="mt-8 flex flex-col sm:flex-row gap-4">
@@ -193,21 +229,21 @@ export default function DeityPage({ deityKey }: { deityKey: string }) {
           <Card className="p-7 gold-border bg-card paper-grain">
             <div className="text-xs tracking-[0.24em] uppercase text-muted-foreground">溫柔提醒</div>
             <div className="mt-2 font-display text-2xl">先把祈願寫成一句話</div>
-            <p className="mt-3 readable text-muted-foreground">不用寫很玄。用一句你看得懂、也願意承擔的話就好：例如「願我把財務節奏穩住」。</p>
+            <p className="mt-3 text-sm readable text-muted-foreground">不用寫很玄。用一句你看得懂、也願意承擔的話就好：例如「願我把財務節奏穩住」。</p>
           </Card>
           <Card className="p-7 gold-border bg-card">
             <div className="text-xs tracking-[0.24em] uppercase text-muted-foreground">完成法事後的你</div>
             <div className="mt-2 font-display text-2xl">把一件小事做完</div>
-            <p className="mt-3 readable text-muted-foreground">護持不是把責任丟出去。你可以選一件最小的事情：寫下一個決策——讓福氣開始。</p>
+            <p className="mt-3 text-sm readable text-muted-foreground">護持不是把責任丟出去。選一件最小、最可行的事情去執行——讓福氣開始。</p>
           </Card>
           <Card className="p-7 gold-border bg-card">
             <div className="text-xs tracking-[0.24em] uppercase text-muted-foreground">你可能感受到</div>
             <div className="mt-2 font-display text-2xl">心比較定、路比較清楚</div>
-            <p className="mt-3 readable text-muted-foreground">我們不寫「保證」。比較常見的是：焦慮下降、猶豫變少，這種細微但會累積的改變。</p>
+            <p className="mt-3 text-sm readable text-muted-foreground">常見的是：焦慮下降、猶豫變少、開啟機會，這種細微但會累積的改變。</p>
           </Card>
         </section>
 
-        {/* 3) Plans & ✅ 補回追蹤點點擊 */}
+        {/* 3) Plans & GA4 Tracking */}
         <section id="plans" className="mt-16 scroll-mt-24">
           <div className="flex items-end justify-between border-b pb-6">
             <h2 className="font-display text-3xl md:text-4xl">專屬護持方案</h2>
@@ -236,7 +272,7 @@ export default function DeityPage({ deityKey }: { deityKey: string }) {
                     href={p.url} 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    onClick={() => trackEcPayClick(p.name, p.price, d.name)} // ✅ 補回關鍵追蹤
+                    onClick={() => trackEcPayClick(p.name, p.price, d.name)}
                   >
                     <Button className="w-full gold-border font-black uppercase tracking-widest h-14">
                       前往綠界安全登記 <ExternalLink className="h-5 w-5 ml-2" />
@@ -257,7 +293,7 @@ export default function DeityPage({ deityKey }: { deityKey: string }) {
               <div className="text-xs tracking-[0.24em] uppercase text-muted-foreground mb-3">{r.title}</div>
               <p className="readable text-muted-foreground italic mb-8 border-b pb-6 text-lg">{r.note}</p>
               <div className="space-y-8">
-                {r.steps.map((step, idx) => (
+                {r.steps.map((step: string, idx: number) => (
                   <div key={idx} className="flex gap-6 items-start">
                     <span className="font-display text-3xl text-primary/30 leading-none">0{idx + 1}</span>
                     <p className="readable text-md pt-1">{step}</p>
@@ -269,10 +305,21 @@ export default function DeityPage({ deityKey }: { deityKey: string }) {
                   <Heart className="h-4 w-4 text-primary" /> 儀軌所需廣大供具 (全數具足)
                 </div>
                 <div className="flex flex-wrap gap-3">
-                  {r.used.map((u) => (
+                  {r.used.map((u: string) => (
                     <Badge key={u} variant="outline" className="font-normal px-4 py-2 bg-background/50 border-primary/20">{u}</Badge>
                   ))}
                 </div>
+              </div>
+
+              <div className="mt-8 text-xs text-muted-foreground">
+                參考資料：
+                {r.sources.map((x) => (
+                  <div key={x.url} className="mt-2">
+                    <a className="underline underline-offset-4" href={x.url} target="_blank" rel="noreferrer">
+                      {x.label}
+                    </a>
+                  </div>
+                ))}
               </div>
             </Card>
 
@@ -294,7 +341,7 @@ export default function DeityPage({ deityKey }: { deityKey: string }) {
           </div>
         </section>
 
-        {/* 5) Sutra Merit */}
+        {/* 5) Sutra Merit (經典功德) */}
         <section className="mt-24">
           <h2 className="font-display text-3xl md:text-4xl mb-6">經典對應功德與經文引用</h2>
           <Card className="p-8 gold-border bg-card paper-grain shadow-sm">
@@ -309,7 +356,7 @@ export default function DeityPage({ deityKey }: { deityKey: string }) {
           </Card>
         </section>
 
-        {/* 6) Wealth Story */}
+        {/* 6) Wealth Story (增益故事) */}
         <section className="mt-24">
           <h2 className="font-display text-3xl md:text-4xl mb-6">經典裡，這尊如何給你『增益』</h2>
           <Card className="p-8 gold-border bg-card paper-grain shadow-sm">
@@ -321,14 +368,14 @@ export default function DeityPage({ deityKey }: { deityKey: string }) {
           </Card>
         </section>
 
-        {/* 7) Testimonials */}
+        {/* 7) Testimonials (見證回饋) */}
         <section className="mt-24">
           <h2 className="font-display text-3xl md:text-4xl mb-8">願你是下一個回來感恩的人</h2>
           <div className="grid gap-6 md:grid-cols-3">
-            {d.testimonials.map((t) => (
-              <Card key={t.title} className="p-8 gold-border bg-card hover:bg-accent/5 transition-colors">
+            {d.testimonials.map((t, i) => (
+              <Card key={i} className="p-8 gold-border bg-card hover:bg-accent/5 transition-colors">
                 <div className="font-bold text-primary mb-4 text-lg">{t.title}</div>
-                <div className="readable text-muted-foreground leading-relaxed mb-6">{t.body}</div>
+                <div className="text-sm readable text-muted-foreground leading-relaxed mb-6">{t.body}</div>
                 <div className="text-xs tracking-[0.2em] uppercase text-muted-foreground border-t pt-4">{t.by}</div>
               </Card>
             ))}
@@ -340,7 +387,7 @@ export default function DeityPage({ deityKey }: { deityKey: string }) {
           <h2 className="font-display text-3xl md:text-4xl mb-10 text-center">常見疑慮</h2>
           <Accordion type="single" collapsible className="max-w-4xl mx-auto space-y-4">
             {d.faq.map((x, i) => (
-              <AccordionItem key={x.q} value={`${i}`} className="gold-border rounded-2xl bg-card px-4">
+              <AccordionItem key={i} value={`${i}`} className="gold-border rounded-2xl bg-card px-4">
                 <AccordionTrigger className="px-6 py-5 text-left font-semibold text-lg hover:no-underline">{x.q}</AccordionTrigger>
                 <AccordionContent className="px-6 pb-6 readable text-muted-foreground text-md leading-relaxed">{x.a}</AccordionContent>
               </AccordionItem>
@@ -352,11 +399,11 @@ export default function DeityPage({ deityKey }: { deityKey: string }) {
         <section className="mt-24">
           <h2 className="font-display text-3xl md:text-4xl mb-8">你也可能更適合…</h2>
           <div className="grid gap-6 md:grid-cols-2">
-            {d.crossSell.map((x) => (
-              <Link key={x.title} href={`/deities/${x.to}`}>
-                <Card className="p-8 gold-border bg-card hover:bg-accent/25 transition-all group">
+            {d.crossSell.map((x, i) => (
+              <Link key={i} href={`/deities/${x.to}`}>
+                <Card className="p-8 gold-border bg-card hover:bg-accent/25 transition-all group cursor-pointer">
                   <div className="font-bold text-xl mb-3">{x.title}</div>
-                  <div className="readable text-muted-foreground">{x.desc}</div>
+                  <div className="text-sm readable text-muted-foreground">{x.desc}</div>
                   <div className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-primary group-hover:translate-x-1 transition-transform">
                     看對應路徑 <ArrowRight className="h-4 w-4" />
                   </div>
