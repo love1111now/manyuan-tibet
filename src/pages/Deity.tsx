@@ -21,14 +21,18 @@ import altarYellow from "@/assets/visuals/generated/altar-yellow-water-offering.
 import altarMahashri from "@/assets/visuals/generated/altar-mahashri-home-wealth.jpeg";
 import altarGanapati from "@/assets/visuals/generated/altar-ganapati-obstacle-removal.jpeg";
 import altarKurukulla from "@/assets/visuals/generated/altar-kurukulla-magnetizing.jpeg";
+import altarGreenTara from "@/assets/visuals/generated/altar-green-tara-fire-offering.jpeg";
 
 import iconYellow from "@/assets/visuals/generated/image_w1024_h1024_icon-yellow-water-offering.webp";
 import iconMahashri from "@/assets/visuals/generated/image_w1024_h1024_icon-mahashri-home.webp";
 import iconGanapati from "@/assets/visuals/generated/image_w1024_h1024_icon-ganapati-clarity.webp";
 import iconKurukulla from "@/assets/visuals/generated/image_w1024_h1024_icon-kurukulla-magnetize.webp";
+import iconGreenTara from "@/assets/visuals/generated/image_w1024_h1024_icon-green-tara-quick-help.webp";
 
 import iconWater from "@/assets/visuals/generated/icon-water-offering.jpeg";
 import iconIncense from "@/assets/visuals/generated/icon-incense-lamp.jpeg";
+import greenTaraGallery01 from "@/assets/visuals/generated/green-tara-gallery-01.jpeg";
+import greenTaraGallery02 from "@/assets/visuals/generated/green-tara-gallery-02.jpeg";
 
 // GA4 追蹤函數
 const trackEcPayClick = (planName: string, price: number, deityName: string) => {
@@ -107,6 +111,15 @@ const RITUAL_VISUAL_BY_KEY: Record<DeityKey, RitualVisual> = {
     iconBLabel: "Offerings",
     iconBTitle: "花／香／燈供",
   },
+  "green-tara": {
+    photo: altarGreenTara,
+    iconA: iconGreenTara,
+    iconALabel: "Quick help",
+    iconATitle: "綠度母迅疾除障",
+    iconB: iconIncense,
+    iconBLabel: "Homa offering",
+    iconBTitle: "護摩火供",
+  },
 };
 
 const RITUAL_BY_KEY: Record<DeityKey, RitualBlock> = {
@@ -158,10 +171,22 @@ const RITUAL_BY_KEY: Record<DeityKey, RitualBlock> = {
     used: ["鮮豔紅蓮花/玫瑰", "玫瑰精油香氛", "紅色酥油燈", "石榴/紅葡萄", "懷愛哈達", "紅珊瑚裝飾", "懷愛心咒輪"],
     sources: [{ label: "Lotsawa House｜Kurukullā Sādhana", url: "https://www.lotsawahouse.org/tibetan-masters/mipham/kurukulla-sadhana" }],
   },
+  "green-tara": {
+    title: "綠度母：清明除障護摩火供",
+    note: "度母以『迅速』聞名：以火供的轉化力，清算障礙種子，令福德與利樂快速落地。",
+    steps: [
+      "立清淨動機：皈依三寶、發菩提心，將祈願寫成一句具體可承擔的話。",
+      "安置火供壇城：備辦香、燈、花、食、淨水等供具，莊嚴壇場。",
+      "護摩火供轉化：以聖火承載祈願與迴向，觀想障礙與恐懼在火中清淨。",
+      "結行迴向：願『八怖即除』，令身心輕安，事業與人際回到正位。",
+    ],
+    used: ["護摩火供爐", "酥油燈", "淨水供杯", "青蓮/綠色花供", "藏香", "供米/供糖", "迴向疏文"],
+    sources: [{ label: "《二十一尊度母讚》概述", url: "#" }],
+  },
 };
 
 export default function DeityPage({ deityKey }: { deityKey: string }) {
-  const keys: readonly DeityKey[] = ["yellow", "mahashri", "ganapati", "kurukulla"];
+  const keys: readonly DeityKey[] = ["yellow", "mahashri", "ganapati", "kurukulla", "green-tara"];
   const d: Deity | undefined = keys.includes(deityKey as DeityKey)
     ? DEITY_BY_KEY[deityKey as DeityKey]
     : undefined;
@@ -182,6 +207,7 @@ export default function DeityPage({ deityKey }: { deityKey: string }) {
 
   const r = RITUAL_BY_KEY[d.key];
   const rv = RITUAL_VISUAL_BY_KEY[d.key];
+  const isComingSoon = d.key === "green-tara";
 
   return (
     <div className="min-h-screen bg-background">
@@ -243,7 +269,35 @@ export default function DeityPage({ deityKey }: { deityKey: string }) {
           </Card>
         </section>
 
-        {/* 3) Plans & GA4 Tracking */}
+        {/* 3) 綠度母加碼：活動預告與配圖（更豐富） */}
+        {d.key === "green-tara" && (
+          <section className="mt-14">
+            <Card className="p-8 gold-border bg-card paper-grain">
+              <div className="flex items-start justify-between gap-6 flex-wrap">
+                <div>
+                  <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">活動預告</div>
+                  <div className="mt-2 font-display text-2xl md:text-3xl">綠度母火供｜4/7 才開放登記</div>
+                  <p className="mt-4 readable text-muted-foreground leading-relaxed max-w-prose">
+                    這一頁先把路徑與儀軌說清楚，讓你可以先準備祈願與需求。<br />
+                    4/7 開放後，你可在本頁直接完成登記。
+                  </p>
+                </div>
+                <Badge className="gold-border bg-accent/25 text-accent-foreground">4/7 開放</Badge>
+              </div>
+
+              <div className="mt-8 grid gap-4 md:grid-cols-3">
+                <div className="rounded-[28px] overflow-hidden gold-border md:col-span-2">
+                  <img src={greenTaraGallery01} alt="綠度母壇城與酥油燈" className="h-[280px] md:h-[360px] w-full object-cover" loading="eager" />
+                </div>
+                <div className="rounded-[28px] overflow-hidden gold-border">
+                  <img src={greenTaraGallery02} alt="護摩火供儀軌" className="h-[280px] md:h-[360px] w-full object-cover" loading="eager" />
+                </div>
+              </div>
+            </Card>
+          </section>
+        )}
+
+        {/* 4) Plans & GA4 Tracking */}
         <section id="plans" className="mt-16 scroll-mt-24">
           <div className="flex items-end justify-between border-b pb-6">
             <h2 className="font-display text-3xl md:text-4xl">專屬護持方案</h2>
@@ -268,16 +322,26 @@ export default function DeityPage({ deityKey }: { deityKey: string }) {
                 </div>
 
                 <div className="mt-8">
-                  <a 
-                    href={p.url} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    onClick={() => trackEcPayClick(p.name, p.price, d.name)}
-                  >
-                    <Button className="w-full gold-border font-black uppercase tracking-widest h-14">
-                      前往綠界安全登記 <ExternalLink className="h-5 w-5 ml-2" />
+                  {isComingSoon ? (
+                    <Button
+                      className="w-full gold-border font-black uppercase tracking-widest h-14"
+                      variant="secondary"
+                      disabled
+                    >
+                      4/7 開放登記
                     </Button>
-                  </a>
+                  ) : (
+                    <a
+                      href={p.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => trackEcPayClick(p.name, p.price, d.name)}
+                    >
+                      <Button className="w-full gold-border font-black uppercase tracking-widest h-14">
+                        前往綠界安全登記 <ExternalLink className="h-5 w-5 ml-2" />
+                      </Button>
+                    </a>
+                  )}
                 </div>
               </Card>
             ))}

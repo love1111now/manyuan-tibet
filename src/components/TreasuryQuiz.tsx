@@ -149,7 +149,7 @@ function sampleFive(bank: QuizQuestion[]) {
 }
 
 function emptyScore(): Record<DeityKey, number> {
-  return { yellow: 0, mahashri: 0, ganapati: 0, kurukulla: 0 };
+  return { yellow: 0, mahashri: 0, ganapati: 0, kurukulla: 0, "green-tara": 0 };
 }
 
 function pickWinner(score: Record<DeityKey, number>): DeityKey {
@@ -181,6 +181,11 @@ const RESULT_COPY: Record<DeityKey, { tag: string; title: string; desc: string }
     tag: "貴人／感召",
     title: "你要先『打通人脈磁場』：資源才接得上",
     desc: "你現在靠自己撐太久了。當你的狀態回到正位，貴人、合作、介紹會更容易靠近，事情自然變好談。",
+  },
+  "green-tara": {
+    tag: "除障／轉運",
+    title: "你需要『迅速清障』：把阻力先拿掉",
+    desc: "當阻力一直在拖，你再努力也會被消耗。先除障、再前進，節奏才會回到正軌。",
   },
 };
 
