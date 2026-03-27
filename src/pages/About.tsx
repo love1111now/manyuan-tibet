@@ -3,6 +3,10 @@ import SiteFooter from "@/components/SiteFooter";
 import FloatingFb from "@/components/FloatingFb";
 import StickyCta from "@/components/StickyCta";
 import Seo from "@/components/Seo";
+import PageIllustrations from "@/components/PageIllustrations";
+
+import aboutImg1 from "@/assets/visuals/seo/image_w5504_h3072_page-about-1.webp";
+import aboutImg2 from "@/assets/visuals/seo/image_w5504_h3072_page-about-2.webp";
 import { Card } from "@/components/ui/card";
 
 import bannerArt from "@/assets/visuals/generated/deity-page-banner-abstract.jpeg";
@@ -46,6 +50,8 @@ export default function About() {
           </Card>
         </section>
       </main>
+
+      <PageIllustrations images={[{ src: aboutImg1, alt: "寺院木雕與金色飾邊細節" }, { src: aboutImg2, alt: "供桌花與燈的溫暖氛圍" }]} />
 
       <SiteFooter />
       <FloatingFb />

@@ -2,15 +2,53 @@ import heroYellow from "@/assets/visuals/deity-yellow.webp";
 import heroMahashri from "@/assets/visuals/deity-mahashri.webp";
 import heroGanapati from "@/assets/visuals/deity-ganapati.webp";
 import heroKurukulla from "@/assets/visuals/deity-kurukulla.webp";
-import heroGreenTara from "@/assets/visuals/deity-green-tara.webp";
 
 export const SITE = {
   name: "滿願藏庫",
   url: "https://manyuan-tibet.vercel.app",
   fb: "https://www.facebook.com/profile.php?id=61583749010531",
+
+  // SEO
+  defaultOgImage: "/downloads/huangcaishen-wallpaper.jpg",
+  // 不會顯示在前台，只用於 meta / structured data
+  keywords: [
+    "滿願藏庫",
+    "藏傳佛教",
+    "密宗",
+    "佛教法會",
+    "招財",
+    "補財庫",
+    "還庫",
+    "月老",
+    "姻緣",
+    "桃花",
+    "開運",
+    "轉運",
+    "祈福",
+    "消災",
+    "點燈",
+    "光明燈",
+    "財神",
+    "黃財神",
+    "大吉祥天女",
+    "象神",
+    "綠度母",
+    "水供",
+    "供養",
+    "護持",
+    "貴人",
+    "事業",
+    "升遷",
+    "平安",
+    "安太歲",
+    "太歲",
+    "祭改",
+    "文昌",
+    "考試",
+  ],
 } as const;
 
-export type DeityKey = "yellow" | "mahashri" | "ganapati" | "kurukulla" | "green-tara";
+export type DeityKey = "yellow" | "mahashri" | "ganapati" | "kurukulla";
 
 export type Testimonial = {
   title: string;
@@ -477,87 +515,6 @@ export const DEITIES: Deity[] = [
     crossSell: [
       { title: "若你覺得是自己的情緒與焦慮破壞了感情與人際", desc: "看象神：劈開無明雜訊，讓你在社交與決策中保持清醒與智慧。", to: "ganapati" },
       { title: "若你們已論及婚嫁，或想為事業建立穩固底盤", desc: "看大吉祥天女：啟動資糧續航，安穩家宅與團隊底盤。", to: "mahashri" },
-    ],
-  },
-  {
-    key: "green-tara",
-    route: "/deities/green-tara",
-    legacyRoute: "/green-tara",
-    name: "綠度母",
-    subtitle: "清明除障最速件｜迅疾滿願・八怖即除",
-    promise: "專注於『迅速斷障、轉運護身』。度母以「迅速」聞名：把你卡住的災橫、小人、莫名疲累與心中恐懼，直接清算；讓福德與利樂能在現實裡落地。",
-    heroImage: heroGreenTara,
-    oracle: {
-      question: "事業遇瓶頸、小人頻繁出現，或身體總感到莫名疲累——努力一直被看不見的阻力拖住",
-      title: "應感本尊：綠度母",
-      desc: "當障礙累積到一定程度，靠意志硬撐只會更耗。先『除障』，運勢才會開始回正。",
-    },
-    plans: [
-      {
-        id: "gt-1860",
-        name: "迅疾除障｜入名單",
-        price: 1860,
-        url: "https://cart.cashier.ecpay.com.tw/qp/z5c3",
-        hot: true,
-        badge: "清明檔期首選",
-        blurb: "【核心路線】鎖定『小人干擾、阻礙纏身、心氣沉重』等狀態。以綠度母火供的轉化力，快速清算障礙，讓你做事不再卡關。\n\n※ 本法會將於 4/7 正式對外開放登記，目前頁面為預告與資訊先行。",
-        feedback: "很多人的第一個感受，是『心變輕、路變清楚』：該談的案子變好談、該做的事更做得下去。",
-      },
-      {
-        id: "gt-3680",
-        name: "滿願轉運｜深度護持",
-        price: 3680,
-        url: "https://cart.cashier.ecpay.com.tw/qp/z5d7",
-        blurb: "【加強路線】針對『長期反覆卡關』與『磁場被拖累』的狀況：把阻礙你發財、成功與關係和合的種子，透過火供聖火一次燒掉，重啟你的福德續航。\n\n※ 本法會將於 4/7 正式對外開放登記，目前頁面為預告與資訊先行。",
-        feedback: "常見回饋是：阻力明顯變少、貴人開始出現、做決定更果斷，整個節奏回到正軌。",
-      },
-    ],
-    sutraMerit: {
-      title: "為何綠度母最快改變運勢？",
-      quote:
-        "ཏཱ་རེ་དཔའ་བོའི་དཔའ་མོ་སྟེ། ཏུ་ཏཱ་རེས་འཇིགས་ཆེན་འཇོམས། ཏུ་རེས་ཕན་ཡོན་རབ་ཏུ་སྩོལ།",
-      quoteSource: "《二十一尊度母讚》｜迅疾除八怖，速賜利樂",
-      paragraphs: [
-        "這段開示的要義是：綠度母展現勇猛的力量，能瞬間消除我們內心與生活中的『八大恐懼與災難』，並快速賜予世間的福德與利樂。",
-        "在佛經中，度母被視為觀世音菩薩慈悲的化身，祂的感應以『迅速』聞名——不是拖很久才好轉，而是把卡點直接切開。",
-        "火供（護摩）是密法中非常強的轉化法門：以聖火承載加持力，把你生命裡的『障礙種子』燒掉，讓運勢能回到正軌。",
-      ],
-    },
-    wealthStory: {
-      title: "度母緣起：迅疾勇猛的『滿願』之母",
-      source: "度母（多羅）緣起｜公主般若月（般若月）發願以女身修行，直至成佛",
-      paragraphs: [
-        "在鼓音如來的時代，有一位公主名叫般若月，她發願以女身修行，直至成佛。她以『滿願』作為救度眾生的方式，協助眾生遠離外在與內在的痛苦與障礙。",
-        "她全心全意用於度眾，甚至忙到沒有時間進食，因此得到『勇母』之稱，以迅疾勇猛的救度力聞名。",
-        "度母（Tara / Drolma）以『快速 + 滿願』兩大功德，成為印度與西藏都極受信仰的本尊。你在此對接的，不只是一次祈求，而是一條千年傳承的除障滿願路徑。",
-      ],
-    },
-    testimonials: [
-      {
-        title: "不是突然變幸運，是『阻力被拿掉』後事情終於動了",
-        body: "我最明顯的感覺是：同樣的努力，以前像推牆，現在像終於找到門。卡住的合作開始回覆，討論變得順，心裡也不再那麼沉。",
-        by: "台北｜接案者",
-      },
-      {
-        title: "小人干擾變少，做事不再一直被打斷",
-        body: "之前總有人在背後攪局、誤會一堆，工作很難推進。做完後，雜訊像被『清場』，溝通變簡單，主管也更願意支持。",
-        by: "新竹｜上班族",
-      },
-      {
-        title: "清明前先把能量大掃除，睡眠跟精神先回來",
-        body: "我本來覺得只是累，但其實是心氣一直被拖。護持後第一週，睡眠變深，早上起來不再那麼疲累。精神回來後，很多事就能自己處理好。",
-        by: "台中｜自營",
-      },
-    ],
-    faq: [
-      { q: "這頁面寫 4/7 才開放登記，是什麼意思？", a: "綠度母火供將於 4/7 才正式對外開放登記；目前先提供完整介紹與方案資訊，讓你可以先了解路徑、準備祈願。" },
-      { q: "為什麼清明檔期特別適合做除障？", a: "清明前後磁場變動大，很多人會覺得更沉、更累、更容易出狀況。這時做除障與護摩，能把『累積的負面牽引』快速清算，讓你清明後重新起步。" },
-      { q: "綠度母火供會不會是求什麼就一定會得到？", a: "我們不做保證。它的核心是『清障 + 轉化』：把你前進路上的阻力拿掉，讓你的努力更容易接上結果。" },
-      { q: "我該怎麼寫祈願最有效？", a: "用一句具體的話寫清楚：你要清什麼障、想回到什麼狀態。例如：『願我清除職場小人與阻礙，讓工作順利推進』。" },
-    ],
-    crossSell: [
-      { title: "若你也同時有『漏財』與現金流失血", desc: "看黃財神：先止漏，再開源，讓你的努力能留下來。", to: "yellow" },
-      { title: "若你需要把心智迷霧劈開，做出關鍵決策", desc: "看象神：除障清明，讓你看清盲點、出手更穩。", to: "ganapati" },
     ],
   },
 ];

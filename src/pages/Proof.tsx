@@ -5,6 +5,10 @@ import SiteFooter from "@/components/SiteFooter";
 import FloatingFb from "@/components/FloatingFb";
 import StickyCta from "@/components/StickyCta";
 import Seo from "@/components/Seo";
+import PageIllustrations from "@/components/PageIllustrations";
+
+import proofImg1 from "@/assets/visuals/seo/image_w5504_h3072_page-proof-1.webp";
+import proofImg2 from "@/assets/visuals/seo/image_w5504_h3072_page-proof-2.webp";
 import { DEITIES } from "@/lib/siteData";
 
 export default function Proof() {
@@ -45,6 +49,8 @@ export default function Proof() {
           </Link>
         </div>
       </main>
+
+      <PageIllustrations images={[{ src: proofImg1, alt: "儀軌用品與燈火象徵圓滿" }, { src: proofImg2, alt: "寺院走廊光影象徵平安" }]} />
 
       <SiteFooter />
       <FloatingFb />

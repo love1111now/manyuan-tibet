@@ -43,10 +43,7 @@ function ScrollToTop() {
 function AppRouter() {
   return (
     <Router hook={useHashLocation}>
-      {/* 抵達任何頁面都自動捲動至最上方 */}
-      <ScrollToTop />
-
-      {/* 👇 將追蹤器放在 Router 內部，這樣它才能監聽到 hash location 的變化 */}
+      {/* 👇 2. 將追蹤器放在 Router 內部，這樣它才能監聽到 hash location 的變化 */}
       <AnalyticsTracker /> 
       
       <Switch>
@@ -82,6 +79,7 @@ export default function App() {
         <TooltipProvider>
           <Toaster position={isMobile ? "top-center" : "bottom-right"} />
           <LiveRegistrations />
+          <ScrollToTop />
           <AppRouter />
         </TooltipProvider>
       </ThemeProvider>

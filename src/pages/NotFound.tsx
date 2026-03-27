@@ -1,6 +1,10 @@
 import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
 import Seo from "@/components/Seo";
+import PageIllustrations from "@/components/PageIllustrations";
+
+import nfImg1 from "@/assets/visuals/seo/image_w5504_h3072_page-404-1.webp";
+import nfImg2 from "@/assets/visuals/seo/image_w5504_h3072_page-404-2.webp";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import { Button } from "@/components/ui/button";
@@ -30,6 +34,9 @@ export default function NotFound() {
           </Link>
         </div>
       </main>
+
+      <PageIllustrations images={[{ src: nfImg1, alt: "寺院走廊光影象徵回到正軌" }, { src: nfImg2, alt: "黑暗中金色光束指引前行" }]} />
+
       <SiteFooter />
     </div>
   );
