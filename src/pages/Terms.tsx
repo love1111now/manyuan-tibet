@@ -2,10 +2,6 @@ import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import FloatingFb from "@/components/FloatingFb";
 import Seo from "@/components/Seo";
-import PageIllustrations from "@/components/PageIllustrations";
-
-import termsImg1 from "@/assets/visuals/seo/image_w5504_h3072_page-terms-1.webp";
-import termsImg2 from "@/assets/visuals/seo/image_w5504_h3072_page-terms-2.webp";
 import { Card } from "@/components/ui/card";
 
 export default function Terms() {
@@ -52,8 +48,6 @@ export default function Terms() {
           </Card>
         </section>
       </main>
-
-      <PageIllustrations images={[{ src: termsImg1, alt: "紙筆與香爐象徵清楚透明" }, { src: termsImg2, alt: "秩序感金色幾何抽象背景" }]} />
 
       <SiteFooter />
       <FloatingFb />

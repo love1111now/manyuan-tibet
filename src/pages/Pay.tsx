@@ -4,10 +4,6 @@ import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import FloatingFb from "@/components/FloatingFb";
 import Seo from "@/components/Seo";
-import PageIllustrations from "@/components/PageIllustrations";
-
-import payImg1 from "@/assets/visuals/seo/image_w5504_h3072_page-pay-1.webp";
-import payImg2 from "@/assets/visuals/seo/image_w5504_h3072_page-pay-2.webp";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -161,8 +157,6 @@ export default function Pay() {
           ))}
         </section>
       </main>
-
-      <PageIllustrations images={[{ src: payImg1, alt: "金剛杵與銅鈴靜物" }, { src: payImg2, alt: "金色流光能量意象" }]} />
 
       <SiteFooter />
       <FloatingFb />

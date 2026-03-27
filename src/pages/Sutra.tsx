@@ -3,10 +3,6 @@ import SiteFooter from "@/components/SiteFooter";
 import FloatingFb from "@/components/FloatingFb";
 import StickyCta from "@/components/StickyCta";
 import Seo from "@/components/Seo";
-import PageIllustrations from "@/components/PageIllustrations";
-
-import sutraImg1 from "@/assets/visuals/seo/image_w5504_h3072_page-sutra-1.webp";
-import sutraImg2 from "@/assets/visuals/seo/image_w5504_h3072_page-sutra-2.webp";
 import { Card } from "@/components/ui/card";
 import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
@@ -121,8 +117,6 @@ export default function Sutra() {
           </div>
         </section>
       </main>
-
-      <PageIllustrations images={[{ src: sutraImg1, alt: "經本與念珠的靜心場景" }, { src: sutraImg2, alt: "淡金色護持光暈意象" }]} />
 
       <SiteFooter />
       <FloatingFb />

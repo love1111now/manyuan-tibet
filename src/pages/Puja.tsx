@@ -5,10 +5,6 @@ import SiteFooter from "@/components/SiteFooter";
 import StickyCta from "@/components/StickyCta";
 import FloatingFb from "@/components/FloatingFb";
 import Seo from "@/components/Seo";
-import PageIllustrations from "@/components/PageIllustrations";
-
-import pujaImg1 from "@/assets/visuals/seo/image_w5504_h3072_page-puja-1.webp";
-import pujaImg2 from "@/assets/visuals/seo/image_w5504_h3072_page-puja-2.webp";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { DEITIES } from "@/lib/siteData";
@@ -77,8 +73,6 @@ export default function Puja() {
           ))}
         </section>
       </main>
-
-      <PageIllustrations images={[{ src: pujaImg1, alt: "供品與供養的儀軌靜物" }, { src: pujaImg2, alt: "點燃酥油燈的儀軌瞬間" }]} />
 
       <SiteFooter />
       <FloatingFb />

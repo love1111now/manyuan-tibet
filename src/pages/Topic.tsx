@@ -1,9 +1,5 @@
 import { Link } from "wouter";
 import Seo from "@/components/Seo";
-import PageIllustrations from "@/components/PageIllustrations";
-
-import topicImg1 from "@/assets/visuals/seo/image_w5504_h3072_page-topic-1.webp";
-import topicImg2 from "@/assets/visuals/seo/image_w5504_h3072_page-topic-2.webp";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import FloatingFb from "@/components/FloatingFb";
@@ -93,8 +89,6 @@ export default function Topic({ slug }: { slug: string }) {
           </Card>
         </section>
       </main>
-
-      <PageIllustrations images={[{ src: topicImg1, alt: "閱讀與沉思的靜物場景" }, { src: topicImg2, alt: "思緒流動的黑金抽象背景" }]} />
 
       <SiteFooter />
       <FloatingFb />

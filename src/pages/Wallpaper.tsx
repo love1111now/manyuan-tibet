@@ -8,10 +8,6 @@ Design philosophy: Neo-thangka noir
 import { Download } from "lucide-react";
 import { Link } from "wouter";
 import Seo from "@/components/Seo";
-import PageIllustrations from "@/components/PageIllustrations";
-
-import wpImg1 from "@/assets/visuals/seo/image_w5504_h3072_page-wallpaper-1.webp";
-import wpImg2 from "@/assets/visuals/seo/image_w5504_h3072_page-wallpaper-2.webp";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import { Card } from "@/components/ui/card";
@@ -64,8 +60,6 @@ export default function Wallpaper() {
           </Card>
         </div>
       </main>
-
-      <PageIllustrations images={[{ src: wpImg1, alt: "金色曼荼羅抽象圖騰" }, { src: wpImg2, alt: "織錦布料與金色飾品靜物" }]} />
 
       <SiteFooter />
     </div>

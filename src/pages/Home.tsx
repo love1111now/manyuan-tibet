@@ -21,19 +21,15 @@ import iconYellow from "@/assets/visuals/generated/image_w1024_h1024_icon-yellow
 import iconMahashri from "@/assets/visuals/generated/image_w1024_h1024_icon-mahashri-home.webp";
 import iconGanapati from "@/assets/visuals/generated/image_w1024_h1024_icon-ganapati-clarity.webp";
 import iconKurukulla from "@/assets/visuals/generated/image_w1024_h1024_icon-kurukulla-magnetize.webp";
+import iconGreenTara from "@/assets/visuals/generated/image_w1024_h1024_icon-green-tara-quick-help.webp";
 import wallpaperYellow from "@/assets/downloads/huangcaishen-wallpaper.jpg";
-
-import PageIllustrations from "@/components/PageIllustrations";
-import homeHero1 from "@/assets/visuals/seo/image_w5504_h3072_home-hero-1.webp";
-import homeHero2 from "@/assets/visuals/seo/image_w5504_h3072_home-hero-2.webp";
-import homeHero3 from "@/assets/visuals/seo/image_w5504_h3072_home-hero-3.webp";
-import homeHero4 from "@/assets/visuals/seo/image_w5504_h3072_home-hero-4.webp";
 
 const ICON_BY_KEY: Record<string, string> = {
   yellow: iconYellow,
   mahashri: iconMahashri,
   ganapati: iconGanapati,
   kurukulla: iconKurukulla,
+  "green-tara": iconGreenTara,
 };
 
 export default function Home() {
@@ -149,17 +145,6 @@ export default function Home() {
             </div>
           </div>
         </section>
-
-        {/* 額外配圖（首頁 4 張） */}
-        <PageIllustrations
-          images={[
-            { src: homeHero1, alt: "藏傳佛教寺院內景與祭壇" },
-            { src: homeHero2, alt: "供水碗與酥油燈的供桌靜物" },
-            { src: homeHero3, alt: "金色曼荼羅光紋抽象背景" },
-            { src: homeHero4, alt: "念珠與香爐的靜心場景" },
-          ]}
-          className="pt-8"
-        />
 
         {/* 1) 停留率：完整的互動測驗元件 (點擊上面按鈕會滑動到這裡) */}
         <div id="quiz">
@@ -306,7 +291,72 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 3) 衝動：Bonus 區塊（原本的最上方橫條移到這裡，不干擾初次閱讀） */}
+        {/* 3) 活動通知（桌布領取上方） */}
+        <section className="mx-auto max-w-6xl px-4 pt-8 pb-6">
+          <Card className="p-8 gold-border bg-card/70 backdrop-blur paper-grain">
+            <div className="flex items-start justify-between gap-6 flex-wrap">
+              <div>
+                <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">活動通知</div>
+                <h2 className="mt-2 font-display text-2xl md:text-3xl">【最後倒數】清明除障最速件：綠度母火供「限時免費」入名單！</h2>
+                <p className="mt-3 readable text-muted-foreground">優惠截止日：<span className="text-foreground font-semibold">4 月 2 日 23:59</span> 準時關閉</p>
+              </div>
+              <Badge className="gold-border bg-accent/25 text-accent-foreground">限時免費入名單</Badge>
+            </div>
+
+            <div className="mt-6 readable text-muted-foreground leading-relaxed space-y-4">
+              <p>
+                清明節將至，您是否感覺生活有些沉重？事業遇到瓶頸、小人頻繁出現，或是身體總感到莫名疲累？這不是您不夠努力，而是累積的「障礙」需要一次徹底的清算。
+              </p>
+              <p>
+                即日起至 4/2，凡於官網登記【任一法事】，滿願藏庫即免費送您：<br />
+                <span className="text-foreground font-semibold">【清明節．綠度母滿願除障護摩火供】專屬功德迴向</span><br />
+                （※此法會四月才正式對外開放登記，現在登記現省千元結緣金！）
+              </p>
+
+              <details className="mt-2">
+                <summary className="cursor-pointer text-primary font-semibold">展開：為何「綠度母」能最快改變您的運勢？</summary>
+                <div className="mt-4 space-y-4">
+                  <p className="text-sm">
+                    根據藏傳佛教最殊勝的《二十一尊度母讚》中開示：
+                  </p>
+                  <blockquote className="border-l-2 border-border/70 pl-4 text-sm italic text-foreground">
+                    ཏཱ་རེ་དཔའ་བོའི་དཔའ་མོ་སྟེ། ཏུ་ཏཱ་རེས་འཇིགས་ཆེན་འཇོམས། ཏུ་རེས་ཕན་ཡོན་རབ་ཏུ་སྩོལ།
+                    <div className="mt-2 not-italic text-xs text-muted-foreground">(Tā re pa wo'i pa mo te, Tu tā re'i jig chen jom, Tu re'i pen yon rap tu tso)</div>
+                  </blockquote>
+                  <p className="text-sm">
+                    意思是：綠度母展現勇猛的力量，能瞬間消除我們內心與生活中的「八大恐懼與災難」，並快速賜予世間所有的「福德與利樂」。
+                    度母的感應以「迅速」聞名；透過「護摩火供」的強大轉化力，能將加持力化為實質能量，直接燒掉阻礙您發財、戀愛、成功的種子。
+                  </p>
+
+                  <p className="text-sm font-semibold text-foreground">錯過不再：為什麼您必須在 4/2 前行動？</p>
+                  <ul className="list-disc pl-5 text-sm space-y-2">
+                    <li><span className="text-foreground font-semibold">稀缺能量</span>：四月才開放單獨登記，現在是回饋老客戶的「搶先特權」。</li>
+                    <li><span className="text-foreground font-semibold">時機關鍵</span>：清明磁場變動劇烈，4/2 前完成登記，法師可提前準備疏文，確保第一時間得到火供聖火加持。</li>
+                    <li><span className="text-foreground font-semibold">一份功德，雙重圓滿</span>：現在登記解決「現在」的問題，贈送火供幫您燒掉「過去」的債。</li>
+                  </ul>
+                  <p className="text-sm italic">「火供所到之處，障礙悉皆化除。」</p>
+                </div>
+              </details>
+            </div>
+
+            <div className="mt-8 flex flex-col sm:flex-row gap-3">
+              <Link
+                href="/pay"
+                className="h-12 px-6 inline-flex items-center justify-center rounded-md bg-primary text-primary-foreground font-black tracking-[0.22em] uppercase gold-border"
+              >
+                立即登記任一法事 <ArrowRight className="h-4 w-4 ml-2" />
+              </Link>
+              <Link
+                href="/deities/green-tara"
+                className="h-12 px-6 inline-flex items-center justify-center rounded-md border bg-background/30 gold-border readable"
+              >
+                了解綠度母火供（4/7開放）
+              </Link>
+            </div>
+          </Card>
+        </section>
+
+        {/* 4) 衝動：Bonus 區塊（原本的最上方橫條移到這裡，不干擾初次閱讀） */}
         <section className="mx-auto max-w-6xl px-4 pt-8 pb-6">
           <Card className="p-7 gold-border bg-card/70 backdrop-blur paper-grain">
             <div className="grid gap-6 md:grid-cols-[1fr_.9fr] items-center">
