@@ -45,16 +45,16 @@ export default function Pay() {
             <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground flex items-center gap-2">
               <Sparkles className="h-3 w-3 text-primary" /> Pay Hub
             </div>
-            <h1 className="mt-2 font-display text-4xl md:text-5xl">到綠界完成護持登記</h1>
+            <h1 className="mt-2 font-display text-4xl md:text-5xl">到公正第三方完成登記</h1>
             <p className="mt-4 readable text-muted-foreground max-w-prose">
-              付款會跳轉至第三方金流平台綠界完成。你只要依提示完成付款與必要欄位，其餘照如法流程安排。
+              你只要依提示完成付款與必要欄位，其餘照如法流程安排。
             </p>
 
             <Card className="mt-6 p-7 gold-border bg-accent/20 paper-grain shadow-sm">
               <div className="text-xs tracking-[0.24em] uppercase text-muted-foreground">本期活動</div>
-              <div className="mt-2 font-display text-2xl">完成登記法事，即免費加入「煙供聖典」一次</div>
+              <div className="mt-2 font-display text-2xl">只要完成任一項法事登記，即免費參加清明迅疾除障火供儀式乙次。</div>
               <p className="mt-3 readable text-muted-foreground">
-                這個法事之後才會正式開放；現在只要完成任一項護持登記，我們會把你加進本期的煙供名單，作為額外的善緣增上。
+                綠度母相關法事，將於四月七號正式開放對外登記。綠度母以「隨求即應」著稱。在商業競爭或職場中，我們常遇到小人、官非或無謂的波折，這些都是財運的阻礙。綠度母的能量能迅速平息災難與障礙，當你工作順遂、危機解除時，財富自然隨之而來。
               </p>
               <div className="mt-3 text-sm text-muted-foreground">
                 你也可以替家人朋友登記（把善意往外放，福德迴流通常更大）。
