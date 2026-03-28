@@ -338,7 +338,7 @@ export default function DeityPage({ deityKey }: { deityKey: string }) {
                       onClick={() => trackEcPayClick(p.name, p.price, d.name)}
                     >
                       <Button className="w-full gold-border font-black uppercase tracking-widest h-14">
-                        前往綠界安全登記 <ExternalLink className="h-5 w-5 ml-2" />
+                        前往法會登記 <ExternalLink className="h-5 w-5 ml-2" />
                       </Button>
                     </a>
                   )}

@@ -45,7 +45,7 @@ export default function Pay() {
             <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground flex items-center gap-2">
               <Sparkles className="h-3 w-3 text-primary" /> Pay Hub
             </div>
-            <h1 className="mt-2 font-display text-4xl md:text-5xl">到公正第三方完成登記</h1>
+            <h1 className="mt-2 font-display text-4xl md:text-5xl">開始取回人生發球權</h1>
             <p className="mt-4 readable text-muted-foreground max-w-prose">
               你只要依提示完成付款與必要欄位，其餘照如法流程安排。
             </p>
@@ -146,7 +146,7 @@ export default function Pay() {
                         onClick={() => trackEcPayClick(p.name, p.price, d.name)} // ✅ 植入追蹤邏輯
                       >
                         <Button className="h-11 px-5 font-black tracking-[0.22em] uppercase gold-border hover:bg-primary/10 transition-all">
-                          前往綠界完成 <ExternalLink className="h-4 w-4 ml-1" />
+                          立即啟動助緣 <ExternalLink className="h-4 w-4 ml-1" />
                         </Button>
                       </a>
                     </div>
