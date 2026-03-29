@@ -26,17 +26,17 @@ export default function Pay() {
         <div className="grid gap-6 md:grid-cols-[1.05fr_.95fr] md:items-start">
           <div>
             <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">Checkout</div>
-            <h1 className="mt-2 font-display text-4xl">法事登記（收費表）</h1>
+            <h1 className="mt-2 font-display text-4xl">法事登記（綠界多元支付）</h1>
             <p className="mt-4 readable text-muted-foreground max-w-prose">
               你可以直接在這一頁完成下單。建議順序：
-              <span className="text-foreground/90">先選本尊 → 再選方案 → 點「立即下單」</span>。
-              付款完成即保留名額。
+              <span className="text-foreground/90">先選本尊 → 再選方案 → 點「登記法事」</span>。
+              付款完成即安排法事。
             </p>
 
             <Card className="mt-7 p-7 gold-border bg-card/70 paper-grain">
               <div className="font-display text-2xl">下單後你會發生什麼</div>
               <div className="mt-4 grid gap-3">
-                {["你完成付款（保留名額）", "透過 Facebook 私訊補充/確認祈願內容（可協助整理）", "依本尊法門如法設供與修持", "完成後給你一份『回向心念指引』（本月活動）"].map(
+                {["你完成付款（保留名額）", "透過綠界金流/確認祈願內容", "依本尊法門如法設供與修持", "完成後給你一份『回向心念指引』（本月活動）"].map(
                   (x) => (
                     <div key={x} className="flex gap-2 text-muted-foreground readable">
                       <CheckCircle2 className="h-5 w-5 text-primary mt-0.5" />
@@ -62,9 +62,9 @@ export default function Pay() {
               <div className="flex flex-wrap gap-2">
                 <Badge variant="secondary">想增財/跑現金流 → 黃財神</Badge>
                 <Badge variant="secondary">想守財/護家運 → 大吉祥天女</Badge>
-                <Badge variant="secondary">卡關/決策期 → 象頭財神</Badge>
-                <Badge variant="secondary">愛情/人緣 → 作明佛母</Badge>
-                <Badge variant="secondary">焦慮/身心不穩 → 綠度母</Badge>
+                <Badge variant="secondary">投資理財/決策期 → 象頭財神</Badge>
+                <Badge variant="secondary">愛情/貴人緣 → 作明佛母</Badge>
+                <Badge variant="secondary">迅速破災/消除恐懼 → 綠度母</Badge>
               </div>
             </div>
 
@@ -74,7 +74,7 @@ export default function Pay() {
             <ul className="mt-3 text-sm text-muted-foreground readable space-y-2">
               <li>1) 先選「推薦」方案：通常是最對位、回饋最多的。</li>
               <li>2) 祈願寫越具體越好：對象/時間/困境/你希望的改變。</li>
-              <li>3) 做完後配合一個小行動：催款、溝通、界線、建立預備金…</li>
+              <li>3) 做完後配合一個小行動：沖澡、溝通、寫下困境、建立佈施預備金…</li>
             </ul>
           </Card>
         </div>
@@ -83,9 +83,9 @@ export default function Pay() {
 
         <section>
           <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">Pricing</div>
-          <h2 className="mt-2 font-display text-3xl">全收費表（點一下就下單）</h2>
+          <h2 className="mt-2 font-display text-3xl">全法事總表</h2>
           <p className="mt-3 readable text-muted-foreground max-w-prose">
-            已依你的收費表建立所有連結。若你之後更新收費表，我也可以一鍵同步更新。
+            可供全面清楚所需。
           </p>
 
           <div className="mt-7 grid gap-6">
@@ -128,7 +128,7 @@ export default function Pay() {
                         <div className="mt-5">
                           <a href={p.url} target="_blank" rel="noreferrer">
                             <Button className="h-11 w-full font-bold tracking-[0.22em] uppercase gold-border">
-                              立即下單 <ExternalLink className="h-4 w-4" />
+                              登記法事 <ExternalLink className="h-4 w-4" />
                             </Button>
                           </a>
                         </div>
