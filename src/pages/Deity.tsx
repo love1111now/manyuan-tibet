@@ -1,7 +1,7 @@
 "use client";
 
 import { Link } from "wouter";
-import { ArrowRight, ExternalLink, ShieldCheck, Sparkles, Heart, ChevronRight } from "lucide-react";
+import { ArrowRight, ExternalLink, ShieldCheck, Sparkles, Heart, Zap, ChevronRight } from "lucide-react";
 import Seo from "@/components/Seo";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
@@ -38,8 +38,8 @@ import greenTaraGallery02 from "@/assets/visuals/generated/green-tara-gallery-02
 
 // GA4 追蹤函數
 const trackEcPayClick = (planName: string, price: number, deityName: string) => {
-  if (typeof window !== "undefined" && window.gtag) {
-    window.gtag("event", "begin_checkout", {
+  if (typeof window !== "undefined" && (window as any).gtag) {
+    (window as any).gtag("event", "begin_checkout", {
       currency: "TWD",
       value: price,
       items: [{
@@ -49,7 +49,7 @@ const trackEcPayClick = (planName: string, price: number, deityName: string) => 
         quantity: 1
       }]
     });
-    window.gtag("event", "click_ecpay", {
+    (window as any).gtag("event", "click_ecpay", {
       deity: deityName,
       plan: planName,
       value: price

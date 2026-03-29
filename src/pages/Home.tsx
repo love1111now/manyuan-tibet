@@ -1,19 +1,21 @@
 "use client";
 
 import { Link } from "wouter";
-import {
-  ArrowRight,
-  Sparkles,
-  Check,
-  ShieldCheck,
-  Heart,
-  Flame,
-  Droplets,
-  Wind,
+import { 
+  ArrowRight, 
+  Sparkles, 
+  Check, 
+  ShieldCheck, 
+  Heart, 
+  Flame, 
+  Droplets, 
+  Wind, 
+  Calendar,
   Download,
   Gift,
   MessageSquareQuote,
   Timer,
+  ChevronRight
 } from "lucide-react";
 import Seo from "@/components/Seo";
 import SiteHeader from "@/components/SiteHeader";

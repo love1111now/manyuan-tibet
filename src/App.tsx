@@ -34,8 +34,7 @@ function ScrollToTop() {
   const [loc] = useLocation();
 
   useEffect(() => {
-    // 讓瀏覽器先有機會完成下一次 paint，再捲動（減少主執行緒阻塞，改善 INP）
-    requestAnimationFrame(() => window.scrollTo(0, 0));
+    window.scrollTo(0, 0);
   }, [loc]);
 
   return null;

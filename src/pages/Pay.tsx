@@ -2,10 +2,11 @@
 
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
-import {
-  ChevronRight,
-  ShieldCheck,
-  Info,
+import { 
+  ChevronRight, 
+  ExternalLink, 
+  ShieldCheck, 
+  Info, 
   CheckCircle2,
   Sparkles,
   Heart,
@@ -14,7 +15,7 @@ import {
   Wind,
   Sparkle,
   Gem,
-  Flower2,
+  Flower2
 } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import {
