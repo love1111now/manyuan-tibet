@@ -3,13 +3,12 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import LiveRegistrations from "@/components/LiveRegistrations";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Router, Route, Switch, useLocation } from "wouter";
-import { useHashLocation } from "wouter/use-hash-location";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import { useEffect } from "react";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 
-// 1. 引入追蹤元件
-import AnalyticsTracker from "@/components/AnalyticsTracker"; 
+// 追蹤元件（保留既有追蹤，另補 Vercel Analytics）
+import AnalyticsTracker from "@/components/AnalyticsTracker";
 
 import Home from "@/pages/Home";
 import Puja from "@/pages/Puja";
@@ -24,9 +23,12 @@ import DeityPage from "@/pages/Deity";
 import NotFound from "@/pages/NotFound";
 
 function Redirect({ to }: { to: string }) {
-  if (typeof window !== "undefined") {
-    window.location.hash = `#${to}`;
-  }
+  const [, setLocation] = useLocation();
+
+  useEffect(() => {
+    setLocation(to);
+  }, [setLocation, to]);
+
   return null;
 }
 
@@ -34,7 +36,8 @@ function ScrollToTop() {
   const [loc] = useLocation();
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    // 讓瀏覽器先有機會完成下一次 paint，再捲動（減少主執行緒阻塞，改善 INP）
+    requestAnimationFrame(() => window.scrollTo(0, 0));
   }, [loc]);
 
   return null;
@@ -42,13 +45,13 @@ function ScrollToTop() {
 
 function AppRouter() {
   return (
-    <Router hook={useHashLocation}>
+    <Router>
       {/* 抵達任何頁面都自動捲動至最上方 */}
       <ScrollToTop />
 
-      {/* 將追蹤器放在 Router 內部，監聽 hash location 變化 */}
-      <AnalyticsTracker /> 
-      
+      {/* 追蹤器放在 Router 內部，監聽 location 變化 */}
+      <AnalyticsTracker />
+
       <Switch>
         <Route path="/" component={Home} />
         <Route path="/puja" component={Puja} />
@@ -57,10 +60,11 @@ function AppRouter() {
         <Route path="/sutra" component={Sutra} />
         <Route path="/about" component={About} />
         <Route path="/terms" component={Terms} />
-        
-        {/* 修正：精確對接首頁的桌布下載按鈕 */}
-        <Route path="/wallpapers" component={Wallpaper} />
-        <Route path="/topics/wallpapers">{() => <Redirect to="/wallpapers" />}</Route>
+
+        {/* 桌布下載：以 /wallpaper 為主，保留相容 */}
+        <Route path="/wallpaper" component={Wallpaper} />
+        <Route path="/wallpapers">{() => <Redirect to="/wallpaper" />}</Route>
+        <Route path="/topics/wallpapers">{() => <Redirect to="/wallpaper" />}</Route>
 
         {/* 動態路由 */}
         <Route path="/topics/:slug">{(params) => <Topic slug={params.slug} />}</Route>
@@ -73,7 +77,7 @@ function AppRouter() {
         <Route path="/kurukulla">{() => <Redirect to="/deities/kurukulla" />}</Route>
         <Route path="/green-tara">{() => <Redirect to="/deities/green-tara" />}</Route>
 
-        {/* 404 頁面 */}
+        {/* 404 */}
         <Route component={NotFound} />
       </Switch>
     </Router>
@@ -85,7 +89,7 @@ export default function App() {
 
   return (
     <ErrorBoundary>
-      <ThemeProvider defaultTheme="light"> {/* 若您的 UI 是深色系，可考慮改為 dark 或確保 CSS 控制得當 */}
+      <ThemeProvider defaultTheme="light">
         <TooltipProvider>
           <Toaster position={isMobile ? "top-center" : "bottom-right"} />
           <LiveRegistrations />

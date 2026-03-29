@@ -114,6 +114,9 @@
   body {
     @apply bg-background text-foreground antialiased;
     font-family: var(--font-body);
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   h1,
@@ -127,8 +130,13 @@
 
 @layer utilities {
   .readable {
-    line-height: 1.9;
+    line-height: 1.85;
     letter-spacing: 0.01em;
+  }
+
+  /* 深底區塊的文字可讀性（不改文案，只提升對比/清晰度） */
+  .text-on-dark {
+    text-shadow: 0 1px 14px rgba(0, 0, 0, 0.55);
   }
 
   /* legacy class name kept to avoid large refactors */

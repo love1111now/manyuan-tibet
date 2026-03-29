@@ -5,7 +5,7 @@ import StickyCta from "@/components/StickyCta";
 import Seo from "@/components/Seo";
 import { Card } from "@/components/ui/card";
 
-import bannerArt from "@/assets/visuals/generated/deity-page-banner-abstract.jpeg";
+import bannerArt from "@/assets/visuals/generated/deity-page-banner-abstract.webp";
 
 export default function About() {
   return (

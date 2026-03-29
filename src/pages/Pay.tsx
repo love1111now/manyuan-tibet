@@ -2,11 +2,10 @@
 
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { 
-  ChevronRight, 
-  ExternalLink, 
-  ShieldCheck, 
-  Info, 
+import {
+  ChevronRight,
+  ShieldCheck,
+  Info,
   CheckCircle2,
   Sparkles,
   Heart,
@@ -15,7 +14,7 @@ import {
   Wind,
   Sparkle,
   Gem,
-  Flower2
+  Flower2,
 } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import {
@@ -220,7 +219,7 @@ const Pay = () => {
                     </div>
                     <div className="flex gap-4">
                       <div className="w-7 h-7 rounded-full bg-amber-500/10 text-amber-500 flex items-center justify-center font-bold text-xs shrink-0 border border-amber-500/20">3</div>
-                      <p>法師於壇城前進行名字如法迴向，系統隨後發送數位證明，圓滿此功德緣起。</p>
+                      <p>法師於壇城前進行名字如法回向，系統隨後發送數位證明，圓滿此功德緣起。</p>
                     </div>
                   </div>
                 </DialogContent>

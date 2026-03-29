@@ -7,7 +7,7 @@ import { Card } from "@/components/ui/card";
 import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
 
-import sutraPhoto from "@/assets/visuals/generated/sutra-closeup.jpeg";
+import sutraPhoto from "@/assets/visuals/generated/sutra-closeup.webp";
 
 export default function Sutra() {
   return (
