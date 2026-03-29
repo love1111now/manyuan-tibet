@@ -25,11 +25,11 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 
-// 視覺素材：使用 webp 版本以提升畫質/檔案效率
+// 視覺素材
 import heroBrocade from "@/assets/visuals/generated/hero-brocade.webp";
 
 // ----------------------------------------------------------------------
-// 1. 核心五路徑：正信藏傳語境與痛點對位
+// 1. 核心五路徑
 // ----------------------------------------------------------------------
 const CORE_PATHS = [
   {
@@ -85,7 +85,7 @@ const CORE_PATHS = [
 ];
 
 // ----------------------------------------------------------------------
-// 2. 首頁精選見證 (完整五神明 + 真實背景)
+// 2. 首頁精選見證
 // ----------------------------------------------------------------------
 const TESTIMONIALS = [
   { 
@@ -127,7 +127,6 @@ const TESTIMONIALS = [
 
 export default function Home() {
   
-  // 安全的捲動函數，避開 a 標籤與 Hash Router 的衝突
   const scrollToPaths = (e: any) => {
     e.preventDefault();
     const element = document.getElementById('paths');
@@ -137,7 +136,6 @@ export default function Home() {
   };
 
   return (
-    // 修正：移除 font-serif，改用預設 font-sans 確保中文字體清晰好讀
     <div className="min-h-screen bg-[#050505] font-sans text-slate-200 selection:bg-amber-500/30 overflow-x-hidden">
       <Seo title="滿願藏庫｜法財滿願，如法護持" path="/" />
       <SiteHeader />
@@ -147,7 +145,6 @@ export default function Home() {
             1. Hero 區塊 
         ========================================================= */}
         <section className="relative pt-32 pb-32 md:pt-48 md:pb-56 px-6 flex items-center justify-center min-h-[85vh]">
-          {/* 修正：移除 mix-blend-screen 避免背景過髒，改用單純的 opacity 與漸層 */}
           <div className="absolute inset-0 z-0">
             <img src={heroBrocade} alt="Brocade Texture" className="w-full h-full object-cover opacity-20" />
             <div className="absolute inset-0 bg-gradient-to-b from-[#050505]/40 via-[#050505]/80 to-[#050505]" />
@@ -155,7 +152,7 @@ export default function Home() {
           
           <div className="max-w-4xl mx-auto text-center relative z-10">
             <Badge className="mb-6 bg-amber-500/10 text-amber-500 border border-amber-500/20 px-4 py-2 text-sm font-bold tracking-widest">
-              依佛法經典與藏密續法訊
+              依止佛法經典與藏密續法訊
             </Badge>
             
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-8">
@@ -169,15 +166,15 @@ export default function Home() {
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link href="/pay">
-                {/* 修正：按鈕字體改為 font-bold 與 text-base，移除 font-black 與過度擠壓的 tracking */}
                 <Button className="w-full sm:w-auto h-14 px-8 bg-[#D4AF37] hover:bg-amber-400 text-black font-bold text-base transition-all duration-300">
                   預約您的護持路徑 <ArrowRight className="w-5 h-5 ml-2" />
                 </Button>
               </Link>
+              {/* ✅ 關鍵修正：加上 bg-transparent，徹底解決白底白字問題 */}
               <Button 
                 variant="outline" 
                 onClick={scrollToPaths}
-                className="w-full sm:w-auto h-14 px-8 border-white/20 hover:bg-white/10 text-white font-bold text-base backdrop-blur-sm"
+                className="w-full sm:w-auto h-14 px-8 bg-transparent border-white/20 hover:bg-white/10 text-white font-bold text-base backdrop-blur-sm"
               >
                 了解 5 條對位路徑
               </Button>
@@ -193,7 +190,6 @@ export default function Home() {
             <div className="group relative rounded-[2.5rem] p-[2px] bg-gradient-to-r from-red-800 via-red-500 to-amber-600 overflow-hidden shadow-[0_10px_40px_rgba(239,68,68,0.2)] hover:shadow-[0_10px_60px_rgba(239,68,68,0.35)] transition-all duration-500">
               <div className="bg-[#0A0A0A] rounded-[2.4rem] p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden">
                 
-                {/* 修正：替換 blur-[80px] 為 radial-gradient 效能優化 */}
                 <div className="absolute top-0 right-0 w-96 h-96 bg-[radial-gradient(circle,rgba(239,68,68,0.15)_0%,transparent_70%)] -translate-y-1/2 translate-x-1/3 pointer-events-none group-hover:bg-[radial-gradient(circle,rgba(239,68,68,0.25)_0%,transparent_70%)] transition-colors duration-500" />
                 
                 <div className="flex flex-col sm:flex-row items-center sm:items-start md:items-center gap-6 z-10 w-full text-center sm:text-left">
@@ -244,7 +240,8 @@ export default function Home() {
                       立即登記任一法事 <ArrowRight className="w-5 h-5 ml-2" />
                     </Button>
                   </Link>
-                  <Button variant="outline" className="w-full border-white/20 text-slate-300 hover:bg-white/10 transition-colors px-6 h-12 font-bold text-sm cursor-not-allowed opacity-70">
+                  {/* ✅ 關鍵修正：加上 bg-transparent */}
+                  <Button variant="outline" className="w-full bg-transparent border-white/20 text-slate-300 hover:bg-white/10 transition-colors px-6 h-12 font-bold text-sm cursor-not-allowed opacity-70">
                     了解綠度母火供（4/7開放）
                   </Button>
                 </div>
@@ -300,7 +297,6 @@ export default function Home() {
                     {path.description}
                   </p>
 
-                  {/* 修正：使用 ?target= 避免 Hash Router 報錯 */}
                   <Link href={`/pay?target=${path.id}`}>
                     <Button className="w-full bg-black border border-white/20 hover:border-[#D4AF37] hover:bg-[#D4AF37] hover:text-black text-white transition-all py-6 font-bold text-base">
                       預約專屬護持 <ArrowRight className="w-5 h-5 ml-2 opacity-70" />
@@ -351,7 +347,7 @@ export default function Home() {
         </section>
 
         {/* =========================================================
-            6. 真實見證 (升級版五神明)
+            6. 真實見證
         ========================================================= */}
         <section className="py-24 px-6 relative overflow-hidden">
           <div className="max-w-7xl mx-auto">
@@ -396,7 +392,8 @@ export default function Home() {
             </p>
             
             <Link href="/wallpapers">
-              <Button variant="outline" className="h-16 px-12 border-amber-500/50 text-amber-500 hover:bg-amber-500 hover:text-black font-bold text-lg transition-all">
+              {/* ✅ 關鍵修正：加上 bg-transparent */}
+              <Button variant="outline" className="h-16 px-12 bg-transparent border-amber-500/50 text-amber-500 hover:bg-amber-500 hover:text-black font-bold text-lg transition-all">
                 免費下載結緣桌布 <Download className="w-5 h-5 ml-3" />
               </Button>
             </Link>

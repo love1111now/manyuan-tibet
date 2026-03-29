@@ -8,7 +8,7 @@ import ErrorBoundary from "@/components/ErrorBoundary";
 import { useEffect } from "react";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 
-// 👇 1. 引入追蹤元件
+// 引入追蹤元件
 import AnalyticsTracker from "@/components/AnalyticsTracker"; 
 
 import Home from "@/pages/Home";
@@ -23,11 +23,10 @@ import Topic from "@/pages/Topic";
 import DeityPage from "@/pages/Deity";
 import NotFound from "@/pages/NotFound";
 
-// ✅ 修正：加上 useEffect，完美避開 React 無限渲染導致的白畫面
 function Redirect({ to }: { to: string }) {
-  useEffect(() => {
+  if (typeof window !== "undefined") {
     window.location.hash = `#${to}`;
-  }, [to]);
+  }
   return null;
 }
 
@@ -44,10 +43,7 @@ function ScrollToTop() {
 function AppRouter() {
   return (
     <Router hook={useHashLocation}>
-      {/* 抵達任何頁面都自動捲動至最上方 */}
       <ScrollToTop />
-
-      {/* 將追蹤器放在 Router 內部 */}
       <AnalyticsTracker /> 
       
       <Switch>
@@ -58,22 +54,15 @@ function AppRouter() {
         <Route path="/sutra" component={Sutra} />
         <Route path="/about" component={About} />
         <Route path="/terms" component={Terms} />
-        
-        {/* ✅ 修正：將桌布路由加上 s，以對接首頁的按鈕連結 */}
-        <Route path="/wallpapers" component={Wallpaper} />
-        <Route path="/wallpaper">{() => <Redirect to="/wallpapers" />}</Route>
-        <Route path="/topics/wallpapers">{() => <Redirect to="/wallpapers" />}</Route>
+        <Route path="/wallpaper" component={Wallpaper} />
 
         <Route path="/topics/:slug">{(params) => <Topic slug={params.slug} />}</Route>
         <Route path="/deities/:deityKey">{(params) => <DeityPage deityKey={params.deityKey} />}</Route>
 
-        {/* 快速轉址：五大本尊 */}
         <Route path="/yellow-dzambhala">{() => <Redirect to="/deities/yellow" />}</Route>
         <Route path="/mahashri-devi">{() => <Redirect to="/deities/mahashri" />}</Route>
         <Route path="/ganapati">{() => <Redirect to="/deities/ganapati" />}</Route>
         <Route path="/kurukulla">{() => <Redirect to="/deities/kurukulla" />}</Route>
-        {/* ✅ 補上綠度母的快速轉址 */}
-        <Route path="/green-tara">{() => <Redirect to="/deities/green-tara" />}</Route>
 
         <Route component={NotFound} />
       </Switch>
@@ -86,7 +75,8 @@ export default function App() {
 
   return (
     <ErrorBoundary>
-      <ThemeProvider defaultTheme="light">
+      {/* ✅ 關鍵修正：將 defaultTheme 改為 dark，符合全站漆黑金箔美學 */}
+      <ThemeProvider defaultTheme="dark">
         <TooltipProvider>
           <Toaster position={isMobile ? "top-center" : "bottom-right"} />
           <LiveRegistrations />
