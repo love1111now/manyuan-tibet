@@ -1,8 +1,7 @@
 "use client";
 
 import { Link } from "wouter";
-// ✅ 修正 1：將 BookOpen 移到最上方正確的 import 位置
-import { ArrowRight, ExternalLink, ShieldCheck, Sparkles, Heart, Zap, ChevronRight, BookOpen } from "lucide-react";
+import { ArrowRight, ExternalLink, ShieldCheck, Sparkles, Heart, ChevronRight, BookOpen } from "lucide-react";
 import Seo from "@/components/Seo";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
@@ -196,7 +195,6 @@ export default function DeityPage({ deityKey }: { deityKey: string }) {
     ? DEITY_BY_KEY[deityKey as DeityKey]
     : undefined;
 
-  // 防呆：若路徑錯誤顯示 404
   if (!d) {
     return (
       <div className="min-h-screen bg-[#050505] flex flex-col font-sans">
@@ -220,17 +218,12 @@ export default function DeityPage({ deityKey }: { deityKey: string }) {
   const rv = RITUAL_VISUAL_BY_KEY[d.key];
 
   return (
-    // ✅ 修正 4：改用 font-sans 確保中文字體清晰好讀
     <div className="min-h-screen bg-[#050505] font-sans text-slate-200 selection:bg-amber-500/30 overflow-x-hidden">
       <Seo title={`${d.name}｜${d.subtitle}`} path={d.route} />
       <SiteHeader />
 
       <main className="mx-auto max-w-6xl px-6 pt-24 md:pt-32 pb-32">
-        {/* =========================================================
-            1) Hero 區塊 
-        ========================================================= */}
         <section className="grid gap-12 md:grid-cols-[1.1fr_.9fr] items-center relative">
-          {/* ✅ 修正 3：替換 blur-[120px] 效能殺手為 radial-gradient */}
           <div className="absolute top-0 left-0 w-96 h-96 bg-[radial-gradient(circle,rgba(245,158,11,0.1)_0%,transparent_70%)] -z-10 rounded-full pointer-events-none" />
           
           <div className="relative z-10">
@@ -263,7 +256,6 @@ export default function DeityPage({ deityKey }: { deityKey: string }) {
           </div>
 
           <div className="relative group">
-            {/* ✅ 修正 3：替換 blur 為 radial-gradient */}
             <div className="absolute inset-0 bg-[radial-gradient(circle,rgba(245,158,11,0.15)_0%,transparent_70%)] rounded-[2.5rem] transition-colors duration-500 -z-10" />
             <div className="rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl relative">
               <img src={d.heroImage} alt={d.name} className="w-full h-[450px] md:h-[650px] object-cover transform group-hover:scale-105 transition-transform duration-1000" loading="eager" />
@@ -272,9 +264,6 @@ export default function DeityPage({ deityKey }: { deityKey: string }) {
           </div>
         </section>
 
-        {/* =========================================================
-            2) 心理建設卡片 (Info Cards)
-        ========================================================= */}
         <section className="mt-32 grid gap-6 md:grid-cols-3">
           {[
             { title: "溫柔提醒", sub: "先把祈願寫成一句話", desc: "不用寫很玄。用一句你看得懂、也願意承擔的話就好：例如「願我把財務節奏穩住」。" },
@@ -289,13 +278,9 @@ export default function DeityPage({ deityKey }: { deityKey: string }) {
           ))}
         </section>
 
-        {/* =========================================================
-            3) 綠度母特別企劃 (Gallery)
-        ========================================================= */}
         {d.key === "green-tara" && (
           <section className="mt-32">
             <Card className="p-10 md:p-12 rounded-[3rem] border border-amber-500/20 bg-gradient-to-br from-[#0a0a0a] to-[#111] shadow-2xl overflow-hidden relative">
-              {/* ✅ 修正 3：替換 blur-[80px] 為 radial-gradient */}
               <div className="absolute top-0 right-0 w-64 h-64 bg-[radial-gradient(circle,rgba(34,197,94,0.05)_0%,transparent_70%)] rounded-full pointer-events-none" />
               <div className="flex items-start justify-between gap-6 flex-wrap relative z-10">
                 <div className="max-w-xl">
@@ -322,9 +307,6 @@ export default function DeityPage({ deityKey }: { deityKey: string }) {
           </section>
         )}
 
-        {/* =========================================================
-            4) 方案區塊 (Plans)
-        ========================================================= */}
         <section id="plans" className="mt-32 scroll-mt-32">
           <div className="flex flex-col md:flex-row md:items-end justify-between border-b border-white/10 pb-6 mb-12 gap-4">
             <div>
@@ -342,7 +324,6 @@ export default function DeityPage({ deityKey }: { deityKey: string }) {
             {d.plans.map((p) => (
               <Card key={p.id} className="p-8 md:p-10 rounded-[2.5rem] border border-white/10 bg-white/[0.02] hover:bg-white/[0.04] hover:border-amber-500/30 transition-all duration-500 group flex flex-col relative overflow-hidden">
                 
-                {/* ✅ 修正 3：替換 blur-[40px] 為 radial-gradient */}
                 {p.hot && <div className="absolute -top-10 -right-10 w-40 h-40 bg-[radial-gradient(circle,rgba(245,158,11,0.15)_0%,transparent_70%)] rounded-full pointer-events-none" />}
 
                 <div className="flex items-start justify-between gap-4 mb-6 relative z-10">
@@ -384,9 +365,6 @@ export default function DeityPage({ deityKey }: { deityKey: string }) {
           </div>
         </section>
 
-        {/* =========================================================
-            5) 儀軌細節 (Ritual Detail)
-        ========================================================= */}
         <section className="mt-40">
           <div className="text-center mb-16">
             <div className="text-[#D4AF37] text-xs tracking-[0.2em] uppercase mb-3 font-bold">Dharma Practice</div>
@@ -449,13 +427,9 @@ export default function DeityPage({ deityKey }: { deityKey: string }) {
           </div>
         </section>
 
-        {/* =========================================================
-            6) 經典引用 (Sutra Merit)
-        ========================================================= */}
         <section className="mt-40">
           <Card className="p-10 md:p-20 rounded-[3.5rem] border border-amber-500/20 bg-gradient-to-br from-[#050505] to-[#111] shadow-2xl text-center relative overflow-hidden">
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-2xl h-[1px] bg-gradient-to-r from-transparent via-amber-500/50 to-transparent" />
-            {/* ✅ 修正 3：替換 blur-[100px] 為 radial-gradient */}
             <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-xl h-64 bg-[radial-gradient(circle,rgba(245,158,11,0.05)_0%,transparent_70%)] rounded-full pointer-events-none" />
             
             <div className="text-[10px] tracking-[0.3em] uppercase text-[#D4AF37] mb-6 font-bold relative z-10">{d.sutraMerit.quoteSource}</div>
@@ -471,9 +445,6 @@ export default function DeityPage({ deityKey }: { deityKey: string }) {
           </Card>
         </section>
 
-        {/* =========================================================
-            7) 增益故事 (Wealth Story)
-        ========================================================= */}
         <section className="mt-40">
           <div className="text-center mb-16">
             <div className="text-[#D4AF37] text-xs tracking-[0.2em] uppercase mb-3 font-bold">{d.wealthStory.source}</div>
@@ -491,9 +462,6 @@ export default function DeityPage({ deityKey }: { deityKey: string }) {
           </Card>
         </section>
 
-        {/* =========================================================
-            8) 見證回饋 (Testimonials)
-        ========================================================= */}
         <section className="mt-40">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-bold text-white tracking-tight mb-4">願您是下一位<br className="md:hidden"/>回來感恩的人</h2>
@@ -512,9 +480,6 @@ export default function DeityPage({ deityKey }: { deityKey: string }) {
           </div>
         </section>
 
-        {/* =========================================================
-            9) 常見疑慮 (FAQ)
-        ========================================================= */}
         <section className="mt-40">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-bold text-white tracking-tight">常見疑慮</h2>
@@ -533,9 +498,6 @@ export default function DeityPage({ deityKey }: { deityKey: string }) {
           </Accordion>
         </section>
 
-        {/* =========================================================
-            10) 交叉銷售 (Cross Sell) - ✅ 修正 2：改為 /deities/ 複數路由
-        ========================================================= */}
         <section className="mt-40 border-t border-white/10 pt-32 pb-10">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-bold text-white tracking-tight">您也可能更適合…</h2>
