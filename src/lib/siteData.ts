@@ -1,6 +1,6 @@
 /**
  * 滿願藏庫｜核心資料庫 (siteData.ts)
- * 100% 完美對齊所有組件，解決 Vercel 編譯的數學排序與屬性缺失報錯
+ * 修復：使用 new URL 替換 import，徹底解決 TypeScript 圖片報紅與打包破圖問題
  */
 
 // ----------------------------------------------------------------------
@@ -16,16 +16,17 @@ export const SITE_CONFIG = SITE;
 
 // ----------------------------------------------------------------------
 // 2. 視覺素材路徑 (VISUALS)
+// ✅ 使用 Vite 原生的 new URL，免除 TS 紅字報錯，確保圖片完美打包
 // ----------------------------------------------------------------------
 export const VISUALS = {
-  heroBrocade: "/src/assets/visuals/generated/hero-brocade.webp",
-  heroGilded: "/src/assets/visuals/generated/hero-gilded.webp",
-  sutraCloseup: "/src/assets/visuals/generated/sutra-closeup.webp",
-  altarYellow: "/src/assets/visuals/generated/altar-yellow-water-offering.webp",
-  altarMahashri: "/src/assets/visuals/generated/altar-mahashri-home-wealth.webp",
-  altarGanapati: "/src/assets/visuals/generated/altar-ganapati-obstacle-removal.webp",
-  altarKurukulla: "/src/assets/visuals/generated/altar-kurukulla-magnetizing.webp",
-  altarGreenTara: "/src/assets/visuals/generated/altar-green-tara-fire-offering.webp",
+  heroBrocade: new URL("../assets/visuals/generated/hero-brocade.webp", import.meta.url).href,
+  heroGilded: new URL("../assets/visuals/generated/hero-gilded.webp", import.meta.url).href,
+  sutraCloseup: new URL("../assets/visuals/generated/sutra-closeup.webp", import.meta.url).href,
+  altarYellow: new URL("../assets/visuals/generated/altar-yellow-water-offering.webp", import.meta.url).href,
+  altarMahashri: new URL("../assets/visuals/generated/altar-mahashri-home-wealth.webp", import.meta.url).href,
+  altarGanapati: new URL("../assets/visuals/generated/altar-ganapati-obstacle-removal.webp", import.meta.url).href,
+  altarKurukulla: new URL("../assets/visuals/generated/altar-kurukulla-magnetizing.webp", import.meta.url).href,
+  altarGreenTara: new URL("../assets/visuals/generated/altar-green-tara-fire-offering.webp", import.meta.url).href,
 };
 
 // ----------------------------------------------------------------------
@@ -68,6 +69,7 @@ export const TOPICS = [
     slug: "wealth",
     title: "資糧增益", 
     deity: "yellow",
+    deities: ["yellow", "mahashri"],
     summary: "透過如法護持，修復財庫漏洞，啟動正向豐饒緣起。",
     ctaLabel: "查看資糧路徑"
   },
@@ -76,6 +78,7 @@ export const TOPICS = [
     slug: "obstacle",
     title: "掃除障礙", 
     deity: "ganapati",
+    deities: ["green-tara", "ganapati"],
     summary: "清除前行道路上的違緣阻礙，讓事業與生活重回正軌。",
     ctaLabel: "立即除障"
   },
@@ -84,6 +87,7 @@ export const TOPICS = [
     slug: "love",
     title: "情感圓滿", 
     deity: "kurukulla",
+    deities: ["kurukulla", "mahashri"],
     summary: "修復疏離與對立，轉化磁場感召善緣與貴人。",
     ctaLabel: "圓滿善緣"
   }
@@ -97,7 +101,7 @@ export type DeityKey = "yellow" | "mahashri" | "ganapati" | "kurukulla" | "green
 export interface Plan {
   readonly id: string;
   readonly name: string;
-  readonly price: number; // ✅ 關鍵：必須是數字，Pay.tsx 與 Deity.tsx 的 sort() 才能運作
+  readonly price: number; // ✅ 確保為數字，讓排序功能 (a.price - b.price) 正常運作
   readonly blurb: string;
   readonly url: string;
   readonly hot?: boolean;
@@ -109,8 +113,8 @@ export interface Plan {
 export interface Scripture {
   readonly quote: string;
   readonly source: string;
-  readonly hint?: string; // ✅ 對應 Sutra.tsx 需求
-  readonly url?: string;  // ✅ 對應 Sutra.tsx 需求
+  readonly hint?: string; 
+  readonly url?: string;  
 }
 
 export interface Deity {
@@ -142,7 +146,7 @@ export const DEITY_BY_KEY: Record<DeityKey, Deity> = {
     route: "/deity/yellow",
     primaryIntent: "增加收入",
     heroKicker: "資糧增益首選",
-    heroImage: "/src/assets/visuals/generated/hero-yellow-dzambhala.webp",
+    heroImage: new URL("../assets/visuals/generated/hero-yellow-dzambhala.webp", import.meta.url).href,
     promise: "依贊巴拉教法，洗滌匱乏業印，開啟世間與出世間之財富源泉。對治慳吝心，令福德增長。",
     scripture: [
       { 
@@ -178,7 +182,7 @@ export const DEITY_BY_KEY: Record<DeityKey, Deity> = {
     route: "/deity/mahashri",
     primaryIntent: "家宅平安",
     heroKicker: "生活物資充盈",
-    heroImage: "/src/assets/visuals/generated/hero-mahashri.webp",
+    heroImage: new URL("../assets/visuals/generated/hero-mahashri.webp", import.meta.url).href,
     promise: "依《金光明經》之願力，護佑家宅安隱，令生活資具無所匱乏。",
     scripture: [
       { 
@@ -214,7 +218,7 @@ export const DEITY_BY_KEY: Record<DeityKey, Deity> = {
     route: "/deity/ganapati",
     primaryIntent: "掃除障礙",
     heroKicker: "競爭主導權",
-    heroImage: "/src/assets/visuals/generated/hero-ganapati.webp",
+    heroImage: new URL("../assets/visuals/generated/hero-ganapati.webp", import.meta.url).href,
     promise: "強力掃除之外、內、密違緣，於事業與競爭中掌握自在主導。",
     scripture: [
       { 
@@ -250,7 +254,7 @@ export const DEITY_BY_KEY: Record<DeityKey, Deity> = {
     route: "/deity/kurukulla",
     primaryIntent: "人際圓滿",
     heroKicker: "懷攝大自在",
-    heroImage: "/src/assets/visuals/generated/hero-kurukulla.webp",
+    heroImage: new URL("../assets/visuals/generated/hero-kurukulla.webp", import.meta.url).href,
     promise: "修復愛情與善緣。轉化情執與惡緣，增長自身威儀與慈悲磁場。化解人際對立。",
     scripture: [
       { 
@@ -286,7 +290,7 @@ export const DEITY_BY_KEY: Record<DeityKey, Deity> = {
     route: "/deity/green-tara",
     primaryIntent: "迅疾救護",
     heroKicker: "遠離怖畏",
-    heroImage: "/src/assets/visuals/generated/hero-green-tara.webp",
+    heroImage: new URL("../assets/visuals/generated/hero-green-tara.webp", import.meta.url).href,
     promise: "仰仗大悲誓願，度脫一切苦厄與突發之怖畏。祈願生活平安、諸事順遂、所作皆辦。",
     scripture: [
       { 
