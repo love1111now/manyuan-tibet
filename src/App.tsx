@@ -8,7 +8,7 @@ import ErrorBoundary from "@/components/ErrorBoundary";
 import { useEffect } from "react";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 
-// 👇 1. 引入我們新建的追蹤元件
+// 1. 引入追蹤元件
 import AnalyticsTracker from "@/components/AnalyticsTracker"; 
 
 import Home from "@/pages/Home";
@@ -34,7 +34,8 @@ function ScrollToTop() {
   const [loc] = useLocation();
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    // 讓瀏覽器先有機會完成下一次 paint，再捲動（減少主執行緒阻塞，改善 INP）
+    requestAnimationFrame(() => window.scrollTo(0, 0));
   }, [loc]);
 
   return null;
@@ -46,7 +47,7 @@ function AppRouter() {
       {/* 抵達任何頁面都自動捲動至最上方 */}
       <ScrollToTop />
 
-      {/* 👇 將追蹤器放在 Router 內部，這樣它才能監聽到 hash location 的變化 */}
+      {/* 將追蹤器放在 Router 內部，監聽 hash location 變化 */}
       <AnalyticsTracker /> 
       
       <Switch>
@@ -57,16 +58,23 @@ function AppRouter() {
         <Route path="/sutra" component={Sutra} />
         <Route path="/about" component={About} />
         <Route path="/terms" component={Terms} />
-        <Route path="/wallpaper" component={Wallpaper} />
+        
+        {/* 修正：精確對接首頁的桌布下載按鈕 */}
+        <Route path="/wallpapers" component={Wallpaper} />
+        <Route path="/topics/wallpapers">{() => <Redirect to="/wallpapers" />}</Route>
 
+        {/* 動態路由 */}
         <Route path="/topics/:slug">{(params) => <Topic slug={params.slug} />}</Route>
         <Route path="/deities/:deityKey">{(params) => <DeityPage deityKey={params.deityKey} />}</Route>
 
+        {/* 快速轉址：五大本尊 */}
         <Route path="/yellow-dzambhala">{() => <Redirect to="/deities/yellow" />}</Route>
         <Route path="/mahashri-devi">{() => <Redirect to="/deities/mahashri" />}</Route>
         <Route path="/ganapati">{() => <Redirect to="/deities/ganapati" />}</Route>
         <Route path="/kurukulla">{() => <Redirect to="/deities/kurukulla" />}</Route>
+        <Route path="/green-tara">{() => <Redirect to="/deities/green-tara" />}</Route>
 
+        {/* 404 頁面 */}
         <Route component={NotFound} />
       </Switch>
     </Router>
@@ -78,7 +86,7 @@ export default function App() {
 
   return (
     <ErrorBoundary>
-      <ThemeProvider defaultTheme="light">
+      <ThemeProvider defaultTheme="light"> {/* 若您的 UI 是深色系，可考慮改為 dark 或確保 CSS 控制得當 */}
         <TooltipProvider>
           <Toaster position={isMobile ? "top-center" : "bottom-right"} />
           <LiveRegistrations />

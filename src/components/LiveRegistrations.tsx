@@ -2,12 +2,48 @@ import { useEffect, useMemo } from "react";
 import { toast } from "sonner";
 import { DEITIES } from "@/lib/siteData";
 
+declare global {
+  interface IdleDeadline {
+    didTimeout: boolean;
+    timeRemaining(): number;
+  }
+
+  type IdleRequestCallback = (deadline: IdleDeadline) => void;
+
+  interface IdleRequestOptions {
+    timeout?: number;
+  }
+
+  interface Window {
+    requestIdleCallback?: (callback: IdleRequestCallback, options?: IdleRequestOptions) => number;
+  }
+}
+
 function randInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 const FAMILY_NAMES = ["林", "陳", "張", "黃", "李", "吳", "王", "蔡", "楊", "劉", "周", "鄭"];
-const GIVEN_NAMES = ["怡", "安", "芸", "晴", "昕", "芯", "妍", "庭", "恩", "昊", "承", "柏", "宇", "翔", "皓", "瑄", "甯", "涵"];
+const GIVEN_NAMES = [
+  "怡",
+  "安",
+  "芸",
+  "晴",
+  "昕",
+  "芯",
+  "妍",
+  "庭",
+  "恩",
+  "昊",
+  "承",
+  "柏",
+  "宇",
+  "翔",
+  "皓",
+  "瑄",
+  "甯",
+  "涵",
+];
 const CITIES = ["台北", "新北", "桃園", "新竹", "台中", "彰化", "台南", "高雄", "屏東", "宜蘭"];
 
 function randomMaskedName() {
@@ -16,41 +52,61 @@ function randomMaskedName() {
   return `${f}${g}＊`;
 }
 
+function runWhenIdle(fn: () => void) {
+  // 讓 toast 盡量在主執行緒空閒時跑，降低與使用者互動搶資源（改善 INP）
+  const ric = window.requestIdleCallback;
+
+  if (typeof ric === "function") {
+    ric(() => fn(), { timeout: 2000 });
+  } else {
+    // Safari 等環境 fallback
+    window.setTimeout(fn, 0);
+  }
+}
+
 export default function LiveRegistrations() {
   const items = useMemo(() => {
-    const flat = DEITIES.flatMap((d) =>
-      d.plans.map((p) => ({ deity: d.name, plan: p.name, min: p.price }))
-    );
-    return flat;
+    return DEITIES.flatMap((d) => d.plans.map((p) => ({ deity: d.name, plan: p.name, min: p.price })));
   }, []);
 
   useEffect(() => {
     let timer: number | null = null;
     let cancelled = false;
 
-    const schedule = () => {
+    const scheduleToast = () => {
       const delayMs = randInt(90_000, 240_000); // 90–240 秒不定時（降低頻率）
       timer = window.setTimeout(() => {
         if (cancelled) return;
 
-        const pick = items[randInt(0, items.length - 1)];
-        const name = randomMaskedName();
-        const city = CITIES[randInt(0, CITIES.length - 1)];
+        // 背景分頁不做 UI 動作，避免在回到頁面時「卡一下」
+        if (document.visibilityState !== "visible") {
+          scheduleToast();
+          return;
+        }
 
-        const remain = randInt(2, 16);
-        const days = randInt(1, 5);
+        runWhenIdle(() => {
+          if (cancelled) return;
+          if (document.visibilityState !== "visible") return;
 
-        toast(`${name} 已完成護持登記`, {
-          description: `${city} · ${pick.deity} · ${pick.plan} · 剩餘名額 ${remain}（約 ${days} 天內可能額滿）`,
-          duration: randInt(4600, 6400),
+          const pick = items[randInt(0, items.length - 1)];
+          const name = randomMaskedName();
+          const city = CITIES[randInt(0, CITIES.length - 1)];
+
+          const remain = randInt(2, 16);
+          const days = randInt(1, 5);
+
+          toast(`${name} 已完成護持登記`, {
+            description: `${city} · ${pick.deity} · ${pick.plan} · 剩餘名額 ${remain}（約 ${days} 天內可能額滿）`,
+            duration: randInt(4600, 6400),
+          });
+
+          scheduleToast();
         });
-
-        schedule();
       }, delayMs);
     };
 
     // 首次不要立刻跳，留 25–45 秒的「正常感」
-    timer = window.setTimeout(schedule, randInt(25_000, 45_000));
+    timer = window.setTimeout(scheduleToast, randInt(25_000, 45_000));
 
     return () => {
       cancelled = true;
