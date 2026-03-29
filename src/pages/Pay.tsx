@@ -26,6 +26,26 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
+// 引入全站元件
+import SiteHeader from "@/components/SiteHeader";
+import SiteFooter from "@/components/SiteFooter";
+import Seo from "@/components/Seo";
+
+// GA4 追蹤函數
+const trackPayClick = (planName: string, price: string, deityName: string) => {
+  if (typeof window !== "undefined" && (window as any).gtag) {
+    (window as any).gtag("event", "begin_checkout", {
+      currency: "TWD",
+      value: parseInt(price),
+      items: [{
+        item_name: `${deityName} - ${planName}`,
+        price: price,
+        quantity: 1
+      }]
+    });
+  }
+};
+
 // ----------------------------------------------------------------------
 // 1. 資料定義：如法對位藏傳佛教與經典語境
 // ----------------------------------------------------------------------
@@ -63,7 +83,7 @@ const plans: Record<string, Plan[]> = {
   kurukulla: [
     { id: 'k490', name: '作明佛母｜懷愛明燈', price: '490', description: '點燃慈悲與懷攝之光。化解人際關係中的冷戰、對立與無明疏離。', features: ['照亮善緣路徑', '化解人際對立'], link: 'https://cart.cashier.ecpay.com.tw/qp/z5a8', icon: <Flame className="w-4 h-4 text-pink-400" /> },
     { id: 'k980', name: '作明佛母｜攝受花供', price: '980', description: '以莊嚴鮮花供養，增長自身威儀與魅力磁場，修復並圓滿愛情與情感善緣。', features: ['懷攝磁場啟動', '圓滿情感善緣'], link: 'https://cart.cashier.ecpay.com.tw/qp/z5bF', isPopular: true, tag: '關係圓滿首選', icon: <Flower2 className="w-5 h-5 text-pink-500" /> },
-    { id: 'k1860', name: '作明佛母｜淨緣香供', price: '1860', description: '淨化情執與情感中的負面惡緣。轉化煩惱，為長期的孤立感帶來溫暖接應。', features: ['淨化情執惡緣', '專屬名單回向'], link: 'https://cart.cashier.ecpay.com.tw/qp/z5c3', icon: <Wind className="w-5 h-5 text-pink-500" /> },
+    { id: 'k1860', name: '作明佛母｜淨緣香供', price: '1860', description: '淨化情執與情感中的負面惡緣。轉化煩惱，為長期的孤立感帶來溫溫暖接應。', features: ['淨化情執惡緣', '專屬名單回向'], link: 'https://cart.cashier.ecpay.com.tw/qp/z5c3', icon: <Wind className="w-5 h-5 text-pink-500" /> },
     { id: 'k3680', name: '作明佛母｜自在薈供', price: '3680', description: '成就蓮花部懷業總集。令眾生見者歡喜，情感、人脈與威望皆得大自在。', features: ['懷攝大薈供', '數位回向證明'], link: 'https://cart.cashier.ecpay.com.tw/qp/z5d7', icon: <Heart className="w-5 h-5 text-pink-600" /> }
   ],
   tara: [
@@ -75,58 +95,64 @@ const plans: Record<string, Plan[]> = {
 // ----------------------------------------------------------------------
 // 2. UI 組件：方案卡片
 // ----------------------------------------------------------------------
-const PlanCard = ({ plan }: { plan: Plan }) => (
+const PlanCard = ({ plan, deityName }: { plan: Plan; deityName: string }) => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}
-    className={`relative p-8 rounded-3xl border flex flex-col h-full ${
+    className={`relative p-8 rounded-3xl border flex flex-col h-full transition-all duration-500 group ${
       plan.isPopular 
-        ? 'border-amber-500/50 bg-amber-500/5 shadow-lg shadow-amber-500/5' 
-        : 'border-white/10 bg-white/5'
-    } hover:border-amber-500/50 transition-all duration-500 group`}
+        ? 'border-amber-500/50 bg-amber-500/10 shadow-xl' 
+        : 'border-white/10 bg-white/[0.03] hover:border-white/20'
+    }`}
   >
     {plan.isPopular && (
-      <div className="absolute -top-3 left-8 px-4 py-1 bg-amber-500 text-black text-[10px] font-black rounded-full tracking-widest uppercase shadow-md">
+      <div className="absolute -top-3 left-8 px-4 py-1 bg-amber-500 text-black text-[10px] font-bold rounded-full tracking-widest uppercase shadow-lg">
         POPULAR
       </div>
     )}
     
     <div className="flex justify-between items-start mb-6">
-      <div className="p-3 rounded-2xl bg-white/5 border border-white/10 group-hover:border-amber-500/50 transition-colors">
+      <div className="p-3 rounded-2xl bg-black border border-white/10 group-hover:border-amber-500/50 transition-colors">
         {plan.icon}
       </div>
       {plan.tag && (
-        <span className="text-[10px] text-amber-500 font-bold tracking-tighter flex items-center gap-1.5 uppercase text-right leading-tight">
-          <Sparkles className="w-3 h-3 shrink-0" /> {plan.tag}
+        <span className="text-[11px] text-amber-500 font-bold tracking-wider flex items-center gap-1.5 uppercase">
+          <Sparkles className="w-3 h-3" /> {plan.tag}
         </span>
       )}
     </div>
 
-    <h3 className="text-xl font-bold text-white mb-3 tracking-tight leading-snug">{plan.name}</h3>
-    <p className="text-sm text-slate-400 mb-8 leading-relaxed font-light flex-grow">
+    <h3 className="text-xl font-bold text-white mb-3 tracking-tight">{plan.name}</h3>
+    <p className="text-sm text-slate-400 mb-8 leading-relaxed flex-grow font-normal">
       {plan.description}
     </p>
 
-    <div className="flex items-baseline gap-1 mb-6">
-      <span className="text-sm text-amber-500/80 font-serif">NT$</span>
-      <span className="text-3xl font-bold text-amber-500 font-serif tracking-tighter">{plan.price}</span>
+    <div className="flex items-baseline gap-1 mb-8">
+      <span className="text-sm text-amber-500/80 font-bold">NT$</span>
+      <span className="text-4xl font-bold text-amber-500 tracking-tighter">{plan.price}</span>
     </div>
 
-    <ul className="space-y-3 mb-8">
+    <ul className="space-y-4 mb-10">
       {plan.features.map((feature, idx) => (
-        <li key={idx} className="flex items-start gap-3 text-xs text-slate-300">
+        <li key={idx} className="flex items-start gap-3 text-xs text-slate-300 font-medium">
           <CheckCircle2 className="w-4 h-4 text-amber-500/60 shrink-0" />
-          <span className="leading-relaxed">{feature}</span>
+          <span>{feature}</span>
         </li>
       ))}
     </ul>
 
+    {/* 按鈕樣式優化：確保深色背景下清晰 */}
     <Button 
-      className="w-full mt-auto bg-white hover:bg-[#D4AF37] text-black font-black transition-all duration-500 py-6 text-xs tracking-widest uppercase group/btn"
-      onClick={() => window.open(plan.link, '_blank')}
+      className={`w-full mt-auto py-7 text-sm font-bold tracking-widest uppercase group/btn transition-all duration-300 ${
+        plan.isPopular ? 'bg-amber-500 text-black hover:bg-amber-400' : 'bg-white text-black hover:bg-slate-200'
+      }`}
+      onClick={() => {
+        trackPayClick(plan.name, plan.price, deityName);
+        window.open(plan.link, '_blank');
+      }}
     >
-      預約護持 
+      立即預約護持 
       <ChevronRight className="w-4 h-4 ml-2 group-hover/btn:translate-x-1 transition-transform" />
     </Button>
   </motion.div>
@@ -135,109 +161,133 @@ const PlanCard = ({ plan }: { plan: Plan }) => (
 const Pay = () => {
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      const hash = window.location.hash;
-      if (hash) {
+      const currentHash = window.location.hash;
+      const targetMatch = currentHash.match(/\?target=([^&]+)/);
+      const targetId = targetMatch ? targetMatch[1] : null;
+
+      if (targetId) {
         const timer = setTimeout(() => {
-          const element = document.querySelector(hash);
+          const element = document.getElementById(targetId);
           if (element) {
             element.scrollIntoView({ behavior: 'smooth', block: 'start' });
             element.classList.add('animate-gold-pulse');
           }
-        }, 300);
+        }, 400);
         return () => clearTimeout(timer);
       }
     }
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#050505] pt-32 pb-32 font-serif selection:bg-amber-500/30 overflow-x-hidden">
-      <div className="max-w-7xl mx-auto px-6 md:px-8">
-        <header className="text-center mb-24 relative">
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-amber-500/5 blur-[120px] -z-10" />
+    <div className="min-h-screen bg-[#050505] font-sans selection:bg-amber-500/30 overflow-x-hidden">
+      <Seo title="預約您的資糧路徑｜滿願藏庫" path="/pay" />
+      
+      {/* ✅ 補回頂部導覽列 */}
+      <SiteHeader />
+
+      <div className="max-w-7xl mx-auto px-6 md:px-8 pt-40 pb-32">
+        <header className="text-center mb-32 relative">
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-[radial-gradient(circle,rgba(245,158,11,0.05)_0%,transparent_70%)] -z-10" />
+          
           <motion.h1 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-8 tracking-tighter"
+            className="text-4xl md:text-6xl font-bold text-white mb-8 tracking-tighter"
           >
-            預約您的<span className="text-[#D4AF37] font-light italic">資糧路徑</span>
+            預約您的<span className="text-[#D4AF37] italic font-light">資糧路徑</span>
           </motion.h1>
-          <p className="text-slate-500 max-w-2xl mx-auto tracking-widest text-[11px] uppercase leading-loose opacity-80 font-medium">
-            依止大乘經典與密續法訊如法彙整。付款完成後 24 小時內，名單將由法會現場進行如法回向。
+          <p className="text-slate-400 max-w-2xl mx-auto text-sm md:text-base font-medium leading-loose">
+            依止佛法經典與藏密續法訊如法彙整。付款完成後 24 小時內，<br className="hidden md:block" />
+            名單將由法會現場進行安排吉日如法回向。
           </p>
         </header>
 
-        <div className="space-y-40">
-          {Object.entries(plans).map(([category, categoryPlans]) => (
-            <section key={category} id={category} className="scroll-mt-32 transition-all duration-1000">
-              <div className="flex items-center gap-6 mb-12">
-                <h2 className="text-2xl md:text-3xl font-bold text-[#D4AF37] tracking-[0.25em] whitespace-nowrap uppercase">
-                  {category === 'yellow' && '黃財神｜廣修布施・積聚資糧'}
-                  {category === 'mahashri' && '大吉祥天女｜豐饒吉祥・資具無缺'}
-                  {category === 'ganapati' && '象頭財神｜平息違緣・無礙成就'}
-                  {category === 'kurukulla' && '作明佛母｜懷攝善緣・情感圓滿'}
-                  {category === 'tara' && '綠度母｜迅疾大悲・遠離怖畏'}
-                </h2>
-                <div className="h-[1px] flex-1 bg-gradient-to-r from-amber-500/30 via-amber-500/10 to-transparent" />
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 justify-center">
-                {categoryPlans.map((plan) => (
-                  <PlanCard key={plan.id} plan={plan} />
-                ))}
-              </div>
-            </section>
-          ))}
+        <div className="space-y-48">
+          {Object.entries(plans).map(([category, categoryPlans]) => {
+            const deityNames: Record<string, string> = {
+              yellow: '黃財神', mahashri: '大吉祥天女', ganapati: '象頭財神', kurukulla: '作明佛母', tara: '綠度母'
+            };
+            return (
+              <section key={category} id={category} className="scroll-mt-32">
+                <div className="flex items-center gap-6 mb-12">
+                  <h2 className="text-2xl md:text-3xl font-bold text-[#D4AF37] tracking-widest whitespace-nowrap uppercase">
+                    {category === 'yellow' && '黃財神｜廣修布施・積聚資糧'}
+                    {category === 'mahashri' && '大吉祥天女｜豐饒吉祥・資具無缺'}
+                    {category === 'ganapati' && '象頭財神｜平息違緣・無礙成就'}
+                    {category === 'kurukulla' && '作明佛母｜懷攝善緣・情感圓滿'}
+                    {category === 'tara' && '綠度母｜迅疾大悲・遠離怖畏'}
+                  </h2>
+                  <div className="h-[1px] flex-1 bg-gradient-to-r from-amber-500/40 via-amber-500/10 to-transparent" />
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 justify-center">
+                  {categoryPlans.map((plan) => (
+                    <PlanCard key={plan.id} plan={plan} deityName={deityNames[category]} />
+                  ))}
+                </div>
+              </section>
+            );
+          })}
         </div>
 
-        {/* 信任 Footer */}
-        <footer className="mt-40 max-w-4xl mx-auto">
-          <div className="p-10 md:p-12 rounded-[2rem] border border-white/5 bg-gradient-to-b from-white/[0.02] to-transparent backdrop-blur-3xl text-center">
-            <ShieldCheck className="w-16 h-16 text-amber-500/20 mx-auto mb-8" />
-            <h3 className="text-xl md:text-2xl font-bold text-white mb-6 tracking-tight">護持如法性與安全性說明</h3>
-            <p className="text-sm text-slate-400 mb-10 leading-relaxed font-light max-w-2xl mx-auto">
+        {/* 信任 Footer 區塊 */}
+        <footer className="mt-48 max-w-4xl mx-auto">
+          <div className="p-10 md:p-16 rounded-[3rem] border border-white/10 bg-[#0A0A0A] text-center shadow-2xl relative overflow-hidden">
+            <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_top,rgba(245,158,11,0.03),transparent_50%)] pointer-events-none" />
+            
+            <ShieldCheck className="w-20 h-20 text-amber-500/20 mx-auto mb-10" />
+            <h3 className="text-2xl md:text-3xl font-bold text-white mb-6">護持如法性與安全性說明</h3>
+            <p className="text-base text-slate-400 mb-12 leading-relaxed max-w-2xl mx-auto font-medium">
               滿願藏庫致力於守護每一份清淨發心。所有金流皆透過「綠界科技 ECPay」第三方平台處理，本站不在站內儲存任何敏感財務個資。
             </p>
-            <div className="flex flex-wrap justify-center gap-6">
+            
+            <div className="flex flex-col sm:flex-row justify-center gap-6 relative z-10">
               <Dialog>
                 <DialogTrigger asChild>
-                  <Button variant="outline" className="px-8 py-6 border-white/10 hover:bg-white/5 text-slate-300 text-[11px] tracking-widest uppercase">
-                    <Info className="w-4 h-4 mr-3 opacity-50" /> 了解回向流程
+                  <Button variant="outline" className="px-10 py-7 bg-transparent border-white/20 hover:bg-white/5 text-slate-200 text-sm font-bold tracking-widest uppercase">
+                    <Info className="w-5 h-5 mr-3" /> 了解回向流程
                   </Button>
                 </DialogTrigger>
                 <DialogContent className="bg-[#0A0A0A] border-white/10 text-slate-300">
-                  <DialogHeader className="mb-4">
-                    <DialogTitle className="text-white text-lg tracking-widest font-bold">如法回向流程</DialogTitle>
-                    <DialogDescription className="text-slate-500 mt-2 font-light text-xs">了解您的發心如何被妥善安置</DialogDescription>
+                  <DialogHeader className="mb-6 border-b border-white/10 pb-6">
+                    <DialogTitle className="text-white text-xl font-bold tracking-widest">如法回向流程</DialogTitle>
+                    <DialogDescription className="text-slate-500 mt-2 font-medium">您的發心將被妥善安置於密壇</DialogDescription>
                   </DialogHeader>
-                  <div className="space-y-6 py-4 text-sm font-light leading-loose">
-                    <div className="flex gap-4">
-                      <div className="w-7 h-7 rounded-full bg-amber-500/10 text-amber-500 flex items-center justify-center font-bold text-xs shrink-0 border border-amber-500/20">1</div>
+                  <div className="space-y-8 py-4 text-base font-normal leading-loose">
+                    <div className="flex gap-5">
+                      <div className="w-8 h-8 rounded-full bg-amber-500/10 text-amber-500 flex items-center justify-center font-black text-sm shrink-0 border border-amber-500/30">1</div>
                       <p>完成支付後，系統自動記錄您的護持項目與名單。</p>
                     </div>
-                    <div className="flex gap-4">
-                      <div className="w-7 h-7 rounded-full bg-amber-500/10 text-amber-500 flex items-center justify-center font-bold text-xs shrink-0 border border-amber-500/20">2</div>
+                    <div className="flex gap-5">
+                      <div className="w-8 h-8 rounded-full bg-amber-500/10 text-amber-500 flex items-center justify-center font-black text-sm shrink-0 border border-amber-500/30">2</div>
                       <p>名單將於 24 小時內傳送至法會現場，由工作人員依供法類別如法彙整。</p>
                     </div>
-                    <div className="flex gap-4">
-                      <div className="w-7 h-7 rounded-full bg-amber-500/10 text-amber-500 flex items-center justify-center font-bold text-xs shrink-0 border border-amber-500/20">3</div>
-                      <p>法師於壇城前進行名字如法回向，系統隨後發送數位證明，圓滿此功德緣起。</p>
+                    <div className="flex gap-5">
+                      <div className="w-8 h-8 rounded-full bg-amber-500/10 text-amber-500 flex items-center justify-center font-black text-sm shrink-0 border border-amber-500/30">3</div>
+                      <p>法師於壇城前進行名字如法迴向，系統隨後發送數位證明，圓滿此功德緣起。</p>
                     </div>
                   </div>
                 </DialogContent>
               </Dialog>
-              <Button variant="link" className="text-slate-600 text-[10px] tracking-[0.3em] uppercase hover:text-amber-500 transition-all font-medium" onClick={() => window.open('/terms', '_blank')}>
+              <Button 
+                variant="link" 
+                className="text-slate-500 text-xs tracking-widest uppercase hover:text-amber-500 transition-all font-bold" 
+                onClick={() => window.open('/terms', '_blank')}
+              >
                 Terms & Privacy Policy
               </Button>
             </div>
           </div>
 
-          <div className="mt-16 text-center opacity-30 px-4">
-            <p className="text-[10px] text-slate-500 uppercase tracking-[0.2em] md:tracking-[0.4em] leading-relaxed">
+          <div className="mt-20 text-center opacity-40 px-4">
+            <p className="text-[11px] text-slate-500 uppercase tracking-[0.3em] leading-loose font-bold">
               Dharma Practice Disclaimer: No medical or financial guarantees. <br/>
-              滿願藏庫致力於正信傳承。所有護持皆基於發心，不做世俗醫療或投資保證之承諾。
+              滿願藏庫致力於正信傳承。所有護持皆基於發心，不做立即見效與保證獲利等承諾。
             </p>
           </div>
         </footer>
       </div>
+
+      <SiteFooter />
 
       <style>{`
         @keyframes gold-pulse {
