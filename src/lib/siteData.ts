@@ -30,7 +30,7 @@ import altarGreenTaraImg from "@/assets/visuals/generated/altar-green-tara-fire-
 export const SITE = {
   name: "滿願藏庫",
   url: "https://zambala-tibetan.com.tw",
-  fb: "https://www.facebook.com/profile.php?id=61583749010531",
+  fb: "追蹤FB獲得更多訊息",url: "https://www.facebook.com/profile.php?id=61583749010531",
 } as const;
 
 export const SITE_CONFIG = SITE;
