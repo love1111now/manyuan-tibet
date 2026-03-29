@@ -1,57 +1,42 @@
+/*
+  DESIGN REMINDER (SiteHeader)
+  - Dark + gold, minimal but confident
+  - Keep nav short; drive to /pay
+*/
+
 import { Link, useLocation } from "wouter";
-import { Menu, X, ArrowRight } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { SITE } from "@/lib/siteData";
 
-const NAV = [
-  { label: "法會總覽", href: "/puja" },
-  { label: "經典主軸", href: "/sutra" },
-  { label: "見證", href: "/proof" },
-  { label: "關於", href: "/about" },
-];
+const nav = [
+  { href: "/", label: "首頁" },
+  { href: "/pay", label: "法事登記" },
+  { href: "/proof", label: "回饋文" },
+  { href: "/sutra", label: "經典依據" },
+] as const;
 
 export default function SiteHeader() {
   const [loc] = useLocation();
-  const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    setOpen(false);
-  }, [loc]);
-
-  const isActive = useMemo(() => {
-    const v = new Set(["/puja", "/sutra", "/proof", "/about", "/pay"]);
-    return (href: string) => {
-      if (href === "/") return loc === "/";
-      return loc === href || (v.has(href) && loc.startsWith(href));
-    };
-  }, [loc]);
 
   return (
-    <header className="sticky top-0 z-50 bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/65 border-b border-border">
-      <div className="mx-auto max-w-6xl px-4 py-4 flex items-center justify-between gap-3">
-        <Link href="/" className="flex items-center gap-3 group">
-          <div className="h-9 w-9 rounded-xl gold-border bg-card grid place-items-center">
-            <span className="font-display text-lg">滿</span>
-          </div>
-          <div className="leading-tight">
-            <div className="font-display text-lg tracking-[0.06em] group-hover:text-primary transition-colors">
-              滿願
-            </div>
-            <div className="text-[11px] text-muted-foreground tracking-[0.26em] uppercase">
-              warm zen · gentle vow
-            </div>
-          </div>
+    <header className="sticky top-0 z-50 border-b bg-background/75 backdrop-blur supports-[backdrop-filter]:bg-background/55">
+      <div className="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between gap-3">
+        <Link href="/" className="flex items-baseline gap-2">
+          <span className="font-display text-xl tracking-wide">{SITE.name}</span>
+          <span className="hidden sm:inline text-xs text-muted-foreground tracking-[0.28em] uppercase">
+            Ritual registration
+          </span>
         </Link>
 
-        <nav className="hidden md:flex items-center gap-6">
-          {NAV.map((n) => (
+        <nav className="hidden md:flex items-center gap-1">
+          {nav.map((n) => (
             <Link
               key={n.href}
               href={n.href}
               className={cn(
-                "text-sm tracking-[0.22em] uppercase hover:text-primary transition-colors",
-                isActive(n.href) ? "text-primary" : "text-muted-foreground"
+                "px-3 py-2 text-sm rounded-md hover:bg-accent/40 transition-colors",
+                loc === n.href ? "text-foreground" : "text-muted-foreground"
               )}
             >
               {n.label}
@@ -59,44 +44,39 @@ export default function SiteHeader() {
           ))}
         </nav>
 
-        <div className="hidden md:flex items-center gap-3">
+        <div className="flex items-center gap-2">
+          <a
+            href={SITE.fb}
+            target="_blank"
+            rel="noreferrer"
+            className="hidden sm:inline text-xs text-muted-foreground hover:text-foreground transition-colors"
+          >
+            Facebook
+          </a>
           <Link href="/pay">
-            <Button className="h-10 px-5 font-black tracking-[0.24em] uppercase gold-border">
-              我想安排護持 <ArrowRight className="h-4 w-4" />
+            <Button className="h-10 px-4 font-bold tracking-[0.2em] uppercase gold-border">
+              立即登記
             </Button>
           </Link>
         </div>
-
-        <button
-          className="md:hidden h-10 w-10 grid place-items-center rounded-xl gold-border bg-card"
-          onClick={() => setOpen((v) => !v)}
-          aria-label={open ? "關閉選單" : "開啟選單"}
-        >
-          {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-        </button>
       </div>
 
-      {open ? (
-        <div className="md:hidden border-t border-border bg-background/95 backdrop-blur">
-          <div className="mx-auto max-w-6xl px-4 py-4 grid gap-2">
-            {NAV.map((n) => (
-              <Link
-                key={n.href}
-                href={n.href}
-                className={cn(
-                  "py-3 px-3 rounded-xl gold-border bg-card text-sm tracking-[0.22em] uppercase",
-                  isActive(n.href) ? "text-primary" : "text-foreground"
-                )}
-              >
-                {n.label}
-              </Link>
-            ))}
-            <Link href="/pay" className="py-3 px-3 rounded-xl gold-border bg-primary text-primary-foreground text-sm font-black tracking-[0.22em] uppercase">
-              我想安排護持
+      <div className="md:hidden border-t">
+        <div className="mx-auto max-w-6xl px-2 py-2 grid grid-cols-4 gap-1">
+          {nav.map((n) => (
+            <Link
+              key={n.href}
+              href={n.href}
+              className={cn(
+                "py-2 text-center text-xs rounded-md",
+                loc === n.href ? "bg-accent/40 text-foreground" : "text-muted-foreground hover:bg-accent/30"
+              )}
+            >
+              {n.label}
             </Link>
-          </div>
+          ))}
         </div>
-      ) : null}
+      </div>
     </header>
   );
 }

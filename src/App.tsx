@@ -1,69 +1,35 @@
+/*
+  DESIGN REMINDER (App)
+  - Gilded Monastic Modernism: quiet luxury, black + gold, strong hierarchy
+  - No quirky fonts; rely on Noto Sans/Serif TC
+*/
+
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import LiveRegistrations from "@/components/LiveRegistrations";
-import { useIsMobile } from "@/hooks/use-mobile";
-import { Router, Route, Switch, useLocation } from "wouter";
+import { Router, Route, Switch } from "wouter";
 import { useHashLocation } from "wouter/use-hash-location";
 import ErrorBoundary from "@/components/ErrorBoundary";
-import { useEffect } from "react";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 
-// 引入追蹤元件
-import AnalyticsTracker from "@/components/AnalyticsTracker"; 
+import AnalyticsTracker from "@/components/AnalyticsTracker";
+import VercelScriptsLoader from "@/components/VercelScriptsLoader";
 
 import Home from "@/pages/Home";
-import Puja from "@/pages/Puja";
-import Pay from "@/pages/Pay";
+import Deity from "@/pages/Deity";
 import Proof from "@/pages/Proof";
+import Pay from "@/pages/Pay";
 import Sutra from "@/pages/Sutra";
-import About from "@/pages/About";
-import Terms from "@/pages/Terms";
-import Wallpaper from "@/pages/Wallpaper";
-import Topic from "@/pages/Topic";
-import DeityPage from "@/pages/Deity";
 import NotFound from "@/pages/NotFound";
-
-function Redirect({ to }: { to: string }) {
-  if (typeof window !== "undefined") {
-    window.location.hash = `#${to}`;
-  }
-  return null;
-}
-
-function ScrollToTop() {
-  const [loc] = useLocation();
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [loc]);
-
-  return null;
-}
 
 function AppRouter() {
   return (
     <Router hook={useHashLocation}>
-      <ScrollToTop />
-      <AnalyticsTracker /> 
-      
       <Switch>
         <Route path="/" component={Home} />
-        <Route path="/puja" component={Puja} />
-        <Route path="/pay" component={Pay} />
+        <Route path="/deity/:key">{(params) => <Deity deityKey={params.key} />}</Route>
         <Route path="/proof" component={Proof} />
+        <Route path="/pay" component={Pay} />
         <Route path="/sutra" component={Sutra} />
-        <Route path="/about" component={About} />
-        <Route path="/terms" component={Terms} />
-        <Route path="/wallpaper" component={Wallpaper} />
-
-        <Route path="/topics/:slug">{(params) => <Topic slug={params.slug} />}</Route>
-        <Route path="/deities/:deityKey">{(params) => <DeityPage deityKey={params.deityKey} />}</Route>
-
-        <Route path="/yellow-dzambhala">{() => <Redirect to="/deities/yellow" />}</Route>
-        <Route path="/mahashri-devi">{() => <Redirect to="/deities/mahashri" />}</Route>
-        <Route path="/ganapati">{() => <Redirect to="/deities/ganapati" />}</Route>
-        <Route path="/kurukulla">{() => <Redirect to="/deities/kurukulla" />}</Route>
-
         <Route component={NotFound} />
       </Switch>
     </Router>
@@ -71,15 +37,13 @@ function AppRouter() {
 }
 
 export default function App() {
-  const isMobile = useIsMobile();
-
   return (
     <ErrorBoundary>
-      {/* ✅ 關鍵修正：將 defaultTheme 改為 dark，符合全站漆黑金箔美學 */}
       <ThemeProvider defaultTheme="dark">
         <TooltipProvider>
-          <Toaster position={isMobile ? "top-center" : "bottom-right"} />
-          <LiveRegistrations />
+          <Toaster />
+          <VercelScriptsLoader />
+          <AnalyticsTracker />
           <AppRouter />
         </TooltipProvider>
       </ThemeProvider>

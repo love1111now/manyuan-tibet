@@ -1,7 +1,12 @@
+/*
+  DESIGN REMINDER (AnalyticsTracker)
+  - Keep tracking stable for SPA (hash router)
+  - Manual page_view: GA4 + Meta Pixel + Vercel Analytics
+*/
+
 import { useEffect } from "react";
 import { useLocation } from "wouter";
 
-// 宣告全域變數，讓 TypeScript 不會對 gtag / fbq / va 報錯
 declare global {
   interface Window {
     gtag?: (...args: unknown[]) => void;
@@ -14,30 +19,20 @@ export default function AnalyticsTracker() {
   const [location] = useLocation();
 
   useEffect(() => {
-    // 確保在瀏覽器環境下執行
-    if (typeof window !== "undefined") {
-      // 1. 發送 GA4 PageView（保留既有追蹤）
-      if (window.gtag) {
-        window.gtag("event", "page_view", {
-          page_path: location,
-          page_location: window.location.href,
-        });
-      }
+    if (typeof window === "undefined") return;
 
-      // 2. 發送 FB Pixel PageView（保留既有追蹤）
-      if (window.fbq) {
-        window.fbq("track", "PageView");
-      }
+    // 1) GA4
+    window.gtag?.("event", "page_view", {
+      page_path: location,
+      page_location: window.location.href,
+    });
 
-      // 3. Vercel Analytics：hash router 需要手動補 pageview
-      if (window.va) {
-        window.va("pageview");
-      }
+    // 2) Meta Pixel
+    window.fbq?.("track", "PageView");
 
-      // 測試用：開發時可以把下面這行打開，確認切換頁面時有沒有觸發
-      // console.log("[Analytics] 已追蹤路徑:", location);
-    }
+    // 3) Vercel Analytics (hash router needs manual)
+    window.va?.("pageview");
   }, [location]);
 
-  return null; // 此元件只在背景執行，不渲染任何畫面
+  return null;
 }

@@ -3,45 +3,60 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>滿願藏庫｜法財滿願</title>
+    <title>滿願藏庫｜法事登記</title>
 
-    <!-- Fonts: Display + Body -->
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <!-- Typography: readable, no quirky fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Kaisei+Tokumin:wght@400;500;700&family=ZCOOL+XiaoWei&family=Noto+Serif+TC:wght@400;500;600;700;900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@400;500;600;700;900&display=swap"
       rel="stylesheet"
     />
 
-    <!-- GA -->
+    <!-- GA4 (keep existing tracking code, manual page_view in app) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-5EQ1SBXQ17"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
+      function gtag() {
+        dataLayer.push(arguments);
+      }
       gtag('js', new Date());
-      gtag('config', 'G-5EQ1SBXQ17');
+      // stop auto page_view; SPA will send manually
+      gtag('config', 'G-5EQ1SBXQ17', { send_page_view: false });
     </script>
 
-    <!-- Meta Pixel -->
+    <!-- Meta Pixel (keep existing, manual PageView in app) -->
     <script>
-      !function(f,b,e,v,n,t,s)
-      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-      n.queue=[];t=b.createElement(e);t.async=!0;
-      t.src=v;s=b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t,s)}(window, document,'script',
-      'https://connect.facebook.net/en_US/fbevents.js');
+      !(function (f, b, e, v, n, t, s) {
+        if (f.fbq) return;
+        n = f.fbq = function () {
+          n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
+        };
+        if (!f._fbq) f._fbq = n;
+        n.push = n;
+        n.loaded = !0;
+        n.version = '2.0';
+        n.queue = [];
+        t = b.createElement(e);
+        t.async = !0;
+        t.src = v;
+        s = b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t, s);
+      })(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
       fbq('init', '1974584759935803');
-      fbq('track', 'PageView');
+      // fbq('track', 'PageView'); // SPA will send manually
     </script>
   </head>
+
   <body>
     <noscript>
       <img
         height="1"
         width="1"
-        style="display:none"
+        style="display: none"
         src="https://www.facebook.com/tr?id=1974584759935803&ev=PageView&noscript=1"
         alt=""
       />
