@@ -2,23 +2,6 @@ import { useEffect, useMemo } from "react";
 import { toast } from "sonner";
 import { DEITIES } from "@/lib/siteData";
 
-declare global {
-  interface IdleDeadline {
-    didTimeout: boolean;
-    timeRemaining(): number;
-  }
-
-  type IdleRequestCallback = (deadline: IdleDeadline) => void;
-
-  interface IdleRequestOptions {
-    timeout?: number;
-  }
-
-  interface Window {
-    requestIdleCallback?: (callback: IdleRequestCallback, options?: IdleRequestOptions) => number;
-  }
-}
-
 function randInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -54,7 +37,8 @@ function randomMaskedName() {
 
 function runWhenIdle(fn: () => void) {
   // 讓 toast 盡量在主執行緒空閒時跑，降低與使用者互動搶資源（改善 INP）
-  const ric = window.requestIdleCallback;
+  // 為了避免 TypeScript 版本衝突，直接使用 any 轉型取得 requestIdleCallback
+  const ric = (window as any).requestIdleCallback;
 
   if (typeof ric === "function") {
     ric(() => fn(), { timeout: 2000 });
@@ -106,7 +90,7 @@ export default function LiveRegistrations() {
     };
 
     // 首次不要立刻跳，留 25–45 秒的「正常感」
-    timer = window.setTimeout(scheduleToast, randInt(25_000, 45_000));
+    timer = window.setTimeout(scheduleToast, randInt(43_000, 65_000));
 
     return () => {
       cancelled = true;
