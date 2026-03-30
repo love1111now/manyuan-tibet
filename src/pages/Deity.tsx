@@ -401,9 +401,23 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
                       rel="noreferrer"
                       className="flex-1"
                       aria-label={`前往外部付款頁：${p.name}`}
+                      onClick={() => {
+                        if (typeof window !== "undefined") {
+                          window.gtag?.('event', 'begin_checkout', {
+                            currency: 'TWD',
+                            value: p.price,
+                            items: [{ item_name: `${d.name}-${p.name}`, price: p.price }]
+                          });
+                          window.fbq?.('track', 'InitiateCheckout', {
+                            content_name: p.name,
+                            value: p.price,
+                            currency: 'TWD'
+                          });
+                        }
+                      }}
                     >
                       <Button className="h-12 w-full font-bold tracking-[0.22em] uppercase gold-border">
-                        立即下單 <ExternalLink className="h-4 w-4" />
+                        立即預約法事 <ExternalLink className="h-4 w-4" />
                       </Button>
                     </a>
                     <Link href="/pay" className="flex-1">
