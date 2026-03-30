@@ -34,8 +34,9 @@ export default function Sutra() {
         <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">Scripture</div>
         <h1 className="mt-2 font-display text-4xl">經典依據（引用）</h1>
         <p className="mt-4 readable text-muted-foreground max-w-prose">
-          我們把經典放在這裡，是為了「強化信任感」與「提醒方向」：
-          <span className="text-foreground/90">護持不是交易</span>，而是把心念安放在正因上。
+          我們把經典放在這裡，不是要你背名詞。
+          而是當你很慌、很急、很怕做錯時，你可以回來確認：
+          <span className="text-foreground/90">護持不是交易</span>，是一種把心念放回正因、讓生活重新可控的方式。
         </p>
 
         <Separator className="my-10" />

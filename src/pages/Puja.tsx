@@ -19,10 +19,11 @@ export default function Puja() {
         <div className="grid gap-10 md:grid-cols-[1fr_.9fr] items-start">
           <div>
             <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">總覽</div>
-            <h1 className="mt-2 font-display text-4xl md:text-5xl">四條路徑，不混走</h1>
+            <h1 className="mt-2 font-display text-4xl md:text-5xl">先對位，再護持</h1>
             <p className="mt-4 readable text-muted-foreground max-w-prose">
-              我們不讓你在一堆神祕話術裡亂選。先把困境對位：穩財／補庫／清思／聚人。
-              你只要選對路，然後用最短路徑完成護持。
+              當你正在焦慮、正在失眠、正在被金錢或關係逼到牆角——最容易做錯的，就是亂選、亂拜、亂花錢。
+              我們把路徑拆清楚：<span className="text-foreground/90">增財、守家、破障、人緣、救急、護身心</span>。
+              你只要做一件事：選到最像你現況的那一尊，然後把流程走完。
             </p>
 
             <div className="mt-7 flex flex-col sm:flex-row gap-3">

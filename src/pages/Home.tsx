@@ -57,10 +57,11 @@ export default function Home() {
                 </h1>
 
                 <p className="mt-6 readable text-muted-foreground max-w-prose">
-                  你不需要更用力——你需要更被照顧。
+                  你不是不努力；你是一直在用同一種方式硬撐。
                   <br className="hidden sm:block" />
-                  我們把每個步驟講清楚：<span className="text-foreground/90">對位困境 → 如法護持 →
-                  落地行動</span>。
+                  當現金流越來越緊、情緒越來越躁、決策越來越亂，問題就不只是在「再加把勁」。
+                  <span className="text-foreground/90">先把心安下來、把方向對準、把流程做完</span>——
+                  這才是危機真正開始收斂的方式。
                 </p>
 
                 <div className="mt-8 flex flex-col sm:flex-row gap-3">
@@ -79,7 +80,7 @@ export default function Home() {
                 </div>
 
                 <div className="mt-6 text-xs text-muted-foreground tracking-[0.22em] uppercase">
-                  Dharma-first · clear process · no exaggerated promise
+                  清楚流程 · 經典依據 · 不亂承諾
                 </div>
               </div>
 
@@ -195,7 +196,7 @@ export default function Home() {
         </section>
 
         {/* DEITIES */}
-        <section id="choose" className="mx-auto max-w-6xl px-4 pt-14 pb-4">
+        <section id="choose" className="mx-auto max-w-6xl px-4 pt-14 pb-4 scroll-mt-24">
           <div className="flex items-end justify-between gap-4">
             <div>
               <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">

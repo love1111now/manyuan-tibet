@@ -34,8 +34,8 @@ export default function Proof() {
         <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">Proof</div>
         <h1 className="mt-2 font-display text-4xl">回饋文（節錄）</h1>
         <p className="mt-4 readable text-muted-foreground max-w-prose">
-          我們只整理大家最在意的變化：睡眠、情緒穩定、決策更清楚、現金流止漏、關係回暖。
-          你可以先看與你狀態最像的那幾則。
+          我們只整理大家最在意、也最貼近危機感的變化：睡眠、情緒穩定、決策更清楚、現金流止漏、關係回暖。
+          你可以先看與你狀態最像的那幾則——不是為了被安慰，而是為了更快做出一個正確的選擇。
         </p>
 
         <Separator className="my-10" />

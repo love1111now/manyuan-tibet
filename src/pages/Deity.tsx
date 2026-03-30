@@ -139,7 +139,7 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
         </section>
 
         {/* PLANS */}
-        <section id="plans" className="mx-auto max-w-6xl px-4 pt-12 pb-6">
+        <section id="plans" className="mx-auto max-w-6xl px-4 pt-12 pb-6 scroll-mt-24">
           <div className="flex items-end justify-between gap-4">
             <div>
               <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">Plans</div>
@@ -151,10 +151,7 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
           </div>
 
           <div className="mt-7 grid gap-4 md:grid-cols-2">
-            {d.plans
-              .slice()
-              .sort((a, b) => (b.hot ? 1 : 0) - (a.hot ? 1 : 0) || a.price - b.price)
-              .map((p) => (
+            {d.plans.map((p) => (
                 <Card key={p.id} className="p-7 gold-border bg-card/70 paper-grain">
                   <div className="flex items-start justify-between gap-3">
                     <div>

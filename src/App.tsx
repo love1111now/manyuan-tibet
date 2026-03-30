@@ -4,9 +4,10 @@
   - No quirky fonts; rely on Noto Sans/Serif TC
 */
 
+import React from "react";
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { Router, Route, Switch } from "wouter";
+import { Router, Route, Switch, useLocation } from "wouter";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 
@@ -19,6 +20,17 @@ import Proof from "@/pages/Proof";
 import Pay from "@/pages/Pay";
 import Sutra from "@/pages/Sutra";
 import NotFound from "@/pages/NotFound";
+
+function ScrollToTop() {
+  const [location] = useLocation();
+
+  React.useEffect(() => {
+    if (typeof window === "undefined") return;
+    window.scrollTo(0, 0);
+  }, [location]);
+
+  return null;
+}
 
 function AppRouter() {
   return (
@@ -43,6 +55,7 @@ export default function App() {
           <Toaster />
           <VercelScriptsLoader />
           <AnalyticsTracker />
+          <ScrollToTop />
           <AppRouter />
         </TooltipProvider>
       </ThemeProvider>

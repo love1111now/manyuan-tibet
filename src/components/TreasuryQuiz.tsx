@@ -124,6 +124,7 @@ const QUESTION_BANK: QuizQuestion[] = [
       { id: "b", label: "家裡變安：健康、居住、情緒", weights: { mahashri: 3 } },
       { id: "c", label: "判斷變準：資訊收束、止損轉機", weights: { ganapati: 3 } },
       { id: "d", label: "貴人變多：合作、介紹、提攜", weights: { kurukulla: 3 } },
+      { id: "e", label: "身心先穩：健康、息災、恢復元氣", weights: { "medicine-buddha": 3 } },
     ],
   },
   {
@@ -155,6 +156,7 @@ function emptyScore(): Record<DeityKey, number> {
     ganapati: 0,
     kurukulla: 0,
     padmasambhava: 0,
+    "medicine-buddha": 0,
     "green-tara": 0,
   };
 }
@@ -193,6 +195,11 @@ const RESULT_COPY: Record<DeityKey, { tag: string; title: string; desc: string }
     tag: "靠山／護持",
     title: "你需要『穩固的靠山』：先把恐懼與亂流鎮住",
     desc: "當外在環境與內在焦慮同時拉扯，你最需要的是一股穩定的護持力，讓心不再飄，事情才有機會翻盤。",
+  },
+  "medicine-buddha": {
+    tag: "息災／恢復",
+    title: "你需要『把元氣救回來』：先穩住身心，再談翻盤",
+    desc: "你現在的耗損感很重：睡不好、恢復慢、心裡一直怕出事。先息災、先把身心拉回穩定，後面才有力氣做對的選擇。",
   },
   "green-tara": {
     tag: "除障／轉運",

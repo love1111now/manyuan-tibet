@@ -28,9 +28,10 @@ export default function Pay() {
             <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">Checkout</div>
             <h1 className="mt-2 font-display text-4xl">法事登記（綠界多元支付）</h1>
             <p className="mt-4 readable text-muted-foreground max-w-prose">
-              你可以直接在這一頁完成下單。建議順序：
+              這一頁是「把事情做完」的地方。
               <span className="text-foreground/90">先選本尊 → 再選方案 → 點「登記法事」</span>。
-              付款完成即安排法事。
+              付款完成即保留名額並安排法事。
+              當你處在危機感裡，最需要的不是更多資訊，而是一次正確、可完成的行動。
             </p>
 
             <Card className="mt-7 p-7 gold-border bg-card/70 paper-grain">
@@ -46,7 +47,7 @@ export default function Pay() {
                 )}
               </div>
               <div className="mt-5 text-xs text-muted-foreground">
-                提醒：護持不是交易；我們承諾的是如法完成流程與清楚交付。
+                提醒：護持不是交易；我們承諾的是如法完成流程與清楚交付。你也要承諾自己：回到生活裡做一個小行動，讓好的因有地方落地。
               </div>
             </Card>
           </div>
