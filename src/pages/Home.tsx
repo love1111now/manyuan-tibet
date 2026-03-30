@@ -1,9 +1,3 @@
-/*
-  DESIGN REMINDER (Home)
-  - Hero: cinematic stillness, black + gold, strong hierarchy
-  - Funnel: settle → choose deity → pick plan → checkout
-*/
-
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import StickyCta from "@/components/StickyCta";
@@ -110,6 +104,8 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        <div className="tibetan-divider h-10 opacity-70" aria-hidden />
 
         {/* QUICK GUIDE */}
         <section className="mx-auto max-w-6xl px-4 pt-12 pb-2">

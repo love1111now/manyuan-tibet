@@ -1,8 +1,3 @@
-/*
-  DESIGN REMINDER (Proof)
-  - Social proof should feel real: specific, grounded, no hype
-*/
-
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import StickyCta from "@/components/StickyCta";

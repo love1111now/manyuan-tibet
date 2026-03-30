@@ -1,10 +1,3 @@
-/*
-  DESIGN REMINDER (AnalyticsTracker)
-  - Keep tracking stable for SPA (hash router)
-  - Manual page_view: GA4 + Meta Pixel + Vercel Analytics
-  - Optimized: Scroll to top on route change & title sync delay
-*/
-
 import { useEffect } from "react";
 import { useLocation } from "wouter";
 

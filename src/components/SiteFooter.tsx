@@ -1,9 +1,3 @@
-/*
-  DESIGN REMINDER (SiteFooter)
-  - Keep it calm and trustworthy
-  - No exaggerated claims
-*/
-
 import { SITE } from "@/lib/siteData";
 
 export default function SiteFooter() {

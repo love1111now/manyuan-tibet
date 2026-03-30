@@ -343,7 +343,7 @@ export default function TreasuryQuiz() {
                 <Card className="p-6 gold-border bg-background/40">
                   <div className="flex items-start gap-4">
                     <div className="h-16 w-16 rounded-2xl gold-border bg-card/60 overflow-hidden shrink-0">
-                      <img src={winnerDeity.heroImage} alt="" className="h-full w-full object-cover" />
+                      <img src={winnerDeity.heroImage} alt="" className="h-full w-full object-contain bg-background/30" />
                     </div>
                     <div className="min-w-0">
                       <div className="flex items-center gap-3 flex-wrap">

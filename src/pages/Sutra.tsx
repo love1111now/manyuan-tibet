@@ -1,9 +1,3 @@
-/*
-  DESIGN REMINDER (Sutra)
-  - Present quotes with sources + links
-  - Keep it reverent and readable
-*/
-
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import StickyCta from "@/components/StickyCta";

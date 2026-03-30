@@ -15,7 +15,7 @@ import deityBannerImg from "@/assets/visuals/generated/deity-page-banner-abstrac
 import heroYellowImg from "@/assets/visuals/generated/deity-yellow.webp";
 import altarYellowImg from "@/assets/visuals/generated/altar-yellow-water-offering.webp";
 
-import heroMahashriImg from "@/assets/visuals/generated/deity-mahashri.webp";
+import heroMahashriImg from "@/assets/visuals/deity-mahashri.webp";
 import altarMahashriImg from "@/assets/visuals/generated/altar-mahashri-home-wealth.webp";
 
 import heroGanapatiImg from "@/assets/visuals/generated/deity-ganapati.webp";
@@ -51,7 +51,7 @@ export const SITE = {
 
   /** 兼容舊組件：粉專連結（請勿改動追蹤碼） */
   fb: "https://www.facebook.com/profile.php?id=61583749010531",
-  fbLabel: "追蹤FB獲得更多訊息",
+  fbLabel: "任何問題歡迎到FB私訊我們",
   fbUrl: "https://www.facebook.com/profile.php?id=61583749010531",
 } as const;
 
@@ -190,10 +190,18 @@ export interface Deity {
     readonly title: string;
     readonly image: string;
     readonly imageAlt: string;
+    /** /public/rituals/*.md */
     readonly mdPath: string;
     readonly sourceUrl: string;
     readonly license?: string;
     readonly note?: string;
+
+    /** 儀軌要點（本站摘要，方便快速閱讀） */
+    readonly keyPoints?: readonly string[];
+    /** 如法供養清單（建議項） */
+    readonly offeringsChecklist?: readonly string[];
+    /** 觀修重點（觀想/持咒/發心/回向） */
+    readonly practiceFocus?: readonly string[];
   };
 
   readonly plans: readonly Plan[];
@@ -215,14 +223,30 @@ export const DEITY_BY_KEY: Record<DeityKey, Deity> = {
     heroKicker: "資糧增益首選",
     heroImage: heroYellowImg,
     ritual: {
-      title: "黃財神煙供（Sang Offering to Yellow Jambhala）",
+      title: "黃財神煙供（贊巴拉 Sang 供養）",
       image: ritualSangSmokeImg,
       imageAlt: "儀軌示意：香供／煙供（sang）之煙雲供養",
       mdPath: "yellow-jambhala-sang.md",
       sourceUrl:
         "https://www.lotsawahouse.org/tibetan-masters/jamyang-khyentse-chokyi-lodro/jambhala-sang",
       license: "CC BY-NC 4.0 (Lotsawa House)",
-      note: "全文引用自 Lotsawa House（權威譯本）。若你採用水供法，另可參考：The Verse for Offering Water（Dudjom Lingpa）。",
+      note: "本站以『要點』協助你快速理解；全文則保留權威譯本原文，避免自行改寫失真。",
+      keyPoints: [
+        "發心：皈依三寶、發菩提心，以『利益眾生』為依歸。",
+        "正行：依儀軌供養香煙（sang），以清淨供品作供養；持誦贊巴拉心咒，觀想甘露財寶攝受。",
+        "對治：以布施心對治慳吝與匱乏相，令福德資糧自然增長。",
+        "回向：先回向法界一切眾生，再回向護持者所求之正當資生與善緣。",
+      ],
+      offeringsChecklist: [
+        "清淨香（沉香／檀香／薰香粉）與供器",
+        "清淨水與供碗（可加少量藏紅花，量少即可）",
+        "花、燈、香、果、食等基本供養（量力即可）",
+      ],
+      practiceFocus: [
+        "觀想：本尊前降甘露，洗滌匱乏業印；財富以『正命』方式成熟。",
+        "持咒：以『專注＋恭敬』為主，不以數量自壓；重在相續。",
+        "回向：將功德回向眾生與護持者，避免落入唯我求取的狹小心。",
+      ],
     },
     promise:
       "依贊巴拉教法，洗滌匱乏業印，修復財庫漏洞，開啟世間與出世間之財富源泉。對治慳吝心，令福德增長。",
@@ -237,14 +261,14 @@ export const DEITY_BY_KEY: Record<DeityKey, Deity> = {
     painPoints: ["資源匱乏、事業停滯", "現金流吃緊", "努力工作卻留不住錢"],
     whyThisDeity: ["補齊命中財庫不足", "啟動廣大布施緣起", "清淨貧窮業力障礙"],
     process: [
-      { title: "安置水供", body: "準備清淨藏紅花水，依儀軌整齊排列供碗。" },
-      { title: "誦咒加持", body: "持誦本尊心咒，觀想甘露加持灌頂。" },
-      { title: "如法回向", body: "將功德鎖定於護持者名單，祈願資糧盈滿。" },
+      { title: "發心與設供", body: "皈依三寶、發菩提心；依儀軌備妥清淨香／供水／供品，安置供養次第。" },
+      { title: "煙供與持咒", body: "依贊巴拉法門作 sang 供養，持誦心咒，觀想甘露財寶攝受，令資糧緣起成熟。" },
+      { title: "回向與落地", body: "先回向一切眾生，再回向護持者名單與所求正當資生；建議配合一個『小布施/小整理』讓因緣落地。" },
     ],
     plans: [
       {
         id: "y-490",
-        name: "黃財神 490",
+        name: "止漏入門｜黃財神供燈回向",
         price: 490,
         blurb: "先把『漏』停住：對治慳吝與匱乏業印，讓財路重新有出口。",
         url: "https://cart.cashier.ecpay.com.tw/qp/z4W0",
@@ -253,7 +277,7 @@ export const DEITY_BY_KEY: Record<DeityKey, Deity> = {
       },
       {
         id: "y-980",
-        name: "黃財神 980",
+        name: "開源增益｜黃財神連續水供回向（推薦）",
         price: 980,
         blurb: "想加速開源、讓資糧開始動起來：用更完整的儀軌把方向拉回來。",
         url: "https://cart.cashier.ecpay.com.tw/qp/z4XF",
@@ -264,7 +288,7 @@ export const DEITY_BY_KEY: Record<DeityKey, Deity> = {
       },
       {
         id: "y-1860",
-        name: "黃財神 1860",
+        name: "財路清障｜黃財神除障香供加強回向（深度）",
         price: 1860,
         blurb: "當你明明努力卻一直被打斷：用更強的清淨與除障，把財路的阻滯清出來。",
         url: "https://cart.cashier.ecpay.com.tw/qp/z4Y3",
@@ -274,12 +298,24 @@ export const DEITY_BY_KEY: Record<DeityKey, Deity> = {
     ],
     faq: [
       {
-        q: "護持後需要特別做什麼嗎？",
-        a: "建議做一個很小但很實際的布施：請一杯飲料給同事、捐個零錢、把抽屜裡的舊物整理捐出。不是迷信，是把『願意讓資源流動』這個因，種得更穩。",
+        q: "護持後我需要再做什麼配合嗎？",
+        a: "不需要額外學習或自行操作儀式；我們會依儀軌如法修持並回向。你只要把祈願寫清楚、發心清淨即可。",
       },
       {
-        q: "一定要每天做嗎？",
-        a: "本法事由現場代為執行，您只需保持清淨發心、把祈願寫清楚即可。",
+        q: "祈願內容怎麼寫比較對位？",
+        a: "建議寫『你要守住/打通的是哪一件事』並附上具體情境（例如：現金流、業績、合作案、收支失衡等）。越具體越能對位回向方向。",
+      },
+      {
+        q: "多久會開始修持？",
+        a: "通常依現場排程於近期內依序進行；完成後若需要核對訂單與回向資訊，可透過 Facebook 私訊我們協助確認。",
+      },
+      {
+        q: "可以同時回向多件事嗎？",
+        a: "可以，但建議把『主軸』放一件最重要的，其餘列為次要補充，避免願望發散。",
+      },
+      {
+        q: "名單與祈願會保密嗎？",
+        a: "會。我們僅用於本次修持與回向，不會公開或挪作他用。",
       },
     ],
     crossSell: [
@@ -302,7 +338,23 @@ export const DEITY_BY_KEY: Record<DeityKey, Deity> = {
       imageAlt: "儀軌示意：供燈（酥油燈／燈明供養）",
       mdPath: "mahashri-dharani.md",
       sourceUrl: "/resources/webpages/f-2023-15.pdf",
-      note: "此處呈現之全文來源為《金光明最勝王經》相關陀羅尼整理版（見 PDF）。",
+      note: "本站以『要點』協助你快速理解；全文保留經典/權威來源內容與出處，避免轉述失真。",
+      keyPoints: [
+        "發心：以護持眷屬平安、資具具足為願，皈依三寶、發菩提心。",
+        "正行：依《金光明經》大吉祥天女品（或其陀羅尼）修持，配合供燈/供水等供養，建立吉祥緣起。",
+        "對治：對治『耗損、散亂、家運不安』的因，令日常回到可安住、可積聚。",
+        "回向：先回向一切眾生離苦得樂，再回向家宅成員衣食住藥具足、遠離衰損。",
+      ],
+      offeringsChecklist: [
+        "燈明（酥油燈/供燈）與清淨供器",
+        "清淨水與供碗（量力即可）",
+        "花、香、果、食等五供（不必奢華，重在清淨與恭敬）",
+      ],
+      practiceFocus: [
+        "觀修：觀想家宅光明安住，內心先定下來；以穩定心承接加持。",
+        "持誦/讀誦：重在『日常相續』，不求急躁。",
+        "回向：把所求寫得具體（家運/破財/紛爭/睡眠/孩子等），讓回向對位。",
+      ],
     },
     promise: "依《金光明經》之願力，護佑家宅安隱，令生活資具無所匱乏。",
     scripture: [
@@ -322,25 +374,25 @@ export const DEITY_BY_KEY: Record<DeityKey, Deity> = {
     painPoints: ["家中燥氣重、紛爭多", "常有意外開銷、錢財流失", "覺得福報耗損很快"],
     whyThisDeity: ["平撫環境負面磁場", "建立家宅防護結界", "感召豐饒安隱能量"],
     process: [
-      { title: "備辦五供", body: "準備香、燈、花、食、水，表法圓滿。" },
-      { title: "讀誦天女品", body: "讀誦《金光明最勝王經》天女品，祈請護佑。" },
-      { title: "安隱迴向", body: "回向家宅平安、資具無缺，讓日子重新『可呼吸』。" },
+      { title: "設供與發心", body: "備辦香、燈、花、食、水等五供；皈依三寶、發菩提心，以護持家宅安穩為願。" },
+      { title: "讀誦與祈請", body: "依《金光明經》大吉祥天女品（或其陀羅尼）讀誦/持誦，祈請護佑、攝受吉祥。" },
+      { title: "回向與安住", body: "先回向眾生離苦得樂，再回向家宅衣食住藥具足、遠離衰損；並以日常整理/和合溝通作配合。" },
     ],
     plans: [
       {
         id: "m-490",
-        name: "大吉祥天女 490",
+        name: "吉祥護宅｜大吉祥天女供燈回向（入門）",
         price: 490,
-        blurb: "先穩住家運：把散掉的安全感收回來，讓日常重新有秩序。",
+        blurb: "先把家運『穩住』：讓日常回到安定可呼吸，減少無謂耗損與躁動。",
         url: "https://cart.cashier.ecpay.com.tw/qp/z4ND",
         suitableFor: ["小額發心", "先安定"],
         details: ["吉祥供燈回向"],
       },
       {
         id: "m-980",
-        name: "大吉祥天女 980",
+        name: "資具具足｜大吉祥天女清淨水供回向（推薦）",
         price: 980,
-        blurb: "當你一直覺得『怎麼又要花錢』：把耗損的因停下來，重建豐足磁場。",
+        blurb: "停下『一直在耗』的因：針對破財/意外開銷/家宅不寧，重建豐足與安隱的基底。",
         url: "https://cart.cashier.ecpay.com.tw/qp/z4PD",
         hot: true,
         badge: "豐足首選",
@@ -349,15 +401,21 @@ export const DEITY_BY_KEY: Record<DeityKey, Deity> = {
       },
       {
         id: "m-1860",
-        name: "大吉祥天女 1860",
+        name: "安隱結界｜大吉祥天女清淨香供加強回向（深度）",
         price: 1860,
-        blurb: "當家裡氣場很亂、人很累：用清淨香供把躁氣與耗損感降下來。",
+        blurb: "當你感覺家裡『很亂很耗』：以清淨香供強化護宅與安隱回向，讓氣場慢慢沉靜下來。",
         url: "https://cart.cashier.ecpay.com.tw/qp/z4Q7",
         suitableFor: ["家宅安靜", "需要長期守護"],
         details: ["特製清淨香供", "家宅名單回向"],
       },
     ],
-    faq: [{ q: "可以回向給全家人嗎？", a: "可以。一份護持可回向家中主要成員；你也可以在備註處寫清楚『想守的是哪一件事』。" }],
+    faq: [
+      { q: "可以回向給全家人嗎？", a: "可以。一份護持可回向家中主要成員；也請在備註寫清楚『主要想守住的是哪一件事』（家運、工作、健康或支出等）。" },
+      { q: "大吉祥天女比較適合求什麼？", a: "偏向『把生活守住』：家宅平安、資具無缺、耗損減少、日子回到可安住與可累積的狀態。" },
+      { q: "祈願要寫得很長嗎？", a: "不用長，但要具體。用 3–5 句把現況、你想守住的重點、家中主要成員/對象寫清楚即可。" },
+      { q: "需要自己準備供品或持咒嗎？", a: "不需要。我們會依儀軌備辦與修持並回向；你只需清淨發心、提供正確名單與祈願。" },
+      { q: "如果我同時也想求財，該怎麼選？", a: "若目標是『家運與耗損』優先選大吉祥天女；若是『財庫止漏/開源』請看黃財神。也歡迎私訊我們描述狀況，協助你對位。" },
+    ],
     crossSell: [
       { title: "若你其實最急的是『開源』", desc: "看黃財神：主動止漏、開源，讓現金流先過得去。", to: "yellow" },
       { title: "若你也常被『焦慮與突發恐懼』追著跑", desc: "看綠度母：先救急，讓身心回到穩定。", to: "green-tara" },
@@ -373,13 +431,29 @@ export const DEITY_BY_KEY: Record<DeityKey, Deity> = {
     heroKicker: "把路打通",
     heroImage: heroGanapatiImg,
     ritual: {
-      title: "Gaṇapati Rāgavajra Praise（象頭財神讚頌）",
+      title: "象頭財神讚頌（除障・開路法要）",
       image: ritualTormaAltarImg,
       imageAlt: "儀軌示意：壇城供品與朵瑪（torma）供養",
       mdPath: "ganapati.md",
       sourceUrl: "https://www.lotsawahouse.org/indian-masters/atisha/ganapati-ragavajra-praise",
       license: "CC BY-NC 4.0 (Lotsawa House)",
-      note: "全文引用自 Lotsawa House（Atiśa 之譯本/整理），以確保依據權威記錄呈現。",
+      note: "本站以『要點』協助你快速理解；全文保留權威譯本原文與出處。",
+      keyPoints: [
+        "發心：先把心安住，皈依三寶、發菩提心；所求以『正當、利己利他』為界。",
+        "正行：依儀軌讚頌/持咒，供養朵瑪/供品，祈請除外障（環境）、內障（情緒）、密障（習氣）。",
+        "重點：象頭財神的加持常表現在『條件被打通、決策變清明、阻礙減少』。",
+        "回向：先回向眾生離障得安，再回向護持者之談判、面試、簽約、投資等正事得成辦。",
+      ],
+      offeringsChecklist: [
+        "清淨供品（甜食/水果/糕點等，量力即可）",
+        "供水/供香/供燈（基本供養）",
+        "若有朵瑪（torma）供養則更相應；無亦可依儀軌如法替代",
+      ],
+      practiceFocus: [
+        "觀修：障礙如霧散開，道路清楚可見；心不亂，才不會再選錯。",
+        "持咒/讚頌：重在『清明＋決心』，不是硬撐數量。",
+        "回向對位：把你要成辦的那件事寫具體（時間/對象/關鍵關卡）。",
+      ],
     },
     promise: "強力掃除外、內、密違緣，於事業與競爭中掌握清明判斷與主導。",
     scripture: [
@@ -399,25 +473,25 @@ export const DEITY_BY_KEY: Record<DeityKey, Deity> = {
     painPoints: ["投資失利、判斷錯誤", "職場小人作祟", "重大決策猶豫不決"],
     whyThisDeity: ["劈開認知死角與盲點", "平息外在干擾與違緣", "增長威德與主導力量"],
     process: [
-      { title: "禮敬甜食", body: "依傳統供養歡喜天喜愛之物，建立歡喜相應。" },
-      { title: "除障儀軌", body: "持誦陀羅尼，掃除決策迷霧與違緣障礙。" },
-      { title: "成就迴向", body: "回向你要做的那件事：談判、面試、簽約、投資決策。" },
+      { title: "設供與安住", body: "以清淨供品（甜食/果品等）作供養；先把心安住，讓決策不被恐懼牽著走。" },
+      { title: "除障與清明", body: "依儀軌讚頌/持咒，清除外在干擾與內在雜訊，讓條件回到可成辦。" },
+      { title: "回向與成辦", body: "把你要過的那關寫具體（時間/對象/關鍵點），回向令正事順利、判斷清明、阻礙減少。" },
     ],
     plans: [
       {
         id: "g-490",
-        name: "象頭財神 490",
+        name: "清明開路｜象頭財神供燈回向（入門）",
         price: 490,
-        blurb: "先把腦中的雜訊降下來：清明一點，你就不容易選錯。",
+        blurb: "先把雜訊降下來：焦躁少一點、判斷清楚一點，你就不容易再選錯。",
         url: "https://cart.cashier.ecpay.com.tw/qp/z4R5",
         suitableFor: ["小額發心", "先清思"],
         details: ["清明供燈回向"],
       },
       {
         id: "g-980",
-        name: "象頭財神 980",
+        name: "破迷除障｜象頭財神除障水供回向（推薦）",
         price: 980,
-        blurb: "當你被壓力推著走：平息焦躁、斷掉外在干擾，讓判斷回到你手上。",
+        blurb: "當你被壓力推著走：以除障水供穩住心、斷掉干擾，讓判斷回到你手上。",
         url: "https://cart.cashier.ecpay.com.tw/qp/z4S8",
         hot: true,
         badge: "破迷必備",
@@ -426,15 +500,21 @@ export const DEITY_BY_KEY: Record<DeityKey, Deity> = {
       },
       {
         id: "g-1860",
-        name: "象頭財神 1860",
+        name: "無礙成就｜象頭財神破障香供加強回向（深度）",
         price: 1860,
-        blurb: "當你明明努力推進，卻總有人事/程序把你卡住：強力破障，打通前行路。",
+        blurb: "當你努力推進卻總被人事/程序卡住：以破障香供強力清道，打通前行之路。",
         url: "https://cart.cashier.ecpay.com.tw/qp/z4T1",
         suitableFor: ["重大談判", "競標/簽約前"],
         details: ["特製破障香供"],
       },
     ],
-    faq: [{ q: "適合求偏財嗎？", a: "象頭財神幫你把『判斷力』提回來；當判斷正確，財路自然比較不會走歪。" }],
+    faq: [
+      { q: "適合求偏財嗎？", a: "象頭財神主要強項是『掃除違緣、提回清明判斷』；當判斷正確、阻礙減少，財路自然比較不會走歪。" },
+      { q: "我該把哪些狀況寫在祈願裡？", a: "把你卡住的『障礙型態』寫清楚：例如拖延、溝通卡、合作破局、官非糾紛、合約不順、決策混亂等。" },
+      { q: "修持後我需要做什麼？", a: "不需要你自行學儀軌。我們會依儀軌如法修持並回向；你只要配合把祈願與名單資訊寫對即可。" },
+      { q: "可以回向到工作/公司/專案嗎？", a: "可以。你可以用『公司名/專案名』或你常用的稱呼來寫，並描述希望排除的關鍵阻礙。" },
+      { q: "多久會有感？", a: "每個人因緣不同，常見的體感是：決策比較清楚、卡關處有鬆動、外在阻力減少。若想更精準對位，也可私訊我們描述狀況。" },
+    ],
     crossSell: [
       { title: "若你更需要『直接開源』", desc: "看黃財神：先把現金流救回來。", to: "yellow" },
       { title: "若你其實已經快撐不住、很怕出事", desc: "看綠度母：先救急，讓你有力氣再做決策。", to: "green-tara" },
@@ -450,12 +530,29 @@ export const DEITY_BY_KEY: Record<DeityKey, Deity> = {
     heroKicker: "把緣分拉近",
     heroImage: heroKurukullaImg,
     ritual: {
-      title: "Kurukullā Sādhana（作明佛母儀軌）",
+      title: "作明佛母儀軌（磁聚・愛敬・貴人緣）",
       image: ritualMalaHandsImg,
       imageAlt: "儀軌示意：持咒念珠（mala）修持",
       mdPath: "kurukulla.md",
       sourceUrl: "https://www.lotsawahouse.org/tibetan-masters/mipham/kurukulla-sadhana",
       license: "CC BY-NC 4.0 (Lotsawa House)",
+      note: "本站以『要點』協助你快速理解；全文保留權威譯本原文與出處。",
+      keyPoints: [
+        "發心：以大悲與清淨動機為先；所求以善緣、和合、正當合作/姻緣為界。",
+        "正行：依儀軌持誦作明佛母咒，配合供養與觀想『磁聚』，令善緣聚集。",
+        "重點：磁聚不是操控；是讓你更被看見、更能順利相應『對的人』。",
+        "回向：先回向眾生離苦得樂，再回向你所求之關係/合作得和合、無障礙、具善果。",
+      ],
+      offeringsChecklist: [
+        "供水/供香/供燈（基本供養）",
+        "花供（象徵莊嚴與善緣）",
+        "念珠（mala）或其他持咒工具（非必須）",
+      ],
+      practiceFocus: [
+        "觀修：你自己的心要先柔軟、先不逼迫；磁聚才會自然。",
+        "持咒：重在『恭敬＋不散亂』，不求急躁。",
+        "回向：寫清楚你要的是哪一段關係/哪種合作與其善願。",
+      ],
     },
     promise: "以佛母之磁聚加持，令貴人資源相續現前、合作姻緣順利成就；讓你不再靠硬扛，能被看見、被支持。",
     scripture: [
@@ -469,25 +566,25 @@ export const DEITY_BY_KEY: Record<DeityKey, Deity> = {
     painPoints: ["人脈卡住、資源接不上", "貴人少、合作不成", "常覺得只能自己硬扛"],
     whyThisDeity: ["磁聚善緣與合作機會", "化解人際違緣與誤會", "令資源流動、貴人現前"],
     process: [
-      { title: "安置供品", body: "備辦清淨供品，安立磁聚壇城。" },
-      { title: "持誦觀想", body: "持誦佛母心咒，觀想紅光攝召善緣。" },
-      { title: "迴向鎖定", body: "回向護持名單：你要的是哪一段關係、哪一種合作，寫清楚。" },
+      { title: "設供與發心", body: "備辦清淨供水/花供等；以大悲與清淨動機為先，所求以善緣和合為界。" },
+      { title: "持咒與磁聚", body: "依儀軌持誦佛母心咒，觀想紅光攝召善緣：讓你被看見、被理解、被支持。" },
+      { title: "回向與和合", body: "回向護持名單與所求之關係/合作得和合無礙；同時配合一個『真誠溝通/修復行動』讓善緣落地。" },
     ],
     plans: [
       {
         id: "k-490",
-        name: "作明佛母 490",
+        name: "善緣點燈｜作明佛母磁聚回向（入門）",
         price: 490,
-        blurb: "先把『孤軍奮戰』的狀態鬆開：點亮善緣之光，讓資源開始靠近。",
+        blurb: "先把『孤軍奮戰』鬆開：點亮善緣之光，讓資源與貴人開始靠近。",
         url: "https://cart.cashier.ecpay.com.tw/qp/z5a8",
         suitableFor: ["人緣卡關", "想先暖身"],
         details: ["如法供燈回向"],
       },
       {
         id: "k-980",
-        name: "作明佛母 980",
+        name: "磁聚貴人｜作明佛母相應水供回向（推薦）",
         price: 980,
-        blurb: "當你需要更快出現『對的人』：磁聚善緣、化解誤會，讓互動回到順。",
+        blurb: "當你需要更快遇見『對的人』：磁聚善緣、化解誤會，讓互動回到順與可合作。",
         url: "https://cart.cashier.ecpay.com.tw/qp/z5bF",
         hot: true,
         badge: "人緣首選",
@@ -496,15 +593,21 @@ export const DEITY_BY_KEY: Record<DeityKey, Deity> = {
       },
       {
         id: "k-1860",
-        name: "作明佛母 1860",
+        name: "和合修復｜作明佛母淨障磁聚加強回向（深度）",
         price: 1860,
-        blurb: "當你被冷淡、被忽略、被誤解：用更完整的磁聚與淨障，讓善緣重新接上。",
+        blurb: "當你被冷淡/被誤解/關係斷線：以更完整的淨障與磁聚，讓善緣重新接上。",
         url: "https://cart.cashier.ecpay.com.tw/qp/z5c3",
         suitableFor: ["關係修復", "重要合作"],
         details: ["加強儀軌", "名單回向"],
       },
     ],
-    faq: [{ q: "需要提供對象姓名嗎？", a: "若是回向給特定對象/合作，可提供姓名或稱呼；若是泛用人緣，也可寫『希望吸引的對象特質』。" }],
+    faq: [
+      { q: "需要提供對象姓名嗎？", a: "若是回向給特定對象/合作，可提供姓名或稱呼；若是泛用人緣，也可寫『希望吸引的對象特質』。" },
+      { q: "比較適合用在什麼情境？", a: "偏向『攝召、聚合、把關係拉回對位』：人緣、客源、合作、談判與需要磁吸助緣的情境。" },
+      { q: "祈願內容怎麼寫才不會太籠統？", a: "建議寫清楚：你希望『吸引什麼』與『排除什麼』（例如：吸引穩定長期合作、排除消耗型對象），並附上目前情境。" },
+      { q: "我需要做什麼配合？", a: "不需要你自行操作儀式。我們會依儀軌如法修持並回向；你只要提供正確名單與祈願。" },
+      { q: "可以回向給店面/平台/社群嗎？", a: "可以。用你辨識得到的名稱即可（店名、帳號名、品牌名），並把你想提升的互動/轉換/合作方向寫清楚。" },
+    ],
     crossSell: [
       { title: "若你其實不是沒人緣，而是『你心很不安』", desc: "看綠度母：先讓情緒與安全感穩下來，關係才有空間變好。", to: "green-tara" },
       { title: "若你也同時卡在『一直選錯』", desc: "看象頭財神：清明判斷，少走彎路。", to: "ganapati" },
@@ -520,12 +623,29 @@ export const DEITY_BY_KEY: Record<DeityKey, Deity> = {
     heroKicker: "把你撐住",
     heroImage: heroPadmasambhavaImg,
     ritual: {
-      title: "Seven-Line Prayer（蓮師七句祈請文）",
+      title: "蓮師七句祈請文（總集加持・無畏護持）",
       image: ritualSangSmokeImg,
       imageAlt: "儀軌示意：焚香持誦祈請",
       mdPath: "seven-line-prayer.md",
       sourceUrl: "https://www.lotsawahouse.org/topics/seven-line-prayer/",
       license: "CC BY-NC 4.0 (Lotsawa House)",
+      note: "本站以『要點』協助你快速理解；全文保留權威譯本/原文與出處。",
+      keyPoints: [
+        "發心：皈依三寶、發菩提心；在恐懼與低谷中，先把心投向正法依止。",
+        "正行：依七句祈請文祈請蓮師，配合供香/供燈/供水；以恭敬心啟動相應。",
+        "重點：蓮師法門重在『總集加持』——讓你在混亂中回到無畏、回到可承擔。",
+        "回向：先回向眾生離苦得樂，再回向護持者遠離怖畏、違緣止息、正事得成。",
+      ],
+      offeringsChecklist: [
+        "香（或薰香）與清淨供器",
+        "燈明（酥油燈/供燈）",
+        "清淨水與供碗",
+      ],
+      practiceFocus: [
+        "觀修：觀想蓮師放光攝受，怖畏與障礙融於光明中。",
+        "持誦：重在『信心與相續』，不以焦躁求靈驗。",
+        "回向：把你最需要被撐住的那件事寫具體（事業/家庭/身心/考驗）。",
+      ],
     },
     promise: "仰仗蓮師無量威德，鎮伏一切邪祟與內外密障礙；當你走到最黑的地方，也還有一盞燈替你亮著。",
     scripture: [
@@ -545,14 +665,14 @@ export const DEITY_BY_KEY: Record<DeityKey, Deity> = {
     painPoints: ["面臨巨大挑戰與難關", "感覺受負面能量干擾", "需要強大穩定的精神靠山"],
     whyThisDeity: ["藏傳佛法根本護持力", "轉化惡緣為道用", "鎮伏恐懼，建立無畏"],
     process: [
-      { title: "清淨供養", body: "敬備妙香與供品，祈請蓮師降臨。" },
-      { title: "持誦祈請", body: "持誦蓮師心咒與祈請文，令心念穩住。" },
-      { title: "威德迴向", body: "回向你最需要被撐住的那一段：事業、家庭、身心、或一場大考驗。" },
+      { title: "設供與依止", body: "備香、燈、水等清淨供養；以信心依止三寶與蓮師，先把心靠上去。" },
+      { title: "祈請與相應", body: "依七句祈請文/蓮師心咒作修持，令恐懼與散亂慢慢沉下來，心回到可承擔。" },
+      { title: "回向與無畏", body: "先回向眾生離苦得樂，再回向護持者遠離怖畏、違緣止息、正事得成辦。" },
     ],
     plans: [
       {
         id: "p-490",
-        name: "蓮師 490",
+        name: "無畏點燈｜蓮師七句祈請回向（入門）",
         price: 490,
         blurb: "先讓心『站穩』：當你快被壓垮，先把內在靠山立起來。",
         url: "https://cart.cashier.ecpay.com.tw/qp/z4Z5",
@@ -561,9 +681,9 @@ export const DEITY_BY_KEY: Record<DeityKey, Deity> = {
       },
       {
         id: "p-980",
-        name: "蓮師 980",
+        name: "鎮伏護持｜蓮師加強護法回向（推薦）",
         price: 980,
-        blurb: "當你已經走到『不能再出事』：用更完整的護持，把恐懼與干擾壓下來。",
+        blurb: "當你已經走到『不能再出事』：以更完整的護持把恐懼與干擾壓下來，讓你能穩定撐過關口。",
         url: "https://cart.cashier.ecpay.com.tw/qp/z5d7",
         hot: true,
         badge: "護身首選",
@@ -571,7 +691,13 @@ export const DEITY_BY_KEY: Record<DeityKey, Deity> = {
         details: ["加強護持儀軌", "名單回向"],
       },
     ],
-    faq: [{ q: "任何人都可以護持蓮師嗎？", a: "可以。只要具備信心與清淨發心，蓮師的加持不分對象。" }],
+    faq: [
+      { q: "任何人都可以護持蓮師嗎？", a: "可以。只要具備信心與清淨發心，蓮師的加持不分對象。" },
+      { q: "蓮師這一尊主要在幫什麼？", a: "偏向『威德護持、鎮伏違緣、立穩靠山』：當你覺得一直出狀況、心不安、運勢下墜，先把底盤穩住。" },
+      { q: "祈願內容怎麼寫？", a: "建議把『你最怕出事的是哪一塊』寫清楚（家宅、工作、出行、官非、身心恐懼等），並描述近期發生的狀況。" },
+      { q: "需要自己念什麼或做什麼嗎？", a: "不需要。我們會依儀軌如法修持並回向；你只需提供名單與祈願資訊。" },
+      { q: "可以回向給家人/小孩嗎？", a: "可以。請把回向對象姓名或稱呼、關係與主要狀況寫清楚，便於對位回向。" },
+    ],
     crossSell: [
       { title: "若你其實卡在『錢一直破洞』", desc: "看黃財神：先止漏，再開源。", to: "yellow" },
       { title: "若你需要更快平息突發恐懼", desc: "看綠度母：迅疾救護，先救急。", to: "green-tara" },
@@ -587,12 +713,29 @@ export const DEITY_BY_KEY: Record<DeityKey, Deity> = {
     heroKicker: "把身心救回來",
     heroImage: heroMedicineBuddhaImg,
     ritual: {
-      title: "Medicine Buddha Sādhana（藥師佛儀軌）",
+      title: "藥師如來儀軌（息災延壽・身心安穩）",
       image: ritualWaterOfferingImg,
       imageAlt: "儀軌示意：淨水與供碗供養",
       mdPath: "medicine-buddha.md",
       sourceUrl: "https://www.lotsawahouse.org/tibetan-masters/karma-chakme/medicine-buddha-sadhana",
       license: "CC BY-NC 4.0 (Lotsawa House)",
+      note: "本站以『要點』協助你快速理解；全文保留權威譯本原文與出處。",
+      keyPoints: [
+        "發心：皈依三寶、發菩提心；以『息災、護生、安穩』為願，不以護持取代醫療。",
+        "正行：依藥師法門設供（尤其清淨水供），持誦藥師佛名號/心咒，祈請琉璃光照臨。",
+        "重點：先把『元氣』補回來——睡眠、情緒、身體狀態穩了，外緣才不容易再耗損。",
+        "回向：先回向眾生離病苦，再回向護持者（本人/家人）身心安穩、息災延壽。",
+      ],
+      offeringsChecklist: [
+        "清淨水供（供碗/清水）",
+        "供燈/供香（量力）",
+        "若有病者姓名/稱呼與狀況描述（便於回向對位）",
+      ],
+      practiceFocus: [
+        "觀修：琉璃光明遍照，病苦與怖畏融解於光中。",
+        "持誦：重在『規律與安住』，不以焦躁強求。",
+        "提醒：本護持不能取代就醫；建議同步遵循醫囑與照護。",
+      ],
     },
     promise:
       "依藥師法門之願力，回向身心安穩、息災延壽。當你身體不舒服、情緒失衡、或覺得運勢一直在耗損，先把『元氣』補回來。",
@@ -613,14 +756,14 @@ export const DEITY_BY_KEY: Record<DeityKey, Deity> = {
     painPoints: ["健康反覆、精神耗損", "家人身心不安", "覺得一直在走衰、出狀況"],
     whyThisDeity: ["以息災為先，先把狀態救回來", "回向健康與平安，讓生活少一點『突然』", "在危機感中重新建立可控感"],
     process: [
-      { title: "如法設供", body: "依儀軌設供，清淨發心，祈請藥師如來加持。" },
-      { title: "息災修持", body: "以煙供/修持回向息災、健康、安穩。" },
-      { title: "回向鎖定", body: "回向本人或特定家人；若是健康議題，建議把狀況寫得具體。" },
+      { title: "設供與發心", body: "依儀軌設供（尤重清淨水供）；皈依三寶、發菩提心，以息災護生為願。" },
+      { title: "持誦與息災", body: "依藥師法門持誦名號/心咒，回向身心安穩；建議同步規律作息與照護。" },
+      { title: "回向對位", body: "回向本人或家人；請把狀況寫具體（症狀/時間/困擾），讓回向更精準。" },
     ],
     plans: [
       {
         id: "b-350",
-        name: "琉璃光境：藥師如來健康息災煙供-個人",
+        name: "琉璃光息災｜藥師如來個人健康回向（入門）",
         price: 350,
         blurb: "回向個人身心安穩與息災：先把狀態穩住，才走得遠。",
         url: "https://cart.cashier.ecpay.com.tw/qp/z4V8",
@@ -629,9 +772,9 @@ export const DEITY_BY_KEY: Record<DeityKey, Deity> = {
       },
       {
         id: "b-880",
-        name: "琉璃光境：藥師如來健康息災煙供-團體",
+        name: "琉璃光守護｜藥師如來家人/團體息災回向（推薦）",
         price: 880,
-        blurb: "回向家人/團體平安：當你想一起守住一個家、一個團隊的狀態。",
+        blurb: "回向家人/團體平安：當你想一起守住一個家、一個團隊的狀態，讓日子少一點『突然』。",
         url: "https://cart.cashier.ecpay.com.tw/qp/z4U2",
         hot: true,
         badge: "團體守護",
@@ -640,7 +783,11 @@ export const DEITY_BY_KEY: Record<DeityKey, Deity> = {
       },
     ],
     faq: [
-      { q: "這能取代醫療嗎？", a: "不能。這是以佛法心念與回向來『穩住狀態、息災修福』；若有身體不適，請務必先就醫與規律照護。" },
+      { q: "這能取代醫療嗎？", a: "不能。這是以佛法心念與回向來『息災修福、穩住狀態』；若有身體不適，請務必先就醫與規律照護。" },
+      { q: "適合回向給家人嗎？", a: "可以。你可以提供家人的姓名/稱呼與主要狀況，讓回向更精準。" },
+      { q: "祈願內容要怎麼寫？", a: "把狀況寫具體（症狀/時間/困擾/你最希望先改善的重點）。越具體越能對位回向方向。" },
+      { q: "多久會開始修持？", a: "通常依現場排程於近期內依序進行；若需要核對訂單與回向資訊，可透過 Facebook 私訊我們。" },
+      { q: "修持後我需要做什麼？", a: "不需要你自行學儀軌；我們會依儀軌如法修持並回向。你只需配合保持清淨發心與日常照護。" },
     ],
     crossSell: [
       { title: "若你其實最大的痛是『焦慮與恐懼』", desc: "看綠度母：迅疾救護，先把心拉回來。", to: "green-tara" },
@@ -657,12 +804,29 @@ export const DEITY_BY_KEY: Record<DeityKey, Deity> = {
     heroKicker: "先把怖畏停下",
     heroImage: heroGreenTaraImg,
     ritual: {
-      title: "Daily Green Tārā Practice（綠度母日常修持）",
+      title: "綠度母日常修持（迅疾救護・除怖畏）",
       image: ritualButterLampsImg,
       imageAlt: "儀軌示意：供燈與日常供養",
       mdPath: "green-tara.md",
       sourceUrl: "https://www.lotsawahouse.org/tibetan-masters/dudjom-rinpoche/daily-green-tara-practice",
       license: "CC BY-NC 4.0 (Lotsawa House)",
+      note: "本站以『要點』協助你快速理解；全文保留權威譯本原文與出處。",
+      keyPoints: [
+        "發心：皈依三寶、發菩提心；以救護眾生離怖畏、離災障為願。",
+        "正行：依儀軌祈請綠度母，持誦禮讚/心咒；以供燈/供水等清淨供養作相應。",
+        "重點：綠度母以『迅疾』著稱——常見呈現是：驚慌下降、事情轉圜、違緣減少。",
+        "回向：先回向眾生離苦得樂，再回向護持者遠離八難與突發怖畏、諸事順遂。",
+      ],
+      offeringsChecklist: [
+        "供燈（酥油燈/供燈）",
+        "清淨水供",
+        "花/香等基本供養（量力）",
+      ],
+      practiceFocus: [
+        "觀修：觀想度母放光救護，怖畏如霧散去；心先回到安穩。",
+        "持誦：重在『不散亂』與『信心』，把心念拉回來。",
+        "回向：把你最怕『突然出事』的那一點寫具體（交通/官司/工作/家人）。",
+      ],
     },
     promise: "仰仗大悲誓願，度脫一切苦厄與突發怖畏。祈願生活平安、諸事順遂、所作皆辦。",
     scripture: [
@@ -682,25 +846,25 @@ export const DEITY_BY_KEY: Record<DeityKey, Deity> = {
     painPoints: ["莫名焦慮不安", "生活阻力重重、運勢低迷", "遭遇突發變故或驚嚇"],
     whyThisDeity: ["迅疾的加持力", "消除恐懼與不安全感", "平息世俗種種障礙"],
     process: [
-      { title: "壇城安置", body: "準備度母除障壇城，備辦香燈淨水。" },
-      { title: "修持除障", body: "以加持力清算並轉化障礙種子。" },
-      { title: "救護迴向", body: "回向諸事順遂，遠離八難與突發怖畏。" },
+      { title: "設供與發心", body: "備辦香、燈、淨水等清淨供養；皈依三寶、發菩提心，以救護離怖畏為願。" },
+      { title: "祈請與持誦", body: "依儀軌祈請綠度母，持誦禮讚/心咒；以不散亂心把恐懼與焦躁先降下來。" },
+      { title: "回向與守護", body: "先回向眾生離苦得樂，再回向護持者遠離八難與突發怖畏；把最怕的那一點寫清楚。" },
     ],
     plans: [
       {
         id: "t-680",
-        name: "綠度母 680",
+        name: "迅疾救護｜綠度母慈悲供燈回向（入門）",
         price: 680,
-        blurb: "度母救八難：當你很怕、很累、很不安，先把心安下來。",
+        blurb: "度母救八難：當你很怕、很累、很不安，先把心安下來，讓事情有轉圜空間。",
         url: "https://cart.cashier.ecpay.com.tw/qp/zEJ1",
         suitableFor: ["日常祈福", "先救急"],
         details: ["慈悲供燈回向"],
       },
       {
         id: "t-1280",
-        name: "綠度母 1280",
+        name: "八難止息｜綠度母深度除障救護回向（推薦）",
         price: 1280,
-        blurb: "當你覺得『再出事我就扛不住』：更完整的救護回向，先把運勢穩住。",
+        blurb: "當你覺得『再出事我就扛不住』：以更完整的除障救護回向先把運勢穩住，讓你能撐過關口。",
         url: "https://cart.cashier.ecpay.com.tw/qp/zED7",
         hot: true,
         badge: "全方位守護",
@@ -708,7 +872,13 @@ export const DEITY_BY_KEY: Record<DeityKey, Deity> = {
         details: ["深度除障儀軌", "救護加持回向"],
       },
     ],
-    faq: [{ q: "為什麼稱為迅疾？", a: "度母右足下垂，象徵隨時起身救度；所以我們把『先救急、先穩住』放在第一順位。" }],
+    faq: [
+      { q: "為什麼稱為迅疾？", a: "度母右足下垂，象徵隨時起身救度；所以我們把『先救急、先穩住』放在第一順位。" },
+      { q: "適合什麼樣的狀況？", a: "偏向『突發怖畏、焦慮不安、事情一直出狀況』：先把心與運勢拉回可控，讓違緣減少、轉圜出現。" },
+      { q: "祈願內容怎麼寫比較對位？", a: "建議寫清楚：你目前最怕的是什麼（突發、意外、關係崩、工作出事等），以及你希望先守住哪一件事。" },
+      { q: "我需要自己做功課或念咒嗎？", a: "不需要。我們會依儀軌如法修持並回向；你只要提供名單與祈願資訊即可。" },
+      { q: "如果我同時也想求財或人緣呢？", a: "若當下最痛是『不安與突發』先以綠度母穩住；等狀態回來，再依需求對位黃財神（財）或咕嚕咕咧（人緣/攝召）。" },
+    ],
     crossSell: [
       { title: "若你最急的是『現金流』", desc: "看黃財神：先止漏，再開源。", to: "yellow" },
       { title: "若你正在一場大考驗裡，需要靠山", desc: "看蓮師：總集加持，把你撐住。", to: "padmasambhava" },

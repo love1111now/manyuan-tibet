@@ -1,9 +1,3 @@
-/*
-  DESIGN REMINDER (App)
-  - Gilded Monastic Modernism: quiet luxury, black + gold, strong hierarchy
-  - No quirky fonts; rely on Noto Sans/Serif TC
-*/
-
 import React from "react";
 import { HelmetProvider } from "react-helmet-async";
 import { Toaster } from "@/components/ui/sonner";
@@ -21,6 +15,11 @@ import Deity from "@/pages/Deity";
 import Proof from "@/pages/Proof";
 import Pay from "@/pages/Pay";
 import Sutra from "@/pages/Sutra";
+import Puja from "@/pages/Puja";
+import Topic from "@/pages/Topic";
+import Wallpaper from "@/pages/Wallpaper";
+import About from "@/pages/About";
+import Terms from "@/pages/Terms";
 import NotFound from "@/pages/NotFound";
 
 // 強化的 ScrollToTop：專門對付 Hash Router 的捲動問題
@@ -54,6 +53,11 @@ function AppRouter() {
         <Route path="/proof" component={Proof} />
         <Route path="/pay" component={Pay} />
         <Route path="/sutra" component={Sutra} />
+        <Route path="/puja" component={Puja} />
+        <Route path="/wallpaper" component={Wallpaper} />
+        <Route path="/about" component={About} />
+        <Route path="/terms" component={Terms} />
+        <Route path="/topics/:slug">{(params) => <Topic slug={params.slug} />}</Route>
         <Route component={NotFound} />
       </Switch>
     </Router>

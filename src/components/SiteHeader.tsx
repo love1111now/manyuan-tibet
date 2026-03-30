@@ -1,9 +1,3 @@
-/*
-  DESIGN REMINDER (SiteHeader)
-  - Dark + gold, minimal but confident
-  - Keep nav short; drive to /pay
-*/
-
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";

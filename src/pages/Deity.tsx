@@ -1,10 +1,3 @@
-/*
-  DESIGN REMINDER (Deity)
-  - Make decision easy: pain points → why → plans → FAQ → cross-sell
-  - Add a clear page TOC + quick plan picker
-  - Prefer scannable blocks, fewer walls of text
-*/
-
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import StickyCta from "@/components/StickyCta";
@@ -45,9 +38,14 @@ import { useEffect, useState } from "react";
 
 import { DEITIES, type DeityKey } from "@/lib/siteData";
 
-function anchorBtn(label: string, href: string, Icon: any) {
+function scrollToId(id: string) {
+  if (typeof document === "undefined") return;
+  document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+function anchorBtn(label: string, targetId: string, Icon: any) {
   return (
-    <a href={href} className="block">
+    <button type="button" className="block text-left" onClick={() => scrollToId(targetId)}>
       <Button
         variant="outline"
         className="h-11 w-full justify-start gap-2 gold-border bg-card/50 hover:bg-accent/30"
@@ -55,7 +53,7 @@ function anchorBtn(label: string, href: string, Icon: any) {
         <Icon className="h-4 w-4" />
         <span className="font-semibold">{label}</span>
       </Button>
-    </a>
+    </button>
   );
 }
 
@@ -147,11 +145,11 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
               <p className="mt-5 readable text-muted-foreground max-w-prose">{d.promise}</p>
 
               <div className="mt-7 flex flex-col sm:flex-row gap-3">
-                <a href="#plans">
+                <button type="button" onClick={() => scrollToId("plans")}>
                   <Button className="h-12 px-6 font-bold tracking-[0.22em] uppercase gold-border">
                     直接選方案 <ArrowRight className="h-4 w-4" />
                   </Button>
-                </a>
+                </button>
                 <Link href="/pay">
                   <Button variant="outline" className="h-12 px-6 gold-border">
                     看全收費表
@@ -161,11 +159,11 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
 
               {/* TOC */}
               <div className="mt-7 grid gap-3 sm:grid-cols-2">
-                {anchorBtn("痛點與對治", "#pain", Sparkles)}
-                {anchorBtn("流程怎麼做", "#process", ClipboardList)}
-                {d.ritual ? anchorBtn("正統儀軌", "#ritual", ExternalLink) : null}
-                {anchorBtn("方案與價格", "#plans", ShieldCheck)}
-                {anchorBtn("常見問題", "#faq", HelpCircle)}
+                {anchorBtn("痛點與對治", "pain", Sparkles)}
+                {anchorBtn("流程怎麼做", "process", ClipboardList)}
+                {d.ritual ? anchorBtn("正統儀軌", "ritual", ExternalLink) : null}
+                {anchorBtn("方案與價格", "plans", ShieldCheck)}
+                {anchorBtn("常見問題", "faq", HelpCircle)}
               </div>
             </div>
 
@@ -246,6 +244,8 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
           </div>
         </section>
 
+        <div className="tibetan-divider h-9 opacity-70" aria-hidden />
+
         {/* PROCESS */}
         <section id="process" className="mx-auto max-w-6xl px-4 pt-10 pb-4 scroll-mt-24">
           <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">流程</div>
@@ -260,13 +260,15 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
           </div>
         </section>
 
+        <div className="tibetan-divider h-9 opacity-70" aria-hidden />
+
         {/* RITUAL */}
         {d.ritual ? (
           <section id="ritual" className="mx-auto max-w-6xl px-4 pt-10 pb-4 scroll-mt-24">
             <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">正統儀軌</div>
-            <h2 className="mt-2 font-display text-3xl">正統儀軌與供養指南</h2>
+            <h2 className="mt-2 font-display text-3xl">本次修持依循的正統儀軌</h2>
             <p className="mt-3 readable text-muted-foreground max-w-prose">
-              依你的要求，本區塊以「權威來源的全文」呈現，避免自行改寫造成失真；並附上原始出處連結。
+              下列為我們實際依循的儀軌要點（修持依據）與準備項目；全文保留權威來源與出處，確保修持如法。
             </p>
 
             <div className="mt-6 grid gap-4 md:grid-cols-[0.95fr_1.05fr] md:items-start">
@@ -275,7 +277,7 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
                   <img
                     src={d.ritual.image}
                     alt={d.ritual.imageAlt}
-                    className="h-full w-full object-cover"
+                    className="h-full w-full object-contain bg-background/30"
                     loading="lazy"
                   />
                 </AspectRatio>
@@ -284,6 +286,44 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
                   {d.ritual.note ? (
                     <div className="mt-2 text-sm text-muted-foreground readable">{d.ritual.note}</div>
                   ) : null}
+
+                  {(d.ritual.keyPoints?.length || d.ritual.offeringsChecklist?.length || d.ritual.practiceFocus?.length) ? (
+                    <div className="mt-5 grid gap-3">
+                      {d.ritual.keyPoints?.length ? (
+                        <div className="rounded-md border border-border/70 bg-background/30 p-4">
+                          <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">儀軌要點</div>
+                          <ul className="mt-3 space-y-2 text-sm text-muted-foreground readable list-disc list-inside">
+                            {d.ritual.keyPoints.map((x) => (
+                              <li key={x}>{x}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      ) : null}
+
+                      {d.ritual.offeringsChecklist?.length ? (
+                        <div className="rounded-md border border-border/70 bg-background/30 p-4">
+                          <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">供養準備（我們依此備辦）</div>
+                          <ul className="mt-3 space-y-2 text-sm text-muted-foreground readable list-disc list-inside">
+                            {d.ritual.offeringsChecklist.map((x) => (
+                              <li key={x}>{x}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      ) : null}
+
+                      {d.ritual.practiceFocus?.length ? (
+                        <div className="rounded-md border border-border/70 bg-background/30 p-4">
+                          <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">觀修/持誦重點（修持依據）</div>
+                          <ul className="mt-3 space-y-2 text-sm text-muted-foreground readable list-disc list-inside">
+                            {d.ritual.practiceFocus.map((x) => (
+                              <li key={x}>{x}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      ) : null}
+                    </div>
+                  ) : null}
+
                   <div className="mt-4 flex items-center gap-2">
                     <a href={d.ritual.sourceUrl} target="_blank" rel="noreferrer" className="inline-flex">
                       <Button variant="outline" className="gold-border h-10 gap-2">
@@ -315,6 +355,8 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
           </section>
         ) : null}
 
+        <div className="tibetan-divider h-9 opacity-70" aria-hidden />
+
         {/* PLANS */}
         <section id="plans" className="mx-auto max-w-6xl px-4 pt-12 pb-6 scroll-mt-24">
           <div className="flex items-end justify-between gap-4">
@@ -331,21 +373,21 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
           <Card className="mt-6 p-6 gold-border bg-card/70 paper-grain">
             <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">快速挑選（不想看太多字就用這個）</div>
             <div className="mt-3 grid gap-3 md:grid-cols-3">
-              <a href="#plan-hot" className="block">
+              <button type="button" className="block text-left" onClick={() => scrollToId("plan-hot")}>
                 <Button className="h-12 w-full gold-border font-bold">
                   最多人選：{hot.name} <ArrowRight className="h-4 w-4" />
                 </Button>
-              </a>
-              <a href="#plan-cheap" className="block">
+              </button>
+              <button type="button" className="block text-left" onClick={() => scrollToId("plan-cheap")}>
                 <Button variant="outline" className="h-12 w-full gold-border">
                   先入門穩住：{cheapest.name}
                 </Button>
-              </a>
-              <a href="#plan-pricy" className="block">
+              </button>
+              <button type="button" className="block text-left" onClick={() => scrollToId("plan-pricy")}>
                 <Button variant="outline" className="h-12 w-full gold-border">
                   想一次到位：{priciest.name}
                 </Button>
-              </a>
+              </button>
             </div>
             <div className="mt-3 text-xs text-muted-foreground">
               付款完成即保留名額。若需更改祈願內容，可透過 Facebook 私訊協助。

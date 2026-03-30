@@ -59,7 +59,7 @@ export default function Puja() {
             <Link key={d.key} href={d.route}>
               <Card className="overflow-hidden gold-border bg-card hover:bg-accent/25 transition-colors">
                 <div className="grid md:grid-cols-[220px_1fr]">
-                  <img src={d.heroImage} alt={d.name} className="h-44 w-full object-cover" loading="lazy" />
+                  <img src={d.heroImage} alt={d.name} className="h-44 w-full object-contain bg-background/30" loading="lazy" />
                   <div className="p-7">
                     <div className="text-xs tracking-[0.24em] uppercase text-muted-foreground">{d.subtitle}</div>
                     <div className="mt-2 font-display text-3xl">{d.name}</div>

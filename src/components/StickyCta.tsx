@@ -1,8 +1,3 @@
-/*
-  DESIGN REMINDER (StickyCta)
-  - Always present: minimal, high-contrast
-*/
-
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 

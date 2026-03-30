@@ -1,9 +1,3 @@
-/*
-  DESIGN REMINDER (Pay)
-  - Make checkout frictionless: single place for all links
-  - Explain how to choose + what happens after payment
-*/
-
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import StickyCta from "@/components/StickyCta";
@@ -81,9 +75,10 @@ export default function Pay() {
           </Card>
         </div>
 
+        <div className="tibetan-divider h-9 opacity-70" aria-hidden />
         <Separator className="my-10" />
 
-        <section>
+        <section className="rounded-xl tibetan-texture-bg">
           <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">Pricing</div>
           <h2 className="mt-2 font-display text-3xl">全法事總表</h2>
           <p className="mt-3 readable text-muted-foreground max-w-prose">
