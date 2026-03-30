@@ -9,19 +9,25 @@ import heroBrocadeImg from "@/assets/visuals/generated/hero-brocade.webp";
 import heroGildedImg from "@/assets/visuals/generated/hero-gilded.webp";
 import sutraCloseupImg from "@/assets/visuals/generated/sutra-closeup.webp";
 
-import heroYellowImg from "@/assets/visuals/generated/hero-yellow-dzambhala.webp";
+import heroYellowImg from "@/assets/visuals/generated/deity-yellow.webp";
 import altarYellowImg from "@/assets/visuals/generated/altar-yellow-water-offering.webp";
 
-import heroMahashriImg from "@/assets/visuals/generated/hero-mahashri.webp";
+import heroMahashriImg from "@/assets/visuals/generated/deity-mahashri.webp";
 import altarMahashriImg from "@/assets/visuals/generated/altar-mahashri-home-wealth.webp";
 
-import heroGanapatiImg from "@/assets/visuals/generated/hero-ganapati.webp";
+import heroGanapatiImg from "@/assets/visuals/generated/deity-ganapati.webp";
 import altarGanapatiImg from "@/assets/visuals/generated/altar-ganapati-obstacle-removal.webp";
 
-import heroPadmasambhavaImg from "@/assets/visuals/generated/hero-padmasambhava.webp";
-import altarPadmasambhavaImg from "@/assets/visuals/generated/altar-padmasambhava.webp";
+import heroKurukullaImg from "@/assets/visuals/generated/deity-kurukulla.webp";
+import altarKurukullaImg from "@/assets/visuals/generated/altar-kurukulla-magnetizing.webp";
 
-import heroGreenTaraImg from "@/assets/visuals/generated/hero-green-tara.webp";
+import deityBannerImg from "@/assets/visuals/generated/deity-page-banner-abstract.webp";
+
+// 蓮師素材目前以通用橫幅替代（避免 build 失敗）
+import heroPadmasambhavaImg from "@/assets/visuals/generated/deity-page-banner-abstract.webp";
+import altarPadmasambhavaImg from "@/assets/visuals/generated/deity-page-banner-abstract.webp";
+
+import heroGreenTaraImg from "@/assets/visuals/generated/deity-green-tara.webp";
 import altarGreenTaraImg from "@/assets/visuals/generated/altar-green-tara-fire-offering.webp";
 
 // ----------------------------------------------------------------------
@@ -29,8 +35,13 @@ import altarGreenTaraImg from "@/assets/visuals/generated/altar-green-tara-fire-
 // ----------------------------------------------------------------------
 export const SITE = {
   name: "滿願藏庫",
+  /** 官網主網址（SEO canonical / sitemap 用） */
   url: "https://zambala-tibetan.com.tw",
-  fb: "追蹤FB獲得更多訊息",url: "https://www.facebook.com/profile.php?id=61583749010531",
+
+  /** 兼容舊組件：粉專連結（請勿改動追蹤碼） */
+  fb: "https://www.facebook.com/profile.php?id=61583749010531",
+  fbLabel: "追蹤FB獲得更多訊息",
+  fbUrl: "https://www.facebook.com/profile.php?id=61583749010531",
 } as const;
 
 export const SITE_CONFIG = SITE;
@@ -42,9 +53,11 @@ export const VISUALS = {
   heroBrocade: heroBrocadeImg,
   heroGilded: heroGildedImg,
   sutraCloseup: sutraCloseupImg,
+  deityBanner: deityBannerImg,
   altarYellow: altarYellowImg,
   altarMahashri: altarMahashriImg,
   altarGanapati: altarGanapatiImg,
+  altarKurukulla: altarKurukullaImg,
   altarPadmasambhava: altarPadmasambhavaImg,
   altarGreenTara: altarGreenTaraImg,
 };
@@ -113,7 +126,7 @@ export const TOPICS = [
 // ----------------------------------------------------------------------
 // 5. 類型定義 (Types)
 // ----------------------------------------------------------------------
-export type DeityKey = "yellow" | "mahashri" | "ganapati" | "padmasambhava" | "green-tara";
+export type DeityKey = "yellow" | "mahashri" | "ganapati" | "kurukulla" | "padmasambhava" | "green-tara";
 
 export interface Plan {
   readonly id: string;
@@ -263,6 +276,60 @@ export const DEITY_BY_KEY: Record<DeityKey, Deity> = {
       { title: "若你急需突破現狀，大幅增加現金收入", desc: "看黃財神：主動出擊，強效開源與止漏。", to: "yellow" },
       { title: "若你感到莫名焦慮，或是生活阻力重重", desc: "看綠度母：迅疾救護，掃除八難與突發怖畏。", to: "green-tara" }
     ]
+  },
+  "kurukulla": {
+    key: "kurukulla",
+    name: "咕嚕咕咧佛母",
+    subtitle: "人緣磁聚・貴人資源",
+    route: "/deity/kurukulla",
+    primaryIntent: "人緣貴人",
+    heroKicker: "磁聚人緣首選",
+    heroImage: heroKurukullaImg,
+    promise: "以佛母之磁聚加持，令貴人資源相續現前、合作姻緣順利成就，斷除人脈阻塞與孤軍奮戰之苦。",
+    scripture: [
+      {
+        quote: "「以大悲心攝受眾生，令善緣聚集、所求易成。」",
+        source: "傳承口訣（摘要）",
+        hint: "以善緣為橋，令願望可達",
+        url: "#",
+      },
+    ],
+    painPoints: ["人脈卡住、資源接不上", "貴人少、合作不成", "常覺得只能自己硬扛"],
+    whyThisDeity: ["磁聚善緣與合作機會", "化解人際違緣與誤會", "令資源流動、貴人現前"],
+    process: [
+      { title: "安置供品", body: "備辦清淨供品，安立磁聚壇城。" },
+      { title: "持誦觀想", body: "持誦佛母心咒，觀想紅光攝召善緣。" },
+      { title: "迴向鎖定", body: "將功德回向護持名單，祈願貴人資源順利銜接。" },
+    ],
+    plans: [
+      {
+        id: "k1",
+        name: "磁聚明燈",
+        price: 490,
+        blurb: "點亮善緣之光，打開人脈與合作的門。",
+        url: "https://cart.cashier.ecpay.com.tw/qp/z4W0",
+        suitableFor: ["人緣卡關", "需要合作資源"],
+        details: ["如法供燈乙對", "壇城名單回向"],
+      },
+      {
+        id: "k2",
+        name: "磁聚水供",
+        price: 980,
+        blurb: "洗滌人際阻滯，令貴人資源更易相應。",
+        url: "https://cart.cashier.ecpay.com.tw/qp/z4XF",
+        hot: true,
+        badge: "人緣首選",
+        suitableFor: ["貴人少", "合作不成"],
+        details: ["連續水供儀軌", "專屬名單回向"],
+      },
+    ],
+    faq: [
+      { q: "需要提供對象姓名嗎？", a: "可提供欲回向之姓名或稱呼，利於鎖定善緣回向。" },
+    ],
+    crossSell: [
+      { title: "若你更需要直接開源、止漏補財庫", desc: "看黃財神：強效增益，資糧迅速到位。", to: "yellow" },
+      { title: "若你同時被外在阻礙卡住，推進困難", desc: "看象頭財神：掃除違緣，成就無礙。", to: "ganapati" },
+    ],
   },
   "padmasambhava": {
     key: "padmasambhava",

@@ -149,7 +149,14 @@ function sampleFive(bank: QuizQuestion[]) {
 }
 
 function emptyScore(): Record<DeityKey, number> {
-  return { yellow: 0, mahashri: 0, ganapati: 0, kurukulla: 0, "green-tara": 0 };
+  return {
+    yellow: 0,
+    mahashri: 0,
+    ganapati: 0,
+    kurukulla: 0,
+    padmasambhava: 0,
+    "green-tara": 0,
+  };
 }
 
 function pickWinner(score: Record<DeityKey, number>): DeityKey {
@@ -181,6 +188,11 @@ const RESULT_COPY: Record<DeityKey, { tag: string; title: string; desc: string }
     tag: "貴人／感召",
     title: "你要先『打通人脈磁場』：資源才接得上",
     desc: "你現在靠自己撐太久了。當你的狀態回到正位，貴人、合作、介紹會更容易靠近，事情自然變好談。",
+  },
+  padmasambhava: {
+    tag: "靠山／護持",
+    title: "你需要『穩固的靠山』：先把恐懼與亂流鎮住",
+    desc: "當外在環境與內在焦慮同時拉扯，你最需要的是一股穩定的護持力，讓心不再飄，事情才有機會翻盤。",
   },
   "green-tara": {
     tag: "除障／轉運",

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://manyuan-tibet.vercel.app/sitemap.xml
+Sitemap: https://zambala-tibetan.com.tw/sitemap.xml

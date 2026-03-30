@@ -7,7 +7,6 @@
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Router, Route, Switch } from "wouter";
-import { useHashLocation } from "wouter/use-hash-location";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 
@@ -23,7 +22,7 @@ import NotFound from "@/pages/NotFound";
 
 function AppRouter() {
   return (
-    <Router hook={useHashLocation}>
+    <Router>
       <Switch>
         <Route path="/" component={Home} />
         <Route path="/deity/:key">{(params) => <Deity deityKey={params.key} />}</Route>

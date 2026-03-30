@@ -1,17 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://manyuan-tibet.vercel.app/</loc></url>
-  <url><loc>https://manyuan-tibet.vercel.app/puja</loc></url>
-  <url><loc>https://manyuan-tibet.vercel.app/pay</loc></url>
-  <url><loc>https://manyuan-tibet.vercel.app/sutra</loc></url>
-  <url><loc>https://manyuan-tibet.vercel.app/about</loc></url>
-  <url><loc>https://manyuan-tibet.vercel.app/proof</loc></url>
-  <url><loc>https://manyuan-tibet.vercel.app/terms</loc></url>
-  <url><loc>https://manyuan-tibet.vercel.app/deities/yellow</loc></url>
-  <url><loc>https://manyuan-tibet.vercel.app/deities/mahashri</loc></url>
-  <url><loc>https://manyuan-tibet.vercel.app/deities/ganapati</loc></url>
-  <url><loc>https://manyuan-tibet.vercel.app/deities/kurukulla</loc></url>
-  <url><loc>https://manyuan-tibet.vercel.app/topics/%E4%B8%80%E7%9B%B4%E8%B3%BA%E4%B8%8D%E5%88%B0%E9%8C%A2%E6%80%8E%E9%BA%BC%E8%BE%A6</loc></url>
-  <url><loc>https://manyuan-tibet.vercel.app/topics/%E5%81%9A%E6%B1%BA%E7%AD%96%E7%B8%BD%E6%98%AF%E5%A4%B1%E6%BA%96</loc></url>
-  <url><loc>https://manyuan-tibet.vercel.app/topics/%E8%B2%B4%E4%BA%BA%E5%B0%91%E5%B0%8F%E4%BA%BA%E5%A4%9A</loc></url>
+  <url><loc>https://zambala-tibetan.com.tw/</loc></url>
+  <url><loc>https://zambala-tibetan.com.tw/pay</loc></url>
+  <url><loc>https://zambala-tibetan.com.tw/proof</loc></url>
+  <url><loc>https://zambala-tibetan.com.tw/sutra</loc></url>
+
+  <url><loc>https://zambala-tibetan.com.tw/deity/yellow</loc></url>
+  <url><loc>https://zambala-tibetan.com.tw/deity/mahashri</loc></url>
+  <url><loc>https://zambala-tibetan.com.tw/deity/ganapati</loc></url>
+  <url><loc>https://zambala-tibetan.com.tw/deity/kurukulla</loc></url>
+  <url><loc>https://zambala-tibetan.com.tw/deity/padmasambhava</loc></url>
+  <url><loc>https://zambala-tibetan.com.tw/deity/green-tara</loc></url>
 </urlset>

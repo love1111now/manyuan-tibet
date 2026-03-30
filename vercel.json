@@ -1,10 +1,10 @@
 {
   "redirects": [
-    { "source": "/yellow-dzambhala.html", "destination": "/deities/yellow", "permanent": true },
-    { "source": "/black-dzambhala.html", "destination": "/deities/mahashri", "permanent": true },
-    { "source": "/black-dzambhala", "destination": "/deities/mahashri", "permanent": true },
-    { "source": "/ganapati.html", "destination": "/deities/ganapati", "permanent": true },
-    { "source": "/kurukulla.html", "destination": "/deities/kurukulla", "permanent": true },
+    { "source": "/yellow-dzambhala.html", "destination": "/deity/yellow", "permanent": true },
+    { "source": "/black-dzambhala.html", "destination": "/deity/mahashri", "permanent": true },
+    { "source": "/black-dzambhala", "destination": "/deity/mahashri", "permanent": true },
+    { "source": "/ganapati.html", "destination": "/deity/ganapati", "permanent": true },
+    { "source": "/kurukulla.html", "destination": "/deity/kurukulla", "permanent": true },
     { "source": "/terms.html", "destination": "/terms", "permanent": true }
   ],
   "rewrites": [
