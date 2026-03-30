@@ -5,9 +5,11 @@
 */
 
 import React from "react";
+import { HelmetProvider } from "react-helmet-async";
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Router, Route, Switch, useLocation } from "wouter";
+import { useHashLocation } from "wouter/use-hash-location";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 
@@ -34,7 +36,7 @@ function ScrollToTop() {
 
 function AppRouter() {
   return (
-    <Router>
+    <Router hook={useHashLocation}>
       <Switch>
         <Route path="/" component={Home} />
         <Route path="/deity/:key">{(params) => <Deity deityKey={params.key} />}</Route>
@@ -50,15 +52,17 @@ function AppRouter() {
 export default function App() {
   return (
     <ErrorBoundary>
-      <ThemeProvider defaultTheme="dark">
-        <TooltipProvider>
-          <Toaster />
-          <VercelScriptsLoader />
-          <AnalyticsTracker />
-          <ScrollToTop />
-          <AppRouter />
-        </TooltipProvider>
-      </ThemeProvider>
+      <HelmetProvider>
+        <ThemeProvider defaultTheme="dark">
+          <TooltipProvider>
+            <Toaster />
+            <VercelScriptsLoader />
+            <AnalyticsTracker />
+            <ScrollToTop />
+            <AppRouter />
+          </TooltipProvider>
+        </ThemeProvider>
+      </HelmetProvider>
     </ErrorBoundary>
   );
 }

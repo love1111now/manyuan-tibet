@@ -14,6 +14,7 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 
 import { ExternalLink, CheckCircle2 } from "lucide-react";
+import { Link } from "wouter";
 
 import { DEITIES } from "@/lib/siteData";
 
@@ -99,9 +100,9 @@ export default function Pay() {
                     <div className="mt-1 text-sm text-muted-foreground">{d.subtitle}</div>
                   </div>
                   <div className="flex gap-2">
-                    <a href={`/#/deity/${d.key}`}>
+                    <Link href={`/deity/${d.key}`}>
                       <Button variant="outline" className="gold-border">看介紹</Button>
-                    </a>
+                    </Link>
                   </div>
                 </div>
 

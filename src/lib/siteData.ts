@@ -30,6 +30,13 @@ import altarGreenTaraImg from "@/assets/visuals/generated/altar-green-tara-fire-
 import heroPadmasambhavaImg from "@/assets/visuals/generated/deity-padmasambhava.webp";
 import heroMedicineBuddhaImg from "@/assets/visuals/generated/deity-medicine-buddha.webp";
 
+// 儀軌照片（每個本尊頁的「正統儀軌」區塊使用）
+import ritualWaterOfferingImg from "@/assets/visuals/rituals/ritual-water-offering.webp";
+import ritualSangSmokeImg from "@/assets/visuals/rituals/ritual-sang-smoke.webp";
+import ritualTormaAltarImg from "@/assets/visuals/rituals/ritual-torma-altar.webp";
+import ritualButterLampsImg from "@/assets/visuals/rituals/ritual-butter-lamps.webp";
+import ritualMalaHandsImg from "@/assets/visuals/rituals/ritual-mala-hands.webp";
+
 // 蓮師 / 藥師如來壇城圖：先用通用橫幅（後續若要獨立壇城圖再替換）
 const altarPadmasambhavaImg = deityBannerImg;
 const altarMedicineBuddhaImg = deityBannerImg;
@@ -174,6 +181,21 @@ export interface Deity {
   readonly painPoints: readonly string[];
   readonly whyThisDeity: readonly string[];
   readonly process: readonly { title: string; body: string }[];
+
+  /**
+   * 正統儀軌（全文）：為滿足「嚴格遵循正法紀錄」，此處採用權威來源的原文/譯文全文。
+   * - mdPath：對應 /public/rituals/*.md
+   */
+  readonly ritual?: {
+    readonly title: string;
+    readonly image: string;
+    readonly imageAlt: string;
+    readonly mdPath: string;
+    readonly sourceUrl: string;
+    readonly license?: string;
+    readonly note?: string;
+  };
+
   readonly plans: readonly Plan[];
   readonly faq: readonly { q: string; a: string }[];
   readonly crossSell: readonly { title: string; desc: string; to: DeityKey }[];
@@ -192,6 +214,16 @@ export const DEITY_BY_KEY: Record<DeityKey, Deity> = {
     primaryIntent: "增加收入",
     heroKicker: "資糧增益首選",
     heroImage: heroYellowImg,
+    ritual: {
+      title: "黃財神煙供（Sang Offering to Yellow Jambhala）",
+      image: ritualSangSmokeImg,
+      imageAlt: "儀軌示意：香供／煙供（sang）之煙雲供養",
+      mdPath: "yellow-jambhala-sang.md",
+      sourceUrl:
+        "https://www.lotsawahouse.org/tibetan-masters/jamyang-khyentse-chokyi-lodro/jambhala-sang",
+      license: "CC BY-NC 4.0 (Lotsawa House)",
+      note: "全文引用自 Lotsawa House（權威譯本）。若你採用水供法，另可參考：The Verse for Offering Water（Dudjom Lingpa）。",
+    },
     promise:
       "依贊巴拉教法，洗滌匱乏業印，修復財庫漏洞，開啟世間與出世間之財富源泉。對治慳吝心，令福德增長。",
     scripture: [
@@ -264,6 +296,14 @@ export const DEITY_BY_KEY: Record<DeityKey, Deity> = {
     primaryIntent: "家宅平安",
     heroKicker: "把生活守住",
     heroImage: heroMahashriImg,
+    ritual: {
+      title: "大吉祥天女陀羅尼（善女天咒）",
+      image: ritualButterLampsImg,
+      imageAlt: "儀軌示意：供燈（酥油燈／燈明供養）",
+      mdPath: "mahashri-dharani.md",
+      sourceUrl: "/resources/webpages/f-2023-15.pdf",
+      note: "此處呈現之全文來源為《金光明最勝王經》相關陀羅尼整理版（見 PDF）。",
+    },
     promise: "依《金光明經》之願力，護佑家宅安隱，令生活資具無所匱乏。",
     scripture: [
       {
@@ -332,6 +372,15 @@ export const DEITY_BY_KEY: Record<DeityKey, Deity> = {
     primaryIntent: "掃除障礙",
     heroKicker: "把路打通",
     heroImage: heroGanapatiImg,
+    ritual: {
+      title: "Gaṇapati Rāgavajra Praise（象頭財神讚頌）",
+      image: ritualTormaAltarImg,
+      imageAlt: "儀軌示意：壇城供品與朵瑪（torma）供養",
+      mdPath: "ganapati.md",
+      sourceUrl: "https://www.lotsawahouse.org/indian-masters/atisha/ganapati-ragavajra-praise",
+      license: "CC BY-NC 4.0 (Lotsawa House)",
+      note: "全文引用自 Lotsawa House（Atiśa 之譯本/整理），以確保依據權威記錄呈現。",
+    },
     promise: "強力掃除外、內、密違緣，於事業與競爭中掌握清明判斷與主導。",
     scripture: [
       {
@@ -400,6 +449,14 @@ export const DEITY_BY_KEY: Record<DeityKey, Deity> = {
     primaryIntent: "人緣貴人",
     heroKicker: "把緣分拉近",
     heroImage: heroKurukullaImg,
+    ritual: {
+      title: "Kurukullā Sādhana（作明佛母儀軌）",
+      image: ritualMalaHandsImg,
+      imageAlt: "儀軌示意：持咒念珠（mala）修持",
+      mdPath: "kurukulla.md",
+      sourceUrl: "https://www.lotsawahouse.org/tibetan-masters/mipham/kurukulla-sadhana",
+      license: "CC BY-NC 4.0 (Lotsawa House)",
+    },
     promise: "以佛母之磁聚加持，令貴人資源相續現前、合作姻緣順利成就；讓你不再靠硬扛，能被看見、被支持。",
     scripture: [
       {
@@ -462,6 +519,14 @@ export const DEITY_BY_KEY: Record<DeityKey, Deity> = {
     primaryIntent: "威德護持",
     heroKicker: "把你撐住",
     heroImage: heroPadmasambhavaImg,
+    ritual: {
+      title: "Seven-Line Prayer（蓮師七句祈請文）",
+      image: ritualSangSmokeImg,
+      imageAlt: "儀軌示意：焚香持誦祈請",
+      mdPath: "seven-line-prayer.md",
+      sourceUrl: "https://www.lotsawahouse.org/topics/seven-line-prayer/",
+      license: "CC BY-NC 4.0 (Lotsawa House)",
+    },
     promise: "仰仗蓮師無量威德，鎮伏一切邪祟與內外密障礙；當你走到最黑的地方，也還有一盞燈替你亮著。",
     scripture: [
       {
@@ -521,6 +586,14 @@ export const DEITY_BY_KEY: Record<DeityKey, Deity> = {
     primaryIntent: "健康息災",
     heroKicker: "把身心救回來",
     heroImage: heroMedicineBuddhaImg,
+    ritual: {
+      title: "Medicine Buddha Sādhana（藥師佛儀軌）",
+      image: ritualWaterOfferingImg,
+      imageAlt: "儀軌示意：淨水與供碗供養",
+      mdPath: "medicine-buddha.md",
+      sourceUrl: "https://www.lotsawahouse.org/tibetan-masters/karma-chakme/medicine-buddha-sadhana",
+      license: "CC BY-NC 4.0 (Lotsawa House)",
+    },
     promise:
       "依藥師法門之願力，回向身心安穩、息災延壽。當你身體不舒服、情緒失衡、或覺得運勢一直在耗損，先把『元氣』補回來。",
     scripture: [
@@ -583,6 +656,14 @@ export const DEITY_BY_KEY: Record<DeityKey, Deity> = {
     primaryIntent: "迅疾救護",
     heroKicker: "先把怖畏停下",
     heroImage: heroGreenTaraImg,
+    ritual: {
+      title: "Daily Green Tārā Practice（綠度母日常修持）",
+      image: ritualButterLampsImg,
+      imageAlt: "儀軌示意：供燈與日常供養",
+      mdPath: "green-tara.md",
+      sourceUrl: "https://www.lotsawahouse.org/tibetan-masters/dudjom-rinpoche/daily-green-tara-practice",
+      license: "CC BY-NC 4.0 (Lotsawa House)",
+    },
     promise: "仰仗大悲誓願，度脫一切苦厄與突發怖畏。祈願生活平安、諸事順遂、所作皆辦。",
     scripture: [
       {
