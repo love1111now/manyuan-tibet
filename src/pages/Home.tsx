@@ -123,19 +123,19 @@ export default function Home() {
               <div className="mt-6 grid gap-3">
                 <div className="flex flex-wrap gap-2">
                   <Link href="/deity/yellow" className="inline-flex">
-                    <Badge className="gold-border bg-background/35 hover:bg-accent/35 transition-colors">增財／現金流 → 黃財神</Badge>
+                    <Badge className="text-white gold-border bg-background/35 hover:bg-accent/35 transition-colors">增財／現金流 → 黃財神</Badge>
                   </Link>
                   <Link href="/deity/mahashri" className="inline-flex">
-                    <Badge className="gold-border bg-background/35 hover:bg-accent/35 transition-colors">守財／家運 → 大吉祥天女</Badge>
+                    <Badge className="text-white gold-border bg-background/35 hover:bg-accent/35 transition-colors">守財／家運 → 大吉祥天女</Badge>
                   </Link>
                   <Link href="/deity/ganapati" className="inline-flex">
-                    <Badge className="gold-border bg-background/35 hover:bg-accent/35 transition-colors">卡關／決策期 → 象頭財神</Badge>
+                    <Badge className="text-white gold-border bg-background/35 hover:bg-accent/35 transition-colors">卡關／決策期 → 象頭財神</Badge>
                   </Link>
                   <Link href="/deity/kurukulla" className="inline-flex">
-                    <Badge className="gold-border bg-background/35 hover:bg-accent/35 transition-colors">愛情／人緣 → 作明佛母</Badge>
+                    <Badge className="text-white gold-border bg-background/35 hover:bg-accent/35 transition-colors">愛情／人緣 → 作明佛母</Badge>
                   </Link>
                   <Link href="/deity/green-tara" className="inline-flex">
-                    <Badge className="gold-border bg-background/35 hover:bg-accent/35 transition-colors">焦慮／身心不穩 → 綠度母</Badge>
+                    <Badge className="text-white gold-border bg-background/35 hover:bg-accent/35 transition-colors">焦慮／身心不穩 → 綠度母</Badge>
                   </Link>
                 </div>
 
@@ -167,7 +167,7 @@ export default function Home() {
                   {[
                     { title: "① 選本尊", body: "依困境對位：增財／守財／愛情／破障／護身心" },
                     { title: "② 選方案", body: "看推薦＋看儀軌內容，挑最貼近你狀態的價位" },
-                    { title: "③ 下單登記", body: "到收費表點『立即下單』，付款完成即保留名額" },
+                    { title: "③ 登記", body: "到法事列表點『立即登記』，付款完成即保留名額" },
                   ].map((s, idx) => (
                     <div key={s.title} className="relative">
                       <Card className="p-5 gold-border bg-card/60">
