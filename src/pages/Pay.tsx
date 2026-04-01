@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 
-import { ExternalLink, CheckCircle2 } from "lucide-react";
+import { ExternalLink, CheckCircle2, MessageCircle } from "lucide-react";
 import { Link } from "wouter";
 
 import { DEITIES } from "@/lib/siteData";
@@ -61,7 +61,7 @@ export default function Pay() {
                 <Badge variant="secondary">想守財/護家運 → 大吉祥天女</Badge>
                 <Badge variant="secondary">投資理財/決策期 → 象頭財神</Badge>
                 <Badge variant="secondary">愛情/貴人緣 → 作明佛母</Badge>
-                <Badge variant="secondary">迅速破災/消除恐懼 → 綠度母</Badge>
+                <Badge variant="secondary">迅速破災/消除恐懼 → 綠度</Badge>
               </div>
             </div>
 
@@ -73,6 +73,17 @@ export default function Pay() {
               <li>2) 祈願寫越具體越好：對象/時間/困境/你希望的改變。</li>
               <li>3) 做完後配合一個小行動：沖澡、溝通、寫下困境、建立佈施預備金…</li>
             </ul>
+
+            {/* 在成交小建議下方，加入 FB 私訊導流 */}
+            <div className="mt-6 p-4 rounded-md bg-foreground/5 border border-border/50 text-center">
+              <div className="text-sm text-foreground/80 mb-3">還是不知道怎麼寫祈願名單嗎？</div>
+              <a href="https://m.me/61583749010531" target="_blank" rel="noreferrer">
+                <Button variant="outline" className="w-full border-[#0866FF]/50 text-[#0866FF] hover:bg-[#0866FF]/10 transition-colors">
+                  <MessageCircle className="w-4 h-4 mr-2" />
+                  私訊 FB 粉專，由專人協助您評估
+                </Button>
+              </a>
+            </div>
           </Card>
         </div>
 
@@ -85,6 +96,20 @@ export default function Pay() {
           <p className="mt-3 readable text-muted-foreground max-w-prose">
             可供全面清楚所需。
           </p>
+
+          {/* 加入這個活動橫幅 (Banner) */}
+          <div className="mt-6 p-5 rounded-lg border border-primary/40 bg-primary/5 relative overflow-hidden">
+            <div className="absolute top-0 right-0 p-4 opacity-10 font-display text-6xl text-primary pointer-events-none">
+              ✦
+            </div>
+            <div className="flex items-center gap-2 mb-2">
+              <Badge className="bg-primary text-primary-foreground gold-border">本月限定</Badge>
+              <span className="font-display text-lg text-foreground/90">琉璃護佑：萬願隨行計畫</span>
+            </div>
+            <p className="text-sm text-muted-foreground readable">
+              我們深知「健康與安穩」是所有福報的底氣。即日起，只要於本站登記<strong className="text-foreground">任一法事方案</strong>，我們將為您<strong className="text-primary">免費加碼</strong>列入每週六的「藥師佛健康息災煙供」名單，為您或家人祈求身心平穩。
+            </p>
+          </div>
 
           <div className="mt-7 grid gap-6">
             {DEITIES.map((d) => (
@@ -123,12 +148,19 @@ export default function Pay() {
 
                         <div className="mt-3 text-sm text-muted-foreground readable">{p.blurb}</div>
 
-                        <div className="mt-5">
+                        <div className="mt-5 text-center">
                           <a href={p.url} target="_blank" rel="noreferrer">
-                            <Button className="h-11 w-full font-bold tracking-[0.22em] uppercase gold-border">
-                              登記法事 <ExternalLink className="h-4 w-4" />
+                            <Button className="h-11 w-full font-bold tracking-[0.22em] uppercase gold-border hover:bg-primary/90 transition-colors">
+                              前往登記名額 <ExternalLink className="h-4 w-4 ml-2 opacity-70" />
                             </Button>
                           </a>
+                          <div className="mt-2.5 text-[11px] text-muted-foreground/70 flex flex-col items-center gap-1">
+                            <span className="flex items-center gap-1">
+                              <span className="inline-block w-2 h-2 rounded-full bg-green-500/80"></span>
+                              綠界科技第三方金流代收，安全有保障
+                            </span>
+                            <span className="opacity-80">遇到問題？隨時歡迎至 FB 粉專私訊我們</span>
+                          </div>
                         </div>
                       </Card>
                     ))}
