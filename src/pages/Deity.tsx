@@ -32,6 +32,7 @@ import {
   ClipboardList,
   HelpCircle,
   ShieldCheck,
+  MessageCircle,
 } from "lucide-react";
 
 import { useEffect, useState } from "react";
@@ -359,7 +360,7 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
 
         {/* PLANS */}
         <section id="plans" className="mx-auto max-w-6xl px-4 pt-12 pb-6 scroll-mt-24">
-          <Card className="mb-10 p-6 md:p-8 gold-border bg-background/50 border-primary/40 relative overflow-hidden">
+          <Card className="mb-6 p-6 md:p-8 gold-border bg-background/50 border-primary/40 relative overflow-hidden">
             <div className="absolute left-0 top-0 w-1 h-full bg-primary/60"></div>
             <div className="text-sm tracking-[0.2em] text-primary mb-3 font-bold">【 寫在您選擇方案之前 】</div>
             <p className="text-muted-foreground readable leading-relaxed max-w-3xl">
@@ -367,6 +368,20 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
               如果您讀到了這裡，請相信，這不是演算法的推薦，是這份清淨傳承與您的緣分。
             </p>
           </Card>
+
+          {/* 活動加碼橫幅 (Banner) */}
+          <div className="mt-2 mb-8 p-5 rounded-lg border border-primary/40 bg-primary/5 relative overflow-hidden">
+            <div className="absolute top-0 right-0 p-4 opacity-10 font-display text-6xl text-primary pointer-events-none">
+              ✦
+            </div>
+            <div className="flex items-center gap-2 mb-2">
+              <Badge className="bg-primary text-primary-foreground gold-border">本月限定</Badge>
+              <span className="font-display text-lg text-foreground/90">護持本尊，加碼贈「藥師佛每週息災煙供」</span>
+            </div>
+            <p className="text-sm text-muted-foreground readable">
+              現在登記下方任一 {d.name} 方案，我們將額外為您列入每週六的藥師佛煙供名單，讓本尊的大願與藥師佛的息災為您雙重護持。
+            </p>
+          </div>
 
           <div className="flex items-end justify-between gap-4">
             <div>
@@ -446,31 +461,43 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
                   <Separator className="my-5" />
 
                   <div className="flex flex-col sm:flex-row gap-3">
-                    <a
-                      href={p.url}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="flex-1"
-                      aria-label={`前往外部付款頁：${p.name}`}
-                      onClick={() => {
-                        if (typeof window !== "undefined") {
-                          window.gtag?.('event', 'begin_checkout', {
-                            currency: 'TWD',
-                            value: p.price,
-                            items: [{ item_name: `${d.name}-${p.name}`, price: p.price }]
-                          });
-                          window.fbq?.('track', 'InitiateCheckout', {
-                            content_name: p.name,
-                            value: p.price,
-                            currency: 'TWD'
-                          });
-                        }
-                      }}
-                    >
-                      <Button className="h-12 w-full font-bold tracking-[0.1em] gold-border bg-primary/90 hover:bg-primary text-primary-foreground">
-                        我願以此發心，請師兄代為造冊 <ExternalLink className="h-4 w-4 ml-2" />
-                      </Button>
-                    </a>
+                    <div className="flex-1 text-center">
+                      <a
+                        href={p.url}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="block w-full"
+                        aria-label={`前往外部付款頁：${p.name}`}
+                        onClick={() => {
+                          if (typeof window !== "undefined") {
+                            window.gtag?.('event', 'begin_checkout', {
+                              currency: 'TWD',
+                              value: p.price,
+                              items: [{ item_name: `${d.name}-${p.name}`, price: p.price }]
+                            });
+                            window.fbq?.('track', 'InitiateCheckout', {
+                              content_name: p.name,
+                              value: p.price,
+                              currency: 'TWD'
+                            });
+                          }
+                        }}
+                      >
+                        <Button className="h-12 w-full font-bold tracking-[0.1em] gold-border bg-primary/90 hover:bg-primary text-primary-foreground">
+                          我願以此發心，請師兄代為造冊 <ExternalLink className="h-4 w-4 ml-2" />
+                        </Button>
+                      </a>
+                      {/* 綠界與 FB 信任標籤 */}
+                      <div className="mt-2.5 text-[11px] text-muted-foreground/70 flex flex-col items-center gap-1">
+                        <span className="flex items-center gap-1">
+                          <span className="inline-block w-2 h-2 rounded-full bg-green-500/80"></span>
+                          綠界 ECPay 第三方金流代收，安全有保障
+                        </span>
+                        <a href="https://m.me/61583749010531" target="_blank" rel="noreferrer" className="opacity-80 hover:text-[#0866FF] transition-colors">
+                          不知如何填寫祈願？點此私訊 FB 專人協助
+                        </a>
+                      </div>
+                    </div>
                     <Link href="/pay" className="flex-1">
                       <Button variant="outline" className="h-12 w-full gold-border">
                         看完整登記說明

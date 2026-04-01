@@ -242,46 +242,51 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ACTIVITY */}
+        {/* ACTIVITY - 藥師佛加碼活動區塊 */}
         <section className="mx-auto max-w-6xl px-4 pt-10 pb-2">
-          <Card className="gold-border bg-card/70 overflow-hidden paper-grain">
+          <Card className="gold-border bg-card/70 overflow-hidden paper-grain border-primary/40 relative">
+            <div className="absolute top-0 right-0 p-10 opacity-5 font-display text-9xl text-primary pointer-events-none">
+              ✦
+            </div>
             <div className="grid md:grid-cols-[280px_1fr]">
               <img src={VISUALS.sutraCloseup} alt="經卷與供燈示意" className="h-56 md:h-full w-full object-cover" loading="lazy" />
-              <div className="p-7 md:p-10">
-                <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">本月活動</div>
-                <h3 className="mt-2 font-display text-2xl md:text-3xl">完成登記 → 贈「回向心念指引」</h3>
+              <div className="p-7 md:p-10 z-10">
+                <div className="flex items-center gap-2 mb-2">
+                  <Badge className="bg-primary text-primary-foreground gold-border">本月限定企劃</Badge>
+                  <span className="text-xs tracking-[0.26em] uppercase text-muted-foreground">琉璃護佑計畫</span>
+                </div>
+                <h3 className="mt-2 font-display text-2xl md:text-3xl text-foreground">完成任一登記 → 免費加碼「藥師佛息災煙供」</h3>
                 <p className="mt-4 readable text-muted-foreground">
-                  你會收到一份簡短但可執行的建議：
-                  <span className="text-foreground/90">做完護持後，怎麼持心、怎麼配合行動</span>。
-                  不是大道理，是讓你更容易把力量接住。
+                  我們深知「健康與安穩」是所有福報的底氣。地基不穩，再多資糧也難以受用。<br/>
+                  <span className="text-foreground/90">即日起，只要您護持本站任一法事（如黃財神、綠度母等），我們將直接為您加碼列入每週六的「藥師佛健康息災煙供」名錄中。</span>
                 </p>
-                <Separator className="my-6" />
+                <Separator className="my-6 border-primary/20" />
                 <div className="grid gap-4 md:grid-cols-3">
                   <div>
-                    <div className="text-xs tracking-[0.22em] uppercase text-muted-foreground">名額</div>
-                    <div className="mt-1 font-display text-xl">每月有限</div>
-                    <div className="mt-2 text-sm text-muted-foreground">為了品質與如法流程</div>
+                    <div className="text-xs tracking-[0.22em] uppercase text-primary">雙重守護</div>
+                    <div className="mt-1 font-display text-xl">主法事 + 藥師佛</div>
+                    <div className="mt-2 text-sm text-muted-foreground">補足資糧同時清淨身心</div>
                   </div>
                   <div>
-                    <div className="text-xs tracking-[0.22em] uppercase text-muted-foreground">速度</div>
-                    <div className="mt-1 font-display text-xl">完成登記即保留</div>
-                    <div className="mt-2 text-sm text-muted-foreground">下單完成即算保留名額</div>
+                    <div className="text-xs tracking-[0.22em] uppercase text-primary">流程全透明</div>
+                    <div className="mt-1 font-display text-xl">實體壇城回報</div>
+                    <div className="mt-2 text-sm text-muted-foreground">修法圓滿將回傳影像證明</div>
                   </div>
                   <div>
-                    <div className="text-xs tracking-[0.22em] uppercase text-muted-foreground">清楚</div>
-                    <div className="mt-1 font-display text-xl">每頁都寫明白</div>
-                    <div className="mt-2 text-sm text-muted-foreground">本尊、方案、適合狀態、FAQ</div>
+                    <div className="text-xs tracking-[0.22em] uppercase text-primary">免去繁瑣</div>
+                    <div className="mt-1 font-display text-xl">自動併入名單</div>
+                    <div className="mt-2 text-sm text-muted-foreground">下單主法事即自動獲取資格</div>
                   </div>
                 </div>
 
                 <div className="mt-7">
                   <Link href="/pay">
-                    <Button className="h-12 px-6 font-bold tracking-[0.22em] uppercase gold-border">
-                      立即登記保留名額 <ArrowRight className="h-4 w-4" />
+                    <Button className="h-12 px-6 font-bold tracking-[0.22em] uppercase gold-border hover:bg-primary hover:text-primary-foreground transition-colors">
+                      立即登記，領取雙重加持 <ArrowRight className="h-4 w-4 ml-2" />
                     </Button>
                   </Link>
                   <div className="mt-3 text-xs text-muted-foreground">
-                    提醒：護持不是交易；我們只承諾如法完成流程與清楚交付。
+                    提醒：此為團隊發心加碼，名額將依每週壇城負載量動態調整。
                   </div>
                 </div>
               </div>
