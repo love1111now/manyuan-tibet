@@ -359,6 +359,15 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
 
         {/* PLANS */}
         <section id="plans" className="mx-auto max-w-6xl px-4 pt-12 pb-6 scroll-mt-24">
+          <Card className="mb-10 p-6 md:p-8 gold-border bg-background/50 border-primary/40 relative overflow-hidden">
+            <div className="absolute left-0 top-0 w-1 h-full bg-primary/60"></div>
+            <div className="text-sm tracking-[0.2em] text-primary mb-3 font-bold">【 寫在您選擇方案之前 】</div>
+            <p className="text-muted-foreground readable leading-relaxed max-w-3xl">
+              我們知道，在這繁華的網路世界，您可能看過無數名師與神蹟保證。但滿願藏庫是一群在台北堅持不支薪、不造神的凡夫。我們每週的廣告費不到一千元，因為大家繳交的每一分錢，我們都想實實在在地匯往西藏換成供品。<br/><br/>
+              如果您讀到了這裡，請相信，這不是演算法的推薦，是這份清淨傳承與您的緣分。
+            </p>
+          </Card>
+
           <div className="flex items-end justify-between gap-4">
             <div>
               <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">Plans</div>
@@ -458,8 +467,8 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
                         }
                       }}
                     >
-                      <Button className="h-12 w-full font-bold tracking-[0.22em] uppercase gold-border">
-                        立即預約法事 <ExternalLink className="h-4 w-4" />
+                      <Button className="h-12 w-full font-bold tracking-[0.1em] gold-border bg-primary/90 hover:bg-primary text-primary-foreground">
+                        我願以此發心，請師兄代為造冊 <ExternalLink className="h-4 w-4 ml-2" />
                       </Button>
                     </a>
                     <Link href="/pay" className="flex-1">

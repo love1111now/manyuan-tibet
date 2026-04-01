@@ -41,8 +41,9 @@ export default function Pay() {
                   )
                 )}
               </div>
-              <div className="mt-5 text-xs text-muted-foreground">
-                提醒：護持不是交易；我們承諾的是如法完成流程與清楚交付。你也要承諾自己：回到生活裡做一個小行動，讓好的因有地方落地。
+              <div className="mt-6 p-4 rounded-md bg-background/50 border border-border/70 text-sm text-muted-foreground readable">
+                <span className="font-semibold text-foreground/80 block mb-1">💡 關於綠界手續費與因果的誠實說明：</span>
+                為了符合台灣法令讓您安心支付，每筆登記會由綠界科技收取必要的金流手續費。而我們台灣團隊全體皆為不支薪志工，完全吸收了行政與網站維護成本。您的發心將全數用於法事本身。這份近乎笨拙的透明，是我們對因果的最高敬畏。
               </div>
             </Card>
           </div>

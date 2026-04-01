@@ -45,17 +45,16 @@ export default function Home() {
                 </div>
 
                 <h1 className="mt-6 font-display text-5xl sm:text-6xl md:text-7xl leading-[1.02]">
-                  把心安下來
+                  我們不造神、不支薪
                   <br />
-                  <span className="text-primary">讓路重新亮起</span>
+                  <span className="text-primary">只為您修補缺失的力量</span>
                 </h1>
 
                 <p className="mt-6 readable text-muted-foreground max-w-prose">
-                  你不是不努力；你是一直在用同一種方式硬撐。
+                  我們是台北的無償志工團隊，與西藏師兄姊跨境協力。我們沒有大師包裝，沒有預算打廣告，只有實實在在的法事造冊。
                   <br className="hidden sm:block" />
-                  當現金流越來越緊、情緒越來越躁、決策越來越亂，問題就不只是在「再加把勁」。
-                  <span className="text-foreground/90">先把心安下來、把方向對準、把流程做完</span>——
-                  這才是危機真正開始收斂的方式。
+                  如果您覺得這世界太虛假、太吵鬧，想找回一點點安靜且真實的加持——
+                  <span className="text-foreground/90">不用硬撐，請將這份沉重交託給純粹的傳承。</span>
                 </p>
 
                 <div className="mt-8 flex flex-col sm:flex-row gap-3">
