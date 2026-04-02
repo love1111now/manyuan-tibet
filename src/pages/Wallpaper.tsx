@@ -21,31 +21,33 @@ export default function Wallpaper() {
       <Seo title="黃財神手機桌布下載" path="/wallpaper" />
       <SiteHeader />
 
-      <main className="mx-auto max-w-6xl px-4 pt-10 pb-24">
+      <main className="mx-auto max-w-6xl px-4 pt-10 pb-32">
         <div className="grid gap-8 md:grid-cols-[1fr_.95fr] items-start">
           <div>
             <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">Free Gift</div>
             <h1 className="mt-2 font-display text-4xl md:text-5xl">黃財神手機桌布</h1>
             <p className="mt-4 readable text-muted-foreground max-w-prose">
-              慶祝 FB 粉絲團成立，這張桌布送給你。
-              <span className="text-foreground">願你每天打開手機，都記得：你的財庫在回正，你值得被善緣與資糧好好照顧。</span>
+              慶祝 FB 粉絲團成立，這張桌布送給您。
+              <span className="text-foreground">願您每天打開手機，都記得：您的財庫在回正，您值得被善緣與資糧好好照顧。</span>
             </p>
 
             <div className="mt-7 flex flex-col sm:flex-row gap-3">
               <a href={wallpaperUrl} download>
-                <Button className="h-12 px-6 font-black tracking-[0.22em] uppercase gold-border">
-                  下載桌布 <Download className="h-4 w-4" />
+                <Button className="h-12 w-full sm:w-auto px-6 font-bold tracking-[0.22em] uppercase gold-border">
+                  下載高畫質桌布 <Download className="h-4 w-4 ml-2" />
                 </Button>
               </a>
             </div>
 
             <div className="mt-5 text-xs readable text-muted-foreground">
-              小提醒：若你的手機自動裁切，建議在相簿內移動縮放位置後再設定。
+              小提醒：若您的手機自動裁切，建議在相簿內移動縮放位置後再設定。
             </div>
 
-            <div className="mt-8">
+            <div className="mt-10 pt-6 border-t border-border/50">
               <Link href="/">
-                <span className="underline underline-offset-4 text-primary text-sm">回首頁繼續做「財庫能量檢測」→</span>
+                <span className="inline-flex items-center text-primary text-sm font-semibold hover:text-primary/80 transition-colors">
+                  回首頁查看法事總覽與本月加碼活動 →
+                </span>
               </Link>
             </div>
           </div>

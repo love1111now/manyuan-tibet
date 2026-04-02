@@ -32,7 +32,10 @@ import {
   ClipboardList,
   HelpCircle,
   ShieldCheck,
-  MessageCircle,
+  Lock,
+  CreditCard,
+  Clock,
+  Info,
 } from "lucide-react";
 
 import { useEffect, useState } from "react";
@@ -370,12 +373,12 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
           </Card>
 
           {/* 活動加碼橫幅 (Banner) */}
-          <div className="mt-2 mb-8 p-5 rounded-lg border border-primary/40 bg-primary/5 relative overflow-hidden">
-            <div className="absolute top-0 right-0 p-4 opacity-10 font-display text-6xl text-primary pointer-events-none">
+          <div className="mt-2 mb-8 p-5 rounded-lg border border-primary/40 bg-primary/5 relative overflow-hidden group">
+            <div className="absolute top-0 right-0 p-4 opacity-10 font-display text-6xl text-primary pointer-events-none transition-transform group-hover:scale-110">
               ✦
             </div>
             <div className="flex items-center gap-2 mb-2">
-              <Badge className="bg-primary text-primary-foreground gold-border">本月限定</Badge>
+              <Badge className="bg-primary text-primary-foreground gold-border animate-pulse">本月限定</Badge>
               <span className="font-display text-lg text-foreground/90">護持本尊，加碼贈「藥師佛每週息災煙供」</span>
             </div>
             <p className="text-sm text-muted-foreground readable">
@@ -425,84 +428,102 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
                 <Card
                   key={p.id}
                   id={planAnchor}
-                  className="p-7 gold-border bg-card/70 paper-grain scroll-mt-28"
+                  className="p-7 gold-border bg-card/70 paper-grain scroll-mt-28 flex flex-col justify-between"
                 >
-                  <div className="flex items-start justify-between gap-3">
-                    <div>
-                      <div className="flex items-center gap-2 flex-wrap">
-                        <div className="font-display text-2xl">{p.name}</div>
-                        {p.hot ? <Badge className="gold-border bg-primary text-primary-foreground">推薦</Badge> : null}
-                        {p.badge ? <Badge variant="secondary">{p.badge}</Badge> : null}
+                  <div>
+                    <div className="flex items-start justify-between gap-3">
+                      <div>
+                        <div className="flex items-center gap-2 flex-wrap">
+                          <div className="font-display text-2xl">{p.name}</div>
+                          {p.hot ? <Badge className="gold-border bg-primary text-primary-foreground">推薦</Badge> : null}
+                          {p.badge ? <Badge variant="secondary">{p.badge}</Badge> : null}
+                        </div>
+                        <div className="mt-2 text-sm text-muted-foreground">適合：{p.suitableFor.join("、")}</div>
                       </div>
-                      <div className="mt-2 text-sm text-muted-foreground">適合：{p.suitableFor.join("、")}</div>
+                      <div className="text-right">
+                        <div className="text-xs tracking-[0.22em] uppercase text-muted-foreground">費用</div>
+                        <div className="mt-1 font-display text-3xl text-primary">{p.price}</div>
+                      </div>
                     </div>
-                    <div className="text-right">
-                      <div className="text-xs tracking-[0.22em] uppercase text-muted-foreground">費用</div>
-                      <div className="mt-1 font-display text-3xl text-primary">{p.price}</div>
-                    </div>
+
+                    <p className="mt-4 readable text-muted-foreground">{p.blurb}</p>
+
+                    {p.details?.length ? (
+                      <div className="mt-4">
+                        <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">如法內容（節錄）</div>
+                        <ul className="mt-3 space-y-2 text-sm text-muted-foreground readable">
+                          {p.details.map((x) => (
+                            <li key={x} className="flex gap-2">
+                              <span className="mt-[0.35rem] h-1.5 w-1.5 rounded-full bg-primary/80 flex-none" />
+                              <span>{x}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    ) : null}
                   </div>
 
-                  <p className="mt-4 readable text-muted-foreground">{p.blurb}</p>
-
-                  {p.details?.length ? (
-                    <div className="mt-4">
-                      <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">如法內容（節錄）</div>
-                      <ul className="mt-3 space-y-2 text-sm text-muted-foreground readable">
-                        {p.details.map((x) => (
-                          <li key={x} className="flex gap-2">
-                            <span className="mt-[0.35rem] h-1.5 w-1.5 rounded-full bg-primary/80 flex-none" />
-                            <span>{x}</span>
-                          </li>
-                        ))}
-                      </ul>
+                  <div className="mt-6">
+                    <Separator className="mb-5" />
+                    
+                    {/* 新增：填寫引導提示 */}
+                    <div className="mb-4 p-3 bg-background/60 rounded-md border border-border/50 text-[11px] text-muted-foreground leading-relaxed">
+                      <Info className="w-3 h-3 inline mr-1 text-primary mb-0.5" />
+                      祈願越具體越好！結帳時請於<strong className="text-foreground/80">備註欄</strong>寫下您的：<span className="text-foreground">姓名、居住地與具體困境</span>。
                     </div>
-                  ) : null}
 
-                  <Separator className="my-5" />
-
-                  <div className="flex flex-col sm:flex-row gap-3">
-                    <div className="flex-1 text-center">
-                      <a
-                        href={p.url}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="block w-full"
-                        aria-label={`前往外部付款頁：${p.name}`}
-                        onClick={() => {
-                          if (typeof window !== "undefined") {
-                            window.gtag?.('event', 'begin_checkout', {
-                              currency: 'TWD',
-                              value: p.price,
-                              items: [{ item_name: `${d.name}-${p.name}`, price: p.price }]
-                            });
-                            window.fbq?.('track', 'InitiateCheckout', {
-                              content_name: p.name,
-                              value: p.price,
-                              currency: 'TWD'
-                            });
-                          }
-                        }}
-                      >
-                        <Button className="h-12 w-full font-bold tracking-[0.1em] gold-border bg-primary/90 hover:bg-primary text-primary-foreground">
-                          我願以此發心，請師兄代為造冊 <ExternalLink className="h-4 w-4 ml-2" />
-                        </Button>
-                      </a>
-                      {/* 綠界與 FB 信任標籤 */}
-                      <div className="mt-2.5 text-[11px] text-muted-foreground/70 flex flex-col items-center gap-1">
-                        <span className="flex items-center gap-1">
-                          <span className="inline-block w-2 h-2 rounded-full bg-green-500/80"></span>
-                          綠界 ECPay 第三方金流代收，安全有保障
-                        </span>
-                        <a href="https://m.me/61583749010531" target="_blank" rel="noreferrer" className="opacity-80 hover:text-[#0866FF] transition-colors">
-                          不知如何填寫祈願？點此私訊 FB 專人協助
+                    <div className="flex flex-col sm:flex-row gap-3">
+                      <div className="flex-1 text-center">
+                        <a
+                          href={p.url}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="block w-full"
+                          aria-label={`前往外部付款頁：${p.name}`}
+                          onClick={() => {
+                            if (typeof window !== "undefined") {
+                              window.gtag?.('event', 'begin_checkout', {
+                                currency: 'TWD',
+                                value: p.price,
+                                items: [{ item_name: `${d.name}-${p.name}`, price: p.price }]
+                              });
+                              window.fbq?.('track', 'InitiateCheckout', {
+                                content_name: p.name,
+                                value: p.price,
+                                currency: 'TWD'
+                              });
+                            }
+                          }}
+                        >
+                          <Button className="h-12 w-full font-bold tracking-[0.1em] gold-border bg-primary/90 hover:bg-primary text-primary-foreground shadow-sm transition-all">
+                            我願以此發心，請師兄代為造冊 <ExternalLink className="h-4 w-4 ml-2" />
+                          </Button>
                         </a>
+                        
+                        {/* 新增：金流視覺化與志工排程承諾 */}
+                        <div className="flex flex-col items-center gap-2 pt-3 mt-3 border-t border-border/30">
+                          <div className="flex items-center gap-1.5 text-[10px] text-muted-foreground font-medium">
+                            <Lock className="w-3 h-3 text-green-600/80" />
+                            綠界 256-bit SSL 安全加密付款
+                          </div>
+                          <div className="flex items-center gap-3 opacity-60 grayscale scale-90">
+                            <span className="text-[9px] font-bold tracking-tighter flex items-center gap-1">
+                              <CreditCard className="w-3 h-3" /> VISA / MASTER / JCB / 超商代碼
+                            </span>
+                          </div>
+                          <div className="text-[10px] text-center text-muted-foreground/70 mt-1">
+                            <Clock className="w-3 h-3 inline mr-1 mb-0.5" />
+                            志工於晚間造冊，隔週公佈名錄於 FB
+                          </div>
+                        </div>
                       </div>
+                      
+                      <Link href="/pay" className="flex-1 sm:flex-none">
+                        <Button variant="outline" className="h-12 w-full gold-border">
+                          看完整登記說明
+                        </Button>
+                      </Link>
                     </div>
-                    <Link href="/pay" className="flex-1">
-                      <Button variant="outline" className="h-12 w-full gold-border">
-                        看完整登記說明
-                      </Button>
-                    </Link>
                   </div>
                 </Card>
               );
@@ -533,8 +554,8 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
           </div>
         </section>
 
-        {/* CROSS SELL */}
-        <section className="mx-auto max-w-6xl px-4 pb-14">
+        {/* CROSS SELL - 修改 pb-14 為 pb-32 以避免被 StickyCta 遮擋 */}
+        <section className="mx-auto max-w-6xl px-4 pb-32">
           <Card className="p-7 gold-border bg-card/70 paper-grain">
             <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">你也可以</div>
             <div className="mt-2 font-display text-2xl">如果你的狀態更像下面這些</div>

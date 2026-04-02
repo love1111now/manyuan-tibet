@@ -8,7 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 
 import { Link } from "wouter";
-import { ArrowRight, ShieldCheck, ScrollText, Sparkles } from "lucide-react";
+import { ArrowRight, ShieldCheck, ScrollText, Sparkles, ClipboardList, Clock } from "lucide-react";
 
 import { DEITIES, HOME_TESTIMONIALS, VISUALS } from "@/lib/siteData";
 
@@ -58,22 +58,29 @@ export default function Home() {
                 </p>
 
                 <div className="mt-8 flex flex-col sm:flex-row gap-3">
-                  <Link href="/pay">
-                    <Button className="h-12 px-6 font-bold tracking-[0.22em] uppercase gold-border">
-                      立即登記保留名額 <ArrowRight className="h-4 w-4" />
-                    </Button>
-                  </Link>
+                  <div className="w-full sm:w-auto flex flex-col">
+                    <Link href="/pay">
+                      <Button className="h-12 w-full px-6 font-bold tracking-[0.22em] uppercase gold-border shadow-md">
+                        立即登記保留名額 <ArrowRight className="h-4 w-4 ml-2" />
+                      </Button>
+                    </Link>
+                    {/* 優化點 1：在主要 CTA 下方直接給予透明度承諾 */}
+                    <div className="mt-2 text-[10px] text-muted-foreground/80 flex items-center gap-1">
+                      <Clock className="w-3 h-3" />
+                      台灣志工晚間造冊，隔週公佈去識別化名錄供您核對
+                    </div>
+                  </div>
 
                   <a
                     href="#choose"
-                    className="h-12 px-6 inline-flex items-center justify-center rounded-md border bg-background/35 gold-border readable hover:bg-accent/35 transition-colors"
+                    className="h-12 px-6 inline-flex items-center justify-center rounded-md border bg-background/35 gold-border readable hover:bg-accent/35 transition-colors self-start"
                   >
                     先幫我選本尊 <Sparkles className="ml-2 h-4 w-4" />
                   </a>
                 </div>
 
                 <div className="mt-6 text-xs text-muted-foreground tracking-[0.22em] uppercase">
-                  清楚流程 · 經典依據 · 不亂承諾
+                  清楚流程 · 經典依據 · 隔週造冊公佈
                 </div>
               </div>
 
@@ -138,14 +145,14 @@ export default function Home() {
                 <ul className="mt-2 text-sm text-muted-foreground readable space-y-2">
                   <li>1) <span className="text-foreground/90">先看本尊頁</span>：痛點、為什麼對位、推薦方案、FAQ。</li>
                   <li>2) 再看方案的「<span className="text-foreground/90">如法內容（節錄）</span>」：你會清楚知道我們會做哪些儀軌與回向。</li>
-                  <li>3) 決定後到 <span className="text-foreground/90">登記頁</span> 直接下單，付款完成即保留名額。</li>
+                  <li>3) 決定後到 <span className="text-foreground/90">登記頁</span> 直接下單，付款完成即由志工接手安排。</li>
                 </ul>
               </div>
 
               <div className="mt-7 flex flex-col sm:flex-row gap-3">
                 <a href="#choose" className="flex-1">
                   <Button className="h-12 w-full font-bold tracking-[0.22em] uppercase gold-border">
-                    開始選本尊 <ArrowRight className="h-4 w-4" />
+                    開始選本尊 <ArrowRight className="h-4 w-4 ml-2" />
                   </Button>
                 </a>
                 <Link href="/pay" className="flex-1">
@@ -161,9 +168,9 @@ export default function Home() {
               <div className="mt-6 grid gap-3">
                 <div className="grid gap-3">
                   {[
-                    { title: "① 選本尊", body: "依困境對位：增財／守財／愛情／破障／護身心" },
-                    { title: "② 選方案", body: "看推薦＋看儀軌內容，挑最貼近你狀態的價位" },
-                    { title: "③ 登記", body: "到法事列表點『立即登記』，付款完成即保留名額" },
+                    { title: "① 選本尊與方案", body: "依困境對位（增財/守財/愛情/除障），挑選最貼近狀態的價位。" },
+                    { title: "② 登記與祈願", body: "完成綠界付款，並於備註欄寫下具體困境，系統即刻保留名額。" },
+                    { title: "③ 造冊與公佈", body: "志工於晚間造冊、送達壇城；並於隔週在 FB 公佈去識別化名錄。" }, // 優化點 2：加入造冊公佈流程
                   ].map((s, idx) => (
                     <div key={s.title} className="relative">
                       <Card className="p-5 gold-border bg-card/60">
@@ -179,10 +186,10 @@ export default function Home() {
                   ))}
                 </div>
 
-                <Separator className="my-3" />
+                <Separator className="my-3 border-border/50" />
 
                 <div className="text-sm text-muted-foreground readable">
-                  <span className="text-foreground/90">小提醒：</span>
+                  <span className="text-foreground/90 font-medium">小提醒：</span>
                   護持不是交易；我們承諾的是如法完成流程與清楚交付。祈願越具體（對象/時間/困境/你希望的改變），回向越容易對位。
                 </div>
               </div>
@@ -219,7 +226,7 @@ export default function Home() {
                   <div className="grid md:grid-cols-[220px_1fr]">
                     <img src={d.heroImage} alt={d.name} className="h-44 w-full object-cover" loading="lazy" />
                     <div className="p-7">
-                      <div className="text-xs tracking-[0.24em] uppercase text-muted-foreground">
+                      <div className="text-xs tracking-[0.24em] uppercase text-primary font-semibold">
                         {d.primaryIntent}
                       </div>
                       <div className="mt-2 font-display text-3xl">{d.name}</div>
@@ -252,13 +259,13 @@ export default function Home() {
               <img src={VISUALS.sutraCloseup} alt="經卷與供燈示意" className="h-56 md:h-full w-full object-cover" loading="lazy" />
               <div className="p-7 md:p-10 z-10">
                 <div className="flex items-center gap-2 mb-2">
-                  <Badge className="bg-primary text-primary-foreground gold-border">本月限定企劃</Badge>
+                  <Badge className="bg-primary text-primary-foreground gold-border animate-pulse">本月限定企劃</Badge>
                   <span className="text-xs tracking-[0.26em] uppercase text-muted-foreground">琉璃護佑計畫</span>
                 </div>
                 <h3 className="mt-2 font-display text-2xl md:text-3xl text-foreground">完成任一登記 → 免費加碼「藥師佛息災煙供」</h3>
                 <p className="mt-4 readable text-muted-foreground">
                   我們深知「健康與安穩」是所有福報的底氣。地基不穩，再多資糧也難以受用。<br/>
-                  <span className="text-foreground/90">即日起，只要您護持本站任一法事（如黃財神、綠度母等），我們將直接為您加碼列入每週六的「藥師佛健康息災煙供」名錄中。</span>
+                  <span className="text-foreground/90 font-medium">即日起，只要您護持本站任一法事（如黃財神、綠度母等），我們將直接為您加碼列入每週六的「藥師佛健康息災煙供」名錄中。</span>
                 </p>
                 <Separator className="my-6 border-primary/20" />
                 <div className="grid gap-4 md:grid-cols-3">
@@ -268,9 +275,12 @@ export default function Home() {
                     <div className="mt-2 text-sm text-muted-foreground">補足資糧同時清淨身心</div>
                   </div>
                   <div>
-                    <div className="text-xs tracking-[0.22em] uppercase text-primary">流程全透明</div>
-                    <div className="mt-1 font-display text-xl">實體壇城回報</div>
-                    <div className="mt-2 text-sm text-muted-foreground">修法圓滿將回傳影像證明</div>
+                    <div className="text-xs tracking-[0.22em] uppercase text-primary flex items-center gap-1">
+                      <ClipboardList className="w-3 h-3" /> 流程全透明
+                    </div>
+                    <div className="mt-1 font-display text-xl">隔週名單公佈</div>
+                    {/* 優化點 3：修正在首頁承諾影像回報的錯誤 */}
+                    <div className="mt-2 text-sm text-muted-foreground">志工彙整後於 FB 公佈去識別化名單</div>
                   </div>
                   <div>
                     <div className="text-xs tracking-[0.22em] uppercase text-primary">免去繁瑣</div>
@@ -281,7 +291,7 @@ export default function Home() {
 
                 <div className="mt-7">
                   <Link href="/pay">
-                    <Button className="h-12 px-6 font-bold tracking-[0.22em] uppercase gold-border hover:bg-primary hover:text-primary-foreground transition-colors">
+                    <Button className="h-12 px-6 font-bold tracking-[0.22em] uppercase gold-border hover:bg-primary hover:text-primary-foreground shadow-sm transition-all">
                       立即登記，領取雙重加持 <ArrowRight className="h-4 w-4 ml-2" />
                     </Button>
                   </Link>
@@ -295,7 +305,7 @@ export default function Home() {
         </section>
 
         {/* PROOF */}
-        <section className="mx-auto max-w-6xl px-4 pt-12 pb-14">
+        <section className="mx-auto max-w-6xl px-4 pt-12 pb-24"> {/* 增加 pb 避免被 sticky CTA 擋住 */}
           <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">Proof</div>
           <h2 className="mt-2 font-display text-3xl md:text-4xl">回饋文：你不用猜</h2>
           <p className="mt-4 readable text-muted-foreground max-w-prose">
@@ -304,17 +314,17 @@ export default function Home() {
 
           <div className="mt-7 grid gap-4 md:grid-cols-3">
             {HOME_TESTIMONIALS.map((t) => (
-              <Card key={t.title} className="p-7 gold-border bg-card/70 paper-grain">
-                <div className="font-display text-xl">{t.title}</div>
-                <div className="mt-3 readable text-muted-foreground">{t.body}</div>
-                <div className="mt-4 text-xs tracking-[0.22em] uppercase text-muted-foreground">{t.by}</div>
+              <Card key={t.title} className="p-7 gold-border bg-card/70 paper-grain hover:border-primary/40 transition-colors">
+                <div className="font-display text-xl text-foreground/90">{t.title}</div>
+                <div className="mt-3 readable text-muted-foreground text-sm">{t.body}</div>
+                <div className="mt-4 text-xs tracking-[0.22em] uppercase text-primary/80">{t.by}</div>
               </Card>
             ))}
           </div>
 
-          <div className="mt-8">
+          <div className="mt-8 text-center md:text-left">
             <Link href="/proof">
-              <Button variant="outline" className="gold-border">看更多回饋</Button>
+              <Button variant="outline" className="gold-border h-11 px-6">看更多真實回饋</Button>
             </Link>
           </div>
         </section>

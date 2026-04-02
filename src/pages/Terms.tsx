@@ -10,26 +10,25 @@ export default function Terms() {
       <Seo title="條款與隱私" path="/terms" />
       <SiteHeader />
 
-      <main className="mx-auto max-w-5xl px-4 pt-10 pb-24">
+      <main className="mx-auto max-w-5xl px-4 pt-10 pb-32">
         <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">Terms</div>
         <h1 className="mt-2 font-display text-4xl md:text-5xl">條款與隱私</h1>
         <p className="mt-4 readable text-muted-foreground max-w-prose">
-          為了讓你安心了解護持流程與個資處理方式，我們把重要事項整理如下。
+          為了讓您安心了解護持流程與個資處理方式，我們把重要事項整理如下。
         </p>
 
         <section className="mt-10 grid gap-4">
           <Card className="p-7 gold-border bg-card">
-            <div className="font-semibold">1. 服務性質</div>
+            <div className="font-semibold">1. 服務性質與志工聲明</div>
             <p className="mt-3 readable text-muted-foreground">
-              本站提供宗教護持與迴向相關之資訊與導流，並不提供醫療、法律、投資建議或任何報酬保證。
-              你在本站所做的行為，屬自願性之護持與發心。
+              本站提供宗教護持與迴向相關之資訊與導流，並不提供醫療、法律、投資建議或任何報酬保證。本團隊皆為利用下班時間服務之不支薪志工，您在本站所做之行為，屬自願性之護持與發心。
             </p>
           </Card>
 
           <Card className="p-7 gold-border bg-card paper-grain">
-            <div className="font-semibold">2. 付款與個資</div>
+            <div className="font-semibold text-primary">2. 付款與功德名錄發布（重要）</div>
             <p className="mt-3 readable text-muted-foreground">
-              付款將導向第三方金流平台綠界完成。本站不在站內蒐集敏感個資；必要欄位以第三方平台提示為準。
+              付款將導向合法第三方金流平台「綠界科技 ECPay」完成，本站不在站內蒐集信用卡等敏感個資。為確保流程透明公開，<strong className="text-foreground/80">您於備註欄填寫之祈願名單，志工造冊後將以「去識別化」（如：陳*明）之方式公佈於本站官方 Facebook 粉絲專頁</strong>，以昭公信。完成登記即代表您同意此透明交付機制。
             </p>
           </Card>
 
@@ -43,7 +42,7 @@ export default function Terms() {
           <Card className="p-7 gold-border bg-card">
             <div className="font-semibold">4. 免責聲明</div>
             <p className="mt-3 readable text-muted-foreground">
-              任何成效皆受個人因緣、行為與外在條件影響，本站不做結果保證。
+              佛法護持重在心念與因緣，任何成效皆受個人業力、行為與外在條件影響，本站不做任何世俗結果之絕對保證。
             </p>
           </Card>
         </section>
