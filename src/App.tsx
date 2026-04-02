@@ -2,13 +2,14 @@ import React from "react";
 import { HelmetProvider } from "react-helmet-async";
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { Router, Route, Switch, useLocation } from "wouter";
+import { Router, Route, Switch } from "wouter"; // 移除未使用的 useLocation
 import { useHashLocation } from "wouter/use-hash-location";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 
 import AnalyticsTracker from "@/components/AnalyticsTracker";
 import VercelScriptsLoader from "@/components/VercelScriptsLoader";
+import LiveRegistrations from "@/components/LiveRegistrations"; // 建議加入，提升信任感
 
 import Home from "@/pages/Home";
 import Deity from "@/pages/Deity";
@@ -22,30 +23,11 @@ import About from "@/pages/About";
 import Terms from "@/pages/Terms";
 import NotFound from "@/pages/NotFound";
 
-// 強化的 ScrollToTop：專門對付 Hash Router 的捲動問題
-function ScrollToTop() {
-  const [location] = useLocation();
-
-  React.useEffect(() => {
-    if (typeof window === "undefined") return;
-    
-    // 使用 setTimeout(..., 0) 讓捲動指令排在瀏覽器原生渲染與 Hash 定位之後執行
-    const timer = setTimeout(() => {
-      window.scrollTo({ top: 0, left: 0, behavior: "instant" });
-    }, 0);
-
-    return () => clearTimeout(timer);
-  }, [location]);
-
-  return null;
-}
-
 function AppRouter() {
   return (
     <Router hook={useHashLocation}>
-      {/* 追蹤器與置頂器都必須放在 Router 內部，才能抓到 location 變化 */}
+      {/* 追蹤器已內含 scrollTo(0,0)，不需額外的 ScrollToTop 組件 */}
       <AnalyticsTracker />
-      <ScrollToTop />
       
       <Switch>
         <Route path="/" component={Home} />
@@ -68,11 +50,12 @@ export default function App() {
   return (
     <ErrorBoundary>
       <HelmetProvider>
-        <ThemeProvider defaultTheme="dark">
+        <ThemeProvider>
           <TooltipProvider>
-            <Toaster />
-            <VercelScriptsLoader />
             <AppRouter />
+            <Toaster position="top-center" />
+            <VercelScriptsLoader />
+            <LiveRegistrations />
           </TooltipProvider>
         </ThemeProvider>
       </HelmetProvider>
