@@ -1,46 +1,38 @@
 import React from "react";
 import { HelmetProvider } from "react-helmet-async";
-import { Toaster } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
 import { Router, Route, Switch, useLocation } from "wouter";
 import { useHashLocation } from "wouter/use-hash-location";
-import ErrorBoundary from "@/components/ErrorBoundary";
-import { ThemeProvider } from "@/contexts/ThemeContext";
 
-import AnalyticsTracker from "@/components/AnalyticsTracker";
-import VercelScriptsLoader from "@/components/VercelScriptsLoader";
-import LiveRegistrations from "@/components/LiveRegistrations"; // 引入你提供的原版組件
+// --- 這裡全部修正為「同層相對路徑」 ---
+import ErrorBoundary from "./ErrorBoundary";
+import { ThemeProvider } from "./contexts/ThemeContext"; // 請確認此資料夾是否存在，若報錯請改為 "./ThemeContext"
 
-import Home from "@/pages/Home";
-import Deity from "@/pages/Deity";
-import Proof from "@/pages/Proof";
-import Pay from "@/pages/Pay";
-import Sutra from "@/pages/Sutra";
-import Puja from "@/pages/Puja";
-import Topic from "@/pages/Topic";
-import Wallpaper from "@/pages/Wallpaper";
-import About from "@/pages/About";
-import Terms from "@/pages/Terms";
-import NotFound from "@/pages/NotFound";
+import AnalyticsTracker from "./AnalyticsTracker";
+import VercelScriptsLoader from "./VercelScriptsLoader";
+import LiveRegistrations from "./LiveRegistrations";
 
-/**
- * 強化的 ScrollToTop
- * 確保在手機端 Hash Router 換頁時，頁面能確實回到最上方
- */
+// 頁面組件（假設你的 pages 在 src/pages）
+import Home from "./pages/Home";
+import Deity from "./pages/Deity";
+import Proof from "./pages/Proof";
+import Pay from "./pages/Pay";
+import Sutra from "./pages/Sutra";
+import Puja from "./pages/Puja";
+import Topic from "./pages/Topic";
+import Wallpaper from "./pages/Wallpaper";
+import About from "./pages/About";
+import Terms from "./pages/Terms";
+import NotFound from "./pages/NotFound";
+
 function ScrollToTop() {
   const [location] = useLocation();
-
   React.useEffect(() => {
     if (typeof window === "undefined") return;
-    
-    // 使用 100ms 延遲以確保手機瀏覽器完成渲染後才捲動
     const timer = setTimeout(() => {
       window.scrollTo({ top: 0, left: 0, behavior: "instant" });
     }, 100);
-
     return () => clearTimeout(timer);
   }, [location]);
-
   return null;
 }
 
@@ -49,7 +41,6 @@ function AppRouter() {
     <Router hook={useHashLocation}>
       <AnalyticsTracker />
       <ScrollToTop />
-      
       <Switch>
         <Route path="/" component={Home} />
         <Route path="/deity/:key">{(params) => <Deity deityKey={params.key} />}</Route>
@@ -72,14 +63,10 @@ export default function App() {
     <ErrorBoundary>
       <HelmetProvider>
         <ThemeProvider defaultTheme="dark">
-          <TooltipProvider>
-            {/* position 設為 bottom-center，最符合手機端顯示跑馬燈 */}
-            <Toaster position="bottom-center" richColors />
-            <VercelScriptsLoader />
-            <AppRouter />
-            {/* 啟動跑馬燈，與原本路由功能並行 */}
-            <LiveRegistrations /> 
-          </TooltipProvider>
+          {/* 暫時移除 Toaster 和 TooltipProvider 以防 Module Not Found */}
+          <VercelScriptsLoader />
+          <AppRouter />
+          <LiveRegistrations /> 
         </ThemeProvider>
       </HelmetProvider>
     </ErrorBoundary>

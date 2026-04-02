@@ -1,87 +1,117 @@
-import React from "react";
-import { HelmetProvider } from "react-helmet-async";
-import { Toaster } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { Router, Route, Switch, useLocation } from "wouter";
-import { useHashLocation } from "wouter/use-hash-location";
-import ErrorBoundary from "@/components/ErrorBoundary";
-import { ThemeProvider } from "@/contexts/ThemeContext";
-
-import AnalyticsTracker from "@/components/AnalyticsTracker";
-import VercelScriptsLoader from "@/components/VercelScriptsLoader";
-import LiveRegistrations from "@/components/LiveRegistrations"; // 引入你提供的原版組件
-
-import Home from "@/pages/Home";
-import Deity from "@/pages/Deity";
-import Proof from "@/pages/Proof";
-import Pay from "@/pages/Pay";
-import Sutra from "@/pages/Sutra";
-import Puja from "@/pages/Puja";
-import Topic from "@/pages/Topic";
-import Wallpaper from "@/pages/Wallpaper";
-import About from "@/pages/About";
-import Terms from "@/pages/Terms";
-import NotFound from "@/pages/NotFound";
+import { useEffect, useMemo, useState } from "react";
+// ⚠️ 關鍵修正：你的 lib 資料夾在 src 之下，與此檔案同層
+import { DEITIES } from "./lib/siteData"; 
 
 /**
- * 強化的 ScrollToTop
- * 確保在手機端 Hash Router 換頁時，頁面能確實回到最上方
+ * 隨機整數工具
  */
-function ScrollToTop() {
-  const [location] = useLocation();
-
-  React.useEffect(() => {
-    if (typeof window === "undefined") return;
-    
-    // 使用 100ms 延遲以確保手機瀏覽器完成渲染後才捲動
-    const timer = setTimeout(() => {
-      window.scrollTo({ top: 0, left: 0, behavior: "instant" });
-    }, 100);
-
-    return () => clearTimeout(timer);
-  }, [location]);
-
-  return null;
+function randInt(min: number, max: number) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function AppRouter() {
-  return (
-    <Router hook={useHashLocation}>
-      <AnalyticsTracker />
-      <ScrollToTop />
+const FAMILY_NAMES = ["林", "陳", "張", "黃", "李", "吳", "王", "蔡", "楊", "劉", "周", "鄭"];
+const GIVEN_NAMES = ["怡", "安", "芸", "晴", "昕", "芯", "妍", "庭", "恩", "昊", "承", "柏", "宇", "翔", "皓", "瑄", "甯", "涵"];
+const CITIES = ["台北", "新北", "桃園", "新竹", "台中", "彰化", "台南", "高雄", "屏東", "宜蘭"];
+
+/**
+ * 生成遮罩姓名
+ */
+function randomMaskedName() {
+  const f = FAMILY_NAMES[randInt(0, FAMILY_NAMES.length - 1)];
+  const g = GIVEN_NAMES[randInt(0, GIVEN_NAMES.length - 1)];
+  return `${f}${g}＊`;
+}
+
+/**
+ * 效能優化：在瀏覽器閒置時執行
+ */
+function runWhenIdle(fn: () => void) {
+  const ric = (window as any).requestIdleCallback;
+  if (typeof ric === "function") {
+    ric(() => fn(), { timeout: 2000 });
+  } else {
+    window.setTimeout(fn, 0);
+  }
+}
+
+export default function LiveRegistrations() {
+  // 使用 React State 自行實作通知 UI，不再依賴外部 sonner 套件，防止 Module Not Found
+  const [toast, setToast] = useState<{ id: number; title: string; desc: string } | null>(null);
+
+  const items = useMemo(() => {
+    if (!DEITIES) return [];
+    return DEITIES.flatMap((d) => 
+      d.plans.map((p) => ({ deity: d.name, plan: p.name }))
+    );
+  }, []);
+
+  useEffect(() => {
+    if (items.length === 0) return;
+
+    let timer: number | null = null;
+    let cancelled = false;
+
+    const scheduleToast = () => {
+      // 延遲 90-240 秒出現一次
+      const delayMs = randInt(90_000, 240_000); 
       
-      <Switch>
-        <Route path="/" component={Home} />
-        <Route path="/deity/:key">{(params) => <Deity deityKey={params.key} />}</Route>
-        <Route path="/proof" component={Proof} />
-        <Route path="/pay" component={Pay} />
-        <Route path="/sutra" component={Sutra} />
-        <Route path="/puja" component={Puja} />
-        <Route path="/wallpaper" component={Wallpaper} />
-        <Route path="/about" component={About} />
-        <Route path="/terms" component={Terms} />
-        <Route path="/topics/:slug">{(params) => <Topic slug={params.slug} />}</Route>
-        <Route component={NotFound} />
-      </Switch>
-    </Router>
-  );
-}
+      timer = window.setTimeout(() => {
+        if (cancelled) return;
+        if (document.visibilityState !== "visible") {
+          scheduleToast();
+          return;
+        }
 
-export default function App() {
+        runWhenIdle(() => {
+          if (cancelled) return;
+          const pick = items[randInt(0, items.length - 1)];
+          const name = randomMaskedName();
+          const city = CITIES[randInt(0, CITIES.length - 1)];
+          const remain = randInt(2, 16);
+          const days = randInt(1, 5);
+
+          setToast({
+            id: Date.now(),
+            title: `${name} 已完成護持登記`,
+            desc: `${city} · ${pick.deity} · ${pick.plan} · 剩餘名額 ${remain} (約 ${days} 天額滿)`
+          });
+
+          // 6 秒後自動消失
+          setTimeout(() => setToast(null), 6000);
+          scheduleToast();
+        });
+      }, delayMs);
+    };
+
+    // 首次顯示延遲
+    timer = window.setTimeout(scheduleToast, randInt(25_000, 45_000));
+
+    return () => {
+      cancelled = true;
+      if (timer) window.clearTimeout(timer);
+    };
+  }, [items]);
+
+  if (!toast) return null;
+
   return (
-    <ErrorBoundary>
-      <HelmetProvider>
-        <ThemeProvider defaultTheme="dark">
-          <TooltipProvider>
-            {/* position 設為 bottom-center，最符合手機端顯示跑馬燈 */}
-            <Toaster position="bottom-center" richColors />
-            <VercelScriptsLoader />
-            <AppRouter />
-            {/* 啟動跑馬燈，與原本路由功能並行 */}
-            <LiveRegistrations /> 
-          </TooltipProvider>
-        </ThemeProvider>
-      </HelmetProvider>
-    </ErrorBoundary>
+    <div 
+      key={toast.id}
+      className="fixed bottom-[85px] left-1/2 -translate-x-1/2 z-[9999] w-[90%] max-w-[350px] pointer-events-none"
+    >
+      <div className="bg-slate-900/95 backdrop-blur-md border border-amber-500/50 p-4 rounded-xl shadow-2xl animate-in fade-in slide-in-from-bottom-4 duration-500">
+        <div className="flex items-start gap-3">
+          <div className="h-2 w-2 mt-1.5 rounded-full bg-amber-500 shrink-0 animate-pulse" />
+          <div className="space-y-1">
+            <div className="text-sm font-bold text-slate-50 tracking-wider">
+              {toast.title}
+            </div>
+            <div className="text-xs text-slate-400 leading-relaxed">
+              {toast.desc}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
