@@ -9,11 +9,17 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 
 import { Link } from "wouter";
-import { ArrowRight, ShieldCheck, Sparkles, ClipboardList, Clock } from "lucide-react";
+import { ArrowRight, ShieldCheck, Sparkles, ClipboardList, Clock, Download } from "lucide-react";
 
 import { DEITIES, HOME_TESTIMONIALS, VISUALS } from "@/lib/siteData";
 
 export default function Home() {
+  
+  // 處理頁面內平滑滾動，避免 wouter 路由觸發 404 錯誤
+  const scrollToSection = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <SiteHeader />
@@ -31,60 +37,57 @@ export default function Home() {
           </div>
           <div className="absolute inset-0 bg-gradient-to-b from-background/15 via-background/75 to-background" />
 
-          {/* 移除了原本右側的經典卡片，讓標題更大器置中對齊 */}
-          <div className="relative mx-auto max-w-6xl px-4 pt-14 pb-12 md:pt-20 md:pb-16">
-            <div className="max-w-4xl">
-              <div className="flex flex-wrap items-center gap-2">
-                <Badge className="gold-border bg-background/35 text-foreground backdrop-blur">
-                  本月吉日窗口・名額開放
-                </Badge>
-                <Badge className="gold-border bg-background/35 text-foreground/90 backdrop-blur">
-                  先安定，再行動
-                </Badge>
-              </div>
+          <div className="relative mx-auto max-w-4xl px-4 pt-20 pb-16 flex flex-col items-center text-center">
+            <div className="flex flex-wrap justify-center items-center gap-2">
+              <Badge className="gold-border bg-background/35 text-foreground backdrop-blur">
+                本月吉日窗口・名額開放
+              </Badge>
+              <Badge className="gold-border bg-background/35 text-foreground/90 backdrop-blur">
+                先安定，再行動
+              </Badge>
+            </div>
 
-              <h1 className="mt-6 font-display text-5xl sm:text-6xl md:text-7xl leading-[1.02]">
-                我們不造神、不支薪
-                <br />
-                <span className="text-primary">只為您修補缺失的力量</span>
-              </h1>
+            <h1 className="mt-6 font-display text-5xl sm:text-6xl md:text-7xl leading-[1.02]">
+              我們不造神、不支薪
+              <br />
+              <span className="text-primary">只為您修補缺失的力量</span>
+            </h1>
 
-              <p className="mt-6 readable text-muted-foreground max-w-prose text-lg leading-relaxed">
-                我們是台北的無償志工團隊，與西藏師兄姊跨境協力。我們沒有大師包裝，沒有預算打廣告，只有實實在在的法事造冊。
-                <br className="hidden sm:block" />
-                如果您覺得這世界太虛假、太吵鬧，想找回一點點安靜且真實的加持——
-                <span className="text-foreground/90 font-medium">不用硬撐，請將這份沉重交託給純粹的傳承。</span>
-              </p>
+            <p className="mt-6 readable text-muted-foreground max-w-2xl text-lg leading-relaxed mx-auto">
+              我們是台北的無償志工團隊，與西藏師兄姊跨境協力。我們沒有大師包裝，沒有預算打廣告，只有實實在在的法事造冊。
+              <br className="hidden sm:block" />
+              如果您覺得這世界太虛假、太吵鬧，想找回一點點安靜且真實的加持——
+              <span className="text-foreground/90 font-medium">不用硬撐，請將這份沉重交託給純粹的傳承。</span>
+            </p>
 
-              <div className="mt-10 flex flex-col sm:flex-row gap-4">
-                <div className="w-full sm:w-auto flex flex-col">
-                  <Link href="/pay">
-                    <Button className="h-12 w-full px-8 font-bold tracking-[0.22em] uppercase gold-border shadow-md">
-                      立即登記保留名額 <ArrowRight className="h-4 w-4 ml-2" />
-                    </Button>
-                  </Link>
-                  <div className="mt-2.5 text-[11px] text-muted-foreground/80 flex items-center gap-1.5 font-medium">
-                    <Clock className="w-3.5 h-3.5 text-primary" />
-                    台灣志工晚間造冊，隔週公佈去識別化名錄供您核對
-                  </div>
+            <div className="mt-10 flex flex-col sm:flex-row justify-center gap-4 w-full sm:w-auto">
+              <div className="w-full sm:w-auto flex flex-col items-center">
+                <Link href="/pay">
+                  <Button className="h-12 w-full sm:w-auto px-8 font-bold tracking-[0.22em] uppercase gold-border shadow-md">
+                    立即登記保留名額 <ArrowRight className="h-4 w-4 ml-2" />
+                  </Button>
+                </Link>
+                <div className="mt-2.5 text-[11px] text-muted-foreground/80 flex items-center justify-center gap-1.5 font-medium">
+                  <Clock className="w-3.5 h-3.5 text-primary" />
+                  台灣志工晚間造冊，隔週公佈去識別化名錄
                 </div>
-
-                <a
-                  href="#quiz"
-                  className="h-12 px-8 inline-flex items-center justify-center rounded-md border bg-background/35 gold-border readable hover:bg-accent/35 transition-colors self-start font-medium"
-                >
-                  財庫能量檢測 <Sparkles className="ml-2 h-4 w-4 text-primary" />
-                </a>
               </div>
 
-              <div className="mt-8 text-xs text-muted-foreground tracking-[0.22em] uppercase">
-                清楚流程 · 經典依據 · 隔週造冊公佈
-              </div>
+              <button
+                onClick={() => scrollToSection("quiz")}
+                className="h-12 px-8 inline-flex items-center justify-center rounded-md border bg-background/35 gold-border readable hover:bg-accent/35 transition-colors font-medium w-full sm:w-auto"
+              >
+                財庫能量檢測 <Sparkles className="ml-2 h-4 w-4 text-primary" />
+              </button>
+            </div>
+
+            <div className="mt-10 text-xs text-muted-foreground tracking-[0.22em] uppercase">
+              清楚流程 · 經典依據 · 隔週造冊公佈
             </div>
           </div>
         </section>
 
-        {/* ✅ 財庫能量檢測：成功取代了原本的今日經典，放在最顯眼的黃金版位 */}
+        {/* 財庫能量檢測 */}
         <TreasuryQuiz />
 
         <div className="tibetan-divider h-10 opacity-70 mt-4" aria-hidden />
@@ -94,7 +97,7 @@ export default function Home() {
           <div className="grid gap-4 md:grid-cols-[1.05fr_.95fr] md:items-stretch">
             <Card className="p-7 md:p-9 gold-border bg-card/70 paper-grain">
               <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">快速指引</div>
-              <h2 className="mt-2 font-display text-3xl">30 秒找到你要的護持</h2>
+              <h2 className="mt-2 font-display text-3xl">直覺對位：找到你要的護持</h2>
               <p className="mt-4 readable text-muted-foreground">
                 您不用研究一堆名詞。先選「您卡在哪」，我們把每位本尊的方向寫得很清楚。
               </p>
@@ -126,11 +129,12 @@ export default function Home() {
               </div>
 
               <div className="mt-7 flex flex-col sm:flex-row gap-3">
-                <a href="#choose" className="flex-1">
-                  <Button className="h-12 w-full font-bold tracking-[0.22em] uppercase gold-border shadow-sm">
-                    開始選本尊 <ArrowRight className="h-4 w-4 ml-2" />
-                  </Button>
-                </a>
+                <button 
+                  onClick={() => scrollToSection("choose")}
+                  className="flex-1 h-12 w-full font-bold tracking-[0.22em] uppercase gold-border shadow-sm bg-primary/10 hover:bg-primary/20 transition-colors"
+                >
+                  開始選本尊 <ArrowRight className="h-4 w-4 ml-2 inline" />
+                </button>
                 <Link href="/pay" className="flex-1">
                   <Button variant="outline" className="h-12 w-full gold-border">直接去登記（收費表）</Button>
                 </Link>
@@ -143,7 +147,6 @@ export default function Home() {
 
               <div className="mt-6 grid gap-3">
                 <div className="grid gap-3">
-                  {/* ✅ 已修正：融入志工造冊與 FB 公佈機制 */}
                   {[
                     { title: "① 選本尊與方案", body: "依困境對位（增財/守財/愛情/除障），挑選最貼近狀態的價位。" },
                     { title: "② 登記與祈願", body: "完成綠界付款，並於備註欄寫下具體困境，系統即刻保留名額。" },
@@ -258,7 +261,6 @@ export default function Home() {
                       <ClipboardList className="w-3 h-3" /> 流程全透明
                     </div>
                     <div className="mt-1 font-display text-xl">隔週名單公佈</div>
-                    {/* ✅ 已修正：移除了容易引起客訴的影像回報 */}
                     <div className="mt-2 text-sm text-muted-foreground">志工彙整後於 FB 公佈去識別化名單</div>
                   </div>
                   <div>
@@ -278,6 +280,38 @@ export default function Home() {
                     提醒：此為團隊發心加碼，名額將依每週壇城負載量動態調整。
                   </div>
                 </div>
+              </div>
+            </div>
+          </Card>
+        </section>
+
+        {/* FREE GIFT 黃財神桌布下載區塊 - ✅ 已修正 TypeScript 紅字報錯 */}
+        <section className="mx-auto max-w-6xl px-4 pt-10 pb-2">
+          <Card className="gold-border bg-card/70 overflow-hidden paper-grain hover:border-primary/40 transition-colors">
+            <div className="grid md:grid-cols-[1fr_260px] items-center gap-6">
+              <div className="p-7 md:p-10">
+                <div className="text-xs tracking-[0.26em] uppercase text-primary font-bold flex items-center gap-2">
+                  <Download className="w-4 h-4" /> Free Gift
+                </div>
+                <h2 className="mt-2 font-display text-2xl md:text-3xl">黃財神手機桌布下載</h2>
+                <p className="mt-3 readable text-muted-foreground leading-relaxed max-w-2xl">
+                  慶祝 FB 粉絲團成立，我們製作了專屬的高畫質桌布送給您。<br/>
+                  願您每天打開手機，都記得：您的財庫正在回正，您值得被善緣與資糧好好照顧。
+                </p>
+                <div className="mt-6">
+                  <Link href="/wallpaper">
+                    <Button variant="outline" className="gold-border tracking-[0.15em] font-bold h-11 px-6">
+                      前往免費領取 <ArrowRight className="h-4 w-4 ml-2" />
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+              <div className="hidden md:block h-[280px] w-full">
+                <img 
+                  src={DEITIES.find(d => d.key === 'yellow')?.heroImage} 
+                  alt="黃財神桌布示意" 
+                  className="h-full w-full object-cover border-l border-border/50 opacity-80" 
+                />
               </div>
             </div>
           </Card>
