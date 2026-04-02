@@ -1,102 +1,87 @@
-import { useEffect, useMemo } from "react";
-import { toast } from "sonner";
-import { DEITIES } from "@/lib/siteData";
+import React from "react";
+import { HelmetProvider } from "react-helmet-async";
+import { Toaster } from "@/components/ui/sonner";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { Router, Route, Switch, useLocation } from "wouter";
+import { useHashLocation } from "wouter/use-hash-location";
+import ErrorBoundary from "@/components/ErrorBoundary";
+import { ThemeProvider } from "@/contexts/ThemeContext";
 
+import AnalyticsTracker from "@/components/AnalyticsTracker";
+import VercelScriptsLoader from "@/components/VercelScriptsLoader";
+import LiveRegistrations from "@/components/LiveRegistrations"; // 引入你提供的原版組件
 
-function randInt(min: number, max: number) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
+import Home from "@/pages/Home";
+import Deity from "@/pages/Deity";
+import Proof from "@/pages/Proof";
+import Pay from "@/pages/Pay";
+import Sutra from "@/pages/Sutra";
+import Puja from "@/pages/Puja";
+import Topic from "@/pages/Topic";
+import Wallpaper from "@/pages/Wallpaper";
+import About from "@/pages/About";
+import Terms from "@/pages/Terms";
+import NotFound from "@/pages/NotFound";
 
-const FAMILY_NAMES = ["林", "陳", "張", "黃", "李", "吳", "王", "蔡", "楊", "劉", "周", "鄭"];
-const GIVEN_NAMES = [
-  "怡",
-  "安",
-  "芸",
-  "晴",
-  "昕",
-  "芯",
-  "妍",
-  "庭",
-  "恩",
-  "昊",
-  "承",
-  "柏",
-  "宇",
-  "翔",
-  "皓",
-  "瑄",
-  "甯",
-  "涵",
-];
-const CITIES = ["台北", "新北", "桃園", "新竹", "台中", "彰化", "台南", "高雄", "屏東", "宜蘭"];
+/**
+ * 強化的 ScrollToTop
+ * 確保在手機端 Hash Router 換頁時，頁面能確實回到最上方
+ */
+function ScrollToTop() {
+  const [location] = useLocation();
 
-function randomMaskedName() {
-  const f = FAMILY_NAMES[randInt(0, FAMILY_NAMES.length - 1)];
-  const g = GIVEN_NAMES[randInt(0, GIVEN_NAMES.length - 1)];
-  return `${f}${g}＊`;
-}
+  React.useEffect(() => {
+    if (typeof window === "undefined") return;
+    
+    // 使用 100ms 延遲以確保手機瀏覽器完成渲染後才捲動
+    const timer = setTimeout(() => {
+      window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+    }, 100);
 
-function runWhenIdle(fn: () => void) {
-  // 讓 toast 盡量在主執行緒空閒時跑，降低與使用者互動搶資源（改善 INP）
-  const ric = window.requestIdleCallback;
-
-  if (typeof ric === "function") {
-    ric(() => fn(), { timeout: 2000 });
-  } else {
-    // Safari 等環境 fallback
-    window.setTimeout(fn, 0);
-  }
-}
-
-export default function LiveRegistrations() {
-  const items = useMemo(() => {
-    return DEITIES.flatMap((d) => d.plans.map((p) => ({ deity: d.name, plan: p.name, min: p.price })));
-  }, []);
-
-  useEffect(() => {
-    let timer: number | null = null;
-    let cancelled = false;
-
-    const scheduleToast = () => {
-      const delayMs = randInt(90_000, 240_000); // 90–240 秒不定時（降低頻率）
-      timer = window.setTimeout(() => {
-        if (cancelled) return;
-
-        // 背景分頁不做 UI 動作，避免在回到頁面時「卡一下」
-        if (document.visibilityState !== "visible") {
-          scheduleToast();
-          return;
-        }
-
-        runWhenIdle(() => {
-          if (cancelled) return;
-          if (document.visibilityState !== "visible") return;
-
-          const pick = items[randInt(0, items.length - 1)];
-          const name = randomMaskedName();
-          const city = CITIES[randInt(0, CITIES.length - 1)];
-
-          const remain = randInt(2, 16);
-          const days = randInt(1, 5);
-
-          toast(`${name} 已完成護持登記`, {
-            description: `${city} · ${pick.deity} · ${pick.plan} · 剩餘名額 ${remain}（約 ${days} 天內可能額滿）`,
-            duration: randInt(4600, 6400),
-          });
-
-          scheduleToast();
-        });
-      }, delayMs);
-    };
-
-    // 首次不要立刻跳，留 25–45 秒的「正常感」
-    timer = window.setTimeout(scheduleToast, randInt(25_000, 45_000));
-
-    return () => {
-      cancelled = true;
-      if (timer) window.clearTimeout(timer);
-    };
-  }, [items]);
+    return () => clearTimeout(timer);
+  }, [location]);
 
   return null;
+}
+
+function AppRouter() {
+  return (
+    <Router hook={useHashLocation}>
+      <AnalyticsTracker />
+      <ScrollToTop />
+      
+      <Switch>
+        <Route path="/" component={Home} />
+        <Route path="/deity/:key">{(params) => <Deity deityKey={params.key} />}</Route>
+        <Route path="/proof" component={Proof} />
+        <Route path="/pay" component={Pay} />
+        <Route path="/sutra" component={Sutra} />
+        <Route path="/puja" component={Puja} />
+        <Route path="/wallpaper" component={Wallpaper} />
+        <Route path="/about" component={About} />
+        <Route path="/terms" component={Terms} />
+        <Route path="/topics/:slug">{(params) => <Topic slug={params.slug} />}</Route>
+        <Route component={NotFound} />
+      </Switch>
+    </Router>
+  );
+}
+
+export default function App() {
+  return (
+    <ErrorBoundary>
+      <HelmetProvider>
+        <ThemeProvider defaultTheme="dark">
+          <TooltipProvider>
+            {/* position 設為 bottom-center，最符合手機端顯示跑馬燈 */}
+            <Toaster position="bottom-center" richColors />
+            <VercelScriptsLoader />
+            <AppRouter />
+            {/* 啟動跑馬燈，與原本路由功能並行 */}
+            <LiveRegistrations /> 
+          </TooltipProvider>
+        </ThemeProvider>
+      </HelmetProvider>
+    </ErrorBoundary>
+  );
 }
