@@ -285,7 +285,7 @@ export default function Home() {
           </Card>
         </section>
 
-        {/* FREE GIFT 黃財神桌布下載區塊 - ✅ 已修正 TypeScript 紅字報錯 */}
+        {/* FREE GIFT 黃財神桌布下載區塊 */}
         <section className="mx-auto max-w-6xl px-4 pt-10 pb-2">
           <Card className="gold-border bg-card/70 overflow-hidden paper-grain hover:border-primary/40 transition-colors">
             <div className="grid md:grid-cols-[1fr_260px] items-center gap-6">

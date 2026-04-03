@@ -8,14 +8,14 @@ import { SITE } from "@/lib/siteData";
 
 export default function Success() {
   useEffect(() => {
-    // 💡 這裡是拯救廣告轉換率的關鍵！
+    // 💡 解決 TypeScript 紅字的關鍵：加上 (window as any)
     // 當信眾抵達此頁，發送 Meta Pixel 的「購買 (Purchase)」事件
-    if (typeof window !== "undefined" && window.fbq) {
-      window.fbq('track', 'Purchase', { currency: 'TWD' });
+    if (typeof window !== "undefined" && (window as any).fbq) {
+      (window as any).fbq('track', 'Purchase', { currency: 'TWD' });
     }
-    // 同步發送 Google Analytics 的轉換事件 (如果有用 GA4)
-    if (typeof window !== "undefined" && window.gtag) {
-      window.gtag('event', 'purchase', { currency: 'TWD' });
+    // 同步發送 Google Analytics 的轉換事件
+    if (typeof window !== "undefined" && (window as any).gtag) {
+      (window as any).gtag('event', 'purchase', { currency: 'TWD' });
     }
   }, []);
 
