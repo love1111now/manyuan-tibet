@@ -466,7 +466,7 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
                   <div className="mt-6">
                     <Separator className="mb-5" />
                     
-                    {/* 新增：填寫引導提示 */}
+                    {/* 保留原本的文字提示 */}
                     <div className="mb-4 p-3 bg-background/60 rounded-md border border-border/50 text-[11px] text-muted-foreground leading-relaxed">
                       <Info className="w-3 h-3 inline mr-1 text-primary mb-0.5" />
                       祈願越具體越好！結帳時請於<strong className="text-foreground/80">備註欄</strong>寫下您的：<span className="text-foreground">姓名、居住地與具體困境</span>。
@@ -474,33 +474,85 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
 
                     <div className="flex flex-col sm:flex-row gap-3">
                       <div className="flex-1 text-center">
-                        <a
-                          href={p.url}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="block w-full"
-                          aria-label={`前往外部付款頁：${p.name}`}
-                          onClick={() => {
-                            if (typeof window !== "undefined") {
-                              window.gtag?.('event', 'begin_checkout', {
-                                currency: 'TWD',
-                                value: p.price,
-                                items: [{ item_name: `${d.name}-${p.name}`, price: p.price }]
-                              });
-                              window.fbq?.('track', 'InitiateCheckout', {
-                                content_name: p.name,
-                                value: p.price,
-                                currency: 'TWD'
-                              });
-                            }
-                          }}
-                        >
-                          <Button className="h-12 w-full font-bold tracking-[0.1em] gold-border bg-primary/90 hover:bg-primary text-primary-foreground shadow-sm transition-all">
-                            我願以此發心，請師兄代為造冊 <ExternalLink className="h-4 w-4 ml-2" />
-                          </Button>
-                        </a>
                         
-                        {/* 新增：金流視覺化與志工排程承諾 */}
+                        {/* ★★★ 核心修改區：將單純的跳轉 a 標籤改為包含視覺導引的 Dialog ★★★ */}
+                        <Dialog>
+                          <DialogTrigger asChild>
+                            <Button 
+                              className="h-12 w-full font-bold tracking-[0.1em] gold-border bg-primary/90 hover:bg-primary text-primary-foreground shadow-sm transition-all"
+                            >
+                              我願以此發心，請師兄代為造冊 <ExternalLink className="h-4 w-4 ml-2" />
+                            </Button>
+                          </DialogTrigger>
+                          <DialogContent className="max-w-md p-0 overflow-hidden bg-[#fffaf0] border-[#d4b483]">
+                            {/* 彈窗標題 */}
+                            <DialogHeader className="bg-[#fffaf0] p-6 pb-4 border-b border-[#d4b483]">
+                              <DialogTitle className="text-xl font-bold text-[#8b4513] flex items-center justify-center gap-2">
+                                <span>✍️</span> 綠界填寫預演
+                              </DialogTitle>
+                              <p className="text-sm text-[#8b4513] opacity-80 text-center mt-2 font-medium">
+                                為確保造冊無誤，請先看過<span className="text-red-700">備註欄填寫範例</span>再前往付款
+                              </p>
+                            </DialogHeader>
+
+                            {/* 彈窗內容：視覺模擬圖 */}
+                            <div className="p-6">
+                              <div className="bg-white rounded-xl p-5 mb-6 border border-gray-200 shadow-inner">
+                                <p className="text-sm text-gray-600 mb-4 text-center font-bold">
+                                  進入綠界後請滑到<span className="text-red-600 text-base">最下方</span>，照著下圖格式填寫：
+                                </p>
+                                
+                                <div className="bg-white border-2 border-red-500 rounded-lg p-5 relative shadow-sm mx-1">
+                                  <div className="absolute -top-3 left-4 bg-red-600 text-white text-[11px] px-3 py-0.5 rounded-full font-bold shadow-md tracking-wider">
+                                    必填位置：備註 (Remark)
+                                  </div>
+                                  <div className="font-mono text-gray-800 text-[14px] leading-relaxed mt-2 font-bold">
+                                    姓名：王小明<br/>
+                                    生辰：50年1月1日<br/>
+                                    祈願：祈求{d.name}加持，{p.name.split('｜')[0]}。
+                                  </div>
+                                  <div className="absolute inset-0 border-4 border-red-400 opacity-20 animate-pulse rounded-lg pointer-events-none"></div>
+                                </div>
+                              </div>
+
+                              {/* 實際跳轉綠界的按鈕（包含原有的 GA/FB 追蹤代碼） */}
+                              <a
+                                href={p.url}
+                                target="_blank"
+                                rel="noreferrer"
+                                className="block w-full"
+                                aria-label={`前往外部付款頁：${p.name}`}
+                                onClick={() => {
+                                  if (typeof window !== "undefined") {
+                                    window.gtag?.('event', 'begin_checkout', {
+                                      currency: 'TWD',
+                                      value: p.price,
+                                      items: [{ item_name: `${d.name}-${p.name}`, price: p.price }]
+                                    });
+                                    window.fbq?.('track', 'InitiateCheckout', {
+                                      content_name: p.name,
+                                      value: p.price,
+                                      currency: 'TWD'
+                                    });
+                                  }
+                                }}
+                              >
+                                <Button className="w-full h-14 bg-[#b22222] hover:bg-red-800 text-white text-lg font-bold rounded-full shadow-lg transition-all active:scale-95">
+                                  確認瞭解，前往綠界登記 <ExternalLink className="h-5 w-5 ml-2" />
+                                </Button>
+                              </a>
+
+                              <div className="mt-4 text-center">
+                                <p className="text-[11px] text-gray-500 flex items-center justify-center gap-1.5">
+                                  <Lock className="w-3 h-3 text-green-600" /> 點擊後將跳轉至綠界安全支付
+                                </p>
+                              </div>
+                            </div>
+                          </DialogContent>
+                        </Dialog>
+                        {/* ★★★ 核心修改區結束 ★★★ */}
+                        
+                        {/* 金流視覺化與志工排程承諾 */}
                         <div className="flex flex-col items-center gap-2 pt-3 mt-3 border-t border-border/30">
                           <div className="flex items-center gap-1.5 text-[10px] text-muted-foreground font-medium">
                             <Lock className="w-3 h-3 text-green-600/80" />
