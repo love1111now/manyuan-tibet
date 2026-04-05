@@ -123,10 +123,14 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
   const hot = d.plans.find((p) => p.hot) ?? d.plans[0];
 
   return (
-    <div className="min-h-screen bg-background">
+    // ★ 核心修改：動態套用 siteData 中的背景顏色 (themeColor.bg)，並加入漸變轉場
+    <div 
+      className="min-h-screen transition-colors duration-700 relative"
+      style={{ backgroundColor: d.themeColor.bg }}
+    >
       <SiteHeader />
 
-      <main>
+      <main className="relative z-10">
         {/* HERO */}
         <section className="mx-auto max-w-6xl px-4 pt-10 pb-6">
           <Link
@@ -139,7 +143,18 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
           <div className="mt-4 grid gap-6 md:grid-cols-[1.08fr_.92fr] md:items-start">
             <div>
               <div className="flex flex-wrap items-center gap-2">
-                <Badge className="gold-border bg-card/60">{d.primaryIntent}</Badge>
+                {/* ★ 核心修改：主要意圖標籤套用專屬強調色 (themeColor.accent) */}
+                <Badge 
+                  className="bg-card/60"
+                  style={{ 
+                    borderColor: d.themeColor.accent, 
+                    color: d.themeColor.accent,
+                    borderWidth: '1px',
+                    borderStyle: 'solid'
+                  }}
+                >
+                  {d.primaryIntent}
+                </Badge>
                 <Badge className="gold-border bg-card/60 text-muted-foreground">{d.heroKicker}</Badge>
               </div>
 
@@ -226,7 +241,7 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
               <ul className="mt-4 space-y-2 text-muted-foreground readable">
                 {d.painPoints.map((p) => (
                   <li key={p} className="flex gap-2">
-                    <Flame className="h-5 w-5 text-primary mt-0.5" />
+                    <Flame className="h-5 w-5 mt-0.5" style={{ color: d.themeColor.accent }} />
                     <span>{p}</span>
                   </li>
                 ))}
@@ -239,7 +254,7 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
               <ul className="mt-4 space-y-2 text-muted-foreground readable">
                 {d.whyThisDeity.map((x) => (
                   <li key={x} className="flex gap-2">
-                    <CheckCircle2 className="h-5 w-5 text-primary mt-0.5" />
+                    <CheckCircle2 className="h-5 w-5 mt-0.5" style={{ color: d.themeColor.accent }} />
                     <span>{x}</span>
                   </li>
                 ))}
@@ -257,7 +272,7 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
           <div className="mt-6 grid gap-4 md:grid-cols-3">
             {d.process.map((s) => (
               <Card key={s.title} className="p-7 gold-border bg-card/70 paper-grain">
-                <div className="font-display text-xl">{s.title}</div>
+                <div className="font-display text-xl" style={{ color: d.themeColor.accent }}>{s.title}</div>
                 <div className="mt-3 readable text-muted-foreground">{s.body}</div>
               </Card>
             ))}
@@ -278,15 +293,16 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
             <div className="mt-6 grid gap-4 md:grid-cols-[0.95fr_1.05fr] md:items-start">
               <Card className="gold-border bg-card/70 paper-grain overflow-hidden">
                 <AspectRatio ratio={16 / 9}>
+                  {/* ★ 核心修改：原本的 object-contain 改為 object-cover，營造充滿張力的專業攝影紀錄感 */}
                   <img
                     src={d.ritual.image}
                     alt={d.ritual.imageAlt}
-                    className="h-full w-full object-contain bg-background/30"
+                    className="h-full w-full object-cover bg-background/30"
                     loading="lazy"
                   />
                 </AspectRatio>
                 <div className="p-5">
-                  <div className="font-display text-xl">{d.ritual.title}</div>
+                  <div className="font-display text-xl" style={{ color: d.themeColor.accent }}>{d.ritual.title}</div>
                   {d.ritual.note ? (
                     <div className="mt-2 text-sm text-muted-foreground readable">{d.ritual.note}</div>
                   ) : null}
@@ -363,9 +379,9 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
 
         {/* PLANS */}
         <section id="plans" className="mx-auto max-w-6xl px-4 pt-12 pb-6 scroll-mt-24">
-          <Card className="mb-6 p-6 md:p-8 gold-border bg-background/50 border-primary/40 relative overflow-hidden">
-            <div className="absolute left-0 top-0 w-1 h-full bg-primary/60"></div>
-            <div className="text-sm tracking-[0.2em] text-primary mb-3 font-bold">【 寫在您選擇方案之前 】</div>
+          <Card className="mb-6 p-6 md:p-8 gold-border bg-background/50 relative overflow-hidden" style={{ borderColor: d.themeColor.accent + '66' }}>
+            <div className="absolute left-0 top-0 w-1 h-full" style={{ backgroundColor: d.themeColor.accent }}></div>
+            <div className="text-sm tracking-[0.2em] mb-3 font-bold" style={{ color: d.themeColor.accent }}>【 寫在您選擇方案之前 】</div>
             <p className="text-muted-foreground readable leading-relaxed max-w-3xl">
               我們知道，在這繁華的網路世界，您可能看過無數名師與神蹟保證。但滿願藏庫是一群在台北堅持不支薪、不造神的凡夫。我們每週的廣告費不到一千元，因為大家繳交的每一分錢，我們都想實實在在地匯往西藏換成供品。<br/><br/>
               如果您讀到了這裡，請相信，這不是演算法的推薦，是這份清淨傳承與您的緣分。
@@ -373,12 +389,12 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
           </Card>
 
           {/* 活動加碼橫幅 (Banner) */}
-          <div className="mt-2 mb-8 p-5 rounded-lg border border-primary/40 bg-primary/5 relative overflow-hidden group">
-            <div className="absolute top-0 right-0 p-4 opacity-10 font-display text-6xl text-primary pointer-events-none transition-transform group-hover:scale-110">
+          <div className="mt-2 mb-8 p-5 rounded-lg relative overflow-hidden group border" style={{ borderColor: d.themeColor.accent + '40', backgroundColor: d.themeColor.accent + '0D' }}>
+            <div className="absolute top-0 right-0 p-4 opacity-10 font-display text-6xl pointer-events-none transition-transform group-hover:scale-110" style={{ color: d.themeColor.accent }}>
               ✦
             </div>
             <div className="flex items-center gap-2 mb-2">
-              <Badge className="bg-primary text-primary-foreground gold-border animate-pulse">本月限定</Badge>
+              <Badge className="gold-border animate-pulse" style={{ backgroundColor: d.themeColor.accent, color: '#fff' }}>本月限定</Badge>
               <span className="font-display text-lg text-foreground/90">護持本尊，加碼贈「藥師佛每週息災煙供」</span>
             </div>
             <p className="text-sm text-muted-foreground readable">
@@ -401,8 +417,8 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
             <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">快速挑選（不想看太多字就用這個）</div>
             <div className="mt-3 grid gap-3 md:grid-cols-3">
               <button type="button" className="block text-left" onClick={() => scrollToId("plan-hot")}>
-                <Button className="h-12 w-full gold-border font-bold">
-                  最多人選：{hot.name} <ArrowRight className="h-4 w-4" />
+                <Button className="h-12 w-full gold-border font-bold hover:opacity-90" style={{ backgroundColor: d.themeColor.accent, color: '#fff' }}>
+                  最多人選：{hot.name} <ArrowRight className="h-4 w-4 ml-1" />
                 </Button>
               </button>
               <button type="button" className="block text-left" onClick={() => scrollToId("plan-cheap")}>
@@ -435,14 +451,14 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
                       <div>
                         <div className="flex items-center gap-2 flex-wrap">
                           <div className="font-display text-2xl">{p.name}</div>
-                          {p.hot ? <Badge className="gold-border bg-primary text-primary-foreground">推薦</Badge> : null}
+                          {p.hot ? <Badge className="gold-border" style={{ backgroundColor: d.themeColor.accent, color: '#fff' }}>推薦</Badge> : null}
                           {p.badge ? <Badge variant="secondary">{p.badge}</Badge> : null}
                         </div>
                         <div className="mt-2 text-sm text-muted-foreground">適合：{p.suitableFor.join("、")}</div>
                       </div>
                       <div className="text-right">
                         <div className="text-xs tracking-[0.22em] uppercase text-muted-foreground">費用</div>
-                        <div className="mt-1 font-display text-3xl text-primary">{p.price}</div>
+                        <div className="mt-1 font-display text-3xl" style={{ color: d.themeColor.accent }}>{p.price}</div>
                       </div>
                     </div>
 
@@ -454,7 +470,7 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
                         <ul className="mt-3 space-y-2 text-sm text-muted-foreground readable">
                           {p.details.map((x) => (
                             <li key={x} className="flex gap-2">
-                              <span className="mt-[0.35rem] h-1.5 w-1.5 rounded-full bg-primary/80 flex-none" />
+                              <span className="mt-[0.35rem] h-1.5 w-1.5 rounded-full flex-none" style={{ backgroundColor: d.themeColor.accent }} />
                               <span>{x}</span>
                             </li>
                           ))}
@@ -468,18 +484,18 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
                     
                     {/* 保留原本的文字提示 */}
                     <div className="mb-4 p-3 bg-background/60 rounded-md border border-border/50 text-[11px] text-muted-foreground leading-relaxed">
-                      <Info className="w-3 h-3 inline mr-1 text-primary mb-0.5" />
+                      <Info className="w-3 h-3 inline mr-1 mb-0.5" style={{ color: d.themeColor.accent }} />
                       祈願越具體越好！結帳時請於<strong className="text-foreground/80">備註欄</strong>寫下您的：<span className="text-foreground">姓名、居住地與具體困境</span>。
                     </div>
 
                     <div className="flex flex-col sm:flex-row gap-3">
                       <div className="flex-1 text-center">
                         
-                        {/* ★★★ 核心修改區：將單純的跳轉 a 標籤改為包含視覺導引的 Dialog ★★★ */}
                         <Dialog>
                           <DialogTrigger asChild>
                             <Button 
-                              className="h-12 w-full font-bold tracking-[0.1em] gold-border bg-primary/90 hover:bg-primary text-primary-foreground shadow-sm transition-all"
+                              className="h-12 w-full font-bold tracking-[0.1em] gold-border text-white shadow-sm transition-all hover:opacity-90"
+                              style={{ backgroundColor: d.themeColor.accent }}
                             >
                               我願以此發心，請師兄代為造冊 <ExternalLink className="h-4 w-4 ml-2" />
                             </Button>
@@ -550,7 +566,6 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
                             </div>
                           </DialogContent>
                         </Dialog>
-                        {/* ★★★ 核心修改區結束 ★★★ */}
                         
                         {/* 金流視覺化與志工排程承諾 */}
                         <div className="flex flex-col items-center gap-2 pt-3 mt-3 border-t border-border/30">
@@ -606,7 +621,7 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
           </div>
         </section>
 
-        {/* CROSS SELL - 修改 pb-14 為 pb-32 以避免被 StickyCta 遮擋 */}
+        {/* CROSS SELL */}
         <section className="mx-auto max-w-6xl px-4 pb-32">
           <Card className="p-7 gold-border bg-card/70 paper-grain">
             <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">你也可以</div>
@@ -618,7 +633,7 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
                 return (
                   <Link key={x.to} href={`/deity/${x.to}`} aria-label={`前往 ${t.name} 頁面`}>
                     <Card className="p-6 gold-border bg-background/35 hover:bg-accent/30 transition-colors">
-                      <div className="font-display text-xl">{x.title}</div>
+                      <div className="font-display text-xl" style={{ color: t.themeColor.accent }}>{x.title}</div>
                       <div className="mt-2 text-muted-foreground readable">{x.desc}</div>
                       <div className="mt-4 inline-flex items-center gap-2 text-sm font-semibold">
                         看 {t.name} <ArrowRight className="h-4 w-4" />

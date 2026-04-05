@@ -154,6 +154,11 @@ export type DeityKey =
   | "green-tara"
   | "medicine-buddha";
 
+export interface ThemeColor {
+  readonly bg: string;      // 頁面背景色 (搭配App.css的紙質紋理)
+  readonly accent: string;  // 強調色
+}
+
 export interface Plan {
   readonly id: string;
   readonly name: string;
@@ -179,6 +184,7 @@ export interface Deity {
   readonly subtitle: string;
   readonly route: string;
   readonly primaryIntent: string;
+  readonly themeColor: ThemeColor; // ★ 新增：控制該神明頁面的專屬背景與強調色
   readonly heroKicker: string;
   readonly heroImage: string;
   readonly promise: string;
@@ -189,7 +195,7 @@ export interface Deity {
 
   readonly ritual?: {
     readonly title: string;
-    readonly image: string;
+    readonly image: string; // ★ 動態套用各自專屬的儀軌紀錄照片
     readonly imageAlt: string;
     readonly mdPath: string;
     readonly sourceUrl: string;
@@ -215,11 +221,12 @@ export const DEITY_BY_KEY: Record<DeityKey, Deity> = {
     subtitle: "積聚資糧・廣修布施",
     route: "/deity/yellow",
     primaryIntent: "增加收入",
+    themeColor: { bg: "#FFFBEB", accent: "#B45309" }, // 富貴金
     heroKicker: "修補財庫的起點",
     heroImage: heroYellowImg,
     ritual: {
       title: "黃財神煙供（贊巴拉 Sang 供養）",
-      image: ritualSangSmokeImg,
+      image: ritualSangSmokeImg, // ★ 財富屬性：煙供/香供儀軌紀錄
       imageAlt: "儀軌示意：香供／煙供（sang）之煙雲供養",
       mdPath: "yellow-jambhala-sang.md",
       sourceUrl:
@@ -329,11 +336,12 @@ export const DEITY_BY_KEY: Record<DeityKey, Deity> = {
     subtitle: "豐饒吉祥・資具無缺",
     route: "/deity/mahashri",
     primaryIntent: "家宅平安",
+    themeColor: { bg: "#FFF9F5", accent: "#D97706" }, // 暖金橘色
     heroKicker: "把生活穩穩守住",
     heroImage: heroMahashriImg,
     ritual: {
       title: "大吉祥天女陀羅尼（善女天咒）",
-      image: ritualButterLampsImg,
+      image: ritualButterLampsImg, // ★ 吉祥屬性：供燈/平安紀錄
       imageAlt: "儀軌示意：供燈（酥油燈／燈明供養）",
       mdPath: "mahashri-dharani.md",
       sourceUrl: "/resources/webpages/f-2023-15.pdf",
@@ -431,11 +439,12 @@ export const DEITY_BY_KEY: Record<DeityKey, Deity> = {
     subtitle: "無礙成就・決策清明",
     route: "/deity/ganapati",
     primaryIntent: "掃除障礙",
+    themeColor: { bg: "#F8FAFC", accent: "#1E40AF" }, // 深夜藍
     heroKicker: "為你清開前方的路",
     heroImage: heroGanapatiImg,
     ritual: {
       title: "象頭財神讚頌（除障・開路法要）",
-      image: ritualTormaAltarImg,
+      image: ritualTormaAltarImg, // ★ 力量/破障屬性：朵瑪壇城紀錄
       imageAlt: "儀軌示意：壇城供品與朵瑪（torma）供養",
       mdPath: "ganapati.md",
       sourceUrl: "https://www.lotsawahouse.org/indian-masters/atisha/ganapati-ragavajra-praise",
@@ -534,11 +543,12 @@ export const DEITY_BY_KEY: Record<DeityKey, Deity> = {
     subtitle: "愛敬磁聚・人緣貴人",
     route: "/deity/kurukulla",
     primaryIntent: "人緣貴人",
+    themeColor: { bg: "#FFF1F2", accent: "#BE123C" }, // 珊瑚紅
     heroKicker: "讓對的緣分自然靠近",
     heroImage: heroKurukullaImg,
     ritual: {
       title: "作明佛母儀軌（磁聚・愛敬・貴人緣）",
-      image: ritualMalaHandsImg,
+      image: ritualMalaHandsImg, // ★ 磁聚屬性：持咒念珠紀錄
       imageAlt: "儀軌示意：持咒念珠（mala）修持",
       mdPath: "kurukulla.md",
       sourceUrl: "https://www.lotsawahouse.org/tibetan-masters/mipham/kurukulla-sadhana",
@@ -630,11 +640,12 @@ export const DEITY_BY_KEY: Record<DeityKey, Deity> = {
     subtitle: "總集加持・無畏護持",
     route: "/deity/padmasambhava",
     primaryIntent: "威德護持",
+    themeColor: { bg: "#FDF2F2", accent: "#800000" }, // 藏紅色
     heroKicker: "在你最脆弱時撐住你",
     heroImage: heroPadmasambhavaImg,
     ritual: {
       title: "蓮師七句祈請文（總集加持・無畏護持）",
-      image: ritualSangSmokeImg,
+      image: ritualSangSmokeImg, // ★ 轉運/威德屬性：煙供/香供儀式紀錄
       imageAlt: "儀軌示意：焚香持誦祈請",
       mdPath: "seven-line-prayer.md",
       sourceUrl: "https://www.lotsawahouse.org/topics/seven-line-prayer/",
@@ -723,11 +734,12 @@ export const DEITY_BY_KEY: Record<DeityKey, Deity> = {
     subtitle: "琉璃光境・健康息災",
     route: "/deity/medicine-buddha",
     primaryIntent: "健康息災",
+    themeColor: { bg: "#F0F9FF", accent: "#0369A1" }, // 琉璃藍
     heroKicker: "為您補回流失的元氣",
     heroImage: heroMedicineBuddhaImg,
     ritual: {
       title: "藥師如來儀軌（息災延壽・身心安穩）",
-      image: ritualWaterOfferingImg,
+      image: ritualWaterOfferingImg, // ★ 醫藥屬性：清淨水供紀錄
       imageAlt: "儀軌示意：淨水與供碗供養",
       mdPath: "medicine-buddha.md",
       sourceUrl: "https://www.lotsawahouse.org/tibetan-masters/karma-chakme/medicine-buddha-sadhana",
@@ -811,11 +823,12 @@ export const DEITY_BY_KEY: Record<DeityKey, Deity> = {
     subtitle: "慈悲救護・迅疾除障",
     route: "/deity/green-tara",
     primaryIntent: "迅疾救護",
+    themeColor: { bg: "#F0FDF4", accent: "#15803D" }, // 寧靜綠
     heroKicker: "先把無名的恐懼停下",
     heroImage: heroGreenTaraImg,
     ritual: {
       title: "綠度母日常修持（迅疾救護・除怖畏）",
-      image: ritualButterLampsImg,
+      image: ritualButterLampsImg, // ★ 慈悲屬性：供燈平安紀錄
       imageAlt: "儀軌示意：供燈與日常供養",
       mdPath: "green-tara.md",
       sourceUrl: "https://www.lotsawahouse.org/tibetan-masters/dudjom-rinpoche/daily-green-tara-practice",
