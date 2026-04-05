@@ -1,14 +1,16 @@
 @import "tailwindcss";
 
 @theme {
-  --color-background: var(--background);
+  /* ★ 核心架構升級：允許透過 --page-bg 與 --page-accent 動態覆蓋全站顏色 */
+  --color-background: var(--page-bg, var(--background));
+  --color-primary: var(--page-accent, var(--primary));
+  --color-ring: var(--page-accent, var(--ring));
+
   --color-foreground: var(--foreground);
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
   --color-popover: var(--popover);
   --color-popover-foreground: var(--popover-foreground);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
   --color-muted: var(--muted);
@@ -19,7 +21,7 @@
   --color-destructive-foreground: var(--destructive-foreground);
   --color-border: var(--border);
   --color-input: var(--input);
-  --color-ring: var(--ring);
+  
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -29,44 +31,44 @@
 @layer base {
   /* 合併 :root 與 .dark，確保全站維持深色高質感模式 */
   :root, .dark {
-    /* 背景：極深邃的夜空藍 */
-    --background: oklch(0.15 0.02 260);
+    /* ★ 校正：將原先冷調的藍 (260) 改為深邃的暖黑/褐金 (75)，作為暖金紙質的完美基底 */
+    --background: oklch(0.16 0.02 75);
     /* 文字：帶有一點金黃光澤的米白色 */
-    --foreground: oklch(0.95 0.02 85);
+    --foreground: oklch(0.92 0.02 75);
 
-    /* 卡片與浮出視窗：層次感的深藍 */
-    --card: oklch(0.18 0.02 260);
-    --card-foreground: oklch(0.95 0.02 85);
-    --popover: oklch(0.18 0.02 260);
-    --popover-foreground: oklch(0.95 0.02 85);
+    /* 卡片與浮出視窗：層次感的深褐金 */
+    --card: oklch(0.19 0.02 75);
+    --card-foreground: oklch(0.92 0.02 75);
+    --popover: oklch(0.19 0.02 75);
+    --popover-foreground: oklch(0.92 0.02 75);
 
     /* 主色調：純淨的法器金色 (按鈕、強調) */
-    --primary: oklch(0.75 0.15 85);
-    /* 主色調上的文字：深藍色 */
-    --primary-foreground: oklch(0.15 0.02 260);
+    --primary: oklch(0.75 0.15 80);
+    /* 主色調上的文字：深色，確保對比度 */
+    --primary-foreground: oklch(0.15 0.02 75);
 
-    /* 次要色調：低調的深銅色/暗金色 */
-    --secondary: oklch(0.25 0.05 85);
-    --secondary-foreground: oklch(0.85 0.10 85);
+    /* 次要色調：低調的暗金色 */
+    --secondary: oklch(0.25 0.05 75);
+    --secondary-foreground: oklch(0.85 0.10 75);
 
-    /* 靜音色/輔助色：帶藍灰的暗色 */
-    --muted: oklch(0.22 0.02 260);
-    --muted-foreground: oklch(0.65 0.02 260);
+    /* 靜音色/輔助色 */
+    --muted: oklch(0.22 0.02 75);
+    --muted-foreground: oklch(0.65 0.02 75);
 
     /* 點擊/懸停強調色 */
-    --accent: oklch(0.25 0.04 260);
-    --accent-foreground: oklch(0.95 0.02 85);
+    --accent: oklch(0.25 0.04 75);
+    --accent-foreground: oklch(0.95 0.02 75);
 
     /* 錯誤/警告色：藏紅色 */
     --destructive: oklch(0.50 0.15 25);
-    --destructive-foreground: oklch(0.95 0.02 85);
+    --destructive-foreground: oklch(0.95 0.02 75);
 
-    /* 邊框與輸入框：暗金色或深藍邊框 */
-    --border: oklch(0.25 0.03 260);
-    --input: oklch(0.25 0.03 260);
+    /* 邊框與輸入框 */
+    --border: oklch(0.25 0.03 75);
+    --input: oklch(0.25 0.03 75);
     
     /* 焦點外圈：金色 */
-    --ring: oklch(0.75 0.15 85);
+    --ring: oklch(0.75 0.15 80);
 
     /* 圓角設定 */
     --radius: 0.5rem;
@@ -78,8 +80,7 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
-    /* 字體平滑處理，提升質感 */
+    @apply bg-background text-foreground transition-colors duration-700;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -89,22 +90,20 @@
    Custom Utilities (Neo-thangka noir)
    ========================================= */
 @layer utilities {
-  /* 1. 金色法器邊框與微光暈 */
+  /* 1. 金色法器邊框與微光暈：動態綁定 --color-primary */
   .gold-border {
-    border: 1px solid var(--primary);
-    border-color: color-mix(in oklch, var(--primary) 40%, transparent);
-    box-shadow: 0 4px 20px -2px color-mix(in oklch, var(--primary) 8%, transparent),
-                inset 0 0 0 1px color-mix(in oklch, var(--primary) 10%, transparent);
+    border: 1px solid var(--color-primary);
+    border-color: color-mix(in oklch, var(--color-primary) 40%, transparent);
+    box-shadow: 0 4px 20px -2px color-mix(in oklch, var(--color-primary) 8%, transparent),
+                inset 0 0 0 1px color-mix(in oklch, var(--color-primary) 10%, transparent);
   }
-  /* 滑鼠懸停時的光澤增強 */
   .gold-border:hover {
-    border-color: color-mix(in oklch, var(--primary) 70%, transparent);
-    box-shadow: 0 8px 30px -4px color-mix(in oklch, var(--primary) 15%, transparent),
-                inset 0 0 0 1px color-mix(in oklch, var(--primary) 20%, transparent);
+    border-color: color-mix(in oklch, var(--color-primary) 70%, transparent);
+    box-shadow: 0 8px 30px -4px color-mix(in oklch, var(--color-primary) 15%, transparent),
+                inset 0 0 0 1px color-mix(in oklch, var(--color-primary) 20%, transparent);
   }
 
-  /* 2. 經卷紙質紋理 (Paper Grain)
-     利用 SVG 雜訊製造出非數位的真實觸感，降低宗教網頁的廉價感 */
+  /* 2. 經卷紙質紋理 (Paper Grain) - 深色模式最佳化 */
   .paper-grain {
     position: relative;
     isolation: isolate;
@@ -114,11 +113,21 @@
     position: absolute;
     inset: 0;
     z-index: -1;
-    opacity: 0.05; /* 微妙的雜訊強度 */
-    mix-blend-mode: overlay;
+    opacity: 0.08; /* 稍微調高深色模式下的雜訊能見度 */
+    mix-blend-mode: soft-light; /* soft-light 在深色背景融合更自然 */
     pointer-events: none;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
     border-radius: inherit;
+  }
+  /* 疊加一層極其微弱的主題色光暈，渲染暖金質感 */
+  .paper-grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    background: color-mix(in oklch, var(--color-primary) 2%, transparent);
+    border-radius: inherit;
+    pointer-events: none;
   }
 
   /* 3. 藏式漸層分隔線 */
@@ -128,12 +137,12 @@
     background: linear-gradient(
       90deg,
       transparent 0%,
-      color-mix(in oklch, var(--primary) 50%, transparent) 50%,
+      color-mix(in oklch, var(--color-primary) 50%, transparent) 50%,
       transparent 100%
     );
   }
 
-  /* 4. 長文閱讀優化 (Sutra & Proof 區塊專用) */
+  /* 4. 長文閱讀優化 */
   .readable {
     line-height: 1.8;
     letter-spacing: 0.03em;
@@ -142,7 +151,7 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
-  /* 5. 確保 Sticky 懸浮按鈕在手機端能避開 iOS 底部橫條 (Safe Area) */
+  /* 5. 確保 Sticky 懸浮按鈕避開 iOS 底部橫條 */
   .pb-safe {
     padding-bottom: env(safe-area-inset-bottom, 16px);
   }

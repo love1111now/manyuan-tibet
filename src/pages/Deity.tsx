@@ -52,7 +52,7 @@ function anchorBtn(label: string, targetId: string, Icon: any) {
     <button type="button" className="block text-left" onClick={() => scrollToId(targetId)}>
       <Button
         variant="outline"
-        className="h-11 w-full justify-start gap-2 gold-border bg-card/50 hover:bg-accent/30"
+        className="h-11 w-full justify-start gap-2 gold-border bg-card/50 hover:bg-accent/30 transition-colors"
       >
         <Icon className="h-4 w-4" />
         <span className="font-semibold">{label}</span>
@@ -123,19 +123,22 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
   const hot = d.plans.find((p) => p.hot) ?? d.plans[0];
 
   return (
-    // ★ 核心修改：動態套用 siteData 中的背景顏色 (themeColor.bg)，並加入漸變轉場
+    // ★ 核心變更：將 siteData 中對應本尊的顏色變數注入，配合 index.css 接管全站色彩
     <div 
-      className="min-h-screen transition-colors duration-700 relative"
-      style={{ backgroundColor: d.themeColor.bg }}
+      className="min-h-screen bg-background transition-colors duration-700 relative"
+      style={{
+        "--page-bg": d.themeColor.bg,
+        "--page-accent": d.themeColor.accent,
+      } as React.CSSProperties}
     >
       <SiteHeader />
 
-      <main className="relative z-10">
+      <main>
         {/* HERO */}
         <section className="mx-auto max-w-6xl px-4 pt-10 pb-6">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground"
+            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
           >
             <ArrowLeft className="h-4 w-4" /> 回首頁
           </Link>
@@ -143,16 +146,8 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
           <div className="mt-4 grid gap-6 md:grid-cols-[1.08fr_.92fr] md:items-start">
             <div>
               <div className="flex flex-wrap items-center gap-2">
-                {/* ★ 核心修改：主要意圖標籤套用專屬強調色 (themeColor.accent) */}
-                <Badge 
-                  className="bg-card/60"
-                  style={{ 
-                    borderColor: d.themeColor.accent, 
-                    color: d.themeColor.accent,
-                    borderWidth: '1px',
-                    borderStyle: 'solid'
-                  }}
-                >
+                {/* 意圖標籤套用動態強調色 */}
+                <Badge className="bg-card/60 text-primary border-primary" style={{ borderWidth: '1px' }}>
                   {d.primaryIntent}
                 </Badge>
                 <Badge className="gold-border bg-card/60 text-muted-foreground">{d.heroKicker}</Badge>
@@ -165,12 +160,12 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
 
               <div className="mt-7 flex flex-col sm:flex-row gap-3">
                 <button type="button" onClick={() => scrollToId("plans")}>
-                  <Button className="h-12 px-6 font-bold tracking-[0.22em] uppercase gold-border">
-                    直接選方案 <ArrowRight className="h-4 w-4" />
+                  <Button className="h-12 px-6 font-bold tracking-[0.22em] uppercase gold-border transition-transform hover:scale-[1.02] active:scale-95">
+                    直接選方案 <ArrowRight className="h-4 w-4 ml-1" />
                   </Button>
                 </button>
                 <Link href="/pay">
-                  <Button variant="outline" className="h-12 px-6 gold-border">
+                  <Button variant="outline" className="h-12 px-6 gold-border hover:bg-primary/10">
                     看全收費表
                   </Button>
                 </Link>
@@ -194,7 +189,7 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
                       <img
                         src={d.heroImage}
                         alt={`${d.name} 唐卡形象示意`}
-                        className="h-full w-full object-contain bg-background/40"
+                        className="h-full w-full object-contain bg-background/40 transition-transform duration-500 hover:scale-105"
                         loading="eager"
                       />
                     </AspectRatio>
@@ -218,12 +213,12 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
 
               <div className="p-6">
                 <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">經典依據（節錄）</div>
-                <blockquote className="mt-3 border-l-2 border-border pl-4 readable text-muted-foreground">
+                <blockquote className="mt-3 border-l-2 border-primary/50 pl-4 readable text-muted-foreground">
                   {d.scripture[0]?.quote}
                   <div className="mt-3 text-xs text-muted-foreground/80">出處：{d.scripture[0]?.source}</div>
                 </blockquote>
                 <div className="mt-4">
-                  <Link href="/sutra" className="text-sm underline text-muted-foreground hover:text-foreground">
+                  <Link href="/sutra" className="text-sm underline text-muted-foreground hover:text-foreground transition-colors">
                     看更多經典引用
                   </Link>
                 </div>
@@ -241,7 +236,7 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
               <ul className="mt-4 space-y-2 text-muted-foreground readable">
                 {d.painPoints.map((p) => (
                   <li key={p} className="flex gap-2">
-                    <Flame className="h-5 w-5 mt-0.5" style={{ color: d.themeColor.accent }} />
+                    <Flame className="h-5 w-5 text-primary mt-0.5 flex-none" />
                     <span>{p}</span>
                   </li>
                 ))}
@@ -254,7 +249,7 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
               <ul className="mt-4 space-y-2 text-muted-foreground readable">
                 {d.whyThisDeity.map((x) => (
                   <li key={x} className="flex gap-2">
-                    <CheckCircle2 className="h-5 w-5 mt-0.5" style={{ color: d.themeColor.accent }} />
+                    <CheckCircle2 className="h-5 w-5 text-primary mt-0.5 flex-none" />
                     <span>{x}</span>
                   </li>
                 ))}
@@ -272,7 +267,7 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
           <div className="mt-6 grid gap-4 md:grid-cols-3">
             {d.process.map((s) => (
               <Card key={s.title} className="p-7 gold-border bg-card/70 paper-grain">
-                <div className="font-display text-xl" style={{ color: d.themeColor.accent }}>{s.title}</div>
+                <div className="font-display text-xl text-primary">{s.title}</div>
                 <div className="mt-3 readable text-muted-foreground">{s.body}</div>
               </Card>
             ))}
@@ -285,7 +280,7 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
         {d.ritual ? (
           <section id="ritual" className="mx-auto max-w-6xl px-4 pt-10 pb-4 scroll-mt-24">
             <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">正統儀軌</div>
-            <h2 className="mt-2 font-display text-3xl">本次修持依循的正統儀軌</h2>
+            <h2 className="mt-2 font-display text-3xl text-primary">{d.ritual.title}</h2>
             <p className="mt-3 readable text-muted-foreground max-w-prose">
               下列為我們實際依循的儀軌要點（修持依據）與準備項目；全文保留權威來源與出處，確保修持如法。
             </p>
@@ -293,7 +288,7 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
             <div className="mt-6 grid gap-4 md:grid-cols-[0.95fr_1.05fr] md:items-start">
               <Card className="gold-border bg-card/70 paper-grain overflow-hidden">
                 <AspectRatio ratio={16 / 9}>
-                  {/* ★ 核心修改：原本的 object-contain 改為 object-cover，營造充滿張力的專業攝影紀錄感 */}
+                  {/* ★ 這裡改為 object-cover，呈現專業無邊界的攝影張力 */}
                   <img
                     src={d.ritual.image}
                     alt={d.ritual.imageAlt}
@@ -302,7 +297,7 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
                   />
                 </AspectRatio>
                 <div className="p-5">
-                  <div className="font-display text-xl" style={{ color: d.themeColor.accent }}>{d.ritual.title}</div>
+                  <div className="font-display text-xl">{d.ritual.title}</div>
                   {d.ritual.note ? (
                     <div className="mt-2 text-sm text-muted-foreground readable">{d.ritual.note}</div>
                   ) : null}
@@ -346,7 +341,7 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
 
                   <div className="mt-4 flex items-center gap-2">
                     <a href={d.ritual.sourceUrl} target="_blank" rel="noreferrer" className="inline-flex">
-                      <Button variant="outline" className="gold-border h-10 gap-2">
+                      <Button variant="outline" className="gold-border h-10 gap-2 hover:bg-primary/10 transition-colors">
                         查看原文出處 <ExternalLink className="h-4 w-4" />
                       </Button>
                     </a>
@@ -361,7 +356,7 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
                 <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">全文（可複製）</div>
                 <div className="mt-4">
                   {ritualLoading ? (
-                    <div className="text-sm text-muted-foreground">載入中…</div>
+                    <div className="text-sm text-muted-foreground animate-pulse">載入中…</div>
                   ) : ritualError ? (
                     <div className="text-sm text-destructive">{ritualError}</div>
                   ) : (
@@ -379,9 +374,9 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
 
         {/* PLANS */}
         <section id="plans" className="mx-auto max-w-6xl px-4 pt-12 pb-6 scroll-mt-24">
-          <Card className="mb-6 p-6 md:p-8 gold-border bg-background/50 relative overflow-hidden" style={{ borderColor: d.themeColor.accent + '66' }}>
-            <div className="absolute left-0 top-0 w-1 h-full" style={{ backgroundColor: d.themeColor.accent }}></div>
-            <div className="text-sm tracking-[0.2em] mb-3 font-bold" style={{ color: d.themeColor.accent }}>【 寫在您選擇方案之前 】</div>
+          <Card className="mb-6 p-6 md:p-8 gold-border bg-background/50 border-primary/40 relative overflow-hidden">
+            <div className="absolute left-0 top-0 w-1 h-full bg-primary/60"></div>
+            <div className="text-sm tracking-[0.2em] text-primary mb-3 font-bold">【 寫在您選擇方案之前 】</div>
             <p className="text-muted-foreground readable leading-relaxed max-w-3xl">
               我們知道，在這繁華的網路世界，您可能看過無數名師與神蹟保證。但滿願藏庫是一群在台北堅持不支薪、不造神的凡夫。我們每週的廣告費不到一千元，因為大家繳交的每一分錢，我們都想實實在在地匯往西藏換成供品。<br/><br/>
               如果您讀到了這裡，請相信，這不是演算法的推薦，是這份清淨傳承與您的緣分。
@@ -389,12 +384,12 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
           </Card>
 
           {/* 活動加碼橫幅 (Banner) */}
-          <div className="mt-2 mb-8 p-5 rounded-lg relative overflow-hidden group border" style={{ borderColor: d.themeColor.accent + '40', backgroundColor: d.themeColor.accent + '0D' }}>
-            <div className="absolute top-0 right-0 p-4 opacity-10 font-display text-6xl pointer-events-none transition-transform group-hover:scale-110" style={{ color: d.themeColor.accent }}>
+          <div className="mt-2 mb-8 p-5 rounded-lg border border-primary/40 bg-primary/5 relative overflow-hidden group">
+            <div className="absolute top-0 right-0 p-4 opacity-10 font-display text-6xl text-primary pointer-events-none transition-transform group-hover:scale-110">
               ✦
             </div>
             <div className="flex items-center gap-2 mb-2">
-              <Badge className="gold-border animate-pulse" style={{ backgroundColor: d.themeColor.accent, color: '#fff' }}>本月限定</Badge>
+              <Badge className="bg-primary text-primary-foreground gold-border animate-pulse">本月限定</Badge>
               <span className="font-display text-lg text-foreground/90">護持本尊，加碼贈「藥師佛每週息災煙供」</span>
             </div>
             <p className="text-sm text-muted-foreground readable">
@@ -417,17 +412,17 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
             <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">快速挑選（不想看太多字就用這個）</div>
             <div className="mt-3 grid gap-3 md:grid-cols-3">
               <button type="button" className="block text-left" onClick={() => scrollToId("plan-hot")}>
-                <Button className="h-12 w-full gold-border font-bold hover:opacity-90" style={{ backgroundColor: d.themeColor.accent, color: '#fff' }}>
+                <Button className="h-12 w-full gold-border font-bold shadow-sm transition-transform hover:scale-[1.02] active:scale-95">
                   最多人選：{hot.name} <ArrowRight className="h-4 w-4 ml-1" />
                 </Button>
               </button>
               <button type="button" className="block text-left" onClick={() => scrollToId("plan-cheap")}>
-                <Button variant="outline" className="h-12 w-full gold-border">
+                <Button variant="outline" className="h-12 w-full gold-border hover:bg-primary/10 transition-colors">
                   先入門穩住：{cheapest.name}
                 </Button>
               </button>
               <button type="button" className="block text-left" onClick={() => scrollToId("plan-pricy")}>
-                <Button variant="outline" className="h-12 w-full gold-border">
+                <Button variant="outline" className="h-12 w-full gold-border hover:bg-primary/10 transition-colors">
                   想一次到位：{priciest.name}
                 </Button>
               </button>
@@ -444,21 +439,21 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
                 <Card
                   key={p.id}
                   id={planAnchor}
-                  className="p-7 gold-border bg-card/70 paper-grain scroll-mt-28 flex flex-col justify-between"
+                  className="p-7 gold-border bg-card/70 paper-grain scroll-mt-28 flex flex-col justify-between transition-colors hover:border-primary/80"
                 >
                   <div>
                     <div className="flex items-start justify-between gap-3">
                       <div>
                         <div className="flex items-center gap-2 flex-wrap">
                           <div className="font-display text-2xl">{p.name}</div>
-                          {p.hot ? <Badge className="gold-border" style={{ backgroundColor: d.themeColor.accent, color: '#fff' }}>推薦</Badge> : null}
-                          {p.badge ? <Badge variant="secondary">{p.badge}</Badge> : null}
+                          {p.hot ? <Badge className="gold-border bg-primary text-primary-foreground">推薦</Badge> : null}
+                          {p.badge ? <Badge variant="secondary" className="bg-secondary text-secondary-foreground">{p.badge}</Badge> : null}
                         </div>
                         <div className="mt-2 text-sm text-muted-foreground">適合：{p.suitableFor.join("、")}</div>
                       </div>
                       <div className="text-right">
                         <div className="text-xs tracking-[0.22em] uppercase text-muted-foreground">費用</div>
-                        <div className="mt-1 font-display text-3xl" style={{ color: d.themeColor.accent }}>{p.price}</div>
+                        <div className="mt-1 font-display text-3xl text-primary">{p.price}</div>
                       </div>
                     </div>
 
@@ -470,7 +465,7 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
                         <ul className="mt-3 space-y-2 text-sm text-muted-foreground readable">
                           {p.details.map((x) => (
                             <li key={x} className="flex gap-2">
-                              <span className="mt-[0.35rem] h-1.5 w-1.5 rounded-full flex-none" style={{ backgroundColor: d.themeColor.accent }} />
+                              <span className="mt-[0.35rem] h-1.5 w-1.5 rounded-full bg-primary flex-none" />
                               <span>{x}</span>
                             </li>
                           ))}
@@ -480,12 +475,12 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
                   </div>
 
                   <div className="mt-6">
-                    <Separator className="mb-5" />
+                    <Separator className="mb-5 bg-border/50" />
                     
                     {/* 保留原本的文字提示 */}
-                    <div className="mb-4 p-3 bg-background/60 rounded-md border border-border/50 text-[11px] text-muted-foreground leading-relaxed">
-                      <Info className="w-3 h-3 inline mr-1 mb-0.5" style={{ color: d.themeColor.accent }} />
-                      祈願越具體越好！結帳時請於<strong className="text-foreground/80">備註欄</strong>寫下您的：<span className="text-foreground">姓名、居住地與具體困境</span>。
+                    <div className="mb-4 p-3 bg-background/60 rounded-md border border-primary/20 text-[11px] text-muted-foreground leading-relaxed">
+                      <Info className="w-3 h-3 inline mr-1 text-primary mb-0.5" />
+                      祈願越具體越好！結帳時請於<strong className="text-foreground/90">備註欄</strong>寫下您的：<span className="text-foreground">姓名、居住地與具體困境</span>。
                     </div>
 
                     <div className="flex flex-col sm:flex-row gap-3">
@@ -494,8 +489,7 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
                         <Dialog>
                           <DialogTrigger asChild>
                             <Button 
-                              className="h-12 w-full font-bold tracking-[0.1em] gold-border text-white shadow-sm transition-all hover:opacity-90"
-                              style={{ backgroundColor: d.themeColor.accent }}
+                              className="h-12 w-full font-bold tracking-[0.1em] gold-border bg-primary text-primary-foreground shadow-sm transition-all hover:opacity-90 hover:scale-[1.02] active:scale-95"
                             >
                               我願以此發心，請師兄代為造冊 <ExternalLink className="h-4 w-4 ml-2" />
                             </Button>
@@ -586,7 +580,7 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
                       </div>
                       
                       <Link href="/pay" className="flex-1 sm:flex-none">
-                        <Button variant="outline" className="h-12 w-full gold-border">
+                        <Button variant="outline" className="h-12 w-full gold-border hover:bg-primary/10 transition-colors">
                           看完整登記說明
                         </Button>
                       </Link>
@@ -610,8 +604,8 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
                   {d.faq
                     .filter((_, idx) => idx % 2 === col)
                     .map((f) => (
-                      <AccordionItem key={f.q} value={f.q} className="px-4">
-                        <AccordionTrigger className="font-display text-left">{f.q}</AccordionTrigger>
+                      <AccordionItem key={f.q} value={f.q} className="px-4 border-border/50">
+                        <AccordionTrigger className="font-display text-left hover:text-primary transition-colors">{f.q}</AccordionTrigger>
                         <AccordionContent className="readable text-muted-foreground">{f.a}</AccordionContent>
                       </AccordionItem>
                     ))}
@@ -621,7 +615,7 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
           </div>
         </section>
 
-        {/* CROSS SELL */}
+        {/* CROSS SELL - 修改 pb-14 為 pb-32 以避免被 StickyCta 遮擋 */}
         <section className="mx-auto max-w-6xl px-4 pb-32">
           <Card className="p-7 gold-border bg-card/70 paper-grain">
             <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">你也可以</div>
@@ -632,10 +626,10 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
                 if (!t) return null;
                 return (
                   <Link key={x.to} href={`/deity/${x.to}`} aria-label={`前往 ${t.name} 頁面`}>
-                    <Card className="p-6 gold-border bg-background/35 hover:bg-accent/30 transition-colors">
-                      <div className="font-display text-xl" style={{ color: t.themeColor.accent }}>{x.title}</div>
+                    <Card className="p-6 gold-border bg-background/35 hover:bg-primary/10 transition-colors cursor-pointer group">
+                      <div className="font-display text-xl transition-colors group-hover:opacity-80" style={{ color: t.themeColor.accent }}>{x.title}</div>
                       <div className="mt-2 text-muted-foreground readable">{x.desc}</div>
-                      <div className="mt-4 inline-flex items-center gap-2 text-sm font-semibold">
+                      <div className="mt-4 inline-flex items-center gap-2 text-sm font-semibold transition-transform group-hover:translate-x-1" style={{ color: t.themeColor.accent }}>
                         看 {t.name} <ArrowRight className="h-4 w-4" />
                       </div>
                     </Card>
