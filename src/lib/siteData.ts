@@ -6,38 +6,44 @@
  * - 追蹤碼請勿放在此檔（已在 index.html / AnalyticsTracker）
  */
 
+// ----------------------------------------------------------------------
+// 1. 第一重：各本尊 Hero 視覺圖 (採用高雅靜物/絕美壇城設定，營造平靜質感)
+// ----------------------------------------------------------------------
+import heroYellowImg from "@/assets/visuals/altar-yellow-water-offering.jpg";
+import heroMahashriImg from "@/assets/visuals/altar-mahashri-home-wealth.webp";
+import heroGanapatiImg from "@/assets/visuals/altar-ganapati-obstacle-removal.webp";
+import heroKurukullaImg from "@/assets/visuals/altar-kurukulla-magnetizing.webp";
+import heroGreenTaraImg from "@/assets/visuals/green-tara-gallery-02.jpg";
+import heroPadmasambhavaImg from "@/assets/visuals/zen-wealth-hero.jpg";
+import heroMedicineBuddhaImg from "@/assets/visuals/offering-bowls.jpg";
+
+// ----------------------------------------------------------------------
+// 2. 第二重：高可信度實拍 (儀軌與紀實照片，放於頁面中段建立信任)
+// ----------------------------------------------------------------------
+import ritualYellowImg from "@/assets/visuals/testimonial_bg_yellow.webp"; 
+import ritualMahashriImg from "@/assets/visuals/ritual-butter-lamps.webp"; 
+import ritualGanapatiImg from "@/assets/visuals/ritual-torma-altar.webp"; 
+import ritualKurukullaImg from "@/assets/visuals/ritual-mala-hands.jpg"; 
+import ritualPadmasambhavaImg from "@/assets/visuals/f6q2.jpg"; 
+import ritualMedicineBuddhaImg from "@/assets/visuals/zub.jpg"; 
+import ritualGreenTaraImg from "@/assets/visuals/99fd.jpg"; 
+
+// ----------------------------------------------------------------------
+// 3. 其他輔助紀實素材 / 通用圖 (備用與替換舊有 AI 圖)
+// ----------------------------------------------------------------------
+import ritualLiveImg from "@/assets/visuals/ritual_live.jpg"; 
+import mandalaImg from "@/assets/visuals/wefwsef.jpg"; 
+import lineageWheelsImg from "@/assets/visuals/image_lineage_1.webp"; 
+import lineageFireImg from "@/assets/visuals/image_lineage (2).jpg"; 
+import altarStilllifeImg from "@/assets/visuals/altar-stilllife-offering-set.webp";
+import altar1Img from "@/assets/visuals/altar-1.jpg";
+
 import heroBrocadeImg from "@/assets/visuals/generated/hero-brocade.webp";
 import heroGildedImg from "@/assets/visuals/generated/hero-gilded.webp";
 import sutraCloseupImg from "@/assets/visuals/generated/sutra-closeup.webp";
+import deityBannerImg from "@/assets/visuals/altar-stilllife-offering-set.webp"; // 預設橫幅用高雅靜物圖取代
 
-import deityBannerImg from "@/assets/visuals/generated/deity-page-banner-abstract.webp";
-
-import heroYellowImg from "@/assets/visuals/generated/deity-yellow.webp";
-import altarYellowImg from "@/assets/visuals/generated/altar-yellow-water-offering.webp";
-
-import heroMahashriImg from "@/assets/visuals/deity-mahashri.webp";
-import altarMahashriImg from "@/assets/visuals/generated/altar-mahashri-home-wealth.webp";
-
-import heroGanapatiImg from "@/assets/visuals/generated/deity-ganapati.webp";
-import altarGanapatiImg from "@/assets/visuals/generated/altar-ganapati-obstacle-removal.webp";
-
-import heroKurukullaImg from "@/assets/visuals/generated/deity-kurukulla.webp";
-import altarKurukullaImg from "@/assets/visuals/generated/altar-kurukulla-magnetizing.webp";
-
-import heroGreenTaraImg from "@/assets/visuals/generated/deity-green-tara.webp";
-import altarGreenTaraImg from "@/assets/visuals/generated/altar-green-tara-fire-offering.webp";
-
-import heroPadmasambhavaImg from "@/assets/visuals/generated/deity-padmasambhava.webp";
-import heroMedicineBuddhaImg from "@/assets/visuals/generated/deity-medicine-buddha.webp";
-
-// 儀軌照片（每個本尊頁的「正統儀軌」區塊使用）
-import ritualWaterOfferingImg from "@/assets/visuals/rituals/ritual-water-offering.webp";
-import ritualSangSmokeImg from "@/assets/visuals/rituals/ritual-sang-smoke.webp";
-import ritualTormaAltarImg from "@/assets/visuals/rituals/ritual-torma-altar.webp";
-import ritualButterLampsImg from "@/assets/visuals/rituals/ritual-butter-lamps.webp";
-import ritualMalaHandsImg from "@/assets/visuals/rituals/ritual-mala-hands.webp";
-
-// 蓮師 / 藥師如來壇城圖：先用通用橫幅（後續若要獨立壇城圖再替換）
+// 蓮師 / 藥師如來壇城圖：先用通用橫幅
 const altarPadmasambhavaImg = deityBannerImg;
 const altarMedicineBuddhaImg = deityBannerImg;
 
@@ -58,22 +64,21 @@ export const SITE = {
 export const SITE_CONFIG = SITE;
 
 // ----------------------------------------------------------------------
-// 2. 視覺素材路徑 (VISUALS)
+// 2. 視覺素材路徑匯出 (VISUALS)
 // ----------------------------------------------------------------------
 export const VISUALS = {
   heroBrocade: heroBrocadeImg,
   heroGilded: heroGildedImg,
   sutraCloseup: sutraCloseupImg,
   deityBanner: deityBannerImg,
-
-  altarYellow: altarYellowImg,
-  altarMahashri: altarMahashriImg,
-  altarGanapati: altarGanapatiImg,
-  altarKurukulla: altarKurukullaImg,
-  altarGreenTara: altarGreenTaraImg,
-
-  altarPadmasambhava: altarPadmasambhavaImg,
-  altarMedicineBuddha: altarMedicineBuddhaImg,
+  
+  // 供全站調用的輔助實拍圖
+  ritualLive: ritualLiveImg,
+  mandala: mandalaImg,
+  lineageWheels: lineageWheelsImg,
+  lineageFire: lineageFireImg,
+  altarStilllife: altarStilllifeImg,
+  altar1: altar1Img,
 };
 
 // ----------------------------------------------------------------------
@@ -223,11 +228,11 @@ export const DEITY_BY_KEY: Record<DeityKey, Deity> = {
     primaryIntent: "增加收入",
     themeColor: { bg: "#262217", accent: "#FBBF24" },
     heroKicker: "修補財庫的起點",
-    heroImage: heroYellowImg,
+    heroImage: heroYellowImg, // ★ Hero: 銅碗靜物
     ritual: {
       title: "黃財神煙供（贊巴拉 Sang 供養）",
-      image: ritualSangSmokeImg,
-      imageAlt: "儀軌示意：香供／煙供（sang）之煙雲供養",
+      image: ritualYellowImg, // ★ 儀軌: 黃財神尊像實拍獻供
+      imageAlt: "儀軌示意：實拍僧眾為黃財神尊像獻供",
       mdPath: "yellow-jambhala-sang.md",
       sourceUrl:
         "https://www.lotsawahouse.org/tibetan-masters/jamyang-khyentse-chokyi-lodro/jambhala-sang",
@@ -338,11 +343,11 @@ export const DEITY_BY_KEY: Record<DeityKey, Deity> = {
     primaryIntent: "家宅平安",
     themeColor: { bg: "#281D14", accent: "#F97316" },
     heroKicker: "把生活穩穩守住",
-    heroImage: heroMahashriImg,
+    heroImage: heroMahashriImg, // ★ Hero: 法輪與寶瓶靜物
     ritual: {
       title: "大吉祥天女陀羅尼（善女天咒）",
-      image: ritualButterLampsImg,
-      imageAlt: "儀軌示意：供燈（酥油燈／燈明供養）",
+      image: ritualMahashriImg, // ★ 儀軌: 滿版酥油燈實拍
+      imageAlt: "儀軌示意：實拍供燈（酥油燈／燈明供養）",
       mdPath: "mahashri-dharani.md",
       sourceUrl: "/resources/webpages/f-2023-15.pdf",
       note: "本站以『要點』協助你快速理解；全文保留經典/權威來源內容與出處，避免轉述失真。",
@@ -366,7 +371,7 @@ export const DEITY_BY_KEY: Record<DeityKey, Deity> = {
     promise: "依《金光明經》之願力，護佑家宅安隱，令生活資具無所匱乏。讓家真正成為你能夠休息、充電的避風港。",
     scripture: [
       {
-        quote: "「…所謂飲食、衣服、臥具、醫藥，及餘一切所須資具，皆令圓滿無有乏少。」",
+        quote: "「…所謂飲食、衣服、臥具、醫藥，及餘 পরিচয়一切所須資具，皆令圓滿無有乏少。」",
         source: "《金光明最勝王經》大吉祥天女品",
         hint: "先把日子守住：衣食住藥不再缺",
         url: "https://cbetaonline.dila.edu.tw/zh/T0665_008",
@@ -428,7 +433,7 @@ export const DEITY_BY_KEY: Record<DeityKey, Deity> = {
       { q: "如果我同時也想求財，該怎麼選？", a: "若目標是『家運與耗損』優先選大吉祥天女；若是『財庫止漏/開源』請看黃財神。也歡迎私訊我們描述狀況，協助你對位。" },
     ],
     crossSell: [
-      { title: "若你其實最急的是『開源』", desc: "看黃財神：主主動止漏、開源，讓現金流先過得去。", to: "yellow" },
+      { title: "若你其實最急的是『開源』", desc: "看黃財神：主動止漏、開源，讓現金流先過得去。", to: "yellow" },
       { title: "若你也常被『焦慮與突發恐懼』追著跑", desc: "看綠度母：先救急，讓身心回到穩定。", to: "green-tara" },
     ],
   },
@@ -441,11 +446,11 @@ export const DEITY_BY_KEY: Record<DeityKey, Deity> = {
     primaryIntent: "掃除障礙",
     themeColor: { bg: "#161B2A", accent: "#60A5FA" },
     heroKicker: "為你清開前方的路",
-    heroImage: heroGanapatiImg,
+    heroImage: heroGanapatiImg, // ★ Hero: 木質調鈴杵靜物
     ritual: {
       title: "象頭財神讚頌（除障・開路法要）",
-      image: ritualTormaAltarImg,
-      imageAlt: "儀軌示意：壇城供品與朵瑪（torma）供養",
+      image: ritualGanapatiImg, // ★ 儀軌: 象頭財神朵瑪壇城實拍
+      imageAlt: "儀軌示意：實拍壇城供品與象神朵瑪供養",
       mdPath: "ganapati.md",
       sourceUrl: "https://www.lotsawahouse.org/indian-masters/atisha/ganapati-ragavajra-praise",
       license: "CC BY-NC 4.0 (Lotsawa House)",
@@ -545,11 +550,11 @@ export const DEITY_BY_KEY: Record<DeityKey, Deity> = {
     primaryIntent: "人緣貴人",
     themeColor: { bg: "#2B141C", accent: "#FB7185" },
     heroKicker: "讓對的緣分自然靠近",
-    heroImage: heroKurukullaImg,
+    heroImage: heroKurukullaImg, // ★ Hero: 紅色花卉靜物
     ritual: {
       title: "作明佛母儀軌（磁聚・愛敬・貴人緣）",
-      image: ritualMalaHandsImg,
-      imageAlt: "儀軌示意：持咒念珠（mala）修持",
+      image: ritualKurukullaImg, // ★ 儀軌: 持咒念珠與紅花實拍
+      imageAlt: "儀軌示意：實拍持咒念珠（mala）修持與花供",
       mdPath: "kurukulla.md",
       sourceUrl: "https://www.lotsawahouse.org/tibetan-masters/mipham/kurukulla-sadhana",
       license: "CC BY-NC 4.0 (Lotsawa House)",
@@ -642,11 +647,11 @@ export const DEITY_BY_KEY: Record<DeityKey, Deity> = {
     primaryIntent: "威德護持",
     themeColor: { bg: "#2A1616", accent: "#E57373" },
     heroKicker: "在你最脆弱時撐住你",
-    heroImage: heroPadmasambhavaImg,
+    heroImage: heroPadmasambhavaImg, // ★ Hero: 僧人走向光芒的高雅圖
     ritual: {
       title: "蓮師七句祈請文（總集加持・無畏護持）",
-      image: ritualSangSmokeImg,
-      imageAlt: "儀軌示意：焚香持誦祈請",
+      image: ritualPadmasambhavaImg, // ★ 儀軌: 室內煙供實拍 (f6q2.jpg)
+      imageAlt: "儀軌示意：實拍僧眾焚香持誦祈請",
       mdPath: "seven-line-prayer.md",
       sourceUrl: "https://www.lotsawahouse.org/topics/seven-line-prayer/",
       license: "CC BY-NC 4.0 (Lotsawa House)",
@@ -720,7 +725,7 @@ export const DEITY_BY_KEY: Record<DeityKey, Deity> = {
       { q: "任何人都可以護持蓮師嗎？", a: "可以。只要具備信心與清淨發心，蓮師的加持不分對象。" },
       { q: "祈願內容怎麼寫？", a: "建議把『你最怕出事的是哪一塊』寫清楚（家宅、工作、出行、官非、身心恐懼等），並描述近期發生的狀況。" },
       { q: "需要自己念什麼或做什麼嗎？", a: "不需要。我們會依儀軌如法修持並回向；你只需提供名單與祈願資訊。" },
-      { q: "可以回向給家人/小孩嗎？", a: "可以。請把回向對象姓名或稱呼、關係與主要狀況寫清楚，便於對位回向。" },
+      { q: "可以回向給家人/小孩嗎？", a: "可以。請把回向對象姓名或称呼、關係與主要狀況寫清楚，便於對位回向。" },
     ],
     crossSell: [
       { title: "若你其實卡在『錢一直破洞』", desc: "看黃財神：先止漏，再開源。", to: "yellow" },
@@ -736,11 +741,11 @@ export const DEITY_BY_KEY: Record<DeityKey, Deity> = {
     primaryIntent: "健康息災",
     themeColor: { bg: "#12202B", accent: "#38BDF8" },
     heroKicker: "為您補回流失的元氣",
-    heroImage: heroMedicineBuddhaImg,
+    heroImage: heroMedicineBuddhaImg, // ★ Hero: 七供碗靜物圖
     ritual: {
       title: "藥師如來儀軌（息災延壽・身心安穩）",
-      image: ritualWaterOfferingImg,
-      imageAlt: "儀軌示意：淨水與供碗供養",
+      image: ritualMedicineBuddhaImg, // ★ 儀軌: 藥師佛大唐卡前修法 (zub.jpg)
+      imageAlt: "儀軌示意：實拍僧眾於藥師佛唐卡前修法",
       mdPath: "medicine-buddha.md",
       sourceUrl: "https://www.lotsawahouse.org/tibetan-masters/karma-chakme/medicine-buddha-sadhana",
       license: "CC BY-NC 4.0 (Lotsawa House)",
@@ -825,11 +830,11 @@ export const DEITY_BY_KEY: Record<DeityKey, Deity> = {
     primaryIntent: "迅疾救護",
     themeColor: { bg: "#14241B", accent: "#4ADE80" },
     heroKicker: "先把無名的恐懼停下",
-    heroImage: heroGreenTaraImg,
+    heroImage: heroGreenTaraImg, // ★ Hero: 綠背景白花靜物
     ritual: {
       title: "綠度母日常修持（迅疾救護・除怖畏）",
-      image: ritualButterLampsImg,
-      imageAlt: "儀軌示意：供燈與日常供養",
+      image: ritualGreenTaraImg, // ★ 儀軌: 大型戶外綠度母火供 (99fd.jpg)
+      imageAlt: "儀軌示意：實拍戶外綠度母大型除障火供",
       mdPath: "green-tara.md",
       sourceUrl: "https://www.lotsawahouse.org/tibetan-masters/dudjom-rinpoche/daily-green-tara-practice",
       license: "CC BY-NC 4.0 (Lotsawa House)",
