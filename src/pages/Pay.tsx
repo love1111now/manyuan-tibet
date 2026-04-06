@@ -52,13 +52,13 @@ export default function Pay() {
         <div className="grid gap-6 md:grid-cols-[1.05fr_.95fr] md:items-start">
           <div>
             <div className="flex items-center gap-2 text-xs tracking-[0.26em] uppercase text-muted-foreground font-bold">
-              <ShieldCheck className="w-3 h-3 text-primary" /> Checkout
+              <ShieldCheck className="w-3 h-3 text-primary" /> Initiate Journey
             </div>
-            <h1 className="mt-2 font-display text-4xl">法事登記（綠界多元支付）</h1>
+            <h1 className="mt-2 font-display text-4xl">法事護持登記（綠界安全支付）</h1>
             <p className="mt-4 readable text-muted-foreground max-w-prose">
-              這一頁是「把事情做完」的地方。
-              <span className="text-foreground/90 font-medium">先選本尊 → 再選方案 → 點擊「登記法事」</span>。
-              付款完成即保留名額並安排法事。當你處在危機感裡，最需要的不是更多資訊，而是一次正確、可完成的行動。
+              這是一處讓心念得以落實的所在。
+              <span className="text-foreground/90 font-medium">選擇相應本尊 → 探索適合方案 → 點擊「前往登記名額」</span>。
+              護持完成即保留名額並為您安排修持。當您處於焦慮與掙扎中，最需要的往往不是更多資訊，而是一次清晰、且能為生命帶來安定的行動。
             </p>
 
             {/* 下單流程優化：加入夜間造冊與隔週公佈 */}
@@ -67,15 +67,15 @@ export default function Pay() {
                 <ClipboardList className="w-24 h-24" />
               </div>
               <div className="font-display text-2xl flex items-center gap-2">
-                下單後你會發生什麼
+                善緣啟動後的修持旅程
               </div>
               <div className="mt-5 grid gap-4">
                 {[
-                  { title: "你完成付款（保留名額）", desc: "透過綠界金流系統立即確認您的登記名額。" },
-                  { title: "志工晚間造冊排程", desc: "台灣志工將於下班後的晚間統一核對名單，若有問題會主動私訊聯繫。", highlight: true },
+                  { title: "您完成護持（保留修持名額）", desc: "透過綠界金流系統立即確認您的登記名額。" },
+                  { title: "志工於晚間靜心造冊", desc: "台灣志工將於下班後的晚間統一核對名單，若有問題會主動私訊聯繫。", highlight: true },
                   { title: "依本尊法門如法設供", desc: "名冊將傳遞至西藏壇城，由師兄姊如法設供與修持。" },
                   { title: "隔週公佈功德名錄", desc: "志工彙整後，於 FB 粉專公佈去識別化名錄，確保流程透明。", highlight: true },
-                  { title: "完成後給你一份『回向心念指引』", desc: "提供專屬圖文，引導您將加持力落實於生活。" }
+                  { title: "為您獻上一份『回向心念指引』", desc: "提供專屬圖文，引導您將加持力落實於日常。" }
                 ].map((item, index) => (
                   <div key={index} className="flex gap-3 text-muted-foreground readable">
                     <div className="flex-shrink-0 mt-0.5">
@@ -105,19 +105,19 @@ export default function Pay() {
           </div>
 
           <Card className="p-7 gold-border bg-card/70 paper-grain">
-            <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">快速選擇</div>
-            <div className="mt-2 font-display text-2xl">我不確定選哪個？</div>
+            <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">直覺尋找</div>
+            <div className="mt-2 font-display text-2xl">需要方向指引嗎？</div>
             <p className="mt-3 text-sm text-muted-foreground readable">
-              先看每位本尊頁面的「推薦」方案；或用下面的速選：
+              您可以參考各本尊頁面的推薦路徑；或透過下方的情境直覺尋找：
             </p>
 
             <div className="mt-5 grid gap-3">
               <div className="flex flex-wrap gap-2">
-                <Badge variant="secondary" className="bg-background/50 hover:bg-primary/10 transition-colors">想增財/跑現金流 → 黃財神</Badge>
-                <Badge variant="secondary" className="bg-background/50 hover:bg-primary/10 transition-colors">想守財/護家運 → 大吉祥天女</Badge>
-                <Badge variant="secondary" className="bg-background/50 hover:bg-primary/10 transition-colors">投資理財/決策期 → 象頭財神</Badge>
-                <Badge variant="secondary" className="bg-background/50 hover:bg-primary/10 transition-colors">愛情/貴人緣 → 作明佛母</Badge>
-                <Badge variant="secondary" className="bg-background/50 hover:bg-primary/10 transition-colors">迅速破災/消除恐懼 → 綠度母</Badge>
+                <Badge variant="secondary" className="bg-background/50 hover:bg-primary/10 transition-colors">渴望豐盛/重啟現金流 → 黃財神</Badge>
+                <Badge variant="secondary" className="bg-background/50 hover:bg-primary/10 transition-colors">祈求安隱/守護家運 → 大吉祥天女</Badge>
+                <Badge variant="secondary" className="bg-background/50 hover:bg-primary/10 transition-colors">面臨抉擇/尋求清明洞察 → 象頭財神</Badge>
+                <Badge variant="secondary" className="bg-background/50 hover:bg-primary/10 transition-colors">修復關係/吸引善緣貴人 → 作明佛母</Badge>
+                <Badge variant="secondary" className="bg-background/50 hover:bg-primary/10 transition-colors">突發變故/平息深層恐懼 → 綠度母</Badge>
               </div>
             </div>
 
@@ -125,11 +125,11 @@ export default function Pay() {
 
             {/* FB 私訊導流 */}
             <div className="mt-6 p-4 rounded-md bg-foreground/5 border border-border/50 text-center">
-              <div className="text-sm text-foreground/80 mb-3">還是不知道怎麼寫祈願名單嗎？</div>
+              <div className="text-sm text-foreground/80 mb-3">不確定如何表達內心的祈願嗎？</div>
               <a href="https://m.me/61583749010531" target="_blank" rel="noreferrer">
                 <Button variant="outline" className="w-full border-[#0866FF]/50 text-[#0866FF] hover:bg-[#0866FF]/10 transition-colors">
                   <MessageCircle className="w-4 h-4 mr-2" />
-                  私訊 FB 粉專，由專人協助您評估
+                  私訊 FB 粉專，我們溫暖陪伴您梳理
                 </Button>
               </a>
               <div className="mt-2 text-[10px] text-muted-foreground opacity-70">
@@ -145,10 +145,10 @@ export default function Pay() {
 
         {/* 找回原版的 tibetan-texture-bg */}
         <section className="rounded-xl tibetan-texture-bg p-2 md:p-0">
-          <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">Pricing</div>
-          <h2 className="mt-2 font-display text-3xl">全法事總表</h2>
+          <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">Journey Overview</div>
+          <h2 className="mt-2 font-display text-3xl">全站護持路徑總覽</h2>
           <p className="mt-3 readable text-muted-foreground max-w-prose">
-            可供全面清楚所需。
+            為您完整展開所有的修持與增益可能。
           </p>
 
           {/* 本月加碼活動橫幅 */}
@@ -176,7 +176,7 @@ export default function Pay() {
                   </div>
                   <div className="flex gap-2">
                     <Link href={`/deity/${d.key}`}>
-                      <Button variant="outline" size="sm" className="gold-border text-xs">看介紹</Button>
+                      <Button variant="outline" size="sm" className="gold-border text-xs">探索介紹</Button>
                     </Link>
                   </div>
                 </div>
@@ -214,14 +214,14 @@ export default function Pay() {
                         <div className="mt-6 space-y-4">
                           <div className="p-3 bg-background/60 rounded-md border border-border/50 text-[11px] text-muted-foreground leading-relaxed">
                             <Info className="w-3 h-3 inline mr-1 text-primary mb-0.5" />
-                            祈願越具體越好！結帳時請於<strong className="text-foreground/80">備註欄</strong>寫下您的：<span className="text-foreground">姓名、居住地與具體困境</span>。
+                            祈願越真實越好！登記時請於<strong className="text-foreground/80">備註欄</strong>寫下您的：<span className="text-foreground">姓名、居住地與目前的生命掙扎</span>。
                           </div>
 
                           {/* ★★★ 核心修改區：把 a 標籤替換成 Dialog 視覺導引 ★★★ */}
                           <Dialog>
                             <DialogTrigger asChild>
                               <Button className="h-11 w-full font-bold tracking-[0.22em] uppercase gold-border hover:bg-primary hover:text-primary-foreground shadow-sm transition-all">
-                                前往登記名額 <ExternalLink className="h-4 w-4 ml-2 opacity-70" />
+                                確認了解，啟動善緣 <ExternalLink className="h-4 w-4 ml-2 opacity-70" />
                               </Button>
                             </DialogTrigger>
                             <DialogContent className="max-w-md p-0 overflow-hidden bg-[#fffaf0] border-[#d4b483]">
@@ -230,7 +230,7 @@ export default function Pay() {
                                   <span>✍️</span> 綠界填寫預演
                                 </DialogTitle>
                                 <p className="text-sm text-[#8b4513] opacity-80 text-center mt-2 font-medium">
-                                  為確保造冊無誤，請先看過<span className="text-red-700">備註欄填寫範例</span>再前往付款
+                                  為確保造冊無誤，請先看過<span className="text-red-700">備註欄填寫範例</span>再前往啟動
                                 </p>
                               </DialogHeader>
 
@@ -280,7 +280,7 @@ export default function Pay() {
                           <div className="flex flex-col items-center gap-2 pt-2 border-t border-border/30">
                             <div className="flex items-center gap-1.5 text-[10px] text-muted-foreground font-medium">
                               <Lock className="w-3 h-3 text-green-600/80" />
-                              綠界 256-bit SSL 安全加密
+                              綠界 256-bit SSL 安全加密護持
                             </div>
                             <div className="flex items-center gap-3 opacity-60 grayscale scale-90">
                               <span className="text-[9px] font-bold tracking-tighter flex items-center gap-1">
@@ -289,7 +289,7 @@ export default function Pay() {
                             </div>
                             <div className="text-[10px] text-center text-muted-foreground/70 mt-1">
                               <Clock className="w-3 h-3 inline mr-1 mb-0.5" />
-                              志工於晚間造冊，隔週公佈名錄
+                              志工於晚間靜心造冊，隔週公佈名錄
                             </div>
                           </div>
                         </div>

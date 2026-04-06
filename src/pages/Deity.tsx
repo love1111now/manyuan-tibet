@@ -70,11 +70,11 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
         <SiteHeader />
         <main className="mx-auto max-w-3xl px-4 py-16">
           <Card className="p-8 gold-border bg-card/70 paper-grain">
-            <div className="font-display text-2xl">找不到此頁</div>
-            <p className="mt-3 text-muted-foreground readable">請從首頁重新選擇本尊。</p>
+            <div className="font-display text-2xl">未知的路徑</div>
+            <p className="mt-3 text-muted-foreground readable">請從首頁重新探索與您共鳴的本尊。</p>
             <div className="mt-6">
               <Link href="/">
-                <Button className="gold-border">回首頁</Button>
+                <Button className="gold-border">回到首頁</Button>
               </Link>
             </div>
           </Card>
@@ -161,23 +161,23 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
               <div className="mt-7 flex flex-col sm:flex-row gap-3">
                 <button type="button" onClick={() => scrollToId("plans")}>
                   <Button className="h-12 px-6 font-bold tracking-[0.22em] uppercase gold-border transition-transform hover:scale-[1.02] active:scale-95">
-                    直接選方案 <ArrowRight className="h-4 w-4 ml-1" />
+                    探索護持路徑 <ArrowRight className="h-4 w-4 ml-1" />
                   </Button>
                 </button>
                 <Link href="/pay">
                   <Button variant="outline" className="h-12 px-6 gold-border hover:bg-primary/10">
-                    看全收費表
+                    檢視完整護持總覽
                   </Button>
                 </Link>
               </div>
 
               {/* TOC */}
               <div className="mt-7 grid gap-3 sm:grid-cols-2">
-                {anchorBtn("痛點與對治", "pain", Sparkles)}
-                {anchorBtn("流程怎麼做", "process", ClipboardList)}
-                {d.ritual ? anchorBtn("正統儀軌", "ritual", ExternalLink) : null}
-                {anchorBtn("方案與價格", "plans", ShieldCheck)}
-                {anchorBtn("常見問題", "faq", HelpCircle)}
+                {anchorBtn("生命掙扎與啟發", "pain", Sparkles)}
+                {anchorBtn("修持指引", "process", ClipboardList)}
+                {d.ritual ? anchorBtn("傳承儀軌", "ritual", ExternalLink) : null}
+                {anchorBtn("護持方案", "plans", ShieldCheck)}
+                {anchorBtn("探索釋疑", "faq", HelpCircle)}
               </div>
             </div>
 
@@ -197,7 +197,7 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
                 </DialogTrigger>
                 <DialogContent className="max-w-5xl">
                   <DialogHeader>
-                    <DialogTitle className="font-display">{d.name}｜圖片大圖</DialogTitle>
+                    <DialogTitle className="font-display">{d.name}｜莊嚴法相</DialogTitle>
                   </DialogHeader>
                   <div className="mt-2">
                     <img
@@ -206,7 +206,7 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
                       className="w-full h-auto rounded-md"
                       loading="lazy"
                     />
-                    <div className="mt-2 text-xs text-muted-foreground">點擊主圖可開啟大圖，確保神明形象完整呈現。</div>
+                    <div className="mt-2 text-xs text-muted-foreground">點擊主圖可開啟大圖，感受神聖光芒的完整照耀。</div>
                   </div>
                 </DialogContent>
               </Dialog>
@@ -219,7 +219,7 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
                 </blockquote>
                 <div className="mt-4">
                   <Link href="/sutra" className="text-sm underline text-muted-foreground hover:text-foreground transition-colors">
-                    看更多經典引用
+                    探索更多經典智慧
                   </Link>
                 </div>
               </div>
@@ -231,8 +231,8 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
         <section id="pain" className="mx-auto max-w-6xl px-4 pb-4 scroll-mt-24">
           <div className="grid gap-4 md:grid-cols-2">
             <Card className="p-7 gold-border bg-card/70 paper-grain">
-              <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">你可能正在</div>
-              <h2 className="mt-2 font-display text-2xl">卡在這些痛點</h2>
+              <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">您或許正經歷</div>
+              <h2 className="mt-2 font-display text-2xl">這些生命的掙扎</h2>
               <ul className="mt-4 space-y-2 text-muted-foreground readable">
                 {d.painPoints.map((p) => (
                   <li key={p} className="flex gap-2">
@@ -244,8 +244,8 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
             </Card>
 
             <Card className="p-7 gold-border bg-card/70 paper-grain">
-              <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">我們會怎麼幫你</div>
-              <h2 className="mt-2 font-display text-2xl">把方向拉回可落地</h2>
+              <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">這份力量將如何啟發您</div>
+              <h2 className="mt-2 font-display text-2xl">讓轉變真實發生</h2>
               <ul className="mt-4 space-y-2 text-muted-foreground readable">
                 {d.whyThisDeity.map((x) => (
                   <li key={x} className="flex gap-2">
@@ -262,8 +262,8 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
 
         {/* PROCESS */}
         <section id="process" className="mx-auto max-w-6xl px-4 pt-10 pb-4 scroll-mt-24">
-          <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">流程</div>
-          <h2 className="mt-2 font-display text-3xl">三步完成：清楚、如法、好配合</h2>
+          <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">護持指引</div>
+          <h2 className="mt-2 font-display text-3xl">三步安頓：清晰、如法、溫暖相伴</h2>
           <div className="mt-6 grid gap-4 md:grid-cols-3">
             {d.process.map((s) => (
               <Card key={s.title} className="p-7 gold-border bg-card/70 paper-grain">
@@ -279,10 +279,10 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
         {/* RITUAL */}
         {d.ritual ? (
           <section id="ritual" className="mx-auto max-w-6xl px-4 pt-10 pb-4 scroll-mt-24">
-            <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">正統儀軌</div>
+            <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">傳承儀軌</div>
             <h2 className="mt-2 font-display text-3xl text-primary">{d.ritual.title}</h2>
             <p className="mt-3 readable text-muted-foreground max-w-prose">
-              下列為我們實際依循的儀軌要點（修持依據）與準備項目；全文保留權威來源與出處，確保修持如法。
+              下列為我們為您代為修持的儀軌要點；全文保留權威來源與出處，以確保每一次的祈請皆如法且純粹。
             </p>
 
             <div className="mt-6 grid gap-4 md:grid-cols-[0.95fr_1.05fr] md:items-start">
@@ -342,7 +342,7 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
                   <div className="mt-4 flex items-center gap-2">
                     <a href={d.ritual.sourceUrl} target="_blank" rel="noreferrer" className="inline-flex">
                       <Button variant="outline" className="gold-border h-10 gap-2 hover:bg-primary/10 transition-colors">
-                        查看原文出處 <ExternalLink className="h-4 w-4" />
+                        查閱原文出處 <ExternalLink className="h-4 w-4" />
                       </Button>
                     </a>
                   </div>
@@ -353,10 +353,10 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
               </Card>
 
               <Card className="p-7 gold-border bg-card/70 paper-grain">
-                <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">全文（可複製）</div>
+                <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">儀軌全文（歡迎參閱）</div>
                 <div className="mt-4">
                   {ritualLoading ? (
-                    <div className="text-sm text-muted-foreground animate-pulse">載入中…</div>
+                    <div className="text-sm text-muted-foreground animate-pulse">靜心載入中…</div>
                   ) : ritualError ? (
                     <div className="text-sm text-destructive">{ritualError}</div>
                   ) : (
@@ -376,10 +376,10 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
         <section id="plans" className="mx-auto max-w-6xl px-4 pt-12 pb-6 scroll-mt-24">
           <Card className="mb-6 p-6 md:p-8 gold-border bg-background/50 border-primary/40 relative overflow-hidden">
             <div className="absolute left-0 top-0 w-1 h-full bg-primary/60"></div>
-            <div className="text-sm tracking-[0.2em] text-primary mb-3 font-bold">【 寫在您選擇方案之前 】</div>
+            <div className="text-sm tracking-[0.2em] text-primary mb-3 font-bold">【 寫在您決定啟程之前 】</div>
             <p className="text-muted-foreground readable leading-relaxed max-w-3xl">
-              我們知道，在這繁華的網路世界，您可能看過無數名師與神蹟保證。但滿願藏庫是一群在台北堅持不支薪、不造神的凡夫。我們每週的廣告費不到一千元，因為大家繳交的每一分錢，我們都想實實在在地匯往西藏換成供品。<br/><br/>
-              如果您讀到了這裡，請相信，這不是演算法的推薦，是這份清淨傳承與您的緣分。
+              我們知道，在這繁華的網路世界，您可能看過無數名師與神蹟保證。但滿願藏庫是一群在台北堅持不支薪、不造神的凡夫。我們每週的廣告費不到一千元，因為大家繳交的每一分錢，我們都想實實在在地匯往西藏換成莊嚴供品。<br/><br/>
+              如果您讀到了這裡，請相信，這不是演算法的推薦，是這份清淨傳承與您的甚深緣分。
             </p>
           </Card>
 
@@ -400,35 +400,35 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
           <div className="flex items-end justify-between gap-4">
             <div>
               <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">Plans</div>
-              <h2 className="mt-2 font-display text-3xl">選一個最對位的方案</h2>
+              <h2 className="mt-2 font-display text-3xl">尋找最與您共鳴的路徑</h2>
               <p className="mt-3 readable text-muted-foreground max-w-prose">
-                若你不確定，先選「推薦」那個（已標示）。你也可以先做入門，把狀態穩住。
+                若您感到遲疑，可先從「推薦」路徑開始；或選擇入門方案，溫柔地穩住當下狀態。
               </p>
             </div>
           </div>
 
           {/* QUICK PICK */}
           <Card className="mt-6 p-6 gold-border bg-card/70 paper-grain">
-            <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">快速挑選（不想看太多字就用這個）</div>
+            <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">直覺指引（給需要迅速安頓的您）</div>
             <div className="mt-3 grid gap-3 md:grid-cols-3">
               <button type="button" className="block text-left" onClick={() => scrollToId("plan-hot")}>
                 <Button className="h-12 w-full gold-border font-bold shadow-sm transition-transform hover:scale-[1.02] active:scale-95">
-                  最多人選：{hot.name} <ArrowRight className="h-4 w-4 ml-1" />
+                  深切共鳴：{hot.name} <ArrowRight className="h-4 w-4 ml-1" />
                 </Button>
               </button>
               <button type="button" className="block text-left" onClick={() => scrollToId("plan-cheap")}>
                 <Button variant="outline" className="h-12 w-full gold-border hover:bg-primary/10 transition-colors">
-                  先入門穩住：{cheapest.name}
+                  溫柔安頓：{cheapest.name}
                 </Button>
               </button>
               <button type="button" className="block text-left" onClick={() => scrollToId("plan-pricy")}>
                 <Button variant="outline" className="h-12 w-full gold-border hover:bg-primary/10 transition-colors">
-                  想一次到位：{priciest.name}
+                  深耕轉化：{priciest.name}
                 </Button>
               </button>
             </div>
             <div className="mt-3 text-xs text-muted-foreground">
-              付款完成即保留名額。若需更改祈願內容，可透過 Facebook 私訊協助。
+              登記完成即保留名額。若需梳理祈願內容，可透過 Facebook 私訊，我們將溫暖陪伴您。
             </div>
           </Card>
 
@@ -452,7 +452,7 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
                         <div className="mt-2 text-sm text-muted-foreground">適合：{p.suitableFor.join("、")}</div>
                       </div>
                       <div className="text-right">
-                        <div className="text-xs tracking-[0.22em] uppercase text-muted-foreground">費用</div>
+                        <div className="text-xs tracking-[0.22em] uppercase text-muted-foreground">護持金</div>
                         <div className="mt-1 font-display text-3xl text-primary">{p.price}</div>
                       </div>
                     </div>
@@ -480,7 +480,7 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
                     {/* 保留原本的文字提示 */}
                     <div className="mb-4 p-3 bg-background/60 rounded-md border border-primary/20 text-[11px] text-muted-foreground leading-relaxed">
                       <Info className="w-3 h-3 inline mr-1 text-primary mb-0.5" />
-                      祈願越具體越好！結帳時請於<strong className="text-foreground/90">備註欄</strong>寫下您的：<span className="text-foreground">姓名、居住地與具體困境</span>。
+                      祈願越真實越好！登記時請於<strong className="text-foreground/90">備註欄</strong>寫下您的：<span className="text-foreground">姓名、居住地與目前的生命掙扎</span>。
                     </div>
 
                     <div className="flex flex-col sm:flex-row gap-3">
@@ -491,7 +491,7 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
                             <Button 
                               className="h-12 w-full font-bold tracking-[0.1em] gold-border bg-primary text-primary-foreground shadow-sm transition-all hover:opacity-90 hover:scale-[1.02] active:scale-95"
                             >
-                              我願以此發心，請師兄代為造冊 <ExternalLink className="h-4 w-4 ml-2" />
+                              確認護持意願，請志工代為造冊 <ExternalLink className="h-4 w-4 ml-2" />
                             </Button>
                           </DialogTrigger>
                           <DialogContent className="max-w-md p-0 overflow-hidden bg-[#fffaf0] border-[#d4b483]">
@@ -501,7 +501,7 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
                                 <span>✍️</span> 綠界填寫預演
                               </DialogTitle>
                               <p className="text-sm text-[#8b4513] opacity-80 text-center mt-2 font-medium">
-                                為確保造冊無誤，請先看過<span className="text-red-700">備註欄填寫範例</span>再前往付款
+                                為確保造冊無誤，請先看過<span className="text-red-700">備註欄填寫範例</span>再前往啟動
                               </p>
                             </DialogHeader>
 
@@ -565,7 +565,7 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
                         <div className="flex flex-col items-center gap-2 pt-3 mt-3 border-t border-border/30">
                           <div className="flex items-center gap-1.5 text-[10px] text-muted-foreground font-medium">
                             <Lock className="w-3 h-3 text-green-600/80" />
-                            綠界 256-bit SSL 安全加密付款
+                            綠界 256-bit SSL 安全加密護持
                           </div>
                           <div className="flex items-center gap-3 opacity-60 grayscale scale-90">
                             <span className="text-[9px] font-bold tracking-tighter flex items-center gap-1">
@@ -574,14 +574,14 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
                           </div>
                           <div className="text-[10px] text-center text-muted-foreground/70 mt-1">
                             <Clock className="w-3 h-3 inline mr-1 mb-0.5" />
-                            志工於晚間造冊，隔週公佈名錄於 FB
+                            志工於晚間靜心造冊，隔週公佈名錄
                           </div>
                         </div>
                       </div>
                       
                       <Link href="/pay" className="flex-1 sm:flex-none">
                         <Button variant="outline" className="h-12 w-full gold-border hover:bg-primary/10 transition-colors">
-                          看完整登記說明
+                          了解完整護持說明
                         </Button>
                       </Link>
                     </div>
@@ -595,7 +595,7 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
         {/* FAQ */}
         <section id="faq" className="mx-auto max-w-6xl px-4 pt-10 pb-8 scroll-mt-24">
           <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">FAQ</div>
-          <h2 className="mt-2 font-display text-3xl">常見問題</h2>
+          <h2 className="mt-2 font-display text-3xl">探索釋疑</h2>
 
           <div className="mt-6 grid gap-4 md:grid-cols-2">
             {[0, 1].map((col) => (
@@ -618,8 +618,8 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
         {/* CROSS SELL - 修改 pb-14 為 pb-32 以避免被 StickyCta 遮擋 */}
         <section className="mx-auto max-w-6xl px-4 pb-32">
           <Card className="p-7 gold-border bg-card/70 paper-grain">
-            <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">你也可以</div>
-            <div className="mt-2 font-display text-2xl">如果你的狀態更像下面這些</div>
+            <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">探索其他緣分</div>
+            <div className="mt-2 font-display text-2xl">若您的靈魂更共鳴於以下頻率</div>
             <div className="mt-5 grid gap-4 md:grid-cols-2">
               {d.crossSell.map((x) => {
                 const t = DEITIES.find((k) => k.key === x.to);
@@ -630,7 +630,7 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
                       <div className="font-display text-xl transition-colors group-hover:opacity-80" style={{ color: t.themeColor.accent }}>{x.title}</div>
                       <div className="mt-2 text-muted-foreground readable">{x.desc}</div>
                       <div className="mt-4 inline-flex items-center gap-2 text-sm font-semibold transition-transform group-hover:translate-x-1" style={{ color: t.themeColor.accent }}>
-                        看 {t.name} <ArrowRight className="h-4 w-4" />
+                        尋找 {t.name} <ArrowRight className="h-4 w-4" />
                       </div>
                     </Card>
                   </Link>
