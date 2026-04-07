@@ -36,11 +36,10 @@ import {
   CreditCard,
   Clock,
   Info,
+  Quote
 } from "lucide-react";
 
-import { useEffect, useState } from "react";
-
-import { DEITIES, type DeityKey } from "@/lib/siteData";
+import { DEITIES, HOME_TESTIMONIALS, type DeityKey } from "@/lib/siteData";
 
 function scrollToId(id: string) {
   if (typeof document === "undefined") return;
@@ -83,47 +82,17 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
     );
   }
 
-  const [ritualText, setRitualText] = useState<string>("");
-  const [ritualLoading, setRitualLoading] = useState(false);
-  const [ritualError, setRitualError] = useState<string>("");
-
-  useEffect(() => {
-    let alive = true;
-    async function load() {
-      if (!d?.ritual?.mdPath) {
-        setRitualText("");
-        setRitualError("");
-        return;
-      }
-      try {
-        setRitualLoading(true);
-        setRitualError("");
-        const res = await fetch(`/rituals/${d.ritual.mdPath}`);
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const txt = await res.text();
-        if (!alive) return;
-        setRitualText(txt);
-      } catch (e: any) {
-        if (!alive) return;
-        setRitualError("載入儀軌內容失敗，請稍後再試。");
-        setRitualText("");
-      } finally {
-        if (alive) setRitualLoading(false);
-      }
-    }
-    load();
-    return () => {
-      alive = false;
-    };
-  }, [d.key]);
-
   // Quick pick helpers
   const cheapest = [...d.plans].sort((a, b) => a.price - b.price)[0];
   const priciest = [...d.plans].sort((a, b) => b.price - a.price)[0];
   const hot = d.plans.find((p) => p.hot) ?? d.plans[0];
 
+  // ★ 安全機制：如果 siteData 裡面沒有定義神明專屬的 testimonials，就退回使用全站通用的 HOME_TESTIMONIALS
+  const displayTestimonials = d.testimonials && d.testimonials.length > 0 
+    ? d.testimonials 
+    : HOME_TESTIMONIALS.slice(0, 3);
+
   return (
-    // ★ 核心變更：將 siteData 中對應本尊的顏色變數注入，配合 index.css 接管全站色彩
     <div 
       className="min-h-screen bg-background transition-colors duration-700 relative"
       style={{
@@ -146,7 +115,6 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
           <div className="mt-4 grid gap-6 md:grid-cols-[1.08fr_.92fr] md:items-start">
             <div>
               <div className="flex flex-wrap items-center gap-2">
-                {/* 意圖標籤套用動態強調色 */}
                 <Badge className="bg-card/60 text-primary border-primary" style={{ borderWidth: '1px' }}>
                   {d.primaryIntent}
                 </Badge>
@@ -175,7 +143,7 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
               <div className="mt-7 grid gap-3 sm:grid-cols-2">
                 {anchorBtn("生命掙扎與啟發", "pain", Sparkles)}
                 {anchorBtn("修持指引", "process", ClipboardList)}
-                {d.ritual ? anchorBtn("傳承儀軌", "ritual", ExternalLink) : null}
+                {d.ritual ? anchorBtn("傳承儀軌與見證", "ritual", ExternalLink) : null}
                 {anchorBtn("護持方案", "plans", ShieldCheck)}
                 {anchorBtn("探索釋疑", "faq", HelpCircle)}
               </div>
@@ -276,19 +244,20 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
 
         <div className="tibetan-divider h-9 opacity-70" aria-hidden />
 
-        {/* RITUAL */}
+        {/* RITUAL & TESTIMONIALS */}
         {d.ritual ? (
           <section id="ritual" className="mx-auto max-w-6xl px-4 pt-10 pb-4 scroll-mt-24">
-            <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">傳承儀軌</div>
+            <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">傳承儀軌與見證</div>
             <h2 className="mt-2 font-display text-3xl text-primary">{d.ritual.title}</h2>
             <p className="mt-3 readable text-muted-foreground max-w-prose">
-              下列為我們為您代為修持的儀軌要點；全文保留權威來源與出處，以確保每一次的祈請皆如法且純粹。
+              下列為我們為您代為修持的儀軌要點；透過如法的祈請，讓生命看見真實的轉變。
             </p>
 
             <div className="mt-6 grid gap-4 md:grid-cols-[0.95fr_1.05fr] md:items-start">
-              <Card className="gold-border bg-card/70 paper-grain overflow-hidden">
+              
+              {/* 左側：儀軌細節 */}
+              <Card className="gold-border bg-card/70 paper-grain overflow-hidden h-full flex flex-col">
                 <AspectRatio ratio={16 / 9}>
-                  {/* ★ 這裡改為 object-cover，呈現專業無邊界的攝影張力 */}
                   <img
                     src={d.ritual.image}
                     alt={d.ritual.imageAlt}
@@ -296,76 +265,113 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
                     loading="lazy"
                   />
                 </AspectRatio>
-                <div className="p-5">
-                  <div className="font-display text-xl">{d.ritual.title}</div>
-                  {d.ritual.note ? (
-                    <div className="mt-2 text-sm text-muted-foreground readable">{d.ritual.note}</div>
-                  ) : null}
+                <div className="p-6 md:p-8 flex-1 flex flex-col justify-between">
+                  <div>
+                    <div className="font-display text-xl">{d.ritual.title}</div>
+                    {d.ritual.note ? (
+                      <div className="mt-2 text-sm text-muted-foreground readable">{d.ritual.note}</div>
+                    ) : null}
 
-                  {(d.ritual.keyPoints?.length || d.ritual.offeringsChecklist?.length || d.ritual.practiceFocus?.length) ? (
-                    <div className="mt-5 grid gap-3">
-                      {d.ritual.keyPoints?.length ? (
-                        <div className="rounded-md border border-border/70 bg-background/30 p-4">
-                          <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">儀軌要點</div>
-                          <ul className="mt-3 space-y-2 text-sm text-muted-foreground readable list-disc list-inside">
-                            {d.ritual.keyPoints.map((x) => (
-                              <li key={x}>{x}</li>
-                            ))}
-                          </ul>
-                        </div>
-                      ) : null}
+                    {(d.ritual.keyPoints?.length || d.ritual.offeringsChecklist?.length || d.ritual.practiceFocus?.length) ? (
+                      <div className="mt-5 grid gap-4">
+                        {d.ritual.keyPoints?.length ? (
+                          <div className="rounded-md border border-border/70 bg-background/30 p-4">
+                            <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">儀軌要點</div>
+                            <ul className="mt-3 space-y-2 text-sm text-muted-foreground readable list-disc list-inside">
+                              {d.ritual.keyPoints.map((x) => (
+                                <li key={x}>{x}</li>
+                              ))}
+                            </ul>
+                          </div>
+                        ) : null}
 
-                      {d.ritual.offeringsChecklist?.length ? (
-                        <div className="rounded-md border border-border/70 bg-background/30 p-4">
-                          <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">供養準備（我們依此備辦）</div>
-                          <ul className="mt-3 space-y-2 text-sm text-muted-foreground readable list-disc list-inside">
-                            {d.ritual.offeringsChecklist.map((x) => (
-                              <li key={x}>{x}</li>
-                            ))}
-                          </ul>
-                        </div>
-                      ) : null}
+                        {d.ritual.offeringsChecklist?.length ? (
+                          <div className="rounded-md border border-border/70 bg-background/30 p-4">
+                            <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">供養準備（我們依此備辦）</div>
+                            <ul className="mt-3 space-y-2 text-sm text-muted-foreground readable list-disc list-inside">
+                              {d.ritual.offeringsChecklist.map((x) => (
+                                <li key={x}>{x}</li>
+                              ))}
+                            </ul>
+                          </div>
+                        ) : null}
 
-                      {d.ritual.practiceFocus?.length ? (
-                        <div className="rounded-md border border-border/70 bg-background/30 p-4">
-                          <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">觀修/持誦重點（修持依據）</div>
-                          <ul className="mt-3 space-y-2 text-sm text-muted-foreground readable list-disc list-inside">
-                            {d.ritual.practiceFocus.map((x) => (
-                              <li key={x}>{x}</li>
-                            ))}
-                          </ul>
-                        </div>
-                      ) : null}
-                    </div>
-                  ) : null}
-
-                  <div className="mt-4 flex items-center gap-2">
-                    <a href={d.ritual.sourceUrl} target="_blank" rel="noreferrer" className="inline-flex">
-                      <Button variant="outline" className="gold-border h-10 gap-2 hover:bg-primary/10 transition-colors">
-                        查閱原文出處 <ExternalLink className="h-4 w-4" />
-                      </Button>
-                    </a>
+                        {d.ritual.practiceFocus?.length ? (
+                          <div className="rounded-md border border-border/70 bg-background/30 p-4">
+                            <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">觀修/持誦重點（修持依據）</div>
+                            <ul className="mt-3 space-y-2 text-sm text-muted-foreground readable list-disc list-inside">
+                              {d.ritual.practiceFocus.map((x) => (
+                                <li key={x}>{x}</li>
+                              ))}
+                            </ul>
+                          </div>
+                        ) : null}
+                      </div>
+                    ) : null}
                   </div>
-                  {d.ritual.license ? (
-                    <div className="mt-2 text-xs text-muted-foreground">授權：{d.ritual.license}</div>
-                  ) : null}
+
+                  <div className="mt-6 pt-4 border-t border-border/40">
+                    <div className="flex items-center gap-2">
+                      <a href={d.ritual.sourceUrl} target="_blank" rel="noreferrer" className="inline-flex">
+                        <Button variant="ghost" className="h-9 px-3 gap-2 hover:bg-primary/10 transition-colors text-primary border border-primary/20">
+                          查閱原文出處 <ExternalLink className="h-3.5 w-3.5" />
+                        </Button>
+                      </a>
+                    </div>
+                    {d.ritual.license ? (
+                      <div className="mt-2 text-[11px] text-muted-foreground opacity-70">授權：{d.ritual.license}</div>
+                    ) : null}
+                  </div>
                 </div>
               </Card>
 
-              <Card className="p-7 gold-border bg-card/70 paper-grain">
-                <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">儀軌全文（歡迎參閱）</div>
-                <div className="mt-4">
-                  {ritualLoading ? (
-                    <div className="text-sm text-muted-foreground animate-pulse">靜心載入中…</div>
-                  ) : ritualError ? (
-                    <div className="text-sm text-destructive">{ritualError}</div>
-                  ) : (
-                    <pre className="max-h-[520px] overflow-auto rounded-md border border-border/70 bg-background/30 p-4 text-sm leading-6 whitespace-pre-wrap">
-                      {ritualText}
-                    </pre>
-                  )}
+              {/* 右側：回饋文見證 (自動安全判定) */}
+              <Card className="p-7 md:p-9 gold-border bg-card/70 paper-grain flex flex-col h-full relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-48 h-48 bg-primary/10 rounded-full blur-[60px] pointer-events-none -translate-y-1/2 translate-x-1/3"></div>
+                
+                <div className="relative z-10">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Quote className="w-4 h-4 text-primary opacity-80" />
+                    <div className="text-xs tracking-[0.26em] uppercase text-primary font-medium">Resonance</div>
+                  </div>
+                  <h3 className="font-display text-2xl text-foreground/90">這些微光，也曾照亮相似的掙扎</h3>
+                  <p className="mt-2 text-[13px] text-muted-foreground readable">
+                    他們也曾走過焦慮與迷惘，直到這份願力溫柔地承接了不安。
+                  </p>
+                </div>
+
+                <div className="mt-10 flex flex-col gap-8 flex-1 relative z-10 pl-2">
+                  {/* ★ 安全使用 displayTestimonials 執行 .map */}
+                  {displayTestimonials.map((t, idx) => (
+                    <div 
+                      key={idx} 
+                      className="relative pl-6 border-l-[1.5px] border-primary/20 hover:border-primary/60 transition-colors duration-500 group"
+                    >
+                      <div className="absolute -left-[5px] top-1.5 w-[8px] h-[8px] rounded-full bg-background border border-primary/60 group-hover:bg-primary/30 transition-colors duration-300"></div>
+                      
+                      <div className="font-display text-[1.15rem] text-foreground/90 leading-snug">{t.title}</div>
+                      
+                      <p className="mt-2.5 text-[14px] text-muted-foreground leading-loose readable">
+                        {t.body}
+                      </p>
+                      
+                      <div className="mt-4 flex items-center gap-3">
+                        <span className="w-6 h-[1px] bg-primary/40"></span>
+                        <span className="text-[11px] tracking-[0.18em] text-primary/80">{t.by}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="mt-10 text-center relative z-10">
+                  <Link href="/proof">
+                    <Button variant="ghost" className="w-full text-sm hover:bg-primary/5 hover:text-primary transition-colors border border-transparent hover:border-primary/20">
+                      閱讀更多生命轉變的故事 <ArrowRight className="w-3.5 h-3.5 ml-2" />
+                    </Button>
+                  </Link>
                 </div>
               </Card>
+
             </div>
           </section>
         ) : null}
@@ -374,6 +380,8 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
 
         {/* PLANS */}
         <section id="plans" className="mx-auto max-w-6xl px-4 pt-12 pb-6 scroll-mt-24">
+          
+          {/* 保留的【 寫在您決定啟程之前 】卡片 */}
           <Card className="mb-6 p-6 md:p-8 gold-border bg-background/50 border-primary/40 relative overflow-hidden">
             <div className="absolute left-0 top-0 w-1 h-full bg-primary/60"></div>
             <div className="text-sm tracking-[0.2em] text-primary mb-3 font-bold">【 寫在您決定啟程之前 】</div>
@@ -384,7 +392,7 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
           </Card>
 
           {/* 活動加碼橫幅 (Banner) */}
-          <div className="mt-2 mb-8 p-5 rounded-lg border border-primary/40 bg-primary/5 relative overflow-hidden group">
+          <div className="mb-8 p-5 rounded-lg border border-primary/40 bg-primary/5 relative overflow-hidden group">
             <div className="absolute top-0 right-0 p-4 opacity-10 font-display text-6xl text-primary pointer-events-none transition-transform group-hover:scale-110">
               ✦
             </div>
@@ -477,7 +485,6 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
                   <div className="mt-6">
                     <Separator className="mb-5 bg-border/50" />
                     
-                    {/* 保留原本的文字提示 */}
                     <div className="mb-4 p-3 bg-background/60 rounded-md border border-primary/20 text-[11px] text-muted-foreground leading-relaxed">
                       <Info className="w-3 h-3 inline mr-1 text-primary mb-0.5" />
                       祈願越真實越好！登記時請於<strong className="text-foreground/90">備註欄</strong>寫下您的：<span className="text-foreground">姓名、居住地與目前的生命掙扎</span>。
@@ -495,7 +502,6 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
                             </Button>
                           </DialogTrigger>
                           <DialogContent className="max-w-md p-0 overflow-hidden bg-[#fffaf0] border-[#d4b483]">
-                            {/* 彈窗標題 */}
                             <DialogHeader className="bg-[#fffaf0] p-6 pb-4 border-b border-[#d4b483]">
                               <DialogTitle className="text-xl font-bold text-[#8b4513] flex items-center justify-center gap-2">
                                 <span>✍️</span> 綠界填寫預演
@@ -505,7 +511,6 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
                               </p>
                             </DialogHeader>
 
-                            {/* 彈窗內容：視覺模擬圖 */}
                             <div className="p-6">
                               <div className="bg-white rounded-xl p-5 mb-6 border border-gray-200 shadow-inner">
                                 <p className="text-sm text-gray-600 mb-4 text-center font-bold">
@@ -525,7 +530,6 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
                                 </div>
                               </div>
 
-                              {/* 實際跳轉綠界的按鈕（包含原有的 GA/FB 追蹤代碼） */}
                               <a
                                 href={p.url}
                                 target="_blank"
@@ -561,7 +565,6 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
                           </DialogContent>
                         </Dialog>
                         
-                        {/* 金流視覺化與志工排程承諾 */}
                         <div className="flex flex-col items-center gap-2 pt-3 mt-3 border-t border-border/30">
                           <div className="flex items-center gap-1.5 text-[10px] text-muted-foreground font-medium">
                             <Lock className="w-3 h-3 text-green-600/80" />
@@ -615,7 +618,7 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
           </div>
         </section>
 
-        {/* CROSS SELL - 修改 pb-14 為 pb-32 以避免被 StickyCta 遮擋 */}
+        {/* CROSS SELL */}
         <section className="mx-auto max-w-6xl px-4 pb-32">
           <Card className="p-7 gold-border bg-card/70 paper-grain">
             <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">探索其他緣分</div>
