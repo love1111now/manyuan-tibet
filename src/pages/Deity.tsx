@@ -87,9 +87,10 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
   const priciest = [...d.plans].sort((a, b) => b.price - a.price)[0];
   const hot = d.plans.find((p) => p.hot) ?? d.plans[0];
 
-  // ★ 安全機制：如果 siteData 裡面沒有定義神明專屬的 testimonials，就退回使用全站通用的 HOME_TESTIMONIALS
-  const displayTestimonials = d.testimonials && d.testimonials.length > 0 
-    ? d.testimonials 
+  // ★ 終極安全機制：使用 any 繞過 TS 檢查，確保即便 siteData 沒更新也不會壞掉
+  const deityData = d as any;
+  const displayTestimonials = deityData.testimonials && deityData.testimonials.length > 0 
+    ? deityData.testimonials 
     : HOME_TESTIMONIALS.slice(0, 3);
 
   return (
@@ -325,7 +326,7 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
                 </div>
               </Card>
 
-              {/* 右側：回饋文見證 (自動安全判定) */}
+              {/* 右側：回饋文見證 (極致美感與共感性排版) */}
               <Card className="p-7 md:p-9 gold-border bg-card/70 paper-grain flex flex-col h-full relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-48 h-48 bg-primary/10 rounded-full blur-[60px] pointer-events-none -translate-y-1/2 translate-x-1/3"></div>
                 
@@ -341,8 +342,7 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
                 </div>
 
                 <div className="mt-10 flex flex-col gap-8 flex-1 relative z-10 pl-2">
-                  {/* ★ 安全使用 displayTestimonials 執行 .map */}
-                  {displayTestimonials.map((t, idx) => (
+                  {displayTestimonials.map((t: any, idx: number) => (
                     <div 
                       key={idx} 
                       className="relative pl-6 border-l-[1.5px] border-primary/20 hover:border-primary/60 transition-colors duration-500 group"
@@ -381,7 +381,7 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
         {/* PLANS */}
         <section id="plans" className="mx-auto max-w-6xl px-4 pt-12 pb-6 scroll-mt-24">
           
-          {/* 保留的【 寫在您決定啟程之前 】卡片 */}
+          {/* 【 寫在您決定啟程之前 】卡片 */}
           <Card className="mb-6 p-6 md:p-8 gold-border bg-background/50 border-primary/40 relative overflow-hidden">
             <div className="absolute left-0 top-0 w-1 h-full bg-primary/60"></div>
             <div className="text-sm tracking-[0.2em] text-primary mb-3 font-bold">【 寫在您決定啟程之前 】</div>
