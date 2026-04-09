@@ -11,11 +11,12 @@ import { Separator } from "@/components/ui/separator";
 import { Link } from "wouter";
 import { ArrowRight, ShieldCheck, Sparkles, ClipboardList, Clock, Download } from "lucide-react";
 
-import { DEITIES, HOME_TESTIMONIALS, VISUALS } from "@/lib/siteData";
+// 🟢 核心修復：拆分引入來源，VISUALS 來自 siteData，DEITIES 來自 deities 目錄
+import { HOME_TESTIMONIALS, VISUALS } from "@/lib/siteData";
+import { DEITIES } from "@/data/deities";
 
 export default function Home() {
   
-  // 處理頁面內平滑滾動，避免 wouter 路由觸發 404 錯誤
   const scrollToSection = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
@@ -30,7 +31,7 @@ export default function Home() {
           <div className="absolute inset-0 opacity-40">
             <img
               src={VISUALS.heroGilded}
-              alt="滿願藏庫｜法流意象"
+              alt="滿願藏庫｜招財,人緣,健康,法事登記"
               className="h-full w-full object-cover scale-[1.07]"
               loading="eager"
             />
@@ -54,7 +55,7 @@ export default function Home() {
             </h1>
 
             <p className="mt-6 readable text-muted-foreground max-w-2xl text-lg leading-relaxed mx-auto">
-              我們是台北的無償志工團隊，與西藏師兄姊跨境協力。我們沒有大師包裝，沒有預算打廣告，只有實實在在的法事造冊。
+              我們是無償志工團隊，與西藏師兄姊跨境協力。我們沒有大師包裝，沒有預算打廣告，只有實實在在的法事造冊。
               <br className="hidden sm:block" />
               如果您覺得這世界太虛假、太吵鬧，想找回一點點安靜且真實的加持——
               <span className="text-foreground/90 font-medium">不用硬撐，請將這份沉重交託給純粹的傳承。</span>

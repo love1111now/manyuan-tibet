@@ -29,16 +29,25 @@ import {
 } from "lucide-react";
 import { Link } from "wouter";
 
-import { DEITIES } from "@/lib/siteData";
+// 🟢 核心修復 1：直接從模組化資料庫引入，避開 Vite 的循環依賴地雷
+import { DEITIES } from "@/data/deities";
 
 export default function Pay() {
   
-  // 處理點擊追蹤 (整合 Meta Pixel InitiateCheckout)
-  const handleTrackCheckout = (planName: string) => {
-    if (typeof window !== "undefined" && window.fbq) {
-      window.fbq('track', 'InitiateCheckout', {
+  // 🟢 核心修復 2：升級點擊追蹤 (完美整合 Meta Pixel 與 Google Analytics)
+  const handleTrackCheckout = (planName: string, price: number, deityName: string) => {
+    if (typeof window !== "undefined") {
+      // 觸發 Google Analytics
+      window.gtag?.('event', 'begin_checkout', {
+        currency: 'TWD',
+        value: price,
+        items: [{ item_name: `${deityName}-${planName}`, price: price }]
+      });
+      // 觸發 Meta Pixel
+      window.fbq?.('track', 'InitiateCheckout', {
         content_name: planName,
-        content_category: 'Ritual_Registration',
+        value: price,
+        currency: 'TWD'
       });
     }
   };
@@ -47,7 +56,6 @@ export default function Pay() {
     <div className="min-h-screen bg-background">
       <SiteHeader />
 
-      {/* pb-32 確保手機端滑到底部時，不會被 StickyCta 懸浮按鈕擋住 */}
       <main className="mx-auto max-w-6xl px-4 pt-10 pb-32">
         <div className="grid gap-6 md:grid-cols-[1.05fr_.95fr] md:items-start">
           <div>
@@ -61,7 +69,6 @@ export default function Pay() {
               護持完成即保留名額並為您安排修持。當您處於焦慮與掙扎中，最需要的往往不是更多資訊，而是一次清晰、且能為生命帶來安定的行動。
             </p>
 
-            {/* 下單流程優化：加入夜間造冊與隔週公佈 */}
             <Card className="mt-7 p-7 gold-border bg-card/70 paper-grain relative overflow-hidden">
               <div className="absolute top-0 right-0 p-4 opacity-5 pointer-events-none">
                 <ClipboardList className="w-24 h-24" />
@@ -91,7 +98,6 @@ export default function Pay() {
                 ))}
               </div>
 
-              {/* 誠實聲明：融合原本的文案與志工狀態 */}
               <div className="mt-6 p-4 rounded-md bg-background/50 border border-border/70 text-sm text-muted-foreground readable">
                 <div className="flex items-start gap-2">
                   <Heart className="w-4 h-4 text-primary mt-1 flex-shrink-0" />
@@ -123,7 +129,6 @@ export default function Pay() {
 
             <Separator className="my-6" />
 
-            {/* FB 私訊導流 */}
             <div className="mt-6 p-4 rounded-md bg-foreground/5 border border-border/50 text-center">
               <div className="text-sm text-foreground/80 mb-3">不確定如何表達內心的祈願嗎？</div>
               <a href="https://m.me/61583749010531" target="_blank" rel="noreferrer">
@@ -139,11 +144,9 @@ export default function Pay() {
           </Card>
         </div>
 
-        {/* 保留原版的藏式分隔線 */}
         <div className="tibetan-divider h-9 opacity-70 mt-10" aria-hidden />
         <Separator className="my-10" />
 
-        {/* 找回原版的 tibetan-texture-bg */}
         <section className="rounded-xl tibetan-texture-bg p-2 md:p-0">
           <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">Journey Overview</div>
           <h2 className="mt-2 font-display text-3xl">全站護持路徑總覽</h2>
@@ -151,7 +154,6 @@ export default function Pay() {
             為您完整展開所有的修持與增益可能。
           </p>
 
-          {/* 本月加碼活動橫幅 */}
           <div className="mt-6 p-5 rounded-lg border border-primary/40 bg-primary/5 relative overflow-hidden group">
             <div className="absolute top-0 right-0 p-4 opacity-10 font-display text-6xl text-primary pointer-events-none transition-transform group-hover:scale-110">
               ✦
@@ -188,7 +190,6 @@ export default function Pay() {
                     .map((p) => (
                       <Card key={p.id} className="relative p-6 gold-border bg-background/35 hover:border-primary/40 transition-all duration-300 flex flex-col justify-between">
                         
-                        {/* 推薦標籤：視覺焦點強化 */}
                         {p.hot && (
                           <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-10">
                             <Badge className="bg-primary text-primary-foreground gold-border px-4 py-0.5 text-[10px] tracking-widest shadow-lg animate-bounce">
@@ -217,7 +218,6 @@ export default function Pay() {
                             祈願越真實越好！登記時請於<strong className="text-foreground/80">備註欄</strong>寫下您的：<span className="text-foreground">姓名、居住地與目前的生命掙扎</span>。
                           </div>
 
-                          {/* ★★★ 核心修改區：把 a 標籤替換成 Dialog 視覺導引 ★★★ */}
                           <Dialog>
                             <DialogTrigger asChild>
                               <Button className="h-11 w-full font-bold tracking-[0.22em] uppercase gold-border hover:bg-primary hover:text-primary-foreground shadow-sm transition-all">
@@ -247,7 +247,8 @@ export default function Pay() {
                                     <div className="font-mono text-gray-800 text-[14px] leading-relaxed mt-2 font-bold">
                                       姓名：王小明<br/>
                                       生辰：50年1月1日<br/>
-                                      祈願：祈求{d.name}加持，{p.name.split('｜')[0]}。
+                                      {/* 🟢 核心修復 3：完美擷取「｜」與「：」分隔符號，確保藥師佛名字不會太長 */}
+                                      祈願：祈求{d.name}加持，{p.name.split(/[｜：]/)[0]}。
                                     </div>
                                     <div className="absolute inset-0 border-4 border-red-400 opacity-20 animate-pulse rounded-lg pointer-events-none"></div>
                                   </div>
@@ -259,7 +260,8 @@ export default function Pay() {
                                   rel="noreferrer"
                                   className="block w-full"
                                   aria-label={`前往外部付款頁：${p.name}`}
-                                  onClick={() => handleTrackCheckout(p.name)}
+                                  // 觸發全新的全方位追蹤代碼
+                                  onClick={() => handleTrackCheckout(p.name, p.price, d.name)}
                                 >
                                   <Button className="w-full h-14 bg-[#b22222] hover:bg-red-800 text-white text-lg font-bold rounded-full shadow-lg transition-all active:scale-95">
                                     確認瞭解，前往綠界登記 <ExternalLink className="h-5 w-5 ml-2" />
@@ -274,9 +276,7 @@ export default function Pay() {
                               </div>
                             </DialogContent>
                           </Dialog>
-                          {/* ★★★ 核心修改區結束 ★★★ */}
                           
-                          {/* 安全感與承諾視覺化 */}
                           <div className="flex flex-col items-center gap-2 pt-2 border-t border-border/30">
                             <div className="flex items-center gap-1.5 text-[10px] text-muted-foreground font-medium">
                               <Lock className="w-3 h-3 text-green-600/80" />

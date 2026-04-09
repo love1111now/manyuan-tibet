@@ -63,9 +63,8 @@ export const greenTara: Deity = {
     { title: "回向與見證", body: "將滿願的功德回向；志工將以最快速度為您造冊，與您一起期待轉機的到來。" }
   ],
   plans: [
-    { id: "gt-490", name: "平靜微光｜綠度母解憂供燈回向", price: 490, blurb: "為焦慮的心點亮一盞燈：溫柔釋放緊繃的情緒，祈求在迷茫中看見希望的光。", url: "https://cart.cashier.ecpay.com.tw/qp/t2Q1", suitableFor: ["解除重度焦慮", "日常小願祈福"], details: ["清淨解憂供燈", "✦ 本月結緣：每週六藥師佛息災煙供守護"] },
-    { id: "gt-980", name: "迅疾滿願｜綠度母急難救護相應", price: 980, blurb: "當事情迫在眉睫：祈求度母以最快的速度介入，解除危機，滿足您迫切的願望。", url: "https://cart.cashier.ecpay.com.tw/qp/t2R2", hot: true, badge: "急難首選", suitableFor: ["急難救助", "事業/求子速滿願"], details: ["專屬迅疾滿願修法", "急難護佑回向", "✦ 本月結緣：每週六藥師佛息災煙供守護"] },
-    { id: "gt-1860", name: "生機綻放｜綠度母深層破障加強", price: 1860, blurb: "面對長期卡關的重大祈願：深度破除阻擋滿願的深層障礙，迎接生命全新的生機。", url: "https://cart.cashier.ecpay.com.tw/qp/t2S3", suitableFor: ["長期求子/求職未果", "化解重大官非"], details: ["深層破障滿願香供", "加強迅疾回向", "✦ 本月結緣：每週六藥師佛息災煙供守護"] }
+    { id: "gt-680", name: "平靜微光｜綠度母解憂供燈回向", price: 680, blurb: "為焦慮的心點亮一盞燈：溫柔釋放緊繃的情緒，祈求在迷茫中看見希望的光。", url: "https://cart.cashier.ecpay.com.tw/qp/zEJ1", suitableFor: ["解除重度焦慮", "日常小願祈福"], details: ["清淨解憂供燈", "✦ 本月結緣：每週六藥師佛息災煙供守護"] },
+    { id: "gt-1280", name: "迅疾滿願｜綠度母急難救護相應", price: 1280, blurb: "當事情迫在眉睫：祈求度母以最快的速度介入，解除危機，滿足您迫切的願望。", url: "https://cart.cashier.ecpay.com.tw/qp/zED7", hot: true, badge: "急難首選", suitableFor: ["急難救助", "事業/求子速滿願"], details: ["專屬迅疾滿願修法", "急難護佑回向", "✦ 本月結緣：每週六藥師佛息災煙供守護"] }
   ],
   faq: [
     { q: "這是一場真實的祈福，還是商業買賣？", a: "這是一場真實的法事造冊與善緣探索。我們採用『綠界科技 ECPay』確保您的金流安全。滿願藏庫台灣團隊由不支薪志工組成，護持金扣除手續費後，全數化作西藏壇城的莊嚴供養。修持完成後，我們會在 FB 粉專公佈「去識別化」名錄，讓您的付出成為純粹且透明的善意。" },

@@ -9,20 +9,9 @@ import { padmasambhava } from "./padmasambhava";
 import { medicineBuddha } from "./medicineBuddha"; 
 import { greenTara } from "./greenTara";
 
-// 1. 建立全量資料庫 Mapping
-// 這裡的 Key 值必須精準對應路徑名稱與類型定義
-export const DEITY_BY_KEY: Record<DeityKey, Deity> = {
-  "yellow": yellow,
-  "mahashri": mahashri,
-  "ganapati": ganapati,
-  "kurukulla": kurukulla,
-  "padmasambhava": padmasambhava,
-  "medicine-buddha": medicineBuddha, // 注意這裡連字號要對
-  "green-tara": greenTara,            // 注意這裡連字號要對
-};
-
-// 2. 決定前端頁面顯示的先後順序
-export const DEITIES: Deity[] = [
+// 1. 決定前端頁面顯示的先後順序
+// 優化：加上 readonly，防止 UI 元件意外修改陣列（如誤用 .push() 或 .sort()）
+export const DEITIES: readonly Deity[] = [
   greenTara,      // 綠度母 (迅疾救度，通常放在首位)
   padmasambhava,  // 蓮花生大士 (強力除障)
   medicineBuddha, // 藥師佛 (健康平安)
@@ -31,3 +20,16 @@ export const DEITIES: Deity[] = [
   ganapati,       // 象神 (事業突破)
   kurukulla,      // 咕嚕咕咧佛母 (人際關係)
 ];
+
+// 2. 建立全量資料庫 Mapping
+// 優化 A：加上 Readonly<> 鎖定物件結構
+// 優化 B：使用 ES6 縮寫語法，移除多餘的重複命名 (yellow: yellow -> yellow)
+export const DEITY_BY_KEY: Readonly<Record<DeityKey, Deity>> = {
+  yellow,
+  mahashri,
+  ganapati,
+  kurukulla,
+  padmasambhava,
+  "medicine-buddha": medicineBuddha, // 帶有連字號必須保留字串 Key
+  "green-tara": greenTara,           // 帶有連字號必須保留字串 Key
+};

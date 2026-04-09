@@ -1,7 +1,6 @@
 // @ts-nocheck
 import type { Deity } from "@/lib/siteData";
 
-// 🟢 已經完美對齊您資料夾中的真實檔名
 import heroYellowImg from "@/assets/visuals/deities/dzambhala-hero-altar.jpeg";
 import ritualYellowImg from "@/assets/visuals/deities/dzambhala-vibe-butter-lamp.webp"; 
 import dzambhalaRitualAltar from "@/assets/visuals/deities/dzambhala-ritual-altar.webp";
@@ -80,7 +79,7 @@ export const yellow: Deity = {
     { q: "黃財神與象神（精靈主）有什麼不同？", a: "黃財神側重於『基礎財富累積與撫平匱乏感』；象神則聚焦於『排除阻礙與清明決策』。若覺得錢總是被無端消耗或單純想增加收入，請選黃財神；若事業推動困難重重、小人干擾，建議先祈求象神除障。" }
   ],
   crossSell: [
-    { title: "如果您此刻感到深層的焦慮與不安", desc: "探索綠度母：讓迅疾的慈悲先接住您，穩穩地穩住當下。", to: "green-tara" },
+    { title: "如果您此刻感到深層的焦慮與不安", desc: "探索綠度母：讓迅疾的慈悲先接住您，穩住當下的身心。", to: "green-tara" },
     { title: "如果您正困於決策的迷霧或遭遇阻礙", desc: "探索象神：照亮盲點，掃除違緣，尋回清明的洞察力。", to: "ganapati" }
   ]
 };

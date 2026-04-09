@@ -2,7 +2,7 @@
 import type { Deity } from "@/lib/siteData";
 
 import heroPadmaImg from "@/assets/visuals/deities/padmasambhava-hero-altar.jpeg";
-import ritualPadmaImg from "@/assets/visuals/deities/padmasambhava-vibe-butter-lamp.webp"; 
+import ritualPadmaImg from "@/assets/visuals/testimonial_bg_yellow.webp"; 
 import padmaRitualAltar from "@/assets/visuals/deities/padmasambhava-ritual-altar.webp";
 import padmaActionPuja from "@/assets/visuals/deities/padmasambhava-action-group-puja.webp";
 import padmaVibeLamp from "@/assets/visuals/deities/padmasambhava-vibe-butter-lamp.webp";
@@ -63,9 +63,8 @@ export const padmasambhava: Deity = {
     { title: "回向與見證", body: "將平安的祈願回向給法界；志工將謹慎造冊修持，為您築起隱形的保護網。" }
   ],
   plans: [
-    { id: "p-490", name: "無畏微光｜蓮師息災供燈回向", price: 490, blurb: "為動盪不安的心點亮一盞燈：溫柔安撫內在的恐懼，祈求日常出入的平安。", url: "https://cart.cashier.ecpay.com.tw/qp/p8J1", suitableFor: ["安頓身心", "日常保平安"], details: ["清淨息災供燈", "✦ 本月結緣：每週六藥師佛息災煙供守護"] },
-    { id: "p-980", name: "堅實護持｜蓮師除障相應回向", price: 980, blurb: "當生命遇到逆流或低潮：啟動強大的保護力，遣除疾病、災厄與無形的干擾。", url: "https://cart.cashier.ecpay.com.tw/qp/p8K2", hot: true, badge: "護持首選", suitableFor: ["逢凶化吉", "化解流年不利"], details: ["專屬除障相應修法", "無畏守護回向", "✦ 本月結緣：每週六藥師佛息災煙供守護"] },
-    { id: "p-1860", name: "大威德防護｜蓮師深層淨障加強回向", price: 1860, blurb: "面臨重大人生關卡或複雜磁場：深度淨化生命中的惡緣，建立堅不可摧的心靈靠山。", url: "https://cart.cashier.ecpay.com.tw/qp/p8L3", suitableFor: ["重大違緣化解", "高壓環境工作者"], details: ["深層淨障香供", "加強守護回向", "✦ 本月結緣：每週六藥師佛息災煙供守護"] }
+    { id: "p-490", name: "無畏微光｜蓮師息災供燈回向", price: 490, blurb: "為動盪不安的心點亮一盞燈：溫柔安撫內在的恐懼，祈求日常出入的平安。", url: "https://cart.cashier.ecpay.com.tw/qp/z4Z5", suitableFor: ["安頓身心", "日常保平安"], details: ["清淨息災供燈", "✦ 本月結緣：每週六藥師佛息災煙供守護"] },
+    { id: "p-980", name: "堅實護持｜蓮師除障相應回向", price: 980, blurb: "當生命遇到逆流或低潮：啟動強大的保護力，遣除疾病、災厄與無形的干擾。", url: "https://cart.cashier.ecpay.com.tw/qp/z5d7", hot: true, badge: "護持首選", suitableFor: ["逢凶化吉", "化解流年不利"], details: ["專屬除障相應修法", "無畏守護回向", "✦ 本月結緣：每週六藥師佛息災煙供守護"] }
   ],
   faq: [
     { q: "這是一場真實的祈福，還是商業買賣？", a: "這是一場真實的法事造冊與善緣探索。滿願藏庫台灣團隊由不支薪志工組成，護持金扣除手續費後，全數化作西藏壇城的莊嚴供養。" },
