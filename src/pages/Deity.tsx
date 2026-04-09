@@ -1,6 +1,7 @@
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import StickyCta from "@/components/StickyCta";
+import RitualMarkdown from "@/components/RitualMarkdown";
 
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -87,7 +88,6 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
   const priciest = [...d.plans].sort((a, b) => b.price - a.price)[0];
   const hot = d.plans.find((p) => p.hot) ?? d.plans[0];
 
-  // ★ 終極安全機制：使用 any 繞過 TS 檢查，確保即便 siteData 沒更新也不會壞掉
   const deityData = d as any;
   const displayTestimonials = deityData.testimonials && deityData.testimonials.length > 0 
     ? deityData.testimonials 
@@ -256,7 +256,7 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
 
             <div className="mt-6 grid gap-4 md:grid-cols-[0.95fr_1.05fr] md:items-start">
               
-              {/* 左側：儀軌細節 */}
+              {/* 左側：儀軌細節 (已整合 Markdown 渲染) */}
               <Card className="gold-border bg-card/70 paper-grain overflow-hidden h-full flex flex-col">
                 <AspectRatio ratio={16 / 9}>
                   <img
@@ -273,42 +273,10 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
                       <div className="mt-2 text-sm text-muted-foreground readable">{d.ritual.note}</div>
                     ) : null}
 
-                    {(d.ritual.keyPoints?.length || d.ritual.offeringsChecklist?.length || d.ritual.practiceFocus?.length) ? (
-                      <div className="mt-5 grid gap-4">
-                        {d.ritual.keyPoints?.length ? (
-                          <div className="rounded-md border border-border/70 bg-background/30 p-4">
-                            <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">儀軌要點</div>
-                            <ul className="mt-3 space-y-2 text-sm text-muted-foreground readable list-disc list-inside">
-                              {d.ritual.keyPoints.map((x) => (
-                                <li key={x}>{x}</li>
-                              ))}
-                            </ul>
-                          </div>
-                        ) : null}
-
-                        {d.ritual.offeringsChecklist?.length ? (
-                          <div className="rounded-md border border-border/70 bg-background/30 p-4">
-                            <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">供養準備（我們依此備辦）</div>
-                            <ul className="mt-3 space-y-2 text-sm text-muted-foreground readable list-disc list-inside">
-                              {d.ritual.offeringsChecklist.map((x) => (
-                                <li key={x}>{x}</li>
-                              ))}
-                            </ul>
-                          </div>
-                        ) : null}
-
-                        {d.ritual.practiceFocus?.length ? (
-                          <div className="rounded-md border border-border/70 bg-background/30 p-4">
-                            <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">觀修/持誦重點（修持依據）</div>
-                            <ul className="mt-3 space-y-2 text-sm text-muted-foreground readable list-disc list-inside">
-                              {d.ritual.practiceFocus.map((x) => (
-                                <li key={x}>{x}</li>
-                              ))}
-                            </ul>
-                          </div>
-                        ) : null}
-                      </div>
-                    ) : null}
+                    {/* Markdown 內容渲染區塊 */}
+                    <div className="mt-5 rounded-md border border-border/70 bg-background/30 p-4 md:p-6">
+                      <RitualMarkdown mdPath={d.ritual.mdPath} />
+                    </div>
                   </div>
 
                   <div className="mt-6 pt-4 border-t border-border/40">
@@ -326,7 +294,7 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
                 </div>
               </Card>
 
-              {/* 右側：回饋文見證 (極致美感與共感性排版) */}
+              {/* 右側：回饋文見證 */}
               <Card className="p-7 md:p-9 gold-border bg-card/70 paper-grain flex flex-col h-full relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-48 h-48 bg-primary/10 rounded-full blur-[60px] pointer-events-none -translate-y-1/2 translate-x-1/3"></div>
                 
@@ -371,8 +339,35 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
                   </Link>
                 </div>
               </Card>
-
             </div>
+
+            {/* 🟢 新增：實修光影紀實 (3 張圖片的 Gallery) */}
+            {d.rituals && d.rituals.length > 0 && (
+              <div className="mt-10">
+                <div className="flex items-center gap-2 mb-4">
+                  <Sparkles className="w-5 h-5 text-primary opacity-80" />
+                  <h3 className="font-display text-2xl text-foreground/90">實修光影與紀實</h3>
+                </div>
+                <div className="grid gap-5 grid-cols-1 sm:grid-cols-3">
+                  {d.rituals.map((r) => (
+                    <Card key={r.id} className="overflow-hidden gold-border bg-card/70 paper-grain group flex flex-col border-primary/30 hover:border-primary/60 transition-colors">
+                      <AspectRatio ratio={4 / 3}>
+                        <img
+                          src={r.img}
+                          alt={r.alt}
+                          className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                          loading="lazy"
+                        />
+                      </AspectRatio>
+                      <div className="p-5 flex-1 flex flex-col justify-center border-t border-border/40">
+                        <div className="font-display text-lg text-primary">{r.alt}</div>
+                        <div className="mt-1.5 text-[13px] text-muted-foreground readable leading-relaxed">{r.caption}</div>
+                      </div>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+            )}
           </section>
         ) : null}
 
@@ -381,7 +376,6 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
         {/* PLANS */}
         <section id="plans" className="mx-auto max-w-6xl px-4 pt-12 pb-6 scroll-mt-24">
           
-          {/* 【 寫在您決定啟程之前 】卡片 */}
           <Card className="mb-6 p-6 md:p-8 gold-border bg-background/50 border-primary/40 relative overflow-hidden">
             <div className="absolute left-0 top-0 w-1 h-full bg-primary/60"></div>
             <div className="text-sm tracking-[0.2em] text-primary mb-3 font-bold">【 寫在您決定啟程之前 】</div>
@@ -391,7 +385,6 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
             </p>
           </Card>
 
-          {/* 活動加碼橫幅 (Banner) */}
           <div className="mb-8 p-5 rounded-lg border border-primary/40 bg-primary/5 relative overflow-hidden group">
             <div className="absolute top-0 right-0 p-4 opacity-10 font-display text-6xl text-primary pointer-events-none transition-transform group-hover:scale-110">
               ✦
