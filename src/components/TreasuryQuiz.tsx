@@ -33,77 +33,84 @@ type QuizQuestion = {
   options: QuizOption[];
 };
 
+// 優化為 5 個選項，全面涵蓋 7 本尊的能量特徵
 const QUESTION_BANK: QuizQuestion[] = [
   {
     id: "q1",
     title: "你最近最常冒出的擔心是？",
     subtitle: "選最貼近你現在的感受",
     options: [
-      { id: "a", label: "賺得到但留不住，總有莫名開銷", weights: { yellow: 3, mahashri: 1 } },
+      { id: "a", label: "賺得到但留不住，總有莫名開銷", weights: { yellow: 3 } },
       { id: "b", label: "家裡不太安穩，容易內耗或意外破財", weights: { mahashri: 3 } },
-      { id: "c", label: "我常做錯決定，事後一直後悔", weights: { ganapati: 3 } },
+      { id: "c", label: "常做錯決定，或是面臨突發危機不知所措", weights: { ganapati: 2, "green-tara": 2 } },
       { id: "d", label: "人脈卡住、貴人少，做事像孤軍", weights: { kurukulla: 3 } },
+      { id: "e", label: "長期高壓導致身心耗損，或有難以解釋的恐懼", weights: { "medicine-buddha": 2, padmasambhava: 2 } },
     ],
   },
   {
     id: "q2",
     title: "碰到錢的事，你最容易進入哪種狀態？",
     options: [
-      { id: "a", label: "急：想快點翻身，越急越亂", weights: { yellow: 2, ganapati: 1 } },
-      { id: "b", label: "怕：不敢花也不敢投，心裡一直緊", weights: { yellow: 2, mahashri: 1 } },
+      { id: "a", label: "急：想快點翻身，遇到危機只想迅速解決", weights: { yellow: 2, "green-tara": 2 } },
+      { id: "b", label: "怕：不敢花也不敢投，缺乏深層安全感", weights: { mahashri: 2, padmasambhava: 2 } },
       { id: "c", label: "迷：資訊太多，判斷力像被遮住", weights: { ganapati: 3 } },
-      { id: "d", label: "悶：都得靠自己，沒人能一起扛", weights: { kurukulla: 2, mahashri: 1 } },
+      { id: "d", label: "悶：都得靠自己，沒人能一起扛", weights: { kurukulla: 3 } },
+      { id: "e", label: "累：被錢追著跑，導致失眠或健康亮紅燈", weights: { "medicine-buddha": 3 } },
     ],
   },
   {
     id: "q3",
     title: "你覺得『漏財點』最像哪一種？",
     options: [
-      { id: "a", label: "人情壓力、被情緒勒索，很難拒絕", weights: { yellow: 2, kurukulla: 1 } },
-      { id: "b", label: "家庭／健康／意外支出，常常突然來", weights: { mahashri: 3 } },
+      { id: "a", label: "其實沒有大破財，但無形中一直慢慢流失", weights: { yellow: 3 } },
+      { id: "b", label: "家庭／健康／意外支出，常常突然來", weights: { mahashri: 2, "medicine-buddha": 2 } },
       { id: "c", label: "投資／合作踩雷，總是看錯人、看錯局", weights: { ganapati: 3 } },
-      { id: "d", label: "客源不穩、貴人不出手，資源接不上", weights: { kurukulla: 3 } },
+      { id: "d", label: "人情壓力、客源不穩，資源接不上", weights: { kurukulla: 3 } },
+      { id: "e", label: "突發急難或官非，瞬間把累積的資源掏空", weights: { "green-tara": 2, padmasambhava: 2 } },
     ],
   },
   {
     id: "q4",
     title: "你最想先『立刻改善』的，是哪一件小事？",
     options: [
-      { id: "a", label: "睡覺別再一直算錢、別再焦慮", weights: { yellow: 2, ganapati: 1 } },
-      { id: "b", label: "家裡少吵、事情少出包，日子穩一點", weights: { mahashri: 3 } },
+      { id: "a", label: "睡覺別再一直算錢，或是能一覺到天亮", weights: { yellow: 2, "medicine-buddha": 2 } },
+      { id: "b", label: "家裡少吵、事情少出包，找回內心的安定", weights: { mahashri: 2, padmasambhava: 2 } },
       { id: "c", label: "談合作更清楚，做決定更果斷", weights: { ganapati: 3 } },
       { id: "d", label: "人緣變順，遇到願意拉我一把的人", weights: { kurukulla: 3 } },
+      { id: "e", label: "眼前迫在眉睫的危機可以立刻解除", weights: { "green-tara": 3 } },
     ],
   },
   {
     id: "q5",
     title: "如果只能選一個『能量方向』先做校正，你會選？",
     options: [
-      { id: "a", label: "先把漏口補起來：錢要先留住", weights: { yellow: 3 } },
-      { id: "b", label: "先把家運穩住：安住才有續航", weights: { mahashri: 3 } },
-      { id: "c", label: "先把腦袋變清楚：少走冤枉路", weights: { ganapati: 3 } },
-      { id: "d", label: "先把人脈打通：資源與貴人要能接上", weights: { kurukulla: 3 } },
+      { id: "a", label: "補庫止漏：讓錢留得住", weights: { yellow: 3 } },
+      { id: "b", label: "護佑安家：穩住家運與深層安全感", weights: { mahashri: 2, padmasambhava: 2 } },
+      { id: "c", label: "清明破局：掃除盲點與事業違緣", weights: { ganapati: 3 } },
+      { id: "d", label: "懷愛招緣：打通人脈與情感", weights: { kurukulla: 3 } },
+      { id: "e", label: "迅疾療癒：立刻解除危機或身心病痛", weights: { "green-tara": 2, "medicine-buddha": 2 } },
     ],
   },
-  // 備用題庫（避免每次都一樣，隨機抽 5 題）
   {
     id: "q6",
     title: "你現在最像卡在哪個關卡？",
     options: [
       { id: "a", label: "錢進來一下就流走，像破洞水桶", weights: { yellow: 3 } },
-      { id: "b", label: "家庭／生活常出狀況，心很累", weights: { mahashri: 3 } },
+      { id: "b", label: "家庭或健康常出狀況，心很累", weights: { mahashri: 2, "medicine-buddha": 2 } },
       { id: "c", label: "明明很努力，方向卻一直不對", weights: { ganapati: 3 } },
       { id: "d", label: "好機會常擦身而過，關鍵人接不上", weights: { kurukulla: 3 } },
+      { id: "e", label: "遇到重大變故或極度恐慌，感覺快撐不下去", weights: { padmasambhava: 2, "green-tara": 2 } },
     ],
   },
   {
     id: "q7",
     title: "你做決定時，最常被什麼拉走？",
     options: [
-      { id: "a", label: "怕沒錢：所以容易衝動或亂買", weights: { yellow: 2 } },
-      { id: "b", label: "怕家裡不穩：所以不敢往外衝", weights: { mahashri: 2 } },
-      { id: "c", label: "怕看錯：所以一直拖、一直改", weights: { ganapati: 2 } },
-      { id: "d", label: "怕沒人挺：所以只好自己硬扛", weights: { kurukulla: 2 } },
+      { id: "a", label: "怕沒錢：所以容易衝動或亂買", weights: { yellow: 3 } },
+      { id: "b", label: "怕家裡不穩或身體撐不住：不敢往外衝", weights: { mahashri: 2, "medicine-buddha": 2 } },
+      { id: "c", label: "怕看錯：所以一直拖、一直改", weights: { ganapati: 3 } },
+      { id: "d", label: "怕沒人挺：所以只好自己硬扛", weights: { kurukulla: 3 } },
+      { id: "e", label: "怕未知的災厄：內心總有莫名的恐慌", weights: { padmasambhava: 2, "green-tara": 2 } },
     ],
   },
   {
@@ -112,8 +119,9 @@ const QUESTION_BANK: QuizQuestion[] = [
     options: [
       { id: "a", label: "有進無存，像漏水", weights: { yellow: 3 } },
       { id: "b", label: "地基不穩，常被意外掏空", weights: { mahashri: 3 } },
-      { id: "c", label: "方向不明，像在霧裡走", weights: { ganapati: 3 } },
+      { id: "c", label: "雜訊太多，方向不明，像在霧裡走", weights: { ganapati: 3 } },
       { id: "d", label: "資源接不上，像沒訊號", weights: { kurukulla: 3 } },
+      { id: "e", label: "處於緊急狀態或身心交瘁，隨時會崩盤", weights: { "green-tara": 2, "medicine-buddha": 1, padmasambhava: 1 } },
     ],
   },
   {
@@ -121,10 +129,10 @@ const QUESTION_BANK: QuizQuestion[] = [
     title: "你最希望『哪一種助力』主動出現？",
     options: [
       { id: "a", label: "錢的流動變順：款項、業績、收入", weights: { yellow: 3 } },
-      { id: "b", label: "家裡變安：健康、居住、情緒", weights: { mahashri: 3 } },
-      { id: "c", label: "判斷變準：資訊收束、止損轉機", weights: { ganapati: 3 } },
-      { id: "d", label: "貴人變多：合作、介紹、提攜", weights: { kurukulla: 3 } },
-      { id: "e", label: "身心先穩：健康、息災、恢復元氣", weights: { "medicine-buddha": 3 } },
+      { id: "b", label: "家裡變安：居住、情緒、長輩平安", weights: { mahashri: 3 } },
+      { id: "c", label: "判斷變準：資訊收束、破除事業障礙", weights: { ganapati: 3 } },
+      { id: "d", label: "貴人變多：合作、介紹、桃花提攜", weights: { kurukulla: 3 } },
+      { id: "e", label: "危機解除與療癒：擋下災厄、身心康復", weights: { "green-tara": 1, "medicine-buddha": 1, padmasambhava: 1 } },
     ],
   },
   {
@@ -132,9 +140,10 @@ const QUESTION_BANK: QuizQuestion[] = [
     title: "你覺得你『最吃虧』的地方是？",
     options: [
       { id: "a", label: "太容易心軟，錢跟力氣都被拖走", weights: { yellow: 2, kurukulla: 1 } },
-      { id: "b", label: "太容易把家裡扛在身上，自己被耗乾", weights: { mahashri: 2 } },
-      { id: "c", label: "太容易被漂亮話帶走，事後才醒", weights: { ganapati: 2 } },
-      { id: "d", label: "太容易一個人撐，撐到沒人知道你在撐", weights: { kurukulla: 2 } },
+      { id: "b", label: "太容易把家裡扛在身上，自己被耗乾", weights: { mahashri: 3 } },
+      { id: "c", label: "太容易被漂亮話帶走，或看不清局勢", weights: { ganapati: 3 } },
+      { id: "d", label: "太容易一個人撐，沒有人脈靠山", weights: { kurukulla: 3 } },
+      { id: "e", label: "總是遇到突發狀況或莫名災厄，防不勝防", weights: { "green-tara": 1, padmasambhava: 1, "medicine-buddha": 1 } },
     ],
   },
 ];
@@ -204,14 +213,13 @@ const RESULT_COPY: Record<DeityKey, { tag: string; title: string; desc: string }
   "green-tara": {
     tag: "除障／轉運",
     title: "你需要『迅速清障』：把阻力先拿掉",
-    desc: "當阻力一直在拖，你再努力也會被消耗。先除障、再前進，節奏才會回到正軌。",
+    desc: "當阻力一直在拖，或面臨急迫危機，你再努力也會被消耗。先迅疾除障、再前進，節奏才會回到正軌。",
   },
 };
 
 export default function TreasuryQuiz() {
   const [seed, setSeed] = useState(() => Date.now());
   const questions = useMemo(() => {
-    // seed is only used to re-trigger sampling
     void seed;
     return sampleFive(QUESTION_BANK);
   }, [seed]);
@@ -267,11 +275,11 @@ export default function TreasuryQuiz() {
             <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground inline-flex items-center gap-2">
               <Sparkles className="h-4 w-4" /> 財庫能量檢測
             </div>
-            <h2 className="mt-2 font-display text-3xl md:text-4xl">30 秒找出你該去的本尊頁</h2>
+            <h2 className="mt-2 font-display text-3xl md:text-4xl">30 秒找出你該去的法事</h2>
             <p className="mt-3 readable text-muted-foreground max-w-prose">
               你只要照直覺選。
-              <span className="text-foreground">我們用五題把你的『卡點頻率』抓出來</span>，
-              直接帶你走到最對位的路徑。
+              <span className="text-foreground">我們用五題把你的『困境』抓出來</span>，
+              陪您走進解決的方法。
             </p>
           </div>
           <div className="flex items-center gap-2">
@@ -299,9 +307,10 @@ export default function TreasuryQuiz() {
                 <div className="mt-2 readable text-muted-foreground">{current.subtitle}</div>
               ) : null}
 
+              {/* 綁定 fallback ""，確保進到下一題時絕對是未選擇的乾淨狀態 */}
               <RadioGroup
                 className="mt-6 grid gap-3"
-                value={answers[current.id]}
+                value={answers[current.id] || ""} 
                 onValueChange={(v) => onPick(v)}
               >
                 {current.options.map((opt) => {
@@ -329,7 +338,7 @@ export default function TreasuryQuiz() {
                   下一題 <ArrowRight className="h-4 w-4" />
                 </Button>
                 <Link href="/pay" className="h-12 px-6 inline-flex items-center justify-center rounded-md border bg-background/40 gold-border readable">
-                  我已經很確定，直接去預定
+                  我已經很確定，直接去預定法事
                 </Link>
               </div>
             </div>
@@ -364,7 +373,7 @@ export default function TreasuryQuiz() {
                   </div>
                   <div className="mt-5 flex flex-col sm:flex-row gap-3">
                     <Link href={winnerDeity.route} className="h-12 px-6 inline-flex items-center justify-center rounded-md bg-primary text-primary-foreground font-black tracking-[0.22em] uppercase gold-border">
-                      帶我去本尊頁 <ArrowRight className="h-4 w-4" />
+                      帶我去本尊介紹 <ArrowRight className="h-4 w-4" />
                     </Link>
                     <Button variant="outline" className="h-12 px-6 gold-border" onClick={restart}>
                       再測一次 <RefreshCcw className="h-4 w-4" />

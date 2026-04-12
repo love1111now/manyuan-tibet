@@ -78,7 +78,7 @@ export default function Home() {
                 onClick={() => scrollToSection("quiz")}
                 className="h-12 px-8 inline-flex items-center justify-center rounded-md border bg-background/35 gold-border readable hover:bg-accent/35 transition-colors font-medium w-full sm:w-auto"
               >
-                財庫能量檢測 <Sparkles className="ml-2 h-4 w-4 text-primary" />
+                請依直覺選擇您的困擾 <Sparkles className="ml-2 h-4 w-4 text-primary" />
               </button>
             </div>
 
@@ -100,7 +100,7 @@ export default function Home() {
               <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">快速指引</div>
               <h2 className="mt-2 font-display text-3xl">直覺對位：找到你要的護持</h2>
               <p className="mt-4 readable text-muted-foreground">
-                您不用研究一堆名詞。先選「您卡在哪」，我們把每位本尊的方向寫得很清楚。
+                您不用研究一堆名詞。先選「您的需求在哪」，我們把每位本尊的方向寫得很清楚。
               </p>
 
               <div className="mt-6 grid gap-3">
@@ -248,7 +248,7 @@ export default function Home() {
                 <h3 className="mt-2 font-display text-2xl md:text-3xl text-foreground">完成任一登記 → 免費加碼「藥師佛息災煙供」</h3>
                 <p className="mt-4 readable text-muted-foreground">
                   我們深知「健康與安穩」是所有福報的底氣。地基不穩，再多資糧也難以受用。<br/>
-                  <span className="text-foreground/90 font-medium">即日起，只要您護持本站任一法事（如黃財神、綠度母等），我們將直接為您加碼列入每週六的「藥師佛健康息災煙供」名錄中。</span>
+                  <span className="text-foreground/90 font-medium">即日起，只要您護持本站任一法事（如黃財神、綠度母等），我們將直接為您加碼列入每週的「藥師佛健康息災煙供」名錄中。</span>
                 </p>
                 <Separator className="my-6 border-primary/20" />
                 <div className="grid gap-4 md:grid-cols-3">
