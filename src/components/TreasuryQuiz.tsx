@@ -273,9 +273,9 @@ export default function TreasuryQuiz() {
         <div className="flex items-end justify-between gap-6 flex-wrap">
           <div>
             <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground inline-flex items-center gap-2">
-              <Sparkles className="h-4 w-4" /> 財庫能量檢測
+              <Sparkles className="h-4 w-4" /> 能量檢測
             </div>
-            <h2 className="mt-2 font-display text-3xl md:text-4xl">30 秒找出你該去的法事</h2>
+            <h2 className="mt-2 font-display text-3xl md:text-4xl">30秒,找到您的援助</h2>
             <p className="mt-3 readable text-muted-foreground max-w-prose">
               你只要照直覺選。
               <span className="text-foreground">我們用五題把你的『困境』抓出來</span>，
