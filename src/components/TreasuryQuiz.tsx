@@ -1,10 +1,8 @@
 /*
 Design philosophy: Neo-thangka noir (Viral, Psychological & CRO Upgrade)
-- UX Upgrade 1: Auto-advance questions for frictionless completion.
-- UX Upgrade 2: Added dynamic Social Proof tag before starting.
-- Visual Upgrade 1: Primary Deity card is now a glowing, dominant UI element with clear icons.
-- Visual Upgrade 2: Energy Distribution bars now show exact percentages.
-- Content Upgrade: Deep psychological metaphors for questions, reducing all defenses.
+- Content Fix: Removed all parentheses from questions/options to maintain projective testing immersion.
+- Content Fix: Updated loading phase copy to user's precise requirements.
+- Core Preserved: Haptic Feedback, Real-Time Timestamp, Altruistic Share Hook, Auto-advance, Radar Glow Card.
 - 100% Unabbreviated Production Ready Code.
 */
 
@@ -29,7 +27,8 @@ import {
   Leaf,
   Zap,
   Shield,
-  Users
+  Users,
+  HeartHandshake
 } from "lucide-react";
 import { Link } from "wouter";
 import { toPng } from "html-to-image";
@@ -138,51 +137,55 @@ const KARMA_ADVICE: Record<DeityKey, {
   }
 };
 
-// --- 🟢 深層心理學隱喻題庫 (降低防禦感) ---
+// --- 深層心理學隱喻題庫 (完全無括號，降低防禦感) ---
 const QUESTION_BANK: QuizQuestion[] = [
   { id: "q1", title: "當生活出現難以掌控的變化，你最希望立刻擁有一種什麼樣的能力？", options: [
-    { id: "a", label: "能瞬間補好正在漏水的口袋，讓資源不再流失", weights: { yellow: 3 } },
-    { id: "b", label: "能撐起一把巨大的傘，保護家人不受風雨侵擾", weights: { mahashri: 3 } },
-    { id: "c", label: "能擁有一副透視眼鏡，一眼看穿複雜的迷霧與人心", weights: { ganapati: 3 } },
-    { id: "d", label: "能散發溫暖的光，吸引那些願意無條件幫助我的人", weights: { kurukulla: 3 } },
-    { id: "e", label: "能呼喚一陣狂風，瞬間把眼前的巨石與障礙吹走", weights: { "green-tara": 3 } },
-    { id: "f", label: "能按一個暫停鍵，讓耗損的身心徹底關機修復", weights: { "medicine-buddha": 3 } },
+    { id: "a", label: "能瞬間補好破損的物體", weights: { yellow: 3 } },
+    { id: "b", label: "一把無形巨大的傘，不受一切侵擾", weights: { mahashri: 3 } },
+    { id: "c", label: "一眼看穿複雜的迷霧與人心", weights: { ganapati: 3 } },
+    { id: "d", label: "能吸引那些願意幫助我的人", weights: { kurukulla: 3 } },
+    { id: "e", label: "能呼喚一陣狂風，把眼前的困難與障礙吹走", weights: { "green-tara": 3 } },
+    { id: "f", label: "暫停世界１０分鐘，讓耗損的身心呼吸休養", weights: { "medicine-buddha": 3 } },
   ]},
-  { id: "q2", title: "想像你的內心是一片風景，它現在最像什麼模樣？", options: [
-    { id: "a", label: "一座乾涸的湖泊，水怎麼注都注不滿", weights: { yellow: 3 } },
-    { id: "b", label: "一棟地基微微晃動的房子，讓人不敢安睡", weights: { mahashri: 3, padmasambhava: 1 } },
-    { id: "c", label: "一個被濃霧籠罩的十字路口，找不到指標", weights: { ganapati: 3 } },
-    { id: "d", label: "一座被高聳冰冷圍牆包圍的孤島，外面的人進不來", weights: { kurukulla: 3 } },
-    { id: "e", label: "一片不斷落雷、充滿突發危機的荒野", weights: { "green-tara": 3 } },
+  { id: "q2", title: "想像一個恐怖片的開場，會像什麼模樣？", options: [
+    { id: "a", label: "一座廣大乾涸的湖泊", weights: { yellow: 3 } },
+    { id: "b", label: "一棟破爛不堪的房子", weights: { mahashri: 3, padmasambhava: 1 } },
+    { id: "c", label: "一個被濃霧籠罩的十字路口", weights: { ganapati: 3 } },
+    { id: "d", label: "一座被高聳冰冷圍牆包圍的孤島", weights: { kurukulla: 3 } },
+    { id: "e", label: "一片不斷落雷擊下的荒野", weights: { "green-tara": 3 } },
     { id: "f", label: "一棵樹葉枯黃、根部疲憊不堪的老樹", weights: { "medicine-buddha": 3 } },
   ]},
-  { id: "q3", title: "在人際交涉或事業打拼中，你最近最常感到『心累』的原因是？", options: [
-    { id: "a", label: "不管多努力去談，實質的利益總是與我擦身而過", weights: { yellow: 3 } },
-    { id: "b", label: "家裡或後方陣營不穩，讓我無法心無旁騖地往前衝", weights: { mahashri: 3 } },
-    { id: "c", label: "總是看錯局、信錯人，事後才後悔自己判斷失誤", weights: { ganapati: 3 } },
-    { id: "d", label: "明明想要靠近，卻總是把關係搞砸，覺得沒人懂我", weights: { kurukulla: 3 } },
-    { id: "e", label: "外界太混亂動盪，覺得自己快被這股洪流吞噬", weights: { padmasambhava: 3 } },
+  { id: "q3", title: "如果現在可以有一隻「守護靈獸」陪在你身邊，你會選擇？", options: [
+    { id: "a", label: "勤勞的松鼠", weights: { yellow: 3 } },
+    { id: "b", label: "穩重的棕熊", weights: { mahashri: 3 } },
+    { id: "c", label: "翱翔的雄鷹", weights: { ganapati: 3 } },
+    { id: "d", label: "優雅的白鹿", weights: { kurukulla: 3 } },
+    { id: "e", label: "威嚴的雄獅", weights: { padmasambhava: 3 } },
+    { id: "f", label: "敏捷的神馬", weights: { "medicine-buddha": 2, "green-tara": 2 } },
   ]},
-  { id: "q4", title: "如果可以立刻卸下一種『無形的重擔』，你會毫不猶豫選擇哪一個？", options: [
-    { id: "a", label: "對「下個月的錢從哪裡來」的深層焦慮", weights: { yellow: 3 } },
-    { id: "b", label: "對「家人是否平安健康」的牽掛與擔憂", weights: { mahashri: 3 } },
-    { id: "c", label: "在重大決策前，那種害怕選錯的巨大壓力", weights: { ganapati: 3 } },
-    { id: "d", label: "為了防禦受傷，而一直強迫自己武裝起來的刺", weights: { kurukulla: 3 } },
-    { id: "e", label: "背負在身上許久、卻一直找不到出口的身心病痛", weights: { "medicine-buddha": 3 } },
+  { id: "q4", title: "走進一個房間放鬆，哪一種氣味最能瞬間撫平你的焦慮？", options: [
+    { id: "a", label: "豐收的果香與琥珀", weights: { yellow: 3 } },
+    { id: "b", label: "剛出爐的麵包與柴火", weights: { mahashri: 3 } },
+    { id: "c", label: "清晨的薄荷與檸檬", weights: { ganapati: 3 } },
+    { id: "d", label: "綻放的玫瑰與花香", weights: { kurukulla: 3 } },
+    { id: "e", label: "舒緩的薰衣草與草本", weights: { "medicine-buddha": 3 } },
+    { id: "f", label: "雷雨過後的松針木香", weights: { padmasambhava: 2, "green-tara": 2 } },
   ]},
-  { id: "q5", title: "此刻的你，最需要哪一種『光』來照亮前路？", options: [
-    { id: "a", label: "豐盛的金光，讓我的努力都能化為實質的收穫", weights: { yellow: 3 } },
-    { id: "b", label: "溫暖的橘光，讓我的家庭與後盾永遠安穩", weights: { mahashri: 3 } },
-    { id: "c", label: "銳利的白光，幫我掃開所有的盲點與事業阻礙", weights: { ganapati: 3 } },
-    { id: "d", label: "柔和的粉紅光，讓我與世界、與愛重新連結", weights: { kurukulla: 3 } },
-    { id: "e", label: "堅不可摧的藍光，為我建立抵禦一切動盪的防護罩", weights: { padmasambhava: 3 } },
+  { id: "q5", title: "一位充滿智慧的長者，準備送你一句祝福，你最想聽到哪一句？", options: [
+    { id: "a", label: "「願你的水杯永遠滿溢。」", weights: { yellow: 3 } },
+    { id: "b", label: "「願你的家園堅如磐石。」", weights: { mahashri: 3 } },
+    { id: "c", label: "「願你的雙眼銳利如炬。」", weights: { ganapati: 3 } },
+    { id: "d", label: "「願你的周圍充滿善意。」", weights: { kurukulla: 3 } },
+    { id: "e", label: "「願你眼前的巨石瞬間化為塵埃。」", weights: { "green-tara": 3 } },
+    { id: "f", label: "「願你的身心輕盈如燕。」", weights: { "medicine-buddha": 3 } },
   ]},
-  { id: "q6", title: "深呼吸，問問自己：現在最想為自己求一份什麼樣的『底氣』？", options: [
-    { id: "a", label: "資源不匱乏的底氣，想買什麼、想做什麼不再猶豫", weights: { yellow: 3 } },
-    { id: "b", label: "無後顧之憂的底氣，知道家裡永遠是我安全的避風港", weights: { mahashri: 2, padmasambhava: 1 } },
-    { id: "c", label: "自信判斷的底氣，知道我的決定都能引導我走向破局", weights: { ganapati: 3 } },
-    { id: "d", label: "被愛與被支持的底氣，不再覺得自己是在孤軍奮戰", weights: { kurukulla: 3 } },
-    { id: "e", label: "迅疾化解危機的底氣，無論發生什麼事都能立刻逢凶化吉", weights: { "green-tara": 3 } },
+  { id: "q6", title: "如果給你一張畫布，畫出你此刻最渴望的生命狀態，你會用哪種主色調？", options: [
+    { id: "a", label: "飽滿的金黃色", weights: { yellow: 3 } },
+    { id: "b", label: "溫暖的大地棕", weights: { mahashri: 3 } },
+    { id: "c", label: "清透的純白色", weights: { ganapati: 3 } },
+    { id: "d", label: "柔和的蜜桃粉", weights: { kurukulla: 3 } },
+    { id: "e", label: "療癒的翡翠綠", weights: { "medicine-buddha": 3 } },
+    { id: "f", label: "深邃的靜謐藍", weights: { padmasambhava: 3, "green-tara": 1 } },
   ]},
 ];
 
@@ -196,15 +199,14 @@ export default function TreasuryQuiz() {
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [score, setScore] = useState<Record<DeityKey, number>>(emptyScore());
   
-  // 儀式感過場狀態管理
+  // 儀式感過場與時間狀態
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [loadingPhase, setLoadingPhase] = useState(0);
   const [showResult, setShowResult] = useState(false);
+  const [completionTime, setCompletionTime] = useState("");
   
   const [isCopied, setIsCopied] = useState(false);
   const [remainingSpots, setRemainingSpots] = useState(3);
-  
-  // 動態假數字 (Social Proof)
   const [socialProofNum, setSocialProofNum] = useState(142);
   
   const shareCardRef = useRef<HTMLDivElement>(null);
@@ -213,7 +215,6 @@ export default function TreasuryQuiz() {
 
   useEffect(() => {
     const timer = setTimeout(() => setRemainingSpots(2), 25000);
-    // 隨機產生一個 120~180 的數字作為社會認同
     setSocialProofNum(Math.floor(Math.random() * 60) + 120);
     return () => clearTimeout(timer);
   }, []);
@@ -227,6 +228,10 @@ export default function TreasuryQuiz() {
         setTimeout(() => {
           setIsAnalyzing(false);
           setShowResult(true);
+          // 產生精準的即時鑑定戳記
+          const now = new Date();
+          const timeString = `${now.getFullYear()}/${String(now.getMonth()+1).padStart(2, '0')}/${String(now.getDate()).padStart(2, '0')} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+          setCompletionTime(timeString);
         }, 4500)
       ];
       return () => timers.forEach(clearTimeout);
@@ -241,10 +246,16 @@ export default function TreasuryQuiz() {
     setShowResult(false); 
     setIsAnalyzing(false);
     setLoadingPhase(0);
+    setCompletionTime("");
   };
 
-  // 🟢 CRO 殺手鐧：自動推進邏輯 (Auto-advance)
+  // CRO 升級：自動推進邏輯 + 微觸覺回饋 (Haptic Feedback)
   const handleOptionSelect = (optId: string) => {
+    // 觸發手機震動回饋，增加沉浸感
+    if (typeof window !== "undefined" && navigator.vibrate) {
+      navigator.vibrate(50); 
+    }
+    
     setAnswers(p => ({...p, [current.id]: optId}));
     
     setTimeout(() => {
@@ -263,7 +274,7 @@ export default function TreasuryQuiz() {
       } else { 
         setStep((s) => s + 1); 
       }
-    }, 600); // 0.6秒的延遲，讓使用者看到按鈕被點亮的微回饋
+    }, 600); // 0.6秒延遲，流暢推進
   };
 
   const sortedScores = useMemo(() => {
@@ -280,11 +291,11 @@ export default function TreasuryQuiz() {
   const deity = primaryDeityKey ? DEITY_BY_KEY[primaryDeityKey] : null;
   const secondaryDeity = secondaryDeityKey ? DEITY_BY_KEY[secondaryDeityKey] : null;
 
-  // 病毒傳播：客製化分享文案邏輯
+  // 病毒傳播：客製化分享文案 + 修正官網分享網址
   const handleShare = async () => {
     if (!advice) return;
     
-    const shareUrl = window.location.origin + '/#quiz';
+    const shareUrl = "https://zambala-tibetan.com.tw";
     const shareTitle = '滿願藏庫｜生命維度與能量對位測驗';
     const shareText = `我在滿願藏庫測出我的生命能量最需要【${advice.tag}】的修復。你最近有覺得哪裡卡卡的嗎？來測測你的 30 秒專屬能量圖譜！`;
 
@@ -322,7 +333,7 @@ export default function TreasuryQuiz() {
           </Button>
         </div>
 
-        {/* 🟢 動態社會認同 (Social Proof) */}
+        {/* 動態社會認同 (Social Proof) */}
         {!showResult && !isAnalyzing && (
           <div className="mt-4 flex justify-center md:justify-start">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-500/10 border border-green-500/20 text-green-600 text-[10px] md:text-xs font-bold tracking-widest animate-in fade-in zoom-in duration-700">
@@ -341,8 +352,8 @@ export default function TreasuryQuiz() {
                 <div className="absolute inset-0 border-2 border-primary/20 rounded-full animate-ping" />
               </div>
               <div className="font-display text-xl md:text-2xl text-primary animate-pulse tracking-widest text-center px-6 leading-relaxed">
-                {loadingPhase === 0 && "正在掃描深層意識軌跡..."}
-                {loadingPhase === 1 && "正在對位佛法經典頻率..."}
+                {loadingPhase === 0 && "正在連結深層意識業力軌跡..."}
+                {loadingPhase === 1 && "正在對位佛法經典內容..."}
                 {loadingPhase === 2 && "正在生成您的專屬能量圖譜..."}
               </div>
               <Progress value={(loadingPhase + 1) * 33} className="w-48 h-1 bg-primary/10 mt-8 transition-all duration-1000" />
@@ -372,25 +383,23 @@ export default function TreasuryQuiz() {
                   </div>
                 ))}
               </RadioGroup>
-              {/* 自動推進後隱藏了「下一題」按鈕，讓版面更乾淨、操作更直覺 */}
             </div>
           )}
 
           {showResult && primaryDeityKey && advice && deity && (
             <div className="animate-in slide-in-from-bottom-8 duration-1000">
               
-              {/* 🟢 視覺升級 1：主本尊高階流光卡片 (Primary Deity Radar Glow Card) */}
+              {/* 主本尊高階流光卡片 */}
               <div className="relative p-1 rounded-2xl bg-gradient-to-br from-primary/40 via-background to-primary/10 mb-12 shadow-2xl group">
                 <div className="absolute inset-0 bg-primary/20 blur-2xl rounded-3xl opacity-50 group-hover:opacity-100 transition-opacity duration-1000" />
                 <Card className="relative p-6 md:p-10 bg-background/95 backdrop-blur-xl border-none rounded-xl overflow-hidden flex flex-col md:flex-row gap-8 items-start md:items-center">
-                  {/* 背景超大裝飾 Icon */}
                   {(() => {
                     const PrimaryIcon = DEITY_META[primaryDeityKey]?.icon || Sparkles;
                     return <PrimaryIcon className="absolute -bottom-10 -right-10 w-64 h-64 text-primary opacity-[0.03] rotate-12 pointer-events-none" />;
                   })()}
                   
                   <div className="flex-1 z-10">
-                    <div className="flex items-center gap-3 mb-4">
+                    <div className="flex items-center gap-3 mb-4 flex-wrap">
                       <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center border border-primary/20 shadow-inner">
                         {(() => {
                           const MetaIcon = DEITY_META[primaryDeityKey]?.icon || Sparkles;
@@ -399,7 +408,11 @@ export default function TreasuryQuiz() {
                       </div>
                       <div>
                         <Badge className="bg-primary/20 text-primary hover:bg-primary/20 border-none font-bold tracking-[0.2em] text-[10px] mb-1">主修復維度 (Primary)</Badge>
-                        <div className="text-[10px] font-mono text-muted-foreground tracking-widest uppercase opacity-80">ID: YZ-2026-ENERGY-{primaryDeityKey.toUpperCase().substring(0,3)}</div>
+                        <div className="flex items-center gap-2">
+                          <div className="text-[10px] font-mono text-muted-foreground tracking-widest uppercase opacity-80">ID: YZ-2026-ENERGY-{primaryDeityKey.toUpperCase().substring(0,3)}</div>
+                          <div className="hidden md:block w-1 h-1 rounded-full bg-border/50" />
+                          <div className="text-[10px] font-mono text-primary/60 tracking-widest uppercase">{completionTime}</div>
+                        </div>
                       </div>
                     </div>
                     
@@ -410,7 +423,7 @@ export default function TreasuryQuiz() {
                 </Card>
               </div>
 
-              {/* 🟢 修改標題：滿願藏庫的能量指引 */}
+              {/* 滿願藏庫的能量指引 */}
               <Card className="p-6 md:p-10 bg-primary/5 gold-border border-dashed mb-6 relative overflow-hidden shadow-inner">
                 <Quote className="absolute top-4 right-4 w-10 h-10 md:w-16 md:h-16 opacity-5 text-primary" />
                 <div className="text-[10px] md:text-sm font-bold text-primary mb-5 flex items-center gap-3 tracking-[0.25em]">
@@ -430,7 +443,7 @@ export default function TreasuryQuiz() {
                 </Card>
               )}
 
-              {/* 🟢 視覺升級 2：各本尊對位能量分佈 (含百分比 % 與功能標籤) */}
+              {/* 各本尊對位能量分佈 */}
               <div className="mb-16">
                 <div className="flex items-center gap-2 mb-6">
                   <Activity className="w-5 h-5 text-primary" />
@@ -443,10 +456,9 @@ export default function TreasuryQuiz() {
                 <div className="space-y-6 bg-background/30 p-6 md:p-8 rounded-xl border border-border/50 shadow-inner">
                   {sortedScores.map(([key, val], index) => {
                     const d = DEITY_BY_KEY[key];
-                    const percent = Math.max(Math.round((val / primaryScore) * 100), 2); // 最少顯示 2%
+                    const percent = Math.max(Math.round((val / primaryScore) * 100), 2); 
                     const isWinner = index === 0;
                     
-                    // 動態抓取專屬圖示與輔助標籤
                     const MetaIcon = DEITY_META[key]?.icon || Sparkles;
                     const funcTag = DEITY_META[key]?.funcTag || "能量修復";
 
@@ -472,7 +484,6 @@ export default function TreasuryQuiz() {
                             </div>
                             <div className="flex flex-col md:flex-row md:items-center gap-1 md:gap-2.5">
                               <div className="text-sm md:text-base font-bold tracking-wide" style={{ color: isWinner ? d.themeColor.accent : 'currentColor' }}>{d.name}</div>
-                              {/* 🟢 顯眼的功能標籤 */}
                               <div className="text-[10px] md:text-[11px] px-1.5 py-0.5 rounded border border-border/50 text-muted-foreground opacity-80 w-fit">
                                 {funcTag}
                               </div>
@@ -480,7 +491,6 @@ export default function TreasuryQuiz() {
                           </div>
                           <div className="text-right shrink-0">
                             <div className={`text-[10px] md:text-xs tracking-widest mb-0.5 ${statusOpacity}`}>{statusText}</div>
-                            {/* 🟢 加入百分比顯示 */}
                             <div className="text-xs md:text-sm text-muted-foreground font-mono font-bold tracking-wider">{percent}% <span className="text-[10px] opacity-50 hidden md:inline">({val} Pts)</span></div>
                           </div>
                         </div>
@@ -506,7 +516,7 @@ export default function TreasuryQuiz() {
                   <div className="grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-4">
                     {[
                       { title: "能量定位", desc: "您已完成目前的診斷與對位", active: true },
-                      { title: "志工造冊", desc: "今晚下班後，台灣志工將為您靜心造冊", active: false },
+                      { title: "志工造冊", desc: "志工法工將為您靜心造冊", active: false },
                       { title: "壇城修法", desc: "名錄送達西藏，如法進行儀軌修持", active: false },
                       { title: "公佈名錄", desc: "隔週於 FB 公佈名單，見證善緣流動", active: false }
                     ].map((step, i) => (
@@ -526,7 +536,8 @@ export default function TreasuryQuiz() {
                 </div>
               </div>
 
-              <div className="flex flex-col items-center gap-10 pt-12 border-t border-border/30 relative">
+              {/* 轉化與行動區塊 */}
+              <div className="flex flex-col items-center gap-8 pt-12 border-t border-border/30 relative">
                 <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1.5 bg-destructive/10 text-destructive text-[9px] md:text-[11px] font-bold tracking-[0.2em] border border-destructive/20 rounded-full animate-pulse whitespace-nowrap shadow-sm z-10">
                   ⚡ 今日僅餘 {remainingSpots} 個修復名額（22:00 截止造冊）
                 </div>
@@ -537,21 +548,27 @@ export default function TreasuryQuiz() {
                       啟動我的修復計畫 <ArrowRight className="ml-3 h-6 w-6 group-hover:translate-x-1 transition-transform" />
                     </Button>
                   </Link>
-
+                </div>
+                
+                {/* 利益眾生的分享觸發句 */}
+                <div className="w-full max-w-sm mx-auto flex flex-col gap-3">
+                  <div className="flex items-center gap-2 justify-center text-[11px] font-bold text-muted-foreground/70 tracking-widest uppercase">
+                    <HeartHandshake className="w-3.5 h-3.5" /> 將覺察分享給需要的人，是善念的流動
+                  </div>
                   <Button 
                     variant="outline" 
-                    className={`h-16 md:h-20 w-full md:w-auto px-10 gold-border tracking-[0.2em] group shadow-sm transition-all ${isCopied ? 'bg-green-600/20 text-green-500 border-green-600/50' : 'border-primary/40 hover:bg-primary/5'}`} 
+                    className={`h-14 w-full px-6 gold-border tracking-[0.2em] group shadow-sm transition-all ${isCopied ? 'bg-green-600/20 text-green-500 border-green-600/50' : 'border-primary/40 hover:bg-primary/5'}`} 
                     onClick={handleShare}
                   >
                     {isCopied ? (
-                      <><Check className="mr-2 h-5 w-5" /> 測驗連結已複製</>
+                      <><Check className="mr-2 h-4 w-4" /> 測驗連結已複製</>
                     ) : (
-                      <><Share2 className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" /> 分享測驗網址</>
+                      <><Share2 className="mr-2 h-4 w-4 group-hover:scale-110 transition-transform" /> 點此分享測驗網址</>
                     )}
                   </Button>
                 </div>
                 
-                <div className="text-center space-y-8">
+                <div className="text-center space-y-8 mt-4">
                   <div className="flex items-center justify-center gap-3 text-muted-foreground/80">
                     <Clock className="h-4 w-4 text-primary" />
                     <p className="text-[10px] md:text-xs font-bold tracking-wider">台灣志工每晚跨境造冊，確保心念如實交付。</p>
@@ -560,10 +577,10 @@ export default function TreasuryQuiz() {
                   <div className="max-w-2xl mx-auto p-5 md:p-7 rounded-lg bg-background/40 border border-border/40 text-left">
                     <div className="flex items-center gap-2 mb-3 text-primary/70">
                       <Info className="h-3.5 w-3.5" />
-                      <span className="text-[10px] font-bold tracking-[0.15em] uppercase">生命維度顧問免責聲明</span>
+                      <span className="text-[10px] font-bold tracking-[0.15em] uppercase">免責聲明</span>
                     </div>
                     <p className="text-[10px] leading-relaxed text-muted-foreground/60 readable">
-                      本建議書內容由「滿願藏庫」志工團隊依據佛法傳承經典整理，旨在提供因緣與資糧現況參考，不具備任何醫療、法律、財務或心理諮商診斷效力。法事護持屬於宗教信仰與修持範疇，其感受因個人發心而異。我們不造神、不賣神話，亦不對特定物質結果保證。數據僅供系統匿名分析，守護您的隱私。
+                      本建議書內容由「滿願藏庫」志工團隊依據佛法傳承經典整理，旨在提供因緣與資糧現況參考，不具備任何醫療、法律、財務或心理諮商診斷效力。法事護持屬於宗教信仰與修持範疇，其感受因個人發心而異。不對特定物質結果保證。數據僅供系統匿名分析，守護您的隱私。
                     </p>
                   </div>
                   <div className="text-[11px] text-primary/60 font-bold tracking-[0.4em] uppercase">滿願藏庫 · 生命維度對位系統</div>
@@ -574,7 +591,7 @@ export default function TreasuryQuiz() {
         </Card>
       </div>
 
-      {/* 分享圖卡模板 (隱藏，給舊功能保留) */}
+      {/* 分享圖卡模板 (隱藏) */}
       <div className="fixed left-[-5000px] top-0 pointer-events-none">
         <div ref={shareCardRef} className="w-[1080px] h-[1080px] bg-background paper-grain p-24 flex flex-col justify-between relative overflow-hidden" style={{ backgroundImage: `url(${deity?.heroImage})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
           <div className="absolute inset-0 bg-background/90" />
@@ -582,7 +599,10 @@ export default function TreasuryQuiz() {
             <div className="flex justify-between items-start mb-16">
               <div className="space-y-6">
                 <Badge className="gold-border bg-primary/20 text-primary text-3xl px-8 py-3 tracking-[0.3em] font-bold uppercase">{advice?.tag}</Badge>
-                <div className="text-muted-foreground tracking-[0.5em] text-xl font-bold uppercase opacity-60 font-mono">ID: YZ-2026-LIFE-CONSULTANT</div>
+                <div className="text-muted-foreground tracking-[0.5em] text-xl font-bold uppercase opacity-60 font-mono">
+                  ID: YZ-2026-LIFE-CONSULTANT
+                  <div className="text-sm mt-2 font-mono text-primary/60">{completionTime}</div>
+                </div>
               </div>
               <LifeExplorationSeal />
             </div>
@@ -594,7 +614,7 @@ export default function TreasuryQuiz() {
               </div>
               <div className="flex justify-between items-end border-t border-primary/20 pt-12">
                 <div className="text-muted-foreground/80 text-2xl font-bold tracking-[0.4em] space-y-2">
-                  <div>滿願藏庫 · 2026 生命能量鑑定</div>
+                  <div>滿願藏庫 · 本尊引導建議指引</div>
                   <div className="text-primary/60 text-lg uppercase tracking-widest font-mono">ZAMBALA-TIBETAN.COM.TW</div>
                 </div>
                 <div className="w-36 h-36 border-2 border-primary/40 p-3 rounded-2xl bg-white/5 backdrop-blur shadow-2xl">
