@@ -1,3 +1,11 @@
+/*
+Design philosophy: Neo-thangka noir (Grounded Consultant Upgrade)
+- L4 [Action]: Grounded language tailored for TA ("祈福法事" instead of "生命維度修復").
+- Visuals: Added Deity-specific colored icons to reduce visual fatigue.
+- UX: Navigation tags are now smooth-scroll anchor links.
+- 100% Unabbreviated Production Ready Code.
+*/
+
 import React from "react";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
@@ -28,11 +36,18 @@ import {
   Info,
   Layers,
   ArrowRight,
-  Sparkles
+  Sparkles,
+  Coffee,
+  Coins,
+  Home,
+  Eye,
+  Leaf,
+  Zap,
+  Shield
 } from "lucide-react";
 import { Link } from "wouter";
 
-import { DEITIES } from "@/data/deities";
+import { DEITIES } from "@/lib/siteData";
 
 export default function Pay() {
   
@@ -51,6 +66,13 @@ export default function Pay() {
     }
   };
 
+  const scrollToDeity = (key: string) => {
+    const element = document.getElementById(`deity-section-${key}`);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <SiteHeader />
@@ -62,19 +84,30 @@ export default function Pay() {
             <div className="flex items-center gap-2 text-[10px] md:text-xs tracking-[0.3em] uppercase text-primary font-bold mb-3">
               <ShieldCheck className="w-4 h-4" /> Secure Registry System
             </div>
-            <h1 className="font-display text-4xl md:text-5xl leading-tight">生命維度修復委託<br/><span className="text-foreground/80 text-3xl md:text-4xl">（安全造冊系統）</span></h1>
+            <h1 className="font-display text-4xl md:text-5xl leading-tight">專屬祈福法事登記<br/><span className="text-foreground/80 text-3xl md:text-4xl">（安全造冊系統）</span></h1>
             <p className="mt-6 readable text-muted-foreground max-w-prose text-lg leading-relaxed">
-              這是一處讓修復意念得以落實的所在。
-              <span className="text-foreground font-bold">選擇系統專家 → 探索對位方案 → 點擊「啟動修復」</span>。
-              完成委託後即保留名額。當您處於焦慮與掙扎中，最需要的往往不是更多資訊，而是一次清晰、且能為生命底層帶來安定的行動。
+              這是一個讓您的祈願能如實傳達的所在。
+              <span className="text-foreground font-bold">選擇契合的本尊 → 選擇加持方案 → 點擊「確認委託」</span>。
+              完成登記後，名額即刻為您保留。當您處於焦慮與掙扎中，一次清晰且安定的行動，勝過無數的胡思亂想。
             </p>
+
+            {/* 溫暖的價格錨點 (Price Anchoring) */}
+            <div className="mt-8 p-6 rounded-xl bg-primary/5 border border-primary/30 flex items-start gap-4 shadow-inner">
+              <Coffee className="w-6 h-6 text-primary shrink-0 mt-1" />
+              <div>
+                <h3 className="font-bold text-foreground text-lg mb-2 tracking-wide">毫無負擔的護持起點：自 NT$490 起</h3>
+                <p className="text-sm md:text-base text-muted-foreground readable leading-relaxed">
+                  我們堅持不造神、不以恐懼行銷。系統內所有的基礎祈福方案皆從 <strong className="text-foreground font-bold">NT$490</strong> 起。這大概是一頓簡餐的價格，卻能為您點亮一盞長明的護佑之燈。請依循您當下的能力與心意，安心選擇最契合的路徑。
+                </p>
+              </div>
+            </div>
 
             <Card className="mt-8 p-8 md:p-10 gold-border bg-card/70 paper-grain relative overflow-hidden group">
               <div className="absolute -top-4 -right-4 opacity-5 pointer-events-none group-hover:scale-110 transition-transform duration-1000">
                 <Layers className="w-40 h-40 text-primary" />
               </div>
               <div className="font-display text-2xl md:text-3xl flex items-center gap-3 text-foreground/90">
-                委託啟動後的工程進度
+                法事報名後的執行進度
               </div>
               <div className="mt-8 grid gap-6">
                 {[
@@ -103,7 +136,7 @@ export default function Pay() {
                   <Heart className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
                   <div className="leading-relaxed">
                     <span className="font-bold text-foreground block mb-2 text-base">💡 關於手續費與因果的誠實說明：</span>
-                    為符合台灣法令讓您安心委託，每筆登記將由綠界收取必要金流手續費。而台灣團隊全體皆為<strong className="text-foreground">下班後發心的不支薪志工</strong>，完全吸收了行政與網站維護成本。您的發心將全數用於修復工程本身。這份近乎笨拙的透明，是我們對因果的最高敬畏。
+                    為符合台灣法令讓您安心委託，每筆登記將由綠界收取必要金流手續費。而台灣團隊全體皆為<strong className="text-foreground">下班後發心的不支薪志工</strong>，完全吸收了行政與網站維護成本。您的發心將全數用於法事工程本身。這份近乎笨拙的透明，是我們對因果的最高敬畏。
                   </div>
                 </div>
               </div>
@@ -112,18 +145,48 @@ export default function Pay() {
 
           <Card className="p-8 md:p-10 gold-border bg-card/70 paper-grain">
             <div className="text-[10px] tracking-[0.3em] uppercase text-muted-foreground font-bold mb-2">Intuitive Navigation</div>
-            <div className="font-display text-3xl text-foreground/90">需要方向指引嗎？</div>
+            <div className="font-display text-3xl text-foreground/90">不知道該怎麼選？</div>
             <p className="mt-4 text-base text-muted-foreground readable">
-              您可以參考各本尊頁面的詳細對位；或透過下方情境，直覺尋找您的修復專家：
+              您可以參考各本尊頁面的詳細介紹；或透過下方情境，直覺尋找契合您的<strong className="text-foreground">本尊加持力量</strong>：
             </p>
 
             <div className="mt-6 grid gap-3">
-              <div className="flex flex-col gap-2">
-                <Badge variant="outline" className="justify-start py-2.5 px-4 text-sm font-medium border-primary/20 bg-background/50 hover:bg-primary/10 transition-colors">渴望豐盛 / 重啟現金流 → <span className="ml-2 font-bold text-primary">黃財神</span></Badge>
-                <Badge variant="outline" className="justify-start py-2.5 px-4 text-sm font-medium border-primary/20 bg-background/50 hover:bg-primary/10 transition-colors">祈求安穩 / 守護家運 → <span className="ml-2 font-bold text-primary">大吉祥天女</span></Badge>
-                <Badge variant="outline" className="justify-start py-2.5 px-4 text-sm font-medium border-primary/20 bg-background/50 hover:bg-primary/10 transition-colors">面臨抉擇 / 尋求清明洞察 → <span className="ml-2 font-bold text-primary">象頭財神</span></Badge>
-                <Badge variant="outline" className="justify-start py-2.5 px-4 text-sm font-medium border-primary/20 bg-background/50 hover:bg-primary/10 transition-colors">修復關係 / 吸引善緣貴人 → <span className="ml-2 font-bold text-primary">作明佛母</span></Badge>
-                <Badge variant="outline" className="justify-start py-2.5 px-4 text-sm font-medium border-primary/20 bg-background/50 hover:bg-primary/10 transition-colors">突發變故 / 平息深層恐懼 → <span className="ml-2 font-bold text-primary">綠度母</span></Badge>
+              <div className="flex flex-col gap-3">
+                <button onClick={() => scrollToDeity('yellow')} className="w-full text-left group">
+                  <Badge variant="outline" className="justify-start py-3 px-4 text-sm md:text-base font-medium border-primary/20 bg-background/50 group-hover:bg-primary/10 transition-colors w-full">
+                    <Coins className="w-5 h-5 mr-3 text-[#Eab308]" /> 渴望豐盛 / 重啟現金流 → <span className="ml-auto font-bold text-[#Eab308]">黃財神</span>
+                  </Badge>
+                </button>
+                <button onClick={() => scrollToDeity('mahashri')} className="w-full text-left group">
+                  <Badge variant="outline" className="justify-start py-3 px-4 text-sm md:text-base font-medium border-primary/20 bg-background/50 group-hover:bg-primary/10 transition-colors w-full">
+                    <Home className="w-5 h-5 mr-3 text-[#F97316]" /> 祈求安穩 / 守護家運 → <span className="ml-auto font-bold text-[#F97316]">大吉祥天女</span>
+                  </Badge>
+                </button>
+                <button onClick={() => scrollToDeity('ganapati')} className="w-full text-left group">
+                  <Badge variant="outline" className="justify-start py-3 px-4 text-sm md:text-base font-medium border-primary/20 bg-background/50 group-hover:bg-primary/10 transition-colors w-full">
+                    <Eye className="w-5 h-5 mr-3 text-[#F59E0B]" /> 面臨抉擇 / 尋求清明洞察 → <span className="ml-auto font-bold text-[#F59E0B]">象頭財神</span>
+                  </Badge>
+                </button>
+                <button onClick={() => scrollToDeity('kurukulla')} className="w-full text-left group">
+                  <Badge variant="outline" className="justify-start py-3 px-4 text-sm md:text-base font-medium border-primary/20 bg-background/50 group-hover:bg-primary/10 transition-colors w-full">
+                    <Heart className="w-5 h-5 mr-3 text-[#F43F5E]" /> 修復關係 / 吸引善緣貴人 → <span className="ml-auto font-bold text-[#F43F5E]">作明佛母</span>
+                  </Badge>
+                </button>
+                <button onClick={() => scrollToDeity('medicine-buddha')} className="w-full text-left group">
+                  <Badge variant="outline" className="justify-start py-3 px-4 text-sm md:text-base font-medium border-primary/20 bg-background/50 group-hover:bg-primary/10 transition-colors w-full">
+                    <Leaf className="w-5 h-5 mr-3 text-[#3B82F6]" /> 身心耗損 / 祈求健康平安 → <span className="ml-auto font-bold text-[#3B82F6]">藥師佛</span>
+                  </Badge>
+                </button>
+                <button onClick={() => scrollToDeity('green-tara')} className="w-full text-left group">
+                  <Badge variant="outline" className="justify-start py-3 px-4 text-sm md:text-base font-medium border-primary/20 bg-background/50 group-hover:bg-primary/10 transition-colors w-full">
+                    <Zap className="w-5 h-5 mr-3 text-[#10B981]" /> 突發變故 / 平息深層恐懼 → <span className="ml-auto font-bold text-[#10B981]">綠度母</span>
+                  </Badge>
+                </button>
+                <button onClick={() => scrollToDeity('padmasambhava')} className="w-full text-left group">
+                  <Badge variant="outline" className="justify-start py-3 px-4 text-sm md:text-base font-medium border-primary/20 bg-background/50 group-hover:bg-primary/10 transition-colors w-full">
+                    <Shield className="w-5 h-5 mr-3 text-[#6366F1]" /> 動盪不安 / 尋求強大靠山 → <span className="ml-auto font-bold text-[#6366F1]">蓮花生大士</span>
+                  </Badge>
+                </button>
               </div>
             </div>
 
@@ -151,7 +214,7 @@ export default function Pay() {
           <div className="text-[10px] md:text-xs tracking-[0.3em] uppercase text-muted-foreground font-bold mb-2">Restoration Catalog</div>
           <h2 className="font-display text-4xl md:text-5xl text-foreground/90">全站修復計畫總案冊</h2>
           <p className="mt-4 readable text-muted-foreground max-w-prose text-lg">
-            為您完整展開所有修復與增益的專業路徑。
+            為您完整展開所有本尊法事的專業路徑。
           </p>
 
           <div className="mt-8 p-6 md:p-8 rounded-xl border border-primary/40 bg-primary/5 relative overflow-hidden group shadow-inner">
@@ -169,7 +232,7 @@ export default function Pay() {
 
           <div className="mt-10 grid gap-8">
             {DEITIES.map((d) => (
-              <Card key={d.key} className="p-6 md:p-10 gold-border bg-card/70 paper-grain backdrop-blur-sm shadow-lg">
+              <Card key={d.key} id={`deity-section-${d.key}`} className="p-6 md:p-10 gold-border bg-card/70 paper-grain backdrop-blur-sm shadow-lg scroll-mt-24">
                 <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 border-b border-primary/20 pb-6 mb-8">
                   <div>
                     <div className="text-[10px] md:text-xs tracking-[0.3em] uppercase text-primary font-black mb-1.5">{d.primaryIntent}</div>
@@ -178,7 +241,7 @@ export default function Pay() {
                   </div>
                   <div className="flex gap-2">
                     <Link href={`/deity/${d.key}`}>
-                      <Button variant="outline" className="gold-border text-sm tracking-widest font-bold h-11 px-6 hover:bg-primary/10">探索系統細節</Button>
+                      <Button variant="outline" className="gold-border text-sm tracking-widest font-bold h-11 px-6 hover:bg-primary/10">探索本尊詳情</Button>
                     </Link>
                   </div>
                 </div>
@@ -204,8 +267,8 @@ export default function Pay() {
                               <div className="font-display text-2xl md:text-3xl text-foreground/90">{p.name}</div>
                               <div className="mt-2 text-xs md:text-sm font-bold text-primary/80 tracking-wide">精準對位：{p.suitableFor.join("、")}</div>
                             </div>
-                            <div className="text-right">
-                              <div className="text-[10px] tracking-[0.2em] uppercase text-muted-foreground font-bold mb-1">修復投資</div>
+                            <div className="text-right shrink-0">
+                              <div className="text-[10px] tracking-[0.2em] uppercase text-muted-foreground font-bold mb-1">護持結緣金</div>
                               <div className="font-display text-3xl md:text-4xl text-primary">{p.price}</div>
                             </div>
                           </div>
@@ -221,7 +284,7 @@ export default function Pay() {
                             祈願越真實越好！委託時請於綠界<strong className="text-foreground/90 font-bold">備註欄</strong>寫下您的：<span className="text-foreground font-bold">姓名、居住地與目前的生命掙扎</span>。
                           </div>
 
-                          {/* 🟢 核心升級：充滿陪伴感的引導通道 */}
+                          {/* 充滿陪伴感的引導通道 */}
                           <Dialog>
                             <DialogTrigger asChild>
                               <Button className="h-14 w-full text-base font-bold tracking-[0.15em] uppercase gold-border bg-primary text-primary-foreground shadow-lg transition-all hover:scale-[1.02] active:scale-95">
@@ -246,7 +309,6 @@ export default function Pay() {
 
                               {/* 彈窗內容：1-2 步驟溫暖指引 */}
                               <div className="p-6 md:p-8 space-y-7">
-                                {/* 步驟 1 */}
                                 <div className="flex gap-4 items-start">
                                   <div className="w-8 h-8 rounded-full bg-primary/15 flex items-center justify-center text-primary font-bold shrink-0 gold-border mt-0.5 text-sm shadow-sm">1</div>
                                   <div>
@@ -262,7 +324,6 @@ export default function Pay() {
                                   </div>
                                 </div>
 
-                                {/* 步驟 2 */}
                                 <div className="flex gap-4 items-start">
                                   <div className="w-8 h-8 rounded-full bg-primary/15 flex items-center justify-center text-primary font-bold shrink-0 gold-border mt-0.5 text-sm shadow-sm">2</div>
                                   <div>

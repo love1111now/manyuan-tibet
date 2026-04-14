@@ -3,7 +3,6 @@ Design philosophy: Neo-thangka noir (Professional Consultant Upgrade)
 - L6 [Trust & Social Proof]: Aggregating ALL deity-specific testimonials.
 - Features: Categorized success stories, Transparency declaration, Clear CTAs.
 - 100% Unabbreviated Production Ready Code.
-- Fix: Added missing 'Sparkles', 'Quote', and 'HeartHandshake' to lucide-react imports.
 */
 
 import SiteHeader from "@/components/SiteHeader";

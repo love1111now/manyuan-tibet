@@ -1,10 +1,11 @@
 /*
 Design philosophy: Neo-thangka noir (Professional Consultant Upgrade)
-- L1 [Attention]: Hero section capturing "structural life crises".
-- L2 [Interest]: Scientific/Sutra-based explanation logic.
+- L1 [Attention]: Hero section capturing "structural life crises". Removed buttons to force funnel downwards.
+- L2 [Interest]: Scientific/Sutra-based explanation logic -> Seamlessly enters TreasuryQuiz.
 - L3 [Desire]: Deities as "Systemic Repair Experts" (All 7 Dimensions).
 - L4 [Clarity]: 4-Phase Systemic Restoration visualization.
 - L5 & L6: High-value packaging and scarcity logic.
+- 100% Unabbreviated Production Ready Code.
 */
 
 import SiteHeader from "@/components/SiteHeader";
@@ -29,7 +30,8 @@ import {
   Info,
   Layers,
   Download,
-  Quote // 🟢 已補上缺失的 Quote 圖示
+  Quote,
+  ArrowDown // 🟢 新增向下引導圖示
 } from "lucide-react";
 
 import { HOME_TESTIMONIALS, VISUALS } from "@/lib/siteData";
@@ -80,30 +82,15 @@ export default function Home() {
               這往往非關運氣，而是您的<span className="text-foreground font-bold">資糧容器出現了結構性漏損</span>。我們是志工團隊，旨在透過佛法經典的能量對位，協助您在動盪的時代找回不動的中心。
             </p>
 
-            <div className="mt-12 flex flex-col sm:flex-row justify-center gap-5 w-full sm:w-auto">
-              <div className="w-full sm:w-auto flex flex-col items-center gap-3">
-                <Link href="/pay" className="w-full">
-                  <Button className="h-16 w-full sm:px-10 text-xl font-bold tracking-[0.25em] uppercase gold-border shadow-2xl active:scale-95 transition-all">
-                    啟動我的資糧修復 <ArrowRight className="h-5 w-5 ml-2" />
-                  </Button>
-                </Link>
-                <div className="text-[10px] md:text-xs text-muted-foreground/70 flex items-center gap-2 font-medium">
-                  <ShieldCheck className="w-4 h-4 text-primary/60" />
-                  志工晚間跨境造冊，確保心念如實交付
-                </div>
-              </div>
-
-              <button
-                onClick={() => scrollToSection("quiz")}
-                className="h-16 px-10 inline-flex items-center justify-center rounded-md border bg-background/20 gold-border readable hover:bg-primary/10 transition-all font-bold text-lg w-full sm:w-auto active:scale-95"
-              >
-                30秒發現資糧業力現況 <Sparkles className="ml-2 h-5 w-5 text-primary animate-pulse" />
-              </button>
+            {/* 🟢 核心優化：移除按鈕，換成無縫向下的沈浸式引導 */}
+            <div className="mt-16 flex flex-col items-center justify-center opacity-70 animate-bounce">
+              <span className="text-[10px] tracking-[0.3em] uppercase font-bold text-primary mb-3">向下探索生命維度</span>
+              <ArrowDown className="w-6 h-6 text-primary" />
             </div>
           </div>
         </section>
 
-        {/* L2 [學理證明]: 核心測驗入口 - 專業診斷起始點 */}
+        {/* L2 [學理證明]: 核心測驗入口 - 專業診斷起始點 (緊接在箭頭下方) */}
         <div id="quiz" className="scroll-mt-20">
           <TreasuryQuiz />
         </div>

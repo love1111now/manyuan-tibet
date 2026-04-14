@@ -1,8 +1,9 @@
 /*
 Design philosophy: Neo-thangka noir (Consultant Upgrade)
 - L1 [Lead Magnet]: Transforming a free download into a high-value frequency anchor.
-- L2 [Bridge]: Seamlessly routing traffic to the 30-second Treasury Quiz.
+- L2 [Bridge]: Seamlessly routing traffic to the 30-second Treasury Quiz to reduce bounce rate.
 - L6 [Social Proof]: Integrated Facebook community feed preview for maximum trust.
+- Fix: Replaced external Facebook icon with an inline SVG component to prevent build errors.
 - 100% Unabbreviated Production Ready Code.
 */
 
@@ -13,7 +14,6 @@ import {
   Sparkles, 
   ShieldCheck, 
   HeartHandshake, 
-  Facebook, 
   ExternalLink,
   MessageCircle,
   CalendarCheck
@@ -29,16 +29,38 @@ import { Badge } from "@/components/ui/badge";
 import { SITE } from "@/lib/siteData";
 import wallpaperUrl from "@/assets/downloads/huangcaishen-wallpaper.jpg?url";
 
+// 🟢 防彈級組件：手寫 SVG Facebook 圖示，確保在任何環境下皆能 100% 編譯成功
+const FacebookIcon = ({ className }: { className?: string }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+  >
+    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+  </svg>
+);
+
 export default function Wallpaper() {
   
   const handleDownloadTrack = () => {
     if (typeof window !== "undefined") {
-      // 專業級事件追蹤：桌布下載
-      window.gtag?.('event', 'download_wallpaper', {
-        event_category: 'engagement',
-        event_label: 'yellow_dzambhala'
-      });
-      window.fbq?.('trackCustom', 'DownloadWallpaper');
+      // 專業級追蹤：桌布下載事件
+      if ((window as any).gtag) {
+        (window as any).gtag('event', 'download_wallpaper', {
+          event_category: 'engagement',
+          event_label: 'yellow_dzambhala'
+        });
+      }
+      if ((window as any).fbq) {
+        (window as any).fbq('trackCustom', 'DownloadWallpaper');
+      }
     }
   };
 
@@ -50,7 +72,6 @@ export default function Wallpaper() {
       <main className="flex-1 mx-auto w-full max-w-6xl px-4 pt-10 pb-32">
         <div className="grid gap-12 md:grid-cols-[1fr_.95fr] items-center">
           
-          {/* 左側：文案與轉化漏斗 */}
           <div className="order-2 md:order-1">
             <div className="flex items-center gap-2 text-[10px] md:text-xs tracking-[0.3em] uppercase text-primary font-bold mb-4">
               <ShieldCheck className="w-4 h-4" /> Free Gift & Energy Anchor
@@ -81,7 +102,6 @@ export default function Wallpaper() {
               小提醒：若手機自動裁切，建議在相簿內移動縮放位置後再設定。
             </div>
 
-            {/* NEXT STEP: 測驗引導 (止血工程) */}
             <div className="mt-16 p-8 rounded-2xl bg-primary/5 border border-primary/20 relative overflow-hidden group shadow-inner">
               <div className="absolute top-0 right-0 p-4 opacity-5 pointer-events-none group-hover:rotate-12 transition-transform duration-1000">
                 <Sparkles className="w-24 h-24 text-primary" />
@@ -103,7 +123,6 @@ export default function Wallpaper() {
             </div>
           </div>
 
-          {/* 右側：沉浸式手機展示區 */}
           <div className="order-1 md:order-2 relative px-4 md:px-0">
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-primary/20 rounded-full blur-[80px] pointer-events-none" />
             <Card className="relative p-3 md:p-5 gold-border bg-card/60 backdrop-blur-xl paper-grain shadow-2xl mx-auto max-w-[320px] md:max-w-md transform rotate-1 hover:rotate-0 transition-transform duration-700">
@@ -122,12 +141,11 @@ export default function Wallpaper() {
 
         <div className="tibetan-divider h-12 opacity-60 mt-20" aria-hidden />
 
-        {/* 🟢 核心補強：FB 粉絲團連結與動態看板 (L6 Social Proof) */}
         <section className="mt-20">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
             <div className="text-center md:text-left">
               <div className="flex items-center justify-center md:justify-start gap-2 text-[10px] md:text-xs tracking-[0.3em] uppercase text-primary font-bold mb-3">
-                <Facebook className="w-4 h-4" /> Community & Transparency
+                <FacebookIcon className="w-4 h-4" /> Community & Transparency
               </div>
               <h2 className="font-display text-3xl md:text-5xl tracking-tight">追蹤志工動態：每一份發心皆透明</h2>
               <p className="mt-4 readable text-muted-foreground text-lg max-w-2xl italic">
@@ -141,12 +159,11 @@ export default function Wallpaper() {
             </a>
           </div>
 
-          {/* 模擬最新三篇動態 (Visual Portal) */}
           <div className="grid gap-6 md:grid-cols-3">
             {[
               { 
                 tag: "每週公告", 
-                title: "【隔週名冊公佈】3月第四週功德名錄已全數送達壇城", 
+                title: "【隔週名冊公佈】最新功德名錄已全數送達壇城", 
                 desc: "感謝所有發心信眾，去識別化名單已正式發佈。您的每一分善意，我們皆如實造冊並由師兄姐完成儀軌對位...", 
                 Icon: CalendarCheck 
               },
@@ -185,11 +202,10 @@ export default function Wallpaper() {
             ))}
           </div>
 
-          {/* 手機版顯示按鈕 */}
           <div className="mt-10 md:hidden">
             <a href={SITE.fb} target="_blank" rel="noreferrer">
               <Button className="w-full h-16 gold-border bg-[#0866FF] hover:bg-[#0866FF]/90 text-white font-bold text-lg tracking-widest">
-                <Facebook className="w-5 h-5 mr-2" /> 追蹤 FB 最新公告名單
+                <FacebookIcon className="w-5 h-5 mr-2" /> 追蹤 FB 最新公告名單
               </Button>
             </a>
           </div>
