@@ -51,7 +51,7 @@ export default function Home() {
           <div className="absolute inset-0 opacity-30 md:opacity-40">
             <img
               src={VISUALS.heroGilded}
-              alt="滿願藏庫｜生命維度顧問系統"
+              alt="滿願藏庫｜增財盈貴 斷孽消災法事"
               className="h-full w-full object-cover scale-[1.05]"
               loading="eager"
             />
@@ -69,9 +69,9 @@ export default function Home() {
             </div>
 
             <h1 className="font-display text-5xl sm:text-7xl md:text-8xl leading-[1.1] tracking-tight">
-              我們不造神、不支薪
+              我們不高調、不支薪
               <br />
-              <span className="text-primary italic">只為您修補缺失的力量</span>
+              <span className="text-primary italic">只依正法力量為您完成儀軌</span>
             </h1>
 
             <p className="mt-8 readable text-muted-foreground max-w-3xl text-base md:text-xl leading-relaxed mx-auto italic">
@@ -84,7 +84,7 @@ export default function Home() {
               <div className="w-full sm:w-auto flex flex-col items-center gap-3">
                 <Link href="/pay" className="w-full">
                   <Button className="h-16 w-full sm:px-10 text-xl font-bold tracking-[0.25em] uppercase gold-border shadow-2xl active:scale-95 transition-all">
-                    啟動我的修復計畫 <ArrowRight className="h-5 w-5 ml-2" />
+                    啟動我的資糧修復 <ArrowRight className="h-5 w-5 ml-2" />
                   </Button>
                 </Link>
                 <div className="text-[10px] md:text-xs text-muted-foreground/70 flex items-center gap-2 font-medium">
@@ -144,7 +144,7 @@ export default function Home() {
 
                 <div className="mt-8 p-6 rounded-lg bg-primary/5 border-l-4 border-primary/40 space-y-4">
                   <div className="flex items-center gap-3 text-primary font-bold">
-                    <Info className="h-5 w-5" /> 顧問引導建議
+                    <Info className="h-5 w-5" /> 本尊引導建議
                   </div>
                   <ul className="text-sm md:text-base text-muted-foreground readable space-y-3">
                     <li className="flex gap-2">
@@ -157,7 +157,7 @@ export default function Home() {
                     </li>
                     <li className="flex gap-2">
                       <span className="text-primary font-bold">03</span>
-                      <span><strong className="text-foreground">啟動造冊</strong>：登記完成後，志工將於 24 小時內啟動系統對位。</span>
+                      <span><strong className="text-foreground">啟動造冊</strong>：登記完成後，即日送達名單至西藏排程法事。</span>
                     </li>
                   </ul>
                 </div>
@@ -172,7 +172,7 @@ export default function Home() {
                 </button>
                 <Link href="/pay" className="flex-1">
                   <Button variant="outline" className="h-14 w-full gold-border text-lg tracking-widest">
-                    全站修復方案表
+                    全站神明本尊介紹
                   </Button>
                 </Link>
               </div>
@@ -217,9 +217,9 @@ export default function Home() {
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
             <div className="text-center md:text-left">
               <div className="text-[10px] md:text-xs tracking-[0.3em] uppercase text-muted-foreground font-bold">Expert Alignment</div>
-              <h2 className="mt-3 font-display text-4xl md:text-6xl tracking-tight">選擇您的系統修復專家</h2>
+              <h2 className="mt-3 font-display text-4xl md:text-6xl tracking-tight">滿願藏庫法事本尊</h2>
               <p className="mt-4 readable text-muted-foreground text-lg max-w-2xl italic">
-                不用亂拜，對準困境。每一位本尊代表著不同的修復運算法。
+                不需要亂拜，對準困境。每一位本尊代表著不同的修復運算法。
               </p>
             </div>
             <Link href="/pay" className="hidden md:block">
