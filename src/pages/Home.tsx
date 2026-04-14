@@ -1,3 +1,12 @@
+/*
+Design philosophy: Neo-thangka noir (Professional Consultant Upgrade)
+- L1 [Attention]: Hero section capturing "structural life crises".
+- L2 [Interest]: Scientific/Sutra-based explanation logic.
+- L3 [Desire]: Deities as "Systemic Repair Experts" (All 7 Dimensions).
+- L4 [Clarity]: 4-Phase Systemic Restoration visualization.
+- L5 & L6: High-value packaging and scarcity logic.
+*/
+
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import StickyCta from "@/components/StickyCta";
@@ -9,9 +18,20 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 
 import { Link } from "wouter";
-import { ArrowRight, ShieldCheck, Sparkles, ClipboardList, Clock, Download } from "lucide-react";
+import { 
+  ArrowRight, 
+  ShieldCheck, 
+  Sparkles, 
+  ClipboardList, 
+  Clock, 
+  ChevronRight, 
+  Zap, 
+  Info,
+  Layers,
+  Download,
+  Quote // 🟢 已補上缺失的 Quote 圖示
+} from "lucide-react";
 
-// 🟢 核心修復：拆分引入來源，VISUALS 來自 siteData，DEITIES 來自 deities 目錄
 import { HOME_TESTIMONIALS, VISUALS } from "@/lib/siteData";
 import { DEITIES } from "@/data/deities";
 
@@ -26,259 +46,268 @@ export default function Home() {
       <SiteHeader />
 
       <main>
-        {/* HERO */}
+        {/* L1 [痛點捕捉]: HERO - 將情緒轉化為結構性觀察 */}
         <section className="relative overflow-hidden section-fade">
-          <div className="absolute inset-0 opacity-40">
+          <div className="absolute inset-0 opacity-30 md:opacity-40">
             <img
               src={VISUALS.heroGilded}
-              alt="滿願藏庫｜招財,人緣,健康,法事登記"
-              className="h-full w-full object-cover scale-[1.07]"
+              alt="滿願藏庫｜生命維度顧問系統"
+              className="h-full w-full object-cover scale-[1.05]"
               loading="eager"
             />
           </div>
-          <div className="absolute inset-0 bg-gradient-to-b from-background/15 via-background/75 to-background" />
+          <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/80 to-background" />
 
-          <div className="relative mx-auto max-w-4xl px-4 pt-20 pb-16 flex flex-col items-center text-center">
-            <div className="flex flex-wrap justify-center items-center gap-2">
-              <Badge className="gold-border bg-background/35 text-foreground backdrop-blur">
-                本月吉日窗口・名額開放
+          <div className="relative mx-auto max-w-5xl px-4 pt-20 pb-20 flex flex-col items-center text-center">
+            <div className="flex flex-wrap justify-center items-center gap-3 mb-8">
+              <Badge className="gold-border bg-primary/10 text-primary backdrop-blur px-3 py-1 text-[10px] md:text-xs tracking-widest font-bold">
+                生命能量對位系統 2.0
               </Badge>
-              <Badge className="gold-border bg-background/35 text-foreground/90 backdrop-blur">
-                先安定，再行動
+              <Badge className="gold-border bg-background/40 text-foreground/80 backdrop-blur px-3 py-1 text-[10px] md:text-xs tracking-widest">
+                今日吉時名額開放中
               </Badge>
             </div>
 
-            <h1 className="mt-6 font-display text-5xl sm:text-6xl md:text-7xl leading-[1.02]">
+            <h1 className="font-display text-5xl sm:text-7xl md:text-8xl leading-[1.1] tracking-tight">
               我們不造神、不支薪
               <br />
-              <span className="text-primary">只為您修補缺失的力量</span>
+              <span className="text-primary italic">只為您修補缺失的力量</span>
             </h1>
 
-            <p className="mt-6 readable text-muted-foreground max-w-2xl text-lg leading-relaxed mx-auto">
-              我們是無償志工團隊，與西藏師兄姊跨境協力。我們沒有大師包裝，沒有預算打廣告，只有實實在在的法事造冊。
-              <br className="hidden sm:block" />
-              如果您覺得這世界太虛假、太吵鬧，想找回一點點安靜且真實的加持——
-              <span className="text-foreground/90 font-medium">不用硬撐，請將這份沉重交託給純粹的傳承。</span>
+            <p className="mt-8 readable text-muted-foreground max-w-3xl text-base md:text-xl leading-relaxed mx-auto italic">
+              「為什麼無論多努力，生命中總有些坎跨不過去？」
+              <br className="hidden md:block" />
+              這往往非關運氣，而是您的<span className="text-foreground font-bold">資糧容器出現了結構性漏損</span>。我們是志工團隊，旨在透過佛法經典的能量對位，協助您在動盪的時代找回不動的中心。
             </p>
 
-            <div className="mt-10 flex flex-col sm:flex-row justify-center gap-4 w-full sm:w-auto">
-              <div className="w-full sm:w-auto flex flex-col items-center">
-                <Link href="/pay">
-                  <Button className="h-12 w-full sm:w-auto px-8 font-bold tracking-[0.22em] uppercase gold-border shadow-md">
-                    立即登記保留名額 <ArrowRight className="h-4 w-4 ml-2" />
+            <div className="mt-12 flex flex-col sm:flex-row justify-center gap-5 w-full sm:w-auto">
+              <div className="w-full sm:w-auto flex flex-col items-center gap-3">
+                <Link href="/pay" className="w-full">
+                  <Button className="h-16 w-full sm:px-10 text-xl font-bold tracking-[0.25em] uppercase gold-border shadow-2xl active:scale-95 transition-all">
+                    啟動我的修復計畫 <ArrowRight className="h-5 w-5 ml-2" />
                   </Button>
                 </Link>
-                <div className="mt-2.5 text-[11px] text-muted-foreground/80 flex items-center justify-center gap-1.5 font-medium">
-                  <Clock className="w-3.5 h-3.5 text-primary" />
-                  台灣志工晚間造冊，隔週公佈去識別化名錄
+                <div className="text-[10px] md:text-xs text-muted-foreground/70 flex items-center gap-2 font-medium">
+                  <ShieldCheck className="w-4 h-4 text-primary/60" />
+                  志工晚間跨境造冊，確保心念如實交付
                 </div>
               </div>
 
               <button
                 onClick={() => scrollToSection("quiz")}
-                className="h-12 px-8 inline-flex items-center justify-center rounded-md border bg-background/35 gold-border readable hover:bg-accent/35 transition-colors font-medium w-full sm:w-auto"
+                className="h-16 px-10 inline-flex items-center justify-center rounded-md border bg-background/20 gold-border readable hover:bg-primary/10 transition-all font-bold text-lg w-full sm:w-auto active:scale-95"
               >
-                請依直覺選擇您的困擾 <Sparkles className="ml-2 h-4 w-4 text-primary" />
+                30秒發現資糧業力現況 <Sparkles className="ml-2 h-5 w-5 text-primary animate-pulse" />
               </button>
-            </div>
-
-            <div className="mt-10 text-xs text-muted-foreground tracking-[0.22em] uppercase">
-              清楚流程 · 經典依據 · 隔週造冊公佈
             </div>
           </div>
         </section>
 
-        {/* 財庫能量檢測 */}
-        <TreasuryQuiz />
+        {/* L2 [學理證明]: 核心測驗入口 - 專業診斷起始點 */}
+        <div id="quiz" className="scroll-mt-20">
+          <TreasuryQuiz />
+        </div>
 
-        <div className="tibetan-divider h-10 opacity-70 mt-4" aria-hidden />
+        <div className="tibetan-divider h-12 opacity-60 mt-6" aria-hidden />
 
-        {/* QUICK GUIDE */}
-        <section className="mx-auto max-w-6xl px-4 pt-12 pb-2">
-          <div className="grid gap-4 md:grid-cols-[1.05fr_.95fr] md:items-stretch">
-            <Card className="p-7 md:p-9 gold-border bg-card/70 paper-grain">
-              <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">快速指引</div>
-              <h2 className="mt-2 font-display text-3xl">直覺對位：找到你要的護持</h2>
-              <p className="mt-4 readable text-muted-foreground">
-                您不用研究一堆名詞。先選「您的需求在哪」，我們把每位本尊的方向寫得很清楚。
+        {/* L3 [解決方案]: 生命維度導航 - 將七大神明定義為「修復引導者」 */}
+        <section className="mx-auto max-w-6xl px-4 pt-16 pb-4">
+          <div className="grid gap-6 md:grid-cols-[1.1fr_.9fr] md:items-stretch">
+            <Card className="p-8 md:p-12 gold-border bg-card/70 paper-grain relative overflow-hidden">
+              <div className="absolute -top-10 -right-10 opacity-5 pointer-events-none">
+                <Layers className="w-64 h-64 text-primary" />
+              </div>
+              <div className="text-[10px] md:text-xs tracking-[0.3em] uppercase text-primary font-bold mb-4">Dimension Navigation</div>
+              <h2 className="font-display text-4xl md:text-5xl leading-tight text-foreground/90">生命維度導航：<br/>精準對位您的修復需求</h2>
+              <p className="mt-6 readable text-muted-foreground text-lg italic">
+                「生命的問題不能僅靠心念解決，必須修復底層的資糧結構。」
               </p>
 
-              <div className="mt-6 grid gap-3">
+              <div className="mt-8 grid gap-4">
                 <div className="flex flex-wrap gap-2">
-                  <Link href="/deity/yellow" className="inline-flex">
-                    <Badge className="text-white gold-border bg-background/35 hover:bg-accent/35 transition-colors">增財／現金流 → 黃財神</Badge>
-                  </Link>
-                  <Link href="/deity/mahashri" className="inline-flex">
-                    <Badge className="text-white gold-border bg-background/35 hover:bg-accent/35 transition-colors">守財／家運 → 大吉祥天女</Badge>
-                  </Link>
-                  <Link href="/deity/ganapati" className="inline-flex">
-                    <Badge className="text-white gold-border bg-background/35 hover:bg-accent/35 transition-colors">卡關／決策期 → 象頭財神</Badge>
-                  </Link>
-                  <Link href="/deity/kurukulla" className="inline-flex">
-                    <Badge className="text-white gold-border bg-background/35 hover:bg-accent/35 transition-colors">愛情／人緣 → 作明佛母</Badge>
-                  </Link>
-                  <Link href="/deity/green-tara" className="inline-flex">
-                    <Badge className="text-white gold-border bg-background/35 hover:bg-accent/35 transition-colors">焦慮／身心不穩 → 綠度母</Badge>
-                  </Link>
+                  {[
+                    { label: "資糧流動修復 → 黃財神", to: "yellow" },
+                    { label: "家運地基穩固 → 大吉祥天女", to: "mahashri" },
+                    { label: "決策認知除障 → 象頭財神", to: "ganapati" },
+                    { label: "懷愛磁場重建 → 作明佛母", to: "kurukulla" },
+                    { label: "身心耗損息災 → 藥師佛", to: "medicine-buddha" },
+                    { label: "急難突發化解 → 綠度母", to: "green-tara" },
+                    { label: "動盪防禦建構 → 蓮花生大士", to: "padmasambhava" }
+                  ].map((item) => (
+                    <Link key={item.to} href={`/deity/${item.to}`} className="inline-flex">
+                      <Badge className="px-3 py-2 text-xs md:text-sm gold-border bg-background/40 hover:bg-primary text-foreground hover:text-primary-foreground transition-all cursor-pointer font-medium">
+                        {item.label} <ChevronRight className="h-3 w-3 ml-1 opacity-50" />
+                      </Badge>
+                    </Link>
+                  ))}
                 </div>
 
-                <ul className="mt-4 text-sm text-muted-foreground readable space-y-2">
-                  <li>1) <span className="text-foreground/90 font-medium">先看本尊頁</span>：痛點、為什麼對位、推薦方案、FAQ。</li>
-                  <li>2) 再看方案的「<span className="text-foreground/90 font-medium">如法內容（節錄）</span>」：您會清楚知道我們會做哪些儀軌與回向。</li>
-                  <li>3) 決定後到 <span className="text-foreground/90 font-medium">登記頁</span> 直接下單，付款完成即由志工接手安排。</li>
-                </ul>
+                <div className="mt-8 p-6 rounded-lg bg-primary/5 border-l-4 border-primary/40 space-y-4">
+                  <div className="flex items-center gap-3 text-primary font-bold">
+                    <Info className="h-5 w-5" /> 顧問引導建議
+                  </div>
+                  <ul className="text-sm md:text-base text-muted-foreground readable space-y-3">
+                    <li className="flex gap-2">
+                      <span className="text-primary font-bold">01</span>
+                      <span><strong className="text-foreground">前測對位</strong>：先看本尊介紹頁，確認「能量缺失」是否與現況共鳴。</span>
+                    </li>
+                    <li className="flex gap-2">
+                      <span className="text-primary font-bold">02</span>
+                      <span><strong className="text-foreground">確定方案</strong>：閱讀「如法內容」，了解這份投資如何運作。</span>
+                    </li>
+                    <li className="flex gap-2">
+                      <span className="text-primary font-bold">03</span>
+                      <span><strong className="text-foreground">啟動造冊</strong>：登記完成後，志工將於 24 小時內啟動系統對位。</span>
+                    </li>
+                  </ul>
+                </div>
               </div>
 
-              <div className="mt-7 flex flex-col sm:flex-row gap-3">
+              <div className="mt-10 flex flex-col md:flex-row gap-4">
                 <button 
                   onClick={() => scrollToSection("choose")}
-                  className="flex-1 h-12 w-full font-bold tracking-[0.22em] uppercase gold-border shadow-sm bg-primary/10 hover:bg-primary/20 transition-colors"
+                  className="flex-1 h-14 w-full font-bold tracking-[0.2em] uppercase gold-border shadow-xl bg-primary text-primary-foreground hover:scale-[1.02] transition-all"
                 >
-                  開始選本尊 <ArrowRight className="h-4 w-4 ml-2 inline" />
+                  開始選對位本尊 <ArrowRight className="h-5 w-5 ml-2 inline" />
                 </button>
                 <Link href="/pay" className="flex-1">
-                  <Button variant="outline" className="h-12 w-full gold-border">直接去登記（收費表）</Button>
+                  <Button variant="outline" className="h-14 w-full gold-border text-lg tracking-widest">
+                    全站修復方案表
+                  </Button>
                 </Link>
               </div>
             </Card>
 
-            <Card className="p-7 md:p-9 gold-border bg-background/35 backdrop-blur paper-grain">
-              <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">圖解流程</div>
-              <h3 className="mt-2 font-display text-2xl">清楚三步，完成護持</h3>
+            {/* L4 [流程具象化]: 階段性修復計畫表 */}
+            <Card className="p-8 md:p-12 gold-border bg-background/30 backdrop-blur paper-grain border-dashed">
+              <div className="text-[10px] md:text-xs tracking-[0.3em] uppercase text-muted-foreground font-bold mb-4 italic">Step-by-Step Restoration</div>
+              <h3 className="font-display text-3xl text-foreground/90">四階段系統修復計畫</h3>
+              <p className="mt-4 text-sm text-muted-foreground leading-relaxed">不再是模糊的「祈福」，而是由志工與壇城共同執行的工程進度。</p>
 
-              <div className="mt-6 grid gap-3">
-                <div className="grid gap-3">
-                  {[
-                    { title: "① 選本尊與方案", body: "依困境對位（增財/守財/愛情/除障），挑選最貼近狀態的價位。" },
-                    { title: "② 登記與祈願", body: "完成綠界付款，並於備註欄寫下具體困境，系統即刻保留名額。" },
-                    { title: "③ 造冊與公佈", body: "志工於晚間造冊、送達壇城；並於隔週在 FB 公佈去識別化名錄。" },
-                  ].map((s, idx) => (
-                    <div key={s.title} className="relative">
-                      <Card className="p-5 gold-border bg-card/60 hover:border-primary/30 transition-colors">
-                        <div className="font-display text-xl text-foreground/90">{s.title}</div>
-                        <div className="mt-2 text-sm text-muted-foreground readable">{s.body}</div>
-                      </Card>
-                      {idx < 2 ? (
-                        <div className="hidden md:flex items-center justify-center py-2 text-muted-foreground">
-                          <ArrowRight className="h-4 w-4 opacity-50" />
-                        </div>
-                      ) : null}
+              <div className="mt-10 grid gap-6">
+                {[
+                  { step: "Phase 1", title: "能量定位 (Diagnosis)", body: "透過深度測驗或私訊溝通，確認目前的因緣卡關點（如：資糧漏損、關係防禦）。" },
+                  { step: "Phase 2", title: "業印清理 (Clearing)", body: "完成登記後 24h 內由志工造冊，送達西藏壇城啟動第一步：障礙清淨儀軌。" },
+                  { step: "Phase 3", title: "結構穩定 (Stabilizing)", body: "持續的如法供養與共振，修補受損的容器邊界，讓您的心神找回做決定的定見。" },
+                  { step: "Phase 4", title: "能量強化 (Fortifying)", body: "在修復完成後注入增益能量。地基穩了，您的努力才會在現實中產生感應力。" },
+                ].map((s, idx) => (
+                  <div key={idx} className="relative flex gap-5 group">
+                    <div className="flex-shrink-0 w-12 h-12 rounded-full border gold-border bg-card/80 flex items-center justify-center font-display text-primary text-xs tracking-tighter group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500 z-10">
+                      {s.step}
                     </div>
-                  ))}
-                </div>
+                    <div>
+                      <div className="font-display text-xl text-foreground/90 group-hover:text-primary transition-colors">{s.title}</div>
+                      <div className="mt-2 text-sm text-muted-foreground readable opacity-80">{s.body}</div>
+                    </div>
+                    {idx < 3 && <div className="absolute left-6 top-12 w-px h-full bg-primary/20 -z-10 hidden md:block" />}
+                  </div>
+                ))}
+              </div>
 
-                <Separator className="my-4 border-border/50" />
-
-                <div className="text-sm text-muted-foreground readable">
-                  <span className="text-foreground/90 font-medium">小提醒：</span>
-                  護持不是交易；我們承諾的是如法完成流程與清楚交付。祈願越具體（對象/時間/困境/您希望的改變），回向越容易對位。
-                </div>
+              <div className="mt-12 p-5 rounded bg-destructive/5 border border-destructive/20 text-xs text-destructive/80 leading-relaxed font-bold tracking-wider">
+                <Zap className="h-4 w-4 inline mr-2 mb-1" />
+                提醒：護持非交易。我們承諾的是如法完成每一道修復流程。祈願越具體，能量對位越清晰。
               </div>
             </Card>
           </div>
         </section>
 
-        {/* DEITIES */}
-        <section id="choose" className="mx-auto max-w-6xl px-4 pt-14 pb-4 scroll-mt-24">
-          <div className="flex items-end justify-between gap-4">
-            <div>
-              <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">
-                Choose → plan → checkout
-              </div>
-              <h2 className="mt-2 font-display text-3xl md:text-4xl">需求分明：依神明對位困境</h2>
-              <p className="mt-3 readable text-muted-foreground max-w-prose">
-                不用硬撐，也不用亂拜。先看您卡在哪裡，再選最對位的本尊。
+        {/* DEITIES: 產品對位區塊 (自動 mapping 7 尊) */}
+        <section id="choose" className="mx-auto max-w-6xl px-4 pt-20 pb-10 scroll-mt-24">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+            <div className="text-center md:text-left">
+              <div className="text-[10px] md:text-xs tracking-[0.3em] uppercase text-muted-foreground font-bold">Expert Alignment</div>
+              <h2 className="mt-3 font-display text-4xl md:text-6xl tracking-tight">選擇您的系統修復專家</h2>
+              <p className="mt-4 readable text-muted-foreground text-lg max-w-2xl italic">
+                不用亂拜，對準困境。每一位本尊代表著不同的修復運算法。
               </p>
             </div>
-
-            <div className="hidden md:flex">
-              <Link href="/pay">
-                <Button variant="outline" className="gold-border hover:bg-accent/30">
-                  直接前往登記
-                </Button>
-              </Link>
-            </div>
+            <Link href="/pay" className="hidden md:block">
+              <Button variant="outline" className="gold-border hover:bg-primary/10 px-8 h-14 text-lg">
+                查看全站登記名冊
+              </Button>
+            </Link>
           </div>
 
-          <div className="mt-8 grid gap-4 md:grid-cols-2">
+          <div className="grid gap-6 md:grid-cols-2">
             {DEITIES.map((d) => (
               <Link key={d.key} href={`/deity/${d.key}`}>
-                <Card className="overflow-hidden gold-border bg-card/70 hover:bg-accent/30 hover:border-primary/40 transition-all duration-300 paper-grain group">
-                  <div className="grid md:grid-cols-[220px_1fr]">
-                    <img src={d.heroImage} alt={d.name} className="h-44 w-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" />
-                    <div className="p-7 flex flex-col justify-between">
+                <Card className="overflow-hidden gold-border bg-card/70 hover:bg-accent/20 hover:border-primary transition-all duration-700 paper-grain group cursor-pointer relative">
+                  <div className="grid md:grid-cols-[240px_1fr]">
+                    <div className="h-56 md:h-full w-full overflow-hidden">
+                      <img src={d.heroImage} alt={d.name} className="h-full w-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 group-hover:scale-110" loading="lazy" />
+                    </div>
+                    <div className="p-8 flex flex-col justify-between">
                       <div>
-                        <div className="text-xs tracking-[0.24em] uppercase text-primary font-semibold">
+                        <div className="text-[10px] tracking-[0.25em] uppercase text-primary font-black mb-2 opacity-80">
                           {d.primaryIntent}
                         </div>
-                        <div className="mt-1 font-display text-3xl">{d.name}</div>
-                        <div className="mt-1 text-sm text-muted-foreground">{d.subtitle}</div>
-                        <p className="mt-3 readable text-muted-foreground line-clamp-2">{d.promise}</p>
+                        <div className="mt-1 font-display text-4xl group-hover:text-primary transition-colors">{d.name}</div>
+                        <div className="mt-2 text-sm text-muted-foreground font-medium tracking-wide">{d.subtitle}</div>
+                        <p className="mt-5 readable text-muted-foreground text-sm line-clamp-3 leading-relaxed opacity-70">「{d.promise}」</p>
                       </div>
-                      <div className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-foreground/90 group-hover:text-primary transition-colors">
-                        看介紹與方案 <ArrowRight className="h-4 w-4" />
+                      <div className="mt-8 flex items-center gap-3 text-xs font-bold text-foreground/80 tracking-[0.2em] group-hover:translate-x-2 transition-transform uppercase">
+                        對位介紹與修復方案 <ArrowRight className="h-4 w-4 text-primary" />
                       </div>
                     </div>
+                  </div>
+                  <div className="absolute top-4 right-4 opacity-10 group-hover:opacity-30 transition-opacity">
+                     <Sparkles className="h-6 w-6 text-primary" />
                   </div>
                 </Card>
               </Link>
             ))}
           </div>
-
-          <div className="mt-6 md:hidden">
-            <Link href="/pay">
-              <Button className="h-12 w-full font-bold tracking-[0.22em] uppercase gold-border">直接前往登記</Button>
-            </Link>
-          </div>
         </section>
 
-        {/* ACTIVITY - 藥師佛加碼活動區塊 */}
-        <section className="mx-auto max-w-6xl px-4 pt-10 pb-2">
-          <Card className="gold-border bg-card/70 overflow-hidden paper-grain border-primary/40 relative">
-            <div className="absolute top-0 right-0 p-10 opacity-5 font-display text-9xl text-primary pointer-events-none">
+        {/* L5 [產品包裝]: 藥師佛加碼活動 - 建立「雙重守護」的高價值感 */}
+        <section className="mx-auto max-w-6xl px-4 pt-10 pb-4">
+          <Card className="gold-border bg-primary/5 overflow-hidden paper-grain border-primary/30 relative group">
+            <div className="absolute top-0 right-0 p-12 opacity-5 font-display text-[15rem] text-primary pointer-events-none group-hover:rotate-12 transition-transform duration-1000">
               ✦
             </div>
-            <div className="grid md:grid-cols-[280px_1fr]">
-              <img src={VISUALS.sutraCloseup} alt="經卷與供燈示意" className="h-56 md:h-full w-full object-cover" loading="lazy" />
-              <div className="p-7 md:p-10 z-10">
-                <div className="flex items-center gap-2 mb-2">
-                  <Badge className="bg-primary text-primary-foreground gold-border animate-pulse">本月限定企劃</Badge>
-                  <span className="text-xs tracking-[0.26em] uppercase text-muted-foreground">琉璃護佑計畫</span>
+            <div className="grid md:grid-cols-[320px_1fr]">
+              <div className="h-64 md:h-full w-full relative">
+                <img src={VISUALS.sutraCloseup} alt="琉璃光息災" className="h-full w-full object-cover opacity-60 grayscale group-hover:grayscale-0 transition-all duration-700" loading="lazy" />
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent to-primary/5" />
+              </div>
+              <div className="p-8 md:p-14 z-10 flex flex-col justify-center">
+                <div className="flex items-center gap-3 mb-6">
+                  <Badge className="bg-primary text-primary-foreground gold-border animate-pulse px-4 py-1.5 tracking-widest text-xs font-bold">本月顧問加碼</Badge>
+                  <span className="text-[10px] tracking-[0.3em] uppercase text-muted-foreground font-bold italic">Lapis Lazuli Restoration</span>
                 </div>
-                <h3 className="mt-2 font-display text-2xl md:text-3xl text-foreground">完成任一登記 → 免費加碼「藥師佛息災煙供」</h3>
-                <p className="mt-4 readable text-muted-foreground">
-                  我們深知「健康與安穩」是所有福報的底氣。地基不穩，再多資糧也難以受用。<br/>
-                  <span className="text-foreground/90 font-medium">即日起，只要您護持本站任一法事（如黃財神、綠度母等），我們將直接為您加碼列入每週的「藥師佛健康息災煙供」名錄中。</span>
+                <h3 className="font-display text-3xl md:text-5xl text-foreground leading-tight tracking-tight">啟動任一主計畫，<br/><span className="text-primary underline underline-offset-8">免費對位每週「藥師佛息災煙供」</span></h3>
+                <p className="mt-8 readable text-muted-foreground text-lg leading-loose max-w-3xl">
+                  我們深知<strong className="text-foreground">「健康與安穩」</strong>是所有福報的底氣。地基不穩，再多資糧也難以受用。
+                  這不是商業贈品，而是為了確保您的修復容器足夠穩固，能真正接住後續降臨的善緣與財富。
                 </p>
-                <Separator className="my-6 border-primary/20" />
-                <div className="grid gap-4 md:grid-cols-3">
-                  <div>
-                    <div className="text-xs tracking-[0.22em] uppercase text-primary">雙重守護</div>
-                    <div className="mt-1 font-display text-xl">主法事 + 藥師佛</div>
-                    <div className="mt-2 text-sm text-muted-foreground">補足資糧同時清淨身心</div>
+                
+                <div className="mt-12 grid gap-8 md:grid-cols-3">
+                  <div className="space-y-2">
+                    <div className="text-[10px] tracking-[0.22em] uppercase text-primary font-black flex items-center gap-2 italic">Double Protection < Zap className="h-3 w-3" /></div>
+                    <div className="font-display text-2xl">雙重能量守護</div>
+                    <div className="text-[13px] text-muted-foreground readable">補足資糧缺口，同時清淨身心負累。</div>
                   </div>
-                  <div>
-                    <div className="text-xs tracking-[0.22em] uppercase text-primary flex items-center gap-1">
-                      <ClipboardList className="w-3 h-3" /> 流程全透明
-                    </div>
-                    <div className="mt-1 font-display text-xl">隔週名單公佈</div>
-                    <div className="mt-2 text-sm text-muted-foreground">志工彙整後於 FB 公佈去識別化名單</div>
+                  <div className="space-y-2">
+                    <div className="text-[10px] tracking-[0.22em] uppercase text-primary font-black flex items-center gap-2 italic">Transparency < ShieldCheck className="h-3 w-3" /></div>
+                    <div className="font-display text-2xl">流程全程透明</div>
+                    <div className="text-[13px] text-muted-foreground readable">每週六結案，並於隔週公佈去識別化造冊。</div>
                   </div>
-                  <div>
-                    <div className="text-xs tracking-[0.22em] uppercase text-primary">免去繁瑣</div>
-                    <div className="mt-1 font-display text-xl">自動併入名單</div>
-                    <div className="mt-2 text-sm text-muted-foreground">下單主法事即自動獲取資格</div>
+                  <div className="space-y-2">
+                    <div className="text-[10px] tracking-[0.22em] uppercase text-primary font-black flex items-center gap-2 italic">Automatic Entry < Clock className="h-3 w-3" /></div>
+                    <div className="font-display text-2xl">系統自動併入</div>
+                    <div className="text-[13px] text-muted-foreground readable">登記任一法事後，志工將主動為您名冊歸類。</div>
                   </div>
                 </div>
 
-                <div className="mt-7">
+                <div className="mt-12">
                   <Link href="/pay">
-                    <Button className="h-12 px-6 font-bold tracking-[0.22em] uppercase gold-border hover:bg-primary hover:text-primary-foreground shadow-sm transition-all">
-                      立即登記，領取雙重加持 <ArrowRight className="h-4 w-4 ml-2" />
+                    <Button className="h-20 w-full md:w-auto px-12 text-xl md:text-2xl font-bold tracking-[0.4em] uppercase gold-border bg-primary text-primary-foreground shadow-2xl hover:scale-[1.02] active:scale-95 transition-all group">
+                      立即預約，啟動修復 <ArrowRight className="ml-4 h-8 w-8 group-hover:translate-x-2 transition-transform" />
                     </Button>
                   </Link>
-                  <div className="mt-3 text-xs text-muted-foreground">
-                    提醒：此為團隊發心加碼，名額將依每週壇城負載量動態調整。
+                  <div className="mt-5 text-[11px] text-muted-foreground/60 tracking-widest font-bold uppercase italic text-center md:text-left">
+                    * 本企劃為志工團隊自發加碼，名額將依壇城負載量動態控管。
                   </div>
                 </div>
               </div>
@@ -291,23 +320,23 @@ export default function Home() {
           <Card className="gold-border bg-card/70 overflow-hidden paper-grain hover:border-primary/40 transition-colors">
             <div className="grid md:grid-cols-[1fr_260px] items-center gap-6">
               <div className="p-7 md:p-10">
-                <div className="text-xs tracking-[0.26em] uppercase text-primary font-bold flex items-center gap-2">
+                <div className="text-[10px] tracking-[0.3em] uppercase text-primary font-bold flex items-center gap-2 mb-2">
                   <Download className="w-4 h-4" /> Free Gift
                 </div>
-                <h2 className="mt-2 font-display text-2xl md:text-3xl">黃財神手機桌布下載</h2>
-                <p className="mt-3 readable text-muted-foreground leading-relaxed max-w-2xl">
+                <h2 className="font-display text-3xl md:text-4xl">黃財神手機桌布免費下載</h2>
+                <p className="mt-4 readable text-muted-foreground text-lg leading-relaxed max-w-2xl">
                   慶祝 FB 粉絲團成立，我們製作了專屬的高畫質桌布送給您。<br/>
-                  願您每天打開手機，都記得：您的財庫正在回正，您值得被善緣與資糧好好照顧。
+                  願您每天打開手機，都記得：<strong className="text-foreground">您的財庫正在回正，您值得被善緣與資糧好好照顧。</strong>
                 </p>
-                <div className="mt-6">
+                <div className="mt-8">
                   <Link href="/wallpaper">
-                    <Button variant="outline" className="gold-border tracking-[0.15em] font-bold h-11 px-6">
+                    <Button variant="outline" className="gold-border tracking-[0.2em] font-bold h-14 px-8 text-lg hover:bg-primary/10">
                       前往免費領取 <ArrowRight className="h-4 w-4 ml-2" />
                     </Button>
                   </Link>
                 </div>
               </div>
-              <div className="hidden md:block h-[280px] w-full">
+              <div className="hidden md:block h-[320px] w-full">
                 <img 
                   src={DEITIES.find(d => d.key === 'yellow')?.heroImage} 
                   alt="黃財神桌布示意" 
@@ -318,34 +347,38 @@ export default function Home() {
           </Card>
         </section>
 
-        {/* PROOF */}
-        <section className="mx-auto max-w-6xl px-4 pt-12 pb-24">
-          <div className="flex items-center gap-2 text-xs tracking-[0.26em] uppercase text-primary font-bold">
-            <ShieldCheck className="w-4 h-4" /> Proof
+        {/* L6 [終局收割]: 回饋文 - 建立真實人情味與信任 */}
+        <section className="mx-auto max-w-6xl px-4 pt-20 pb-28">
+          <div className="flex flex-col items-center text-center mb-16">
+            <div className="flex items-center gap-3 text-[10px] md:text-xs tracking-[0.3em] uppercase text-primary font-bold mb-4 bg-primary/5 px-3 py-1 rounded">
+              <ShieldCheck className="w-4 h-4" /> Real Transformations
+            </div>
+            <h2 className="font-display text-4xl md:text-6xl tracking-tight">他們，也曾站在同樣的岔路口</h2>
+            <p className="mt-6 readable text-muted-foreground text-lg max-w-3xl mx-auto italic">
+              我們不賣神話，我們呈現真實的改變。當您把心念放正，世界便會開始對位。
+            </p>
           </div>
-          <h2 className="mt-2 font-display text-3xl md:text-4xl">回饋文：您不用猜</h2>
-          <p className="mt-4 readable text-muted-foreground max-w-prose">
-            我們不賣神話，只呈現大家最在意的：睡得著、決策變穩、錢留得住、關係少內耗。
-          </p>
 
-          <div className="mt-7 grid gap-4 md:grid-cols-3">
-            {HOME_TESTIMONIALS.map((t) => (
-              <Card key={t.title} className="p-7 gold-border bg-card/70 paper-grain hover:border-primary/30 transition-colors flex flex-col justify-between h-full">
-                <div>
-                  <div className="font-display text-xl text-foreground/90">{t.title}</div>
-                  <div className="mt-3 readable text-muted-foreground text-sm leading-relaxed">{t.body}</div>
-                </div>
-                <div className="mt-5 text-xs tracking-[0.22em] uppercase text-primary/80 pt-4 border-t border-border/30">
-                  {t.by}
+          <div className="grid gap-6 md:grid-cols-3">
+            {HOME_TESTIMONIALS.map((t, idx) => (
+              <Card key={idx} className="p-8 md:p-10 gold-border bg-card/70 paper-grain hover:bg-accent/10 transition-all duration-500 group relative">
+                <Quote className="absolute top-6 left-6 w-10 h-10 text-primary opacity-5 group-hover:opacity-10 transition-opacity" />
+                <div className="relative z-10">
+                  <div className="font-display text-2xl text-foreground/90 group-hover:text-primary transition-colors mb-5">{t.title}</div>
+                  <p className="readable text-muted-foreground text-sm leading-loose opacity-80">「{t.body}」</p>
+                  <div className="mt-8 pt-6 border-t border-border/30 flex justify-between items-center">
+                    <span className="text-[10px] tracking-[0.25em] uppercase text-primary font-black italic">{t.by}</span>
+                    <Badge variant="outline" className="text-[8px] opacity-40 border-primary/20">Verified Feedback</Badge>
+                  </div>
                 </div>
               </Card>
             ))}
           </div>
 
-          <div className="mt-8 text-center md:text-left">
+          <div className="mt-16 text-center">
             <Link href="/proof">
-              <Button variant="outline" className="gold-border h-12 px-8 font-bold tracking-[0.1em] hover:bg-accent/40">
-                查看更多真實回饋與造冊證明
+              <Button variant="outline" className="gold-border h-16 px-12 text-lg font-bold tracking-[0.2em] hover:bg-primary/5 transition-all group">
+                探索更多真實轉變的故事 <ArrowRight className="ml-3 h-5 w-5 group-hover:translate-x-2 transition-transform opacity-70" />
               </Button>
             </Link>
           </div>
