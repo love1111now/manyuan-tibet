@@ -58,7 +58,7 @@ export const KARMA_ADVICE: Record<DeityKey, {
     title: "您的直覺正處於『導航失效』：能力很強，卻在迷霧中原地踏步",
     analogy: "這段時間，您辛苦了。這就像是在濃霧中開著超跑。您的能力很好，但因為看不清前面的路，導致您不敢踩油門，甚至常在關鍵岔路選錯方向。這不是您的錯，是路上的『雜訊』太多了。我們要請象神化作一盞強光，撥開眼前的迷霧，讓您恢復清明。",
     repairPlan: "接下來，我們建議為您啟動『破局除障儀軌』，分階段清理干擾決策的隱形能量，協助您在複雜的事業局勢中重新找回掌控權。",
-    goldenPhrase: "清明，是跨越障礙最高效的武器。"
+    goldenPhrase: "思辨，是跨越障礙最高效的武器。"
   },
   "medicine-buddha": {
     tag: "能量載體損耗與息災滯礙",
@@ -94,7 +94,7 @@ export const QUESTION_BANK: QuizQuestion[] = [
     { id: "f", label: "能按一個讓萬物靜止的暫停鍵", weights: { "medicine-buddha": 3 } },
     { id: "g", label: "能瞬間築起一座堅固的堡壘", weights: { padmasambhava: 3 } },
   ]},
-  { id: "q2", title: "想像你的內心是一片風景，它現在最像什麼模樣？", options: [
+  { id: "q2", title: "想像一部驚悚電影的開場畫面，會什麼模樣？", options: [
     { id: "a", label: "一座乾涸但深不見底的湖泊", weights: { yellow: 3 } },
     { id: "b", label: "一棟地基正在微微晃動的木屋", weights: { mahashri: 3 } },
     { id: "c", label: "一個被濃霧完全籠罩的十字路口", weights: { ganapati: 3 } },
