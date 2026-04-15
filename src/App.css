@@ -1,7 +1,0 @@
-/* 移除所有預設的置中與邊距，交由 Tailwind 控管 */
-#root {
-  width: 100%;
-  min-height: 100vh;
-  margin: 0;
-  padding: 0;
-}

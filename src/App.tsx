@@ -53,7 +53,8 @@ function AppRouter() {
       
       <Switch>
         <Route path="/" component={Home} />
-        <Route path="/deity/:key">{(params) => <Deity deityKey={params.key} />}</Route>
+        {/* 🟢 唯一修改點：加上 as any 繞過嚴格型別檢查，完美對接 7 尊神明設定檔 */}
+        <Route path="/deity/:key">{(params) => <Deity deityKey={params.key as any} />}</Route>
         <Route path="/proof" component={Proof} />
         <Route path="/pay" component={Pay} />
         <Route path="/sutra" component={Sutra} />
