@@ -10,6 +10,8 @@ import React from "react";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import StickyCta from "@/components/StickyCta";
+// 🟢 AI SEO 必備：引入 Helmet 動態注入總覽頁 SEO 與定價型錄結構化資料
+import { Helmet } from "react-helmet-async";
 
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -70,8 +72,38 @@ export default function Pay() {
     }
   };
 
+  // 🟢 AI SEO (AEO) 核心晶片：動態生成全站方案型錄 (Catalog / Offers)
+  // 這會告訴 AI 我們所有的方案名稱與精準定價，幫助 AI 回答比價或方案詢問
+  const catalogSchema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "滿願藏庫 - 全站修復計畫總案冊",
+    "description": "專屬祈福法事登記安全造冊系統，提供各本尊法事方案與透明定價。",
+    "itemListElement": DEITIES.flatMap(d => d.plans).map((p, index) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "item": {
+        "@type": "Service",
+        "name": p.name,
+        "offers": {
+          "@type": "Offer",
+          "price": p.price,
+          "priceCurrency": "TWD",
+          "url": p.url
+        }
+      }
+    }))
+  };
+
   return (
     <div className="min-h-screen bg-background">
+      {/* 🟢 注入總覽頁專屬的 Title, Meta 與 JSON-LD */}
+      <Helmet>
+        <title>專屬祈福法事登記｜安全造冊系統｜滿願藏庫</title>
+        <meta name="description" content="滿願藏庫全站修復計畫總案冊。提供多種祈福法事方案，透過綠界 256-bit SSL 安全加密系統，讓您的祈願能如實傳達。志工於晚間靜心造冊，隔週公佈透明名錄。" />
+        <script type="application/ld+json">{JSON.stringify(catalogSchema)}</script>
+      </Helmet>
+
       <SiteHeader />
 
       <main className="mx-auto max-w-6xl px-4 pt-10 pb-32">

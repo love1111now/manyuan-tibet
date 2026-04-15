@@ -2,6 +2,8 @@ import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import StickyCta from "@/components/StickyCta";
 import RitualMarkdown from "@/components/RitualMarkdown";
+// 🟢 AI SEO 必備：引入 Helmet 動態注入 SEO 與結構化資料
+import { Helmet } from "react-helmet-async"; 
 
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -88,6 +90,39 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
     ? deityData.testimonials 
     : HOME_TESTIMONIALS.slice(0, 3);
 
+  // 🟢 AI SEO 核心晶片：動態生成結構化資料 (JSON-LD)
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": d.faq.map(f => ({
+      "@type": "Question",
+      "name": f.q,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": f.a
+      }
+    }))
+  };
+
+  const serviceSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": `${d.name} 專屬修復計畫`,
+    "description": d.promise,
+    "provider": {
+      "@type": "Organization",
+      "name": "滿願藏庫 (Zambala Tibetan)",
+      "url": "https://zambala-tibetan.com.tw"
+    },
+    "offers": d.plans.map(p => ({
+      "@type": "Offer",
+      "name": p.name,
+      "price": p.price,
+      "priceCurrency": "TWD",
+      "url": p.url
+    }))
+  };
+
   return (
     <div 
       className="min-h-screen bg-background transition-colors duration-700 relative"
@@ -96,6 +131,14 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
         "--page-accent": d.themeColor.accent,
       } as React.CSSProperties}
     >
+      {/* 🟢 AI SEO：精準注入 Meta 與 JSON-LD */}
+      <Helmet>
+        <title>{`${d.name}｜${d.subtitle}｜滿願藏庫`}</title>
+        <meta name="description" content={`為您啟動${d.name}專屬修復計畫。針對「${d.painPoints[0]}」等困境，提供深層對位與清淨法事。`} />
+        <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
+        <script type="application/ld+json">{JSON.stringify(serviceSchema)}</script>
+      </Helmet>
+
       <SiteHeader />
 
       <main>
@@ -437,13 +480,12 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
             </div>
           </div>
 
-          {/* 🟢 核心修復：完美適應 2 方案或 3 方案的彈性網格 */}
+          {/* 🟢 核心修復：動態網格 + 彈性換行，徹底解決按鈕擠壓與數量寫死的問題 */}
           <Card className="mb-10 p-6 md:p-8 gold-border bg-card/70 paper-grain">
             <div className="text-[10px] tracking-[0.3em] uppercase text-muted-foreground font-bold mb-4">直覺導航（給需要迅速安頓的您）</div>
             
             <div className={`grid gap-4 ${d.plans.length === 2 ? 'md:grid-cols-2' : 'md:grid-cols-3'}`}>
               {[...d.plans].sort((a, b) => a.price - b.price).map((p, index, arr) => {
-                // 自動化標籤分配 (2個 或 3個)
                 let label = "溫柔安頓";
                 if (arr.length === 2) {
                   label = index === 0 ? "溫柔安頓" : "深切共鳴";
@@ -454,17 +496,17 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
                 }
 
                 // 運用正則表達式，穩健拆分全形/半形符號，讓超長標題完美換行
-                const shortName = p.name.split(/｜|\||：|:/)[0].trim();
+                const shortName = p.name.split(/[｜|：|:]/)[0].trim();
 
                 return (
                   <button key={p.id} type="button" className="block text-left h-full" onClick={() => scrollToId(`plan-${p.id}`)}>
                     <Button 
                       variant={p.hot ? "default" : "outline"} 
-                      className={`h-full min-h-[3.5rem] py-3 px-4 w-full gold-border transition-transform hover:scale-[1.02] active:scale-95 flex flex-row items-center justify-between gap-2 whitespace-normal text-left ${p.hot ? 'bg-primary/10 text-foreground hover:bg-primary/20 shadow-md' : 'hover:bg-primary/5'}`}
+                      className={`h-auto min-h-[4rem] py-3 px-4 w-full gold-border transition-transform hover:scale-[1.02] active:scale-95 flex flex-row items-center justify-between gap-3 whitespace-normal text-left ${p.hot ? 'bg-primary/10 text-foreground hover:bg-primary/20 shadow-md' : 'hover:bg-primary/5'}`}
                     >
-                      <div className="flex flex-col gap-1 items-start">
+                      <div className="flex flex-col gap-1 items-start w-full">
                         <span className="text-[10px] md:text-[11px] opacity-80 font-bold tracking-widest">{label}</span>
-                        <span className="text-sm md:text-base font-bold tracking-widest line-clamp-2">{shortName}</span>
+                        <span className="text-sm md:text-base font-bold tracking-widest leading-snug break-words">{shortName}</span>
                       </div>
                       {p.hot && <ArrowRight className="h-4 w-4 shrink-0 text-primary" />}
                     </Button>
@@ -479,7 +521,7 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
           </Card>
 
           <div className="grid gap-6 md:grid-cols-2">
-            {/* 🟢 確保這裡也是動態渲染，不寫死數量 */}
+            {/* 🟢 確保這裡也是動態渲染，並對接剛剛設定好的 scrollToId 錨點 */}
             {[...d.plans].sort((a, b) => a.price - b.price).map((p) => {
               return (
                 <Card
@@ -571,7 +613,7 @@ export default function Deity({ deityKey }: { deityKey?: string }) {
                                 <div>
                                   <div className="font-bold text-foreground/90 text-base md:text-lg">放心交給安全系統</div>
                                   <div className="text-xs md:text-sm text-muted-foreground mt-1.5 leading-relaxed">
-                                    點擊下方按鈕後，您將進入綠界的 256-bit SSL 加密通道。付款完成後，我們會在成功頁面等您。
+                                    點擊下方按鈕後，您將進入綠界的 256-bit SSL 加密通道。付款完成後，系統會自動引導您回來，我們會在成功頁面等您。
                                   </div>
                                 </div>
                               </div>

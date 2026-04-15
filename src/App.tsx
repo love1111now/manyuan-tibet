@@ -1,5 +1,5 @@
 import React from "react";
-import { HelmetProvider } from "react-helmet-async";
+import { HelmetProvider, Helmet } from "react-helmet-async"; // 🟢 引入 Helmet
 import { Router, Route, Switch, useLocation } from "wouter";
 import { useHashLocation } from "wouter/use-hash-location";
 
@@ -70,9 +70,39 @@ function AppRouter() {
 }
 
 export default function App() {
+  // 🟢 AI SEO (AEO) 核心晶片：全站 E-E-A-T 信任指標與組織宣告
+  // 這段 JSON-LD 對人類隱形，但會被 Google 爬蟲與 AI 優先抓取
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "滿願藏庫 (Zambala Tibetan)",
+    "url": "https://zambala-tibetan.com.tw",
+    "description": "由台灣不支薪志工團隊維護的專屬祈福法事造冊系統。堅持因果透明、不造神，提供綠界 256-bit SSL 安全加密金流，護持金全數用於西藏壇城莊嚴供養。",
+    "location": {
+      "@type": "Place",
+      "name": "Taiwan"
+    },
+    // 告訴 AI 我們是這個領域的專家，強化關聯性
+    "knowsAbout": ["Tibetan Buddhism", "Puja", "Spiritual Healing", "祈福法事", "點燈", "煙供", "除障"]
+  };
+
+  const websiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "滿願藏庫",
+    "alternateName": "Zambala Tibetan",
+    "url": "https://zambala-tibetan.com.tw"
+  };
+
   return (
     <ErrorBoundary>
       <HelmetProvider>
+        {/* 🟢 將結構化資料注入到全站的 Head 中 */}
+        <Helmet>
+          <script type="application/ld+json">{JSON.stringify(organizationSchema)}</script>
+          <script type="application/ld+json">{JSON.stringify(websiteSchema)}</script>
+        </Helmet>
+
         <ThemeProvider defaultTheme="dark">
           {/* 注意：已移除 Toaster 和 TooltipProvider。
             LiveRegistrations 現在會使用自己內部的 UI 顯示通知，不依賴外部套件。

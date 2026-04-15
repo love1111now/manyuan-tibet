@@ -5,8 +5,11 @@ Design philosophy: Neo-thangka noir (Enterprise React 18 Architecture)
 - Perf Fix: Removed unused `html-to-image` dependency and hidden DOM trees.
 - React 18 Fix: Added `isMounted` checks in `useEffect` to prevent memory leak warnings on unmount during timeouts.
 - UX Fix: Implemented multistage countdown for true scarcity psychology.
-- DRY Fix: Centralized scrolling logic to `scrollToElement`.
-- React Fix: Pre-computed components instead of inline IIFEs to prevent re-render thrashing.
+- Top-Tier Opt 1: Replaced setTimeouts with requestAnimationFrame for flawless DOM-aligned scrolling.
+- Top-Tier Opt 2: Added extensive ARIA & a11y support for keyboard navigation.
+- Top-Tier Opt 3: Unhandled Promise Rejection fix on navigator.clipboard.
+- Top-Tier Opt 4: Centralized unmount timer cleanup preventing memory leaks.
+- Top-Tier Opt 5: SSR/Hydration safe random seeding.
 - 100% Unabbreviated Production Ready Code.
 */
 
@@ -39,7 +42,7 @@ import { QUESTION_BANK, KARMA_ADVICE, DEITY_META, type QuizQuestion } from "@/da
 
 // --- 輔助組件：生命探索專用印 ---
 const LifeExplorationSeal = () => (
-  <div className="relative w-16 h-16 md:w-20 md:h-20 opacity-85 select-none flex-shrink-0 rotate-[-12deg] animate-in fade-in zoom-in duration-1000 delay-500">
+  <div className="relative w-16 h-16 md:w-20 md:h-20 opacity-85 select-none flex-shrink-0 rotate-[-12deg] animate-in fade-in zoom-in duration-1000 delay-500" aria-hidden="true">
     <svg viewBox="0 0 100 100" className="w-full h-full fill-destructive/70 drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]">
       <rect x="5" y="5" width="90" height="90" fill="none" stroke="currentColor" strokeWidth="1.5" strokeDasharray="2 1" />
       <rect x="10" y="10" width="80" height="80" fill="none" stroke="currentColor" strokeWidth="3" />
@@ -51,7 +54,7 @@ const LifeExplorationSeal = () => (
   </div>
 );
 
-// --- 核心演算法：Fisher-Yates 選項洗牌機制，徹底摧毀作答規律 ---
+// --- 核心演算法：Fisher-Yates 選項洗牌機制 ---
 const shuffleArray = <T,>(array: T[]): T[] => {
   const newArr = [...array];
   for (let i = newArr.length - 1; i > 0; i--) {
@@ -63,56 +66,67 @@ const shuffleArray = <T,>(array: T[]): T[] => {
 
 const getShuffledQuestions = (bank: QuizQuestion[], count: number) => {
   const selected = [...bank].sort(() => 0.5 - Math.random()).slice(0, count);
-  // 確保題目與選項雙重打亂
   return selected.map(q => ({ ...q, options: shuffleArray(q.options) }));
 };
 
 const emptyScore = (): Record<DeityKey, number> => ({ yellow: 0, mahashri: 0, ganapati: 0, kurukulla: 0, padmasambhava: 0, "medicine-buddha": 0, "green-tara": 0 });
 
 export default function TreasuryQuiz() {
-  const [seed, setSeed] = useState(() => Date.now());
-  const questions = useMemo(() => getShuffledQuestions(QUESTION_BANK, 6), [seed]);
+  // 🟢 優化 5: SSR 安全的亂數種子產生，避免 Hydration Mismatch
+  const [seed, setSeed] = useState<number | null>(null);
+  const [questions, setQuestions] = useState<QuizQuestion[]>([]);
   
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [score, setScore] = useState<Record<DeityKey, number>>(emptyScore());
   
-  // 狀態管理
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [loadingPhase, setLoadingPhase] = useState(0);
   const [showResult, setShowResult] = useState(false);
   const [completionTime, setCompletionTime] = useState("");
+  const [isoCompletionTime, setIsoCompletionTime] = useState(""); // 給 <time> 標籤用語意
   
   const [isCopied, setIsCopied] = useState(false);
   const [remainingSpots, setRemainingSpots] = useState(3);
   const [socialProofNum, setSocialProofNum] = useState(142);
   
-  // 智慧滾動 Refs
   const questionContainerRef = useRef<HTMLDivElement>(null);
   const resultContainerRef = useRef<HTMLDivElement>(null);
+  
+  // 🟢 總管計時器：防止記憶體洩漏
+  const optionTimeoutRef = useRef<NodeJS.Timeout>();
+
+  useEffect(() => {
+    // 僅在客戶端初次掛載時生成，確保 Hydration 安全
+    setSeed(Date.now());
+    setQuestions(getShuffledQuestions(QUESTION_BANK, 6));
+  }, []);
 
   const current = questions[step];
-  const progress = Math.round((step / questions.length) * 100);
+  const progress = questions.length > 0 ? Math.round((step / questions.length) * 100) : 0;
 
-  // 🟢 DRY Helper：集中管理滾動邏輯 (修復 TypeScript Null Checking)
+  // 🟢 優化 1 & 解決問題 4: 雙重 rAF 取代 setTimeout，完美對齊 DOM 繪製幀
   const scrollToElement = (ref: React.RefObject<HTMLDivElement | null>) => {
-    setTimeout(() => {
-      ref.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-    }, 50);
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        ref.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    });
   };
 
-  // 更真實的稀缺感多階段遞減
   useEffect(() => {
     const t1 = setTimeout(() => setRemainingSpots(2), 25000);
-    const t2 = setTimeout(() => setRemainingSpots(1), 70000); // 25s + 45s
+    const t2 = setTimeout(() => setRemainingSpots(1), 70000);
     setSocialProofNum(Math.floor(Math.random() * 60) + 120);
+    
+    // 清除計時器
     return () => { 
       clearTimeout(t1); 
       clearTimeout(t2); 
+      if (optionTimeoutRef.current) clearTimeout(optionTimeoutRef.current);
     };
   }, []);
 
-  // React 18 Strict Mode 防禦：安全清除 Timeout
   useEffect(() => {
     if (!isAnalyzing) return;
     let isMounted = true;
@@ -125,6 +139,7 @@ export default function TreasuryQuiz() {
       setShowResult(true);
       
       const now = new Date();
+      setIsoCompletionTime(now.toISOString());
       const timeString = `${now.getFullYear()}/${String(now.getMonth()+1).padStart(2, '0')}/${String(now.getDate()).padStart(2, '0')} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
       setCompletionTime(timeString);
       
@@ -140,7 +155,8 @@ export default function TreasuryQuiz() {
   }, [isAnalyzing]);
 
   const restart = () => {
-    setSeed(Date.now()); 
+    setSeed(Date.now());
+    setQuestions(getShuffledQuestions(QUESTION_BANK, 6));
     setStep(0); 
     setAnswers({}); 
     setScore(emptyScore());
@@ -151,15 +167,17 @@ export default function TreasuryQuiz() {
     scrollToElement(questionContainerRef);
   };
 
-  // 修正 Batching 問題，計算完立刻設定
   const handleOptionSelect = (optId: string) => {
     if (typeof window !== "undefined" && navigator.vibrate) {
-      navigator.vibrate(50); 
+      try { navigator.vibrate(50); } catch(e) {} // 避免某些 WebView 阻擋震動 API
     }
     
     setAnswers(p => ({...p, [current.id]: optId}));
     
-    setTimeout(() => {
+    // 🟢 解決問題 1: 使用 useRef 記錄 timeout，防止 Unmount 時觸發
+    if (optionTimeoutRef.current) clearTimeout(optionTimeoutRef.current);
+    
+    optionTimeoutRef.current = setTimeout(() => {
       const picked = current.options.find((o) => o.id === optId);
       if (picked) {
         setScore((prev) => {
@@ -180,23 +198,29 @@ export default function TreasuryQuiz() {
     }, 600);
   };
 
-  // 依賴單純化
+  // 鍵盤無障礙支援
+  const handleKeyDown = (e: React.KeyboardEvent, optId: string) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      handleOptionSelect(optId);
+    }
+  };
+
   const sortedScores = useMemo(() => {
     return (Object.entries(score) as Array<[DeityKey, number]>).sort((a, b) => b[1] - a[1]);
   }, [score]);
 
-  // 嚴謹的除以零防禦
   const primaryDeityKey = sortedScores[0]?.[0];
   const primaryScore = Math.max(sortedScores[0]?.[1] ?? 1, 1); 
-  const secondaryDeityKey = sortedScores[1]?.[1] > 0 ? sortedScores[1]?.[0] : null;
+  const secondaryDeityKey = sortedScores.length > 1 && sortedScores[1]?.[1] > 0 ? sortedScores[1]?.[0] : null;
 
   const advice = primaryDeityKey ? KARMA_ADVICE[primaryDeityKey] : null;
   const deity = primaryDeityKey ? DEITY_BY_KEY[primaryDeityKey] : null;
   const secondaryDeity = secondaryDeityKey ? DEITY_BY_KEY[secondaryDeityKey] : null;
 
-  // 提前宣告 Primary Icon，避免 Render 內建構 IIFE
   const PrimaryIcon = primaryDeityKey ? (DEITY_META[primaryDeityKey]?.icon || Sparkles) : Sparkles;
 
+  // 🟢 解決問題 3: 攔截非同步錯誤，確保 UI 不崩潰
   const handleShare = async () => {
     if (!advice) return;
     const shareUrl = "https://zambala-tibetan.com.tw";
@@ -208,13 +232,24 @@ export default function TreasuryQuiz() {
         await navigator.share({ title: shareTitle, text: shareText, url: shareUrl });
         setIsCopied(true);
         setTimeout(() => setIsCopied(false), 3000);
-      } catch (err) { console.log('Share canceled or failed'); }
+      } catch (err) { 
+        console.log('Share canceled or failed'); 
+      }
     } else {
-      navigator.clipboard.writeText(`${shareTitle}\n${shareText}\n${shareUrl}`);
-      setIsCopied(true);
-      setTimeout(() => setIsCopied(false), 3000);
+      navigator.clipboard.writeText(`${shareTitle}\n${shareText}\n${shareUrl}`)
+        .then(() => {
+          setIsCopied(true);
+          setTimeout(() => setIsCopied(false), 3000);
+        })
+        .catch((err) => {
+          console.error("Clipboard API failed:", err);
+          alert("複製失敗，請手動複製網址分享。");
+        });
     }
   };
+
+  // 等待客戶端掛載完成才顯示，避免 SSR 錯亂
+  if (!seed || questions.length === 0) return null;
 
   return (
     <section className="relative" id="quiz">
@@ -241,7 +276,8 @@ export default function TreasuryQuiz() {
 
         <div ref={questionContainerRef} style={{ scrollMarginTop: '100px' }} />
 
-        <Card className="mt-6 md:mt-8 p-5 md:p-10 gold-border bg-card/80 backdrop-blur paper-grain min-h-[500px] relative overflow-hidden shadow-xl">
+        {/* 🟢 優化 2: ARIA 語意區塊宣告 */}
+        <Card aria-live="polite" className="mt-6 md:mt-8 p-5 md:p-10 gold-border bg-card/80 backdrop-blur paper-grain min-h-[500px] relative overflow-hidden shadow-xl">
           
           {isAnalyzing && (
             <div className="py-24 flex flex-col items-center justify-center animate-in fade-in duration-1000">
@@ -267,16 +303,21 @@ export default function TreasuryQuiz() {
               <div className="font-display text-2xl md:text-4xl mb-10 leading-snug">{current.title}</div>
               <RadioGroup className="grid gap-3 md:gap-4" value={answers[current.id] || ""}>
                 {current.options.map((opt) => (
+                  // 🟢 解決問題 2: 完整 A11y 鍵盤與 Screen Reader 支援
                   <div 
                     key={opt.id} 
+                    role="radio"
+                    aria-checked={answers[current.id] === opt.id}
+                    tabIndex={0}
                     onClick={() => handleOptionSelect(opt.id)}
-                    className={`flex items-start gap-4 rounded-xl border gold-border px-5 py-5 md:py-6 cursor-pointer transition-all duration-300 active:scale-[0.98] select-none touch-manipulation ${
+                    onKeyDown={(e) => handleKeyDown(e, opt.id)}
+                    className={`flex items-start gap-4 rounded-xl border gold-border px-5 py-5 md:py-6 cursor-pointer transition-all duration-300 active:scale-[0.98] select-none touch-manipulation focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ${
                       answers[current.id] === opt.id 
                         ? "bg-primary/15 border-primary shadow-[0_0_15px_rgba(var(--primary),0.2)]" 
                         : "bg-background/40 hover:bg-accent/20 active:bg-primary/10"
                     }`}
                   >
-                    <RadioGroupItem value={opt.id} id={opt.id} className="mt-1.5 pointer-events-none" />
+                    <RadioGroupItem value={opt.id} id={opt.id} className="mt-1.5 pointer-events-none" tabIndex={-1} />
                     <Label htmlFor={opt.id} className="readable text-base md:text-xl cursor-pointer leading-relaxed flex-1 pointer-events-none">
                       {opt.label}
                     </Label>
@@ -308,9 +349,10 @@ export default function TreasuryQuiz() {
                             ID: YZ-2026-{primaryDeityKey.toUpperCase().substring(0,3)}
                           </div>
                           <div className="hidden sm:block w-1 h-1 rounded-full bg-border/50" />
-                          <div className="text-[10px] font-mono text-primary/60 tracking-widest uppercase">
+                          {/* 🟢 優化 3: Semantic Time 實體化時間標籤 */}
+                          <time dateTime={isoCompletionTime} className="text-[10px] font-mono text-primary/60 tracking-widest uppercase">
                             {completionTime}
-                          </div>
+                          </time>
                         </div>
                       </div>
                     </div>

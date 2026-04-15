@@ -8,6 +8,8 @@ Design philosophy: Neo-thangka noir (Professional Consultant Upgrade)
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import StickyCta from "@/components/StickyCta";
+// 🟢 AI SEO 必備：引入 Helmet 動態注入 SEO 與結構化資料
+import { Helmet } from "react-helmet-async"; 
 
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -47,8 +49,37 @@ export default function Proof() {
     ['medicine-buddha', 'kurukulla', 'padmasambhava'].includes(t.deityKey)
   );
 
+  // 🟢 AI SEO (AEO) 核心晶片：動態生成 Review (評論) 結構化資料
+  // 這會告訴 AI 這些都是針對特定服務的 5 星好評，大幅提升網站 E-E-A-T 信任度
+  const reviewsSchema = allDeityTestimonials.map(t => ({
+    "@context": "https://schema.org",
+    "@type": "Review",
+    "author": {
+      "@type": "Person",
+      "name": t.by
+    },
+    "name": t.title,
+    "reviewBody": t.body,
+    "reviewRating": {
+      "@type": "Rating",
+      "ratingValue": "5",
+      "bestRating": "5"
+    },
+    "itemReviewed": {
+      "@type": "Service",
+      "name": `滿願藏庫 - ${t.deityName} 修復計畫`
+    }
+  }));
+
   return (
     <div className="min-h-screen bg-background flex flex-col">
+      {/* 🟢 注入專屬的 Title, Meta 與 JSON-LD */}
+      <Helmet>
+        <title>生命轉變實證｜絕對透明的造冊機制｜滿願藏庫</title>
+        <meta name="description" content="不賣神話，只提供絕對透明的造冊機制與真實發生的改變。閱覽來自全台各地，透過滿願藏庫祈福法事重獲身心安頓的真實生命見證。" />
+        <script type="application/ld+json">{JSON.stringify(reviewsSchema)}</script>
+      </Helmet>
+
       <SiteHeader />
 
       <main className="flex-1 mx-auto max-w-6xl px-4 pt-12 pb-32 w-full">

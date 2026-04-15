@@ -12,6 +12,8 @@ import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import StickyCta from "@/components/StickyCta";
 import TreasuryQuiz from "@/components/TreasuryQuiz";
+// 🟢 AI SEO 必備：引入 Helmet 動態注入首頁專屬 SEO 與清單結構化資料
+import { Helmet } from "react-helmet-async";
 
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -43,8 +45,29 @@ export default function Home() {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
+  // 🟢 AI SEO (AEO) 核心晶片：動態生成 ItemList (服務清單) 結構化資料
+  // 告訴 AI 爬蟲我們具體提供哪 7 大維度的修復服務
+  const itemListSchema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "itemListElement": DEITIES.map((d, index) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "name": `${d.name} - ${d.primaryIntent}`,
+      "description": d.subtitle,
+      "url": `https://zambala-tibetan.com.tw/deity/${d.key}`
+    }))
+  };
+
   return (
     <div className="min-h-screen bg-background">
+      {/* 🟢 注入首頁專屬的 Title, Meta 與 JSON-LD */}
+      <Helmet>
+        <title>滿願藏庫｜生命能量對位系統｜專屬祈福法事造冊</title>
+        <meta name="description" content="由台灣志工團隊維護，提供黃財神、藥師佛、綠度母等七大本尊祈福法事。透過絕對透明的造冊機制與佛法經典能量對位，修復您的資糧結構與生命困境。" />
+        <script type="application/ld+json">{JSON.stringify(itemListSchema)}</script>
+      </Helmet>
+
       <SiteHeader />
 
       <main>
