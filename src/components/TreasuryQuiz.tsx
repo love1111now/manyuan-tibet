@@ -10,6 +10,7 @@ Design philosophy: Neo-thangka noir (Enterprise React 18 Architecture)
 - Top-Tier Opt 3: Unhandled Promise Rejection fix on navigator.clipboard.
 - Top-Tier Opt 4: Centralized unmount timer cleanup preventing memory leaks.
 - Top-Tier Opt 5: SSR/Hydration safe random seeding.
+- Vercel Fix: Replaced NodeJS.Timeout with browser-safe ReturnType<typeof setTimeout> and explicit null initialization.
 - 100% Unabbreviated Production Ready Code.
 */
 
@@ -72,7 +73,6 @@ const getShuffledQuestions = (bank: QuizQuestion[], count: number) => {
 const emptyScore = (): Record<DeityKey, number> => ({ yellow: 0, mahashri: 0, ganapati: 0, kurukulla: 0, padmasambhava: 0, "medicine-buddha": 0, "green-tara": 0 });
 
 export default function TreasuryQuiz() {
-  // 🟢 優化 5: SSR 安全的亂數種子產生，避免 Hydration Mismatch
   const [seed, setSeed] = useState<number | null>(null);
   const [questions, setQuestions] = useState<QuizQuestion[]>([]);
   
@@ -84,7 +84,7 @@ export default function TreasuryQuiz() {
   const [loadingPhase, setLoadingPhase] = useState(0);
   const [showResult, setShowResult] = useState(false);
   const [completionTime, setCompletionTime] = useState("");
-  const [isoCompletionTime, setIsoCompletionTime] = useState(""); // 給 <time> 標籤用語意
+  const [isoCompletionTime, setIsoCompletionTime] = useState(""); 
   
   const [isCopied, setIsCopied] = useState(false);
   const [remainingSpots, setRemainingSpots] = useState(3);
@@ -93,8 +93,8 @@ export default function TreasuryQuiz() {
   const questionContainerRef = useRef<HTMLDivElement>(null);
   const resultContainerRef = useRef<HTMLDivElement>(null);
   
-  // 🟢 總管計時器：防止記憶體洩漏
-  const optionTimeoutRef = useRef<NodeJS.Timeout>();
+  // 🟢 Vercel 修正：使用瀏覽器相容型別，並給定明確的 null 初始值
+  const optionTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     // 僅在客戶端初次掛載時生成，確保 Hydration 安全
@@ -105,7 +105,6 @@ export default function TreasuryQuiz() {
   const current = questions[step];
   const progress = questions.length > 0 ? Math.round((step / questions.length) * 100) : 0;
 
-  // 🟢 優化 1 & 解決問題 4: 雙重 rAF 取代 setTimeout，完美對齊 DOM 繪製幀
   const scrollToElement = (ref: React.RefObject<HTMLDivElement | null>) => {
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
@@ -169,12 +168,11 @@ export default function TreasuryQuiz() {
 
   const handleOptionSelect = (optId: string) => {
     if (typeof window !== "undefined" && navigator.vibrate) {
-      try { navigator.vibrate(50); } catch(e) {} // 避免某些 WebView 阻擋震動 API
+      try { navigator.vibrate(50); } catch(e) {} 
     }
     
     setAnswers(p => ({...p, [current.id]: optId}));
     
-    // 🟢 解決問題 1: 使用 useRef 記錄 timeout，防止 Unmount 時觸發
     if (optionTimeoutRef.current) clearTimeout(optionTimeoutRef.current);
     
     optionTimeoutRef.current = setTimeout(() => {
@@ -198,7 +196,6 @@ export default function TreasuryQuiz() {
     }, 600);
   };
 
-  // 鍵盤無障礙支援
   const handleKeyDown = (e: React.KeyboardEvent, optId: string) => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
@@ -220,7 +217,6 @@ export default function TreasuryQuiz() {
 
   const PrimaryIcon = primaryDeityKey ? (DEITY_META[primaryDeityKey]?.icon || Sparkles) : Sparkles;
 
-  // 🟢 解決問題 3: 攔截非同步錯誤，確保 UI 不崩潰
   const handleShare = async () => {
     if (!advice) return;
     const shareUrl = "https://zambala-tibetan.com.tw";
@@ -248,7 +244,6 @@ export default function TreasuryQuiz() {
     }
   };
 
-  // 等待客戶端掛載完成才顯示，避免 SSR 錯亂
   if (!seed || questions.length === 0) return null;
 
   return (
@@ -276,7 +271,6 @@ export default function TreasuryQuiz() {
 
         <div ref={questionContainerRef} style={{ scrollMarginTop: '100px' }} />
 
-        {/* 🟢 優化 2: ARIA 語意區塊宣告 */}
         <Card aria-live="polite" className="mt-6 md:mt-8 p-5 md:p-10 gold-border bg-card/80 backdrop-blur paper-grain min-h-[500px] relative overflow-hidden shadow-xl">
           
           {isAnalyzing && (
@@ -303,7 +297,6 @@ export default function TreasuryQuiz() {
               <div className="font-display text-2xl md:text-4xl mb-10 leading-snug">{current.title}</div>
               <RadioGroup className="grid gap-3 md:gap-4" value={answers[current.id] || ""}>
                 {current.options.map((opt) => (
-                  // 🟢 解決問題 2: 完整 A11y 鍵盤與 Screen Reader 支援
                   <div 
                     key={opt.id} 
                     role="radio"
@@ -349,7 +342,6 @@ export default function TreasuryQuiz() {
                             ID: YZ-2026-{primaryDeityKey.toUpperCase().substring(0,3)}
                           </div>
                           <div className="hidden sm:block w-1 h-1 rounded-full bg-border/50" />
-                          {/* 🟢 優化 3: Semantic Time 實體化時間標籤 */}
                           <time dateTime={isoCompletionTime} className="text-[10px] font-mono text-primary/60 tracking-widest uppercase">
                             {completionTime}
                           </time>
