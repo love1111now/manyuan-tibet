@@ -26,7 +26,7 @@ import {
   Info, 
   CheckCircle2, 
   MoonStar,
-  HeartPulse, // 🟢 閃避了保留字 Activity
+  HeartPulse, // 🟢 已經將會引發白畫面的 Activity 替換為 HeartPulse
   Share2,
   Check,
   Users,
@@ -97,7 +97,6 @@ export default function TreasuryQuiz() {
   const optionTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
-    // 僅在客戶端初次掛載時生成，確保 Hydration 安全
     setSeed(Date.now());
     setQuestions(getShuffledQuestions(QUESTION_BANK, 6));
   }, []);
@@ -118,7 +117,6 @@ export default function TreasuryQuiz() {
     const t2 = setTimeout(() => setRemainingSpots(1), 70000);
     setSocialProofNum(Math.floor(Math.random() * 60) + 120);
     
-    // 清除計時器
     return () => { 
       clearTimeout(t1); 
       clearTimeout(t2); 
@@ -382,6 +380,7 @@ export default function TreasuryQuiz() {
 
               <div className="mb-16">
                 <div className="flex items-center gap-2 mb-6">
+                  {/* 🟢 替換完成，完美避開 Activity 關鍵字 */}
                   <HeartPulse className="w-5 h-5 text-primary" />
                   <h3 className="font-display text-2xl text-foreground/90">各本尊對位能量分佈</h3>
                 </div>
