@@ -8,7 +8,6 @@ export default defineConfig({
     react({
       babel: {
         plugins: [
-          // Inject data-source attribute for AI agent source location
           "./scripts/babel-plugin-jsx-source-location.cjs",
         ],
       },
@@ -16,31 +15,19 @@ export default defineConfig({
     tailwindcss(),
   ],
   resolve: { 
-    alias: { "@": path.resolve(__dirname, "./src") } 
+    alias: { "@": path.resolve(__dirname, "./src") },
+    // 🟢 確保全站只使用同一個 React 實體，防止底層狀態丟失
+    dedupe: ["react", "react-dom"]
   },
   base: "./",
   build: { 
     outDir: "dist", 
     emptyOutDir: true,
-    // 🟢 新增 1：提高警告門檻至 1000kb，消滅終端機黃字警告
     chunkSizeWarningLimit: 1000,
-    // 🟢 新增 2：企業級 Code Splitting，將大型套件拆分，提升二次載入速度
+    // 🟢 清除危險的 manualChunks 分割邏輯，交給 Vite 智能處理
     rollupOptions: {
       output: {
-        manualChunks(id) {
-          if (id.includes('node_modules/react') || id.includes('node_modules/react-dom')) {
-            return 'vendor-react';
-          }
-          if (id.includes('node_modules/wouter')) {
-            return 'vendor-router';
-          }
-          if (id.includes('node_modules/lucide-react')) {
-            return 'vendor-icons';
-          }
-          if (id.includes('node_modules')) {
-            return 'vendor';
-          }
-        }
+        manualChunks: undefined
       }
     }
   },
