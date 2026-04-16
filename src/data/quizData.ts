@@ -154,6 +154,6 @@ export const DEITY_META: Record<DeityKey, { icon: any, funcTag: string }> = {
   "ganapati": { icon: Compass, funcTag: "事業除障破局" },
   "kurukulla": { icon: Heart, funcTag: "善緣懷愛重建" },
   "padmasambhava": { icon: Shield, funcTag: "大威德防護罩" },
-  "medicine-buddha": { icon: HeartPulse, funcTag: "身心細胞療癒" }, // 🟢 使用 HeartPulse 完美閃避 Activity
+  "medicine-buddha": { icon: HeartPulse, funcTag: "身心細胞療癒" },
   "green-tara": { icon: Zap, funcTag: "迅疾急難救助" }
 };

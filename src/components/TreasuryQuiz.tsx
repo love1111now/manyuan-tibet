@@ -26,7 +26,7 @@ import {
   Info, 
   CheckCircle2, 
   MoonStar,
-  HeartPulse, // 🟢 已經將會引發白畫面的 Activity 替換為 HeartPulse
+  HeartPulse, 
   Share2,
   Check,
   Users,
@@ -380,7 +380,6 @@ export default function TreasuryQuiz() {
 
               <div className="mb-16">
                 <div className="flex items-center gap-2 mb-6">
-                  {/* 🟢 替換完成，完美避開 Activity 關鍵字 */}
                   <HeartPulse className="w-5 h-5 text-primary" />
                   <h3 className="font-display text-2xl text-foreground/90">各本尊對位能量分佈</h3>
                 </div>
