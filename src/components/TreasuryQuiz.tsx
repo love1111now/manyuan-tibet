@@ -11,6 +11,7 @@ Design philosophy: Neo-thangka noir (Enterprise React 18 Architecture)
 - Top-Tier Opt 4: Centralized unmount timer cleanup preventing memory leaks.
 - Top-Tier Opt 5: SSR/Hydration safe random seeding.
 - Vercel Fix: Replaced NodeJS.Timeout with browser-safe ReturnType<typeof setTimeout> and explicit null initialization.
+- Production Crash Fix: Replaced Lucide 'Activity' icon with 'HeartPulse' to evade global minifier/WebView naming collisions.
 - 100% Unabbreviated Production Ready Code.
 */
 
@@ -25,7 +26,7 @@ import {
   Info, 
   CheckCircle2, 
   MoonStar,
-  Activity,
+  HeartPulse, // 🟢 閃避了保留字 Activity
   Share2,
   Check,
   Users,
@@ -93,7 +94,6 @@ export default function TreasuryQuiz() {
   const questionContainerRef = useRef<HTMLDivElement>(null);
   const resultContainerRef = useRef<HTMLDivElement>(null);
   
-  // 🟢 Vercel 修正：使用瀏覽器相容型別，並給定明確的 null 初始值
   const optionTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
@@ -382,7 +382,7 @@ export default function TreasuryQuiz() {
 
               <div className="mb-16">
                 <div className="flex items-center gap-2 mb-6">
-                  <Activity className="w-5 h-5 text-primary" />
+                  <HeartPulse className="w-5 h-5 text-primary" />
                   <h3 className="font-display text-2xl text-foreground/90">各本尊對位能量分佈</h3>
                 </div>
                 <p className="text-sm text-muted-foreground readable mb-8">

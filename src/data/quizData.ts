@@ -1,142 +1,159 @@
-import { Coins, Home, Eye, Heart, Leaf, Zap, Shield } from "lucide-react";
-import { type DeityKey } from "@/lib/siteData";
+/*
+Design philosophy: Neo-thangka noir (Cold-Reading & Somatic Psychology)
+- Feature 1: "Barnum Effect" Question Design - Replaced generic questions with deeply visceral, scenario-based prompts.
+- Feature 2: Somatic Markers - Added questions about physical symptoms (sleep, chest tightness) to bypass logical defenses.
+- Feature 3: Weighted Assessment - Complex multi-dimensional scoring mapping exactly to the 7 deities.
+- Feature 4: Consultant-Grade Advice (KARMA_ADVICE) - Provides structural life-coach style feedback, seamlessly leading into the "repair plans".
+- Bugfix: Replaced 'Activity' with 'HeartPulse' to prevent Production Minifier / WebView global keyword collision.
+- 100% Unabbreviated Production Ready Code.
+*/
 
-export type QuizOption = {
-  id: string;
-  label: string;
-  weights: Partial<Record<DeityKey, number>>;
-};
+import type { DeityKey } from "@/lib/siteData";
+import { 
+  Coins, 
+  Home, 
+  Compass, 
+  Heart, 
+  Shield, 
+  HeartPulse, 
+  Zap 
+} from "lucide-react";
 
-export type QuizQuestion = {
+export interface QuizQuestion {
   id: string;
   title: string;
-  options: QuizOption[];
-};
+  options: {
+    id: string;
+    label: string;
+    weights: Partial<Record<DeityKey, number>>;
+  }[];
+}
 
-// --- 神明專屬圖示與「功能標籤」對應表 ---
-export const DEITY_META: Record<DeityKey, { icon: any; enLabel: string; funcTag: string }> = {
-  yellow: { icon: Coins, enLabel: "Wealth & Flow", funcTag: "資糧流動修復" },
-  kurukulla: { icon: Heart, enLabel: "Love & Harmony", funcTag: "善緣懷愛重建" },
-  mahashri: { icon: Home, enLabel: "Stability & Family", funcTag: "家運地基穩固" },
-  ganapati: { icon: Eye, enLabel: "Clarity & Breakthrough", funcTag: "決策迷霧除障" },
-  "medicine-buddha": { icon: Leaf, enLabel: "Healing & Peace", funcTag: "身心耗損息災" },
-  "green-tara": { icon: Zap, enLabel: "Swift Rescue", funcTag: "突發急難化解" },
-  padmasambhava: { icon: Shield, enLabel: "Protection & Anchor", funcTag: "動盪防禦建構" }
-};
+// 🟢 頂級冷讀術題庫：直擊現代人最深層的六大焦慮場景
+export const QUESTION_BANK: QuizQuestion[] = [
+  {
+    id: "q_night",
+    title: "當夜深人靜，獨自面對真實的自己時，哪一種情緒最常將您吞噬？",
+    options: [
+      { id: "n1", label: "帳單與數字帶來的窒息感，總覺得錢不夠用", weights: { yellow: 3, mahashri: 1 } },
+      { id: "n2", label: "擔心突發變故或意外的極度恐慌，缺乏安全感", weights: { "green-tara": 3, padmasambhava: 1 } },
+      { id: "n3", label: "覺得沒有人真正理解我的深深孤獨與不被愛", weights: { kurukulla: 3 } },
+      { id: "n4", label: "思緒混亂，對未來抉擇的迷茫感與自我懷疑", weights: { ganapati: 3 } },
+      { id: "n5", label: "身體與精神都被掏空，一種撐不下去的極度疲憊", weights: { "medicine-buddha": 3 } },
+      { id: "n6", label: "覺得被莫名惡意、小人或厄運纏身的恐懼", weights: { padmasambhava: 3, "green-tara": 1 } }
+    ]
+  },
+  {
+    id: "q_loop",
+    title: "回顧過去一年的軌跡，您發現在哪個領域「最常發生鬼打牆」的循環？",
+    options: [
+      { id: "l1", label: "感情與人際：總是一再遇到消耗我的人，或熱臉貼冷屁股", weights: { kurukulla: 3 } },
+      { id: "l2", label: "財富與資源：明明很努力付出，但錢與機會卻總是留不住", weights: { yellow: 3 } },
+      { id: "l3", label: "職場與專案：眼看要成了，卻總有小人或行政意外從中作梗", weights: { ganapati: 3 } },
+      { id: "l4", label: "身心與健康：小病不斷，失眠焦慮，始終無法徹底放鬆", weights: { "medicine-buddha": 3 } },
+      { id: "l5", label: "家庭與家運：家中氣氛緊繃，總是爭吵或發生不順心的瑣事", weights: { mahashri: 3 } }
+    ]
+  },
+  {
+    id: "q_leak",
+    title: "如果生命是一座容器，您覺得自己現在的「破洞」在哪裡？",
+    options: [
+      { id: "lk1", label: "缺乏一道強而有力的防護罩，覺得自己極度脆弱易受傷", weights: { padmasambhava: 3, "green-tara": 2 } },
+      { id: "lk2", label: "缺乏吸引善意與好運的磁場，總覺得被這個世界冷落", weights: { kurukulla: 3, mahashri: 1 } },
+      { id: "lk3", label: "缺乏清晰的判斷力，常常做出讓自己後悔的衝動決定", weights: { ganapati: 3 } },
+      { id: "lk4", label: "缺乏承載財富的底氣，總覺得自己「不配」擁有更多", weights: { yellow: 3 } },
+      { id: "lk5", label: "缺乏自我修復的能量，像一顆永遠充不滿的損壞電池", weights: { "medicine-buddha": 3 } }
+    ]
+  },
+  {
+    id: "q_desire",
+    title: "面對無法完全掌控的未來，您現在最渴望擁有哪一種「底氣」？",
+    options: [
+      { id: "d1", label: "就算天塌下來，也有一股絕對力量為我撐腰的「安全感」", weights: { padmasambhava: 3 } },
+      { id: "d2", label: "能迅速化解眼前迫切危機，讓我立刻喘口氣的「轉機」", weights: { "green-tara": 3 } },
+      { id: "d3", label: "看透複雜局勢，清明地知道下一步該怎麼走的「智慧」", weights: { ganapati: 3 } },
+      { id: "d4", label: "不必再為五斗米折腰，能自由選擇生活的「豐盛資源」", weights: { yellow: 3 } },
+      { id: "d5", label: "無論走到哪，都能與周遭和諧共處、受人喜愛的「魅力」", weights: { kurukulla: 3 } },
+      { id: "d6", label: "全家人都能平平安安，生活穩穩當當的「圓滿福氣」", weights: { mahashri: 3 } }
+    ]
+  },
+  {
+    id: "q_somatic",
+    title: "當壓力來襲時，您的身體通常是如何向您發出「求救訊號」的？",
+    options: [
+      { id: "s1", label: "頻繁的頭痛、肩頸僵硬，腦袋像隨時要爆炸一樣轉個不停", weights: { ganapati: 2, "medicine-buddha": 2 } },
+      { id: "s2", label: "胸口總覺得悶悶的，甚至會伴隨突如其來的心悸與恐慌", weights: { "green-tara": 3, padmasambhava: 1 } },
+      { id: "s3", label: "嚴重的睡眠障礙，即使睡著也一直做夢，醒來還是極度疲勞", weights: { "medicine-buddha": 3 } },
+      { id: "s4", label: "腸胃經常不適，對生活周遭的變化感到神經質與過度敏感", weights: { mahashri: 2, yellow: 1 } },
+      { id: "s5", label: "總覺得身體發冷、提不起勁，有一種深深的無力與空虛感", weights: { kurukulla: 2, padmasambhava: 1 } }
+    ]
+  },
+  {
+    id: "q_safeplace",
+    title: "如果現在有一個絕對安全的空間，您走進去的第一個動作會是什麼？",
+    options: [
+      { id: "sp1", label: "什麼都不想，只想沈沉地睡上一覺，徹底斷電與世界隔離", weights: { "medicine-buddha": 3 } },
+      { id: "sp2", label: "躲在最堅固的角落，確認沒有任何威脅與惡意可以傷害我", weights: { padmasambhava: 3, "green-tara": 2 } },
+      { id: "sp3", label: "把亂七八糟的思緒寫下來，好好梳理下一步該怎麼突破", weights: { ganapati: 3 } },
+      { id: "sp4", label: "點起溫暖的燈，希望有人能坐下來，溫柔且專注地聽我說話", weights: { kurukulla: 3 } },
+      { id: "sp5", label: "清點自己的存款與資源，盤算著如何讓接下來的生活更安穩", weights: { yellow: 3, mahashri: 2 } }
+    ]
+  }
+];
 
-// --- 建議書內容庫 (KARMA_ADVICE) ---
-export const KARMA_ADVICE: Record<DeityKey, { 
-  tag: string; 
-  title: string; 
-  analogy: string; 
-  repairPlan: string;
-  goldenPhrase: string;
-}> = {
-  yellow: {
-    tag: "資糧流動性漏損",
-    title: "您的資糧正在『流向位移』：提水的人很累，但桶底有洞",
-    analogy: "這段時間，您辛苦了。這就像您的生命水桶底部出現了看不見的小洞。您每天拼命工作、提水，水桶看起來是滿的，但一覺醒來發現水位又降了。這不是提水不夠努力，而是我們需要一起把底部的裂縫補起來，讓您流的每一滴汗，都能實實在在地留在桶子裡。",
-    repairPlan: "解決漏損不能只靠拼命提水。接下來，我們建議透過黃財神法事為您進行系統性的『止漏儀軌』，修復看不見的容器裂縫。",
-    goldenPhrase: "護持不是交易，而是把心念安放在正因上。"
+// 🟢 顧問級診斷書：建立「自我說服」的最後一哩路
+export const KARMA_ADVICE: Record<DeityKey, { tag: string, title: string, analogy: string, repairPlan: string }> = {
+  "yellow": {
+    tag: "資糧漏損",
+    title: "您的財富容器出現了結構性的漏損",
+    analogy: "您一直很努力注水，卻沒發現底部的裂縫。匱乏感正在吞噬您的決策力，讓您越是抓取，越是流失。",
+    repairPlan: "我們將為您連結黃財神的力量。這不僅是祈求收入的增加，更是透過清淨的修法，為您填補資糧的破洞。當內在對金錢的恐懼被撫平，您的努力才能真正轉化為現實中的豐饒與餘裕。"
   },
-  kurukulla: {
-    tag: "懷愛磁場疏離",
-    title: "您的能量處於『封閉防禦』：盔甲太厚，貴人與善緣看不見您",
-    analogy: "這段時間，您辛苦了。這就像是您的心靈穿上了一層太厚的盔甲。這層盔甲或許是為了保護過去受傷的您，但現在卻擋住了貴人與好緣分靠近的視線。您在職場或情感中感到孤單，是因為盔甲讓您的氣息變得尖銳，讓善緣在靠近前被自動彈開。",
-    repairPlan: "接下來，我們建議透過作明佛母法事，為您進行一場溫柔的『磁場軟化工程』，卸除能量上的刺，補充柔和且強大的吸引力。",
-    goldenPhrase: "當您變得柔軟，世界也會對您溫柔。"
+  "mahashri": {
+    tag: "家運不穩",
+    title: "您的家運與生活地基需要重新校準",
+    analogy: "生活的動盪讓您失去了歸屬感。當家宅的磁場或生活的根基不穩，再多的外在成就也無法帶來真正的平靜。",
+    repairPlan: "我們將為您連結大吉祥天女的能量。這是一場為生命注入『圓滿與幸運』的修復工程。透過如法的供養，穩住家宅的磁場，讓您的生活重新迎來和諧、富足與不受干擾的平靜。"
   },
-  mahashri: {
-    tag: "地基失穩與家運偏離",
-    title: "您的能量底盤正在『晃動』：家宅與心神不安，財富便難以依附",
-    analogy: "這段時間，您辛苦了。這就像是您在一個正在晃動的地基上蓋大樓。不論您把樓層裝修得再漂亮，只要地基不穩，心裡始終會有一種莫名的不安，家裡也容易出現瑣碎的內耗或意外破財。",
-    repairPlan: "接下來，我們建議透過大吉祥天女法事為您啟動『吉祥對位頻率』，這是一場針對生命底座的穩固工程，掃除環境違緣，讓福報能穩定落地。",
-    goldenPhrase: "安定了，豐盛自然會留下來。"
+  "ganapati": {
+    tag: "無明障礙",
+    title: "無形的違緣正在干擾您的清明決策",
+    analogy: "您感覺自己像是在泥沼中開車，明明看見了目標，卻總有突如其來的小人、意外或混亂的思緒將您困住。",
+    repairPlan: "我們將為您連結象神（精靈主）的力量。這是一次強力的『事業破局』。透過威猛的除障儀軌，為您掃除無形的絆腳石，並開啟頂輪的清明智慧，讓您在關鍵時刻做出最精準的決斷。"
   },
-  ganapati: {
-    tag: "決策雜訊與事業遮蔽",
-    title: "您的直覺正處於『導航失效』：能力很強，卻在迷霧中原地踏步",
-    analogy: "這段時間，您辛苦了。這就像是在濃霧中開著超跑。您的能力很好，但因為看不清前面的路，導致您不敢踩油門，甚至常在關鍵岔路選錯方向。這不是您的錯，是路上的『雜訊』太多了。我們要請象神化作一盞強光，撥開眼前的迷霧，讓您恢復清明。",
-    repairPlan: "接下來，我們建議為您啟動『破局除障儀軌』，分階段清理干擾決策的隱形能量，協助您在複雜的事業局勢中重新找回掌控權。",
-    goldenPhrase: "思辨，是跨越障礙最高效的武器。"
+  "kurukulla": {
+    tag: "懷愛受損",
+    title: "您的懷愛磁場處於封閉或受傷的狀態",
+    analogy: "在關係中的挫折，讓您不自覺地豎起防備的刺。這不僅阻擋了消耗您的人，也同時把善緣與貴人擋在門外。",
+    repairPlan: "我們將為您連結作明佛母的能量。這不是強制改變他人的迷信，而是溫柔地修復您受損的心輪。當您內在的匱乏被紅色的慈悲之光填滿，您將自然散發出吸引正桃花與職場貴人的強大魅力。"
+  },
+  "padmasambhava": {
+    tag: "深層恐懼",
+    title: "您的靈魂正在呼喚一個絕對強大的靠山",
+    analogy: "環境的劇變或莫名逼近的惡意，讓您的安全感徹底崩塌。您現在需要的不是溫柔的安慰，而是一道堅不可摧的盾牌。",
+    repairPlan: "我們將為您連結蓮花生大士的威德力。這是一場『降伏一切違緣』的金剛級防護工程。透過強勢的息災除障，為您驅逐身邊的邪祟與厄運，在動盪中為您與家人建立不容質疑的絕對安全感。"
   },
   "medicine-buddha": {
-    tag: "能量載體損耗與息災滯礙",
-    title: "您的生命載體正處於『低電量運作』：身心耗損不除，福報難以受用",
-    analogy: "這段時間，您辛苦了。這就像是一台電池健康度只剩 1% 的手機。即便您一直插著電，電力也很快就耗光。您的身心這個『載體』太累了。我們需要透過藥師佛的琉璃光頻率幫您進行深層的『重置與息災』，先把電力充回來。",
-    repairPlan: "接下來，我們建議為您執行『琉璃息災修復計畫』，透過系統化的能量補給，先穩住生命最核心的『底氣』，消除身心耗損因素。",
-    goldenPhrase: "身心的安定，是承載福報唯一的容器。"
+    tag: "生命耗損",
+    title: "您的身心電池已經亮起了極度危險的紅燈",
+    analogy: "長期的壓力與焦慮，已經開始在您的軀體與睡眠上留下刻痕。您在透支未來的生命力，來應付現在的生存。",
+    repairPlan: "我們將為您連結藥師佛的琉璃光療癒。現在，請允許自己停下來。透過深層的息災與淨化，拔除積累在經絡與意識中的病氣與疲憊，為您乾涸的生命力重新注入清涼安定的活水。"
   },
   "green-tara": {
-    tag: "急性違緣栓塞與突發阻礙",
-    title: "您的前進路徑遭遇『突發落石』：需要迅疾的力量推開巨石",
-    analogy: "這段時間，您辛苦了。這就像是通往目標的路上，突然倒下一棵大樹擋住了去路。這不是您走路技術不好，而是突如其來的業力波峰集中釋放，一般的努力會被這種極大的阻力迅速消耗。",
-    repairPlan: "接下來，我們建議為您啟動『迅疾除障儀軌』，這是一套針對急迫危機的解凍計畫，協助您在最短時間內化解壓力，恢復生命的常態節奏。",
-    goldenPhrase: "有些難關，需要迅疾如風的慈愛來化解。"
-  },
-  padmasambhava: {
-    tag: "震盪頻率與生命支撐缺失",
-    title: "您的心神正處於『暴風雨中心』：缺乏強大的靠山讓您搖擺不定",
-    analogy: "這段時間，您辛苦了。這就像是在暴風雨的海面上划著小船。外在環境太亂，讓你心神不寧。這時候您需要的不是更用力划槳，而是找一個『超級大靠山』，讓您的船能在大靠山的港灣裡停泊避風，找回內在的定見。",
-    repairPlan: "接下來，我們建議委託『金剛護持造冊』，為您建立不可摧毀的守護罩。這不只是祈求，而是為您的生命引擎換上乾淨的燃料，讓您找回做決定的底氣。",
-    goldenPhrase: "在動盪的時代，找回內在不動的中心。"
+    tag: "突發急難",
+    title: "您正處於需要被『瞬間接住』的危機邊緣",
+    analogy: "突如其來的變故或極度迫切的渴望，讓您的心跳隨時處於狂飆狀態。您覺得自己快要掉下去了，急需一雙手。",
+    repairPlan: "我們將為您連結綠度母的迅疾力量。度母的特德就是『快』。我們將以最急件的方式為您造冊祈請，用慈悲的綠光瞬間安撫您的恐慌，為眼前的死胡同強勢開闢出一道轉機的出口。"
   }
 };
 
-// --- 純淨版心理學隱喻題庫 (完全無暗示、無解釋) ---
-export const QUESTION_BANK: QuizQuestion[] = [
-  { id: "q1", title: "當生活出現難以掌控的變化，你最希望立刻擁有一種什麼樣的能力？", options: [
-    { id: "a", label: "能瞬間補好正在漏水的口袋", weights: { yellow: 3 } },
-    { id: "b", label: "能撐起一把巨大的保護傘", weights: { mahashri: 3 } },
-    { id: "c", label: "能擁有一副清晰的透視眼鏡", weights: { ganapati: 3 } },
-    { id: "d", label: "能散發吸引同伴靠近的微光", weights: { kurukulla: 3 } },
-    { id: "e", label: "能呼喚一陣吹散巨石的狂風", weights: { "green-tara": 3 } },
-    { id: "f", label: "能按一個讓萬物靜止的暫停鍵", weights: { "medicine-buddha": 3 } },
-    { id: "g", label: "能瞬間築起一座堅固的堡壘", weights: { padmasambhava: 3 } },
-  ]},
-  { id: "q2", title: "想像一部驚悚電影的開場畫面，會什麼模樣？", options: [
-    { id: "a", label: "一座乾涸但深不見底的湖泊", weights: { yellow: 3 } },
-    { id: "b", label: "一棟地基正在微微晃動的木屋", weights: { mahashri: 3 } },
-    { id: "c", label: "一個被濃霧完全籠罩的十字路口", weights: { ganapati: 3 } },
-    { id: "d", label: "一座被高聳冰牆包圍的孤島", weights: { kurukulla: 3 } },
-    { id: "e", label: "一片不斷有落雷降下的荒野", weights: { "green-tara": 3 } },
-    { id: "f", label: "一棵樹葉枯黃且根部疲憊的老樹", weights: { "medicine-buddha": 3 } },
-    { id: "g", label: "一艘在暴風雨中劇烈搖晃的小船", weights: { padmasambhava: 3 } },
-  ]},
-  { id: "q3", title: "如果現在可以有一隻「守護靈獸」陪在你身邊，你會選擇？", options: [
-    { id: "a", label: "勤奮尋找並守護果實的松鼠", weights: { yellow: 3 } },
-    { id: "b", label: "在溫暖洞穴裡守望的棕熊", weights: { mahashri: 3 } },
-    { id: "c", label: "盤旋在高空擁有銳利視野的雄鷹", weights: { ganapati: 3 } },
-    { id: "d", label: "優雅且總是結伴而行的白鹿", weights: { kurukulla: 3 } },
-    { id: "e", label: "能瞬間躍過深谷的身手矯健神馬", weights: { "green-tara": 3 } },
-    { id: "f", label: "在月光下安靜自我療癒的靈狐", weights: { "medicine-buddha": 3 } },
-    { id: "g", label: "無所畏懼且令人感到安心的雄獅", weights: { padmasambhava: 3 } },
-  ]},
-  { id: "q4", title: "走進一個房間放鬆，哪一種氣味最能瞬間撫平你的焦慮？", options: [
-    { id: "a", label: "熟透的果實與溫潤的琥珀香", weights: { yellow: 3 } },
-    { id: "b", label: "剛出爐的麵包與溫暖的柴火香", weights: { mahashri: 3 } },
-    { id: "c", label: "清晨的薄荷與冷冽的雪松", weights: { ganapati: 3 } },
-    { id: "d", label: "初綻放的玫瑰與微甜的晨露", weights: { kurukulla: 3 } },
-    { id: "e", label: "雷雨過後的微苦松針香", weights: { "green-tara": 3 } },
-    { id: "f", label: "舒緩的薰衣草與淡淡的草本香", weights: { "medicine-buddha": 3 } },
-    { id: "g", label: "古老寺廟裡的沉靜檀香", weights: { padmasambhava: 3 } },
-  ]},
-  { id: "q5", title: "一位充滿智慧的長者，準備送你一句祝福，你最想聽到哪一句？", options: [
-    { id: "a", label: "「願你的水杯永遠滿溢。」", weights: { yellow: 3 } },
-    { id: "b", label: "「願你的屋簷永遠溫暖。」", weights: { mahashri: 3 } },
-    { id: "c", label: "「願你的雙眼永遠清明。」", weights: { ganapati: 3 } },
-    { id: "d", label: "「願你的周圍充滿善意。」", weights: { kurukulla: 3 } },
-    { id: "e", label: "「願你的阻礙瞬間瓦解。」", weights: { "green-tara": 3 } },
-    { id: "f", label: "「願你的身心輕盈如燕。」", weights: { "medicine-buddha": 3 } },
-    { id: "g", label: "「願你的步伐堅如磐石。」", weights: { padmasambhava: 3 } },
-  ]},
-  { id: "q6", title: "如果給你一張畫布，畫出你此刻最渴望的生命狀態，你會用哪種主色調？", options: [
-    { id: "a", label: "飽滿流動的金黃色", weights: { yellow: 3 } },
-    { id: "b", label: "溫暖厚實的大地棕", weights: { mahashri: 3 } },
-    { id: "c", label: "清透純粹的冰雪白", weights: { ganapati: 3 } },
-    { id: "d", label: "柔和包容的蜜桃粉", weights: { kurukulla: 3 } },
-    { id: "e", label: "充滿爆發力的閃電綠", weights: { "green-tara": 3 } },
-    { id: "f", label: "充滿生機的療癒翡翠綠", weights: { "medicine-buddha": 3 } },
-    { id: "g", label: "深邃堅定的靜謐藍", weights: { padmasambhava: 3 } },
-  ]},
-];
+// 🟢 閃避了保留字的 Meta 標籤
+export const DEITY_META: Record<DeityKey, { icon: any, funcTag: string }> = {
+  "yellow": { icon: Coins, funcTag: "財富資糧修復" },
+  "mahashri": { icon: Home, funcTag: "家運吉祥結界" },
+  "ganapati": { icon: Compass, funcTag: "事業除障破局" },
+  "kurukulla": { icon: Heart, funcTag: "善緣懷愛重建" },
+  "padmasambhava": { icon: Shield, funcTag: "大威德防護罩" },
+  "medicine-buddha": { icon: HeartPulse, funcTag: "身心細胞療癒" }, // 🟢 使用 HeartPulse 完美閃避 Activity
+  "green-tara": { icon: Zap, funcTag: "迅疾急難救助" }
+};
