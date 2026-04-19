@@ -7,7 +7,10 @@ import FloatingFb from "@/components/FloatingFb";
 import Seo from "@/components/Seo";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { DEITIES } from "@/lib/siteData";
+
+// 🚨 關鍵修正：將 DEITIES 的來源指向搬家後的資料來源 @/data/deities
+// 徹底排除終端機報錯：No matching export in "src/lib/siteData.ts" for import "DEITIES"
+import { DEITIES } from "@/data/deities";
 
 export default function Puja() {
   return (
@@ -59,10 +62,15 @@ export default function Puja() {
 
         <section className="mt-12 grid gap-5 md:grid-cols-2">
           {DEITIES.map((d) => (
-            <Link key={d.key} href={d.route}>
+            <Link key={d.key} href={`/deity/${d.key}`}>
               <Card className="overflow-hidden gold-border bg-card hover:bg-accent/25 hover:border-primary/40 transition-all duration-300">
                 <div className="grid md:grid-cols-[220px_1fr]">
-                  <img src={d.heroImage} alt={d.name} className="h-44 w-full object-contain bg-background/30" loading="lazy" />
+                  <img 
+                    src={d.heroImage} 
+                    alt={d.name} 
+                    className="h-44 w-full object-contain bg-background/30" 
+                    loading="lazy" 
+                  />
                   <div className="p-7 flex flex-col justify-between">
                     <div>
                       <div className="text-xs tracking-[0.24em] uppercase text-primary font-bold">{d.primaryIntent}</div>

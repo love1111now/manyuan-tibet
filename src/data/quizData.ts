@@ -17,6 +17,8 @@ import {
   Shield, 
   HeartPulse, 
   Zap 
+,
+  type LucideIcon
 } from "lucide-react";
 
 export interface QuizQuestion {
@@ -148,7 +150,7 @@ export const KARMA_ADVICE: Record<DeityKey, { tag: string, title: string, analog
 };
 
 // 🟢 閃避了保留字的 Meta 標籤
-export const DEITY_META: Record<DeityKey, { icon: any, funcTag: string }> = {
+export const DEITY_META: Record<DeityKey, { icon: LucideIcon; funcTag: string }> = {
   "yellow": { icon: Coins, funcTag: "財富資糧修復" },
   "mahashri": { icon: Home, funcTag: "家運吉祥結界" },
   "ganapati": { icon: Compass, funcTag: "事業除障破局" },

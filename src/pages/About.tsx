@@ -4,14 +4,11 @@ import FloatingFb from "@/components/FloatingFb";
 import StickyCta from "@/components/StickyCta";
 import Seo from "@/components/Seo";
 import { Card } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
 
 import { 
   Heart, 
   ShieldCheck, 
   EyeOff, 
-  PenTool, 
-  Clock, 
   MessageCircle 
 } from "lucide-react";
 

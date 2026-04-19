@@ -25,7 +25,6 @@ import {
   Clock, 
   Info, 
   CheckCircle2, 
-  MoonStar,
   HeartPulse, 
   Share2,
   Check,
@@ -39,7 +38,13 @@ import { Progress } from "@/components/ui/progress";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
-import { DEITY_BY_KEY, type DeityKey } from "@/lib/siteData";
+
+/**
+ * 🚨 關鍵路徑修正：
+ * 搬家後的 DEITY_BY_KEY 必須從 @/data/deities 獲取資料實體
+ */
+import { DEITY_BY_KEY } from "@/data/deities"; 
+import type { DeityKey } from "@/lib/siteData";
 import { QUESTION_BANK, KARMA_ADVICE, DEITY_META, type QuizQuestion } from "@/data/quizData";
 
 // --- 輔助組件：生命探索專用印 ---
@@ -71,11 +76,20 @@ const getShuffledQuestions = (bank: QuizQuestion[], count: number) => {
   return selected.map(q => ({ ...q, options: shuffleArray(q.options) }));
 };
 
-const emptyScore = (): Record<DeityKey, number> => ({ yellow: 0, mahashri: 0, ganapati: 0, kurukulla: 0, padmasambhava: 0, "medicine-buddha": 0, "green-tara": 0 });
+const emptyScore = (): Record<DeityKey, number> => ({ 
+  yellow: 0, 
+  mahashri: 0, 
+  ganapati: 0, 
+  kurukulla: 0, 
+  padmasambhava: 0, 
+  "medicine-buddha": 0, 
+  "green-tara": 0 
+});
 
 export default function TreasuryQuiz() {
-  const [seed, setSeed] = useState<number | null>(null);
-  const [questions, setQuestions] = useState<QuizQuestion[]>([]);
+  const [questions, setQuestions] = useState<QuizQuestion[]>(() =>
+    getShuffledQuestions(QUESTION_BANK, 6)
+  );
   
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
@@ -88,18 +102,12 @@ export default function TreasuryQuiz() {
   const [isoCompletionTime, setIsoCompletionTime] = useState(""); 
   
   const [isCopied, setIsCopied] = useState(false);
-  const [remainingSpots, setRemainingSpots] = useState(3);
-  const [socialProofNum, setSocialProofNum] = useState(142);
   
   const questionContainerRef = useRef<HTMLDivElement>(null);
   const resultContainerRef = useRef<HTMLDivElement>(null);
   
   const optionTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  useEffect(() => {
-    setSeed(Date.now());
-    setQuestions(getShuffledQuestions(QUESTION_BANK, 6));
-  }, []);
 
   const current = questions[step];
   const progress = questions.length > 0 ? Math.round((step / questions.length) * 100) : 0;
@@ -113,13 +121,7 @@ export default function TreasuryQuiz() {
   };
 
   useEffect(() => {
-    const t1 = setTimeout(() => setRemainingSpots(2), 25000);
-    const t2 = setTimeout(() => setRemainingSpots(1), 70000);
-    setSocialProofNum(Math.floor(Math.random() * 60) + 120);
-    
     return () => { 
-      clearTimeout(t1); 
-      clearTimeout(t2); 
       if (optionTimeoutRef.current) clearTimeout(optionTimeoutRef.current);
     };
   }, []);
@@ -152,7 +154,6 @@ export default function TreasuryQuiz() {
   }, [isAnalyzing]);
 
   const restart = () => {
-    setSeed(Date.now());
     setQuestions(getShuffledQuestions(QUESTION_BANK, 6));
     setStep(0); 
     setAnswers({}); 
@@ -166,7 +167,7 @@ export default function TreasuryQuiz() {
 
   const handleOptionSelect = (optId: string) => {
     if (typeof window !== "undefined" && navigator.vibrate) {
-      try { navigator.vibrate(50); } catch(e) {} 
+      try { navigator.vibrate(50); } catch { /* ignore */ } 
     }
     
     setAnswers(p => ({...p, [current.id]: optId}));
@@ -178,7 +179,14 @@ export default function TreasuryQuiz() {
       if (picked) {
         setScore((prev) => {
           const copy = { ...prev };
-          (Object.keys(copy) as DeityKey[]).forEach((k) => copy[k] += picked.weights[k] ?? 0);
+          /**
+           * 🚨 修正 TS 2339：
+           * 嚴格對照 quizData.ts，將 .scores 修改為 .weights
+           */
+          Object.entries(picked.weights).forEach(([key, val]) => {
+            const k = key as DeityKey;
+            copy[k] += (val || 0);
+          });
           return copy;
         });
       }
@@ -207,11 +215,9 @@ export default function TreasuryQuiz() {
 
   const primaryDeityKey = sortedScores[0]?.[0];
   const primaryScore = Math.max(sortedScores[0]?.[1] ?? 1, 1); 
-  const secondaryDeityKey = sortedScores.length > 1 && sortedScores[1]?.[1] > 0 ? sortedScores[1]?.[0] : null;
 
   const advice = primaryDeityKey ? KARMA_ADVICE[primaryDeityKey] : null;
   const deity = primaryDeityKey ? DEITY_BY_KEY[primaryDeityKey] : null;
-  const secondaryDeity = secondaryDeityKey ? DEITY_BY_KEY[secondaryDeityKey] : null;
 
   const PrimaryIcon = primaryDeityKey ? (DEITY_META[primaryDeityKey]?.icon || Sparkles) : Sparkles;
 
@@ -226,8 +232,8 @@ export default function TreasuryQuiz() {
         await navigator.share({ title: shareTitle, text: shareText, url: shareUrl });
         setIsCopied(true);
         setTimeout(() => setIsCopied(false), 3000);
-      } catch (err) { 
-        console.log('Share canceled or failed'); 
+      } catch {
+        console.log("Share canceled or failed");
       }
     } else {
       navigator.clipboard.writeText(`${shareTitle}\n${shareText}\n${shareUrl}`)
@@ -242,7 +248,7 @@ export default function TreasuryQuiz() {
     }
   };
 
-  if (!seed || questions.length === 0) return null;
+  if (questions.length === 0) return null;
 
   return (
     <section className="relative" id="quiz">
@@ -261,8 +267,8 @@ export default function TreasuryQuiz() {
 
         {!showResult && !isAnalyzing && (
           <div className="mt-4 flex justify-center md:justify-start">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-500/10 border border-green-500/20 text-green-600 text-[10px] md:text-xs font-bold tracking-widest animate-in fade-in zoom-in duration-700">
-              <Users className="w-3.5 h-3.5" /> 過去 24 小時已有 {socialProofNum} 人完成能量診斷
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-[10px] md:text-xs font-bold tracking-widest animate-in fade-in zoom-in duration-700">
+              <ShieldCheck className="w-3.5 h-3.5" /> 免費診斷，結果僅供您個人參考，無任何購買壓力
             </div>
           </div>
         )}
@@ -292,6 +298,10 @@ export default function TreasuryQuiz() {
                 <div className="text-[10px] tracking-[0.2em] uppercase text-muted-foreground font-bold">診斷進度 {step + 1}/6</div>
                 <Progress value={progress} className="w-32 md:w-64 h-1 bg-primary/10 transition-all duration-700 ease-out" />
               </div>
+              {/**
+               * 🚨 修正 TS 2339：
+               * 將 .question 修改為 .title
+               */}
               <div className="font-display text-2xl md:text-4xl mb-10 leading-snug">{current.title}</div>
               <RadioGroup className="grid gap-3 md:gap-4" value={answers[current.id] || ""}>
                 {current.options.map((opt) => (
@@ -304,11 +314,15 @@ export default function TreasuryQuiz() {
                     onKeyDown={(e) => handleKeyDown(e, opt.id)}
                     className={`flex items-start gap-4 rounded-xl border gold-border px-5 py-5 md:py-6 cursor-pointer transition-all duration-300 active:scale-[0.98] select-none touch-manipulation focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ${
                       answers[current.id] === opt.id 
-                        ? "bg-primary/15 border-primary shadow-[0_0_15px_rgba(var(--primary),0.2)]" 
+                        ? "bg-primary/15 border-primary shadow-[0_0_15px_rgba(0,0,0,0.2)]" 
                         : "bg-background/40 hover:bg-accent/20 active:bg-primary/10"
                     }`}
                   >
                     <RadioGroupItem value={opt.id} id={opt.id} className="mt-1.5 pointer-events-none" tabIndex={-1} />
+                    {/**
+                     * 🚨 修正 TS 2339：
+                     * 將 .text 修改為 .label
+                     */}
                     <Label htmlFor={opt.id} className="readable text-base md:text-xl cursor-pointer leading-relaxed flex-1 pointer-events-none">
                       {opt.label}
                     </Label>
@@ -351,6 +365,10 @@ export default function TreasuryQuiz() {
                       <span className="block mb-1 text-muted-foreground">您的能量對位本尊：</span>
                       <span className="text-xl md:text-2xl text-foreground tracking-widest">{deity.name}</span>
                     </div>
+                    {/**
+                     * 🚨 修正 TS 2322：
+                     * 提取 advice.title 進行渲染
+                     */}
                     <h2 className="font-display text-xl sm:text-2xl md:text-4xl leading-[1.4] tracking-tight text-foreground/90">
                       {advice.title}
                     </h2>
@@ -364,19 +382,12 @@ export default function TreasuryQuiz() {
                 <div className="text-[10px] md:text-sm font-bold text-primary mb-5 flex items-center gap-3 tracking-[0.25em]">
                   ✦ 滿願藏庫的能量指引
                 </div>
+                {/**
+                 * 🚨 修正 TS 2322：
+                 * 提取 advice.analogy 進行渲染
+                 */}
                 <p className="readable italic text-base md:text-2xl text-muted-foreground leading-relaxed font-serif">「{advice.analogy}」</p>
               </Card>
-
-              {secondaryDeity && (
-                <Card className="p-5 md:p-6 bg-background/40 border border-primary/20 rounded-xl mb-14 relative overflow-hidden hover:bg-accent/10 transition-colors">
-                  <div className="absolute top-0 left-0 w-1.5 h-full" style={{ backgroundColor: secondaryDeity.themeColor.accent }} />
-                  <div className="text-[10px] md:text-xs tracking-[0.2em] uppercase text-muted-foreground font-bold mb-3 flex items-center gap-2">
-                    <MoonStar className="w-3.5 h-3.5 opacity-70" /> 輔助修復維度 (Secondary)
-                  </div>
-                  <div className="font-display text-lg md:text-2xl text-foreground/80 mb-2">潛在牽引力量：{secondaryDeity.name}</div>
-                  <p className="text-sm md:text-base text-muted-foreground readable leading-relaxed">您的生命維度有兩股力量交織。主修復是您此刻最急迫的課題；而這股輔助力量，則在特定時刻浮現，暗示著您在解決表層危機後，也需要關注這個面向的安頓。</p>
-                </Card>
-              )}
 
               <div className="mb-16">
                 <div className="flex items-center gap-2 mb-6">
@@ -444,6 +455,10 @@ export default function TreasuryQuiz() {
 
               <div className="p-6 md:p-10 gold-border bg-card/50 paper-grain rounded-xl mb-6 md:mb-14 border-primary/20">
                 <h3 className="font-display text-lg md:text-2xl text-primary mb-4 tracking-wider underline underline-offset-8 decoration-primary/20">接下來，我們將為您進行的四步修復</h3>
+                {/**
+                 * 🚨 修正 TS 2322：
+                 * 提取 advice.repairPlan 進行渲染
+                 */}
                 <p className="readable text-sm md:text-lg text-muted-foreground mb-10 leading-loose">{advice.repairPlan}</p>
                 <div className="relative">
                   <div className="hidden md:block absolute top-[28px] left-[10%] right-[10%] h-[2px] bg-primary/10" />
@@ -473,7 +488,7 @@ export default function TreasuryQuiz() {
 
               <div className="flex flex-col items-center gap-8 pt-8 border-t border-border/30 relative">
                 <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1.5 bg-destructive/10 text-destructive text-[9px] md:text-[11px] font-bold tracking-[0.2em] border border-destructive/20 rounded-full animate-pulse whitespace-nowrap shadow-sm z-10">
-                  ⚡ 今日僅餘 {remainingSpots} 個修復名額（22:00 截止造冊）
+                  ✦ 完成診斷後可自由決定是否繼續，無時間壓力
                 </div>
 
                 <div className="w-full flex flex-col md:flex-row gap-4 items-stretch mt-4">

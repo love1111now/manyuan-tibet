@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://manyuan-tibet.vercel.app/sitemap.xml

@@ -13,7 +13,6 @@ import { Helmet } from "react-helmet-async";
 
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 
 import { Link } from "wouter";
@@ -27,7 +26,8 @@ import {
   Sparkles 
 } from "lucide-react";
 
-import { DEITIES, HOME_TESTIMONIALS } from "@/lib/siteData";
+// 🚨 關鍵修正：將 DEITIES 與 HOME_TESTIMONIALS 的來源精準分開
+import { DEITIES } from "@/data/deities";
 
 export default function Proof() {
   // 🟢 核心邏輯：自動聚合並提取所有神明資料庫中的專屬見證

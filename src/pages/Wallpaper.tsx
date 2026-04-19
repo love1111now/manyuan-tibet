@@ -52,14 +52,14 @@ export default function Wallpaper() {
   const handleDownloadTrack = () => {
     if (typeof window !== "undefined") {
       // 專業級追蹤：桌布下載事件
-      if ((window as any).gtag) {
-        (window as any).gtag('event', 'download_wallpaper', {
-          event_category: 'engagement',
-          event_label: 'yellow_dzambhala'
+      if (window.gtag) {
+        window.gtag("event", "download_wallpaper", {
+          event_category: "engagement",
+          event_label: "yellow_dzambhala",
         });
       }
-      if ((window as any).fbq) {
-        (window as any).fbq('trackCustom', 'DownloadWallpaper');
+      if (window.fbq) {
+        window.fbq("trackCustom", "DownloadWallpaper");
       }
     }
   };

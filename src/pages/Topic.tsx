@@ -7,7 +7,10 @@ import StickyCta from "@/components/StickyCta";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-import { DEITY_BY_KEY, TOPICS } from "@/lib/siteData";
+
+// 🚨 關鍵修正：將 DEITY_BY_KEY 與 TOPICS 的來源精準拆分
+import { DEITY_BY_KEY } from "@/data/deities";
+import { TOPICS } from "@/lib/siteData";
 
 export default function Topic({ slug }: { slug: string }) {
   const t = TOPICS.find((x) => x.slug === slug);

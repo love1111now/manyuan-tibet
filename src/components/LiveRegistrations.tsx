@@ -1,92 +1,48 @@
-import { useEffect, useMemo, useState } from "react";
-// ⚠️ 修正路徑：因為此檔案在 components 內，要跳出一層去 lib 找資料
-import { DEITIES } from "../lib/siteData"; 
-
 /**
- * 工具函式
+ * LiveRegistrations — 誠信版
+ * 以靜態、可查核的社會認同訊息取代原本的隨機假通知。
+ * 顯示時機：進入頁面 30 秒後，每次停留僅顯示一次，不循環。
  */
-function randInt(min: number, max: number) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
+import { useEffect, useState } from "react";
+import { ShieldCheck } from "lucide-react";
 
-const FAMILY_NAMES = ["林", "陳", "張", "黃", "李", "吳", "王", "蔡", "楊", "劉", "周", "鄭"];
-const GIVEN_NAMES = ["怡", "安", "芸", "晴", "昕", "芯", "妍", "庭", "恩", "昊", "承", "柏", "宇", "翔", "皓", "瑄", "甯", "涵"];
-const CITIES = ["台北", "新北", "桃園", "新竹", "台中", "彰化", "台南", "高雄", "屏東", "宜蘭"];
-
-function randomMaskedName() {
-  const f = FAMILY_NAMES[randInt(0, FAMILY_NAMES.length - 1)];
-  const g = GIVEN_NAMES[randInt(0, GIVEN_NAMES.length - 1)];
-  return `${f}${g}＊`;
-}
-
-function runWhenIdle(fn: () => void) {
-  const ric = (window as any).requestIdleCallback;
-  if (typeof ric === "function") {
-    ric(() => fn(), { timeout: 2000 });
-  } else {
-    window.setTimeout(fn, 0);
-  }
-}
+const TRUST_MESSAGES = [
+  { title: "志工團隊承諾", desc: "護持金 100% 專款專用於西藏壇城法事，不抽取任何行政費用。" },
+  { title: "綠界 SSL 金流保護", desc: "所有付款均透過綠界 256-bit SSL 加密傳輸，資料安全有保障。" },
+  { title: "造冊機制說明", desc: "完成登記後，志工於 24 小時內完成造冊並回傳確認，流程透明可追蹤。" },
+];
 
 export default function LiveRegistrations() {
-  const [toast, setToast] = useState<{ id: number; title: string; desc: string } | null>(null);
-
-  const items = useMemo(() => {
-    if (!DEITIES) return [];
-    return DEITIES.flatMap((d) => d.plans.map((p) => ({ deity: d.name, plan: p.name })));
-  }, []);
+  const [msg, setMsg] = useState<typeof TRUST_MESSAGES[0] | null>(null);
 
   useEffect(() => {
-    if (items.length === 0) return;
-    let timer: number | null = null;
-    let cancelled = false;
+    // 進入頁面 30 秒後顯示一次，不重複
+    const timer = window.setTimeout(() => {
+      if (document.visibilityState !== "visible") return;
+      const pick = TRUST_MESSAGES[Math.floor(Math.random() * TRUST_MESSAGES.length)];
+      setMsg(pick);
+      // 顯示 7 秒後自動收起
+      window.setTimeout(() => setMsg(null), 7000);
+    }, 30_000);
 
-    const scheduleToast = () => {
-      const delayMs = randInt(90_000, 240_000); 
-      timer = window.setTimeout(() => {
-        if (cancelled) return;
-        if (document.visibilityState !== "visible") {
-          scheduleToast();
-          return;
-        }
+    return () => window.clearTimeout(timer);
+  }, []);
 
-        runWhenIdle(() => {
-          if (cancelled) return;
-          const pick = items[randInt(0, items.length - 1)];
-          const name = randomMaskedName();
-          const city = CITIES[randInt(0, CITIES.length - 1)];
-          const remain = randInt(2, 16);
-          const days = randInt(1, 5);
-
-          setToast({
-            id: Date.now(),
-            title: `${name} 已完成護持登記`,
-            desc: `${city} · ${pick.deity} · ${pick.plan} · 剩餘 ${remain} 位`
-          });
-
-          setTimeout(() => setToast(null), 6000);
-          scheduleToast();
-        });
-      }, delayMs);
-    };
-
-    timer = window.setTimeout(scheduleToast, randInt(25_000, 45_000));
-    return () => {
-      cancelled = true;
-      if (timer) window.clearTimeout(timer);
-    };
-  }, [items]);
-
-  if (!toast) return null;
+  if (!msg) return null;
 
   return (
-    <div key={toast.id} className="fixed bottom-24 left-1/2 -translate-x-1/2 z-[9999] w-[90%] max-w-[350px] pointer-events-none">
-      <div className="bg-slate-900/95 backdrop-blur border border-amber-500/50 p-4 rounded-xl shadow-2xl animate-in fade-in slide-in-from-bottom-4 duration-500">
+    <div
+      className="fixed bottom-24 left-1/2 -translate-x-1/2 z-[9999] w-[90%] max-w-[360px] pointer-events-none"
+      role="status"
+      aria-live="polite"
+      aria-atomic="true"
+    >
+      <div className="bg-slate-900/95 backdrop-blur border border-amber-500/40 p-4 rounded-xl shadow-2xl animate-in fade-in slide-in-from-bottom-4 duration-500">
         <div className="flex items-start gap-3">
-          <div className="h-2 w-2 mt-1.5 rounded-full bg-amber-500 shrink-0 animate-pulse" />
-          <div className="space-y-1">
-            <div className="text-sm font-bold text-slate-50">{toast.title}</div>
-            <div className="text-xs text-slate-400">{toast.desc}</div>
+          <ShieldCheck className="h-4 w-4 mt-0.5 text-amber-400 shrink-0" />
+          <div className="space-y-0.5">
+            <div className="text-sm font-bold text-slate-50">{msg.title}</div>
+            <div className="text-xs text-slate-400 leading-relaxed">{msg.desc}</div>
           </div>
         </div>
       </div>

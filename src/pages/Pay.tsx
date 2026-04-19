@@ -46,7 +46,8 @@ import {
 } from "lucide-react";
 import { Link } from "wouter";
 
-import { DEITIES } from "@/lib/siteData";
+// 🚨 關鍵修正：將 DEITIES 來源從 @/lib/siteData 改為 @/data/deities
+import { DEITIES } from "@/data/deities";
 
 export default function Pay() {
   
@@ -396,6 +397,7 @@ export default function Pay() {
                                     <div className="text-xs md:text-sm text-muted-foreground mt-1.5 leading-relaxed">
                                       進入綠界後，請滑到最下方的<strong className="text-foreground">「備註欄 (Remark)」</strong>，寫下您的：姓名、生辰、與此刻最想改變的困境。
                                     </div>
+                                    {/* 🟢 補回被我不慎刪減的範例提示區塊 */}
                                     <div className="mt-3 p-3 md:p-4 bg-background/50 border border-primary/20 rounded-md font-mono text-[11px] md:text-[13px] text-muted-foreground shadow-inner leading-relaxed">
                                       <span className="text-primary font-bold">📝 填寫範例：</span><br/>
                                       王小明，50年1月1日<br/>

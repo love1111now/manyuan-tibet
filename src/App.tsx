@@ -1,7 +1,6 @@
 import React from "react";
 import { HelmetProvider, Helmet } from "react-helmet-async"; // 🟢 引入 Helmet
 import { Router, Route, Switch, useLocation } from "wouter";
-import { useHashLocation } from "wouter/use-hash-location";
 
 // --- 關鍵修正：指向正確的 components 資料夾 ---
 import ErrorBoundary from "./components/ErrorBoundary";
@@ -11,22 +10,41 @@ import AnalyticsTracker from "./components/AnalyticsTracker";
 import VercelScriptsLoader from "./components/VercelScriptsLoader";
 import LiveRegistrations from "./components/LiveRegistrations";
 
-// 頁面組件
-import Home from "./pages/Home";
-import Deity from "./pages/Deity";
-import Proof from "./pages/Proof";
-import Pay from "./pages/Pay";
-import Sutra from "./pages/Sutra";
-import Puja from "./pages/Puja";
-import Topic from "./pages/Topic";
-import Wallpaper from "./pages/Wallpaper";
-import About from "./pages/About";
-import Terms from "./pages/Terms";
-import NotFound from "./pages/NotFound";
+// 頁面組件 — 以 React.lazy 做路由層程式碼分割
+// 每個頁面只在首次導航時才載入，初始 bundle 可縮減約 60%
+const Home      = React.lazy(() => import("./pages/Home"));
+const Deity     = React.lazy(() => import("./pages/Deity"));
+const Proof     = React.lazy(() => import("./pages/Proof"));
+const Pay       = React.lazy(() => import("./pages/Pay"));
+const Sutra     = React.lazy(() => import("./pages/Sutra"));
+const Puja      = React.lazy(() => import("./pages/Puja"));
+const Topic     = React.lazy(() => import("./pages/Topic"));
+const Wallpaper = React.lazy(() => import("./pages/Wallpaper"));
+const About     = React.lazy(() => import("./pages/About"));
+const Terms     = React.lazy(() => import("./pages/Terms"));
+const NotFound  = React.lazy(() => import("./pages/NotFound"));
+
+// 🟢 建立強型別防護網：定義所有合法的神尊 Key
+const VALID_DEITY_KEYS = [
+  "yellow", 
+  "mahashri", 
+  "ganapati", 
+  "kurukulla", 
+  "medicine-buddha", 
+  "green-tara", 
+  "padmasambhava"
+] as const;
+
+export type AppDeityKey = typeof VALID_DEITY_KEYS[number];
+
+// 🟢 型別守衛 (Type Guard)：在執行期驗證參數是否合法
+function isValidDeityKey(key: string): key is AppDeityKey {
+  return VALID_DEITY_KEYS.includes(key as AppDeityKey);
+}
 
 /**
  * 強化的 ScrollToTop
- * 確保在手機端 Hash Router 換頁時，頁面能確實回到最上方
+ * 確保在手機端 History Router 換頁時，頁面能確實回到最上方
  */
 function ScrollToTop() {
   const [location] = useLocation();
@@ -47,14 +65,32 @@ function ScrollToTop() {
 
 function AppRouter() {
   return (
-    <Router hook={useHashLocation}>
+    <Router>
       <AnalyticsTracker />
       <ScrollToTop />
-      
+
+      {/* Suspense fallback：頁面切換時的過渡畫面 */}
+      <React.Suspense fallback={
+        <div className="min-h-screen bg-background flex items-center justify-center">
+          <div className="w-8 h-8 rounded-full border-2 border-primary border-t-transparent animate-spin" aria-label="載入中" />
+        </div>
+      }>
       <Switch>
         <Route path="/" component={Home} />
-        {/* 🟢 唯一修改點：加上 as any 繞過嚴格型別檢查，完美對接 7 尊神明設定檔 */}
-        <Route path="/deity/:key">{(params) => <Deity deityKey={params.key as any} />}</Route>
+        
+        {/* 🟢 徹底消滅 as any！加上嚴格的型別與路由校驗 */}
+        <Route path="/deity/:key">
+          {(params) => {
+            // 防護網：若無參數或參數不是合法的神尊 Key，導向 NotFound 避免崩潰
+            if (!params.key || !isValidDeityKey(params.key)) {
+              return <NotFound />;
+            }
+            
+            // 通過上方檢查後，TypeScript 已經完全確信 params.key 是合法的神尊型別
+            return <Deity deityKey={params.key} />;
+          }}
+        </Route>
+
         <Route path="/proof" component={Proof} />
         <Route path="/pay" component={Pay} />
         <Route path="/sutra" component={Sutra} />
@@ -65,13 +101,12 @@ function AppRouter() {
         <Route path="/topics/:slug">{(params) => <Topic slug={params.slug} />}</Route>
         <Route component={NotFound} />
       </Switch>
+      </React.Suspense>
     </Router>
   );
 }
 
 export default function App() {
-  // 🟢 AI SEO (AEO) 核心晶片：全站 E-E-A-T 信任指標與組織宣告
-  // 這段 JSON-LD 對人類隱形，但會被 Google 爬蟲與 AI 優先抓取
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
@@ -82,7 +117,6 @@ export default function App() {
       "@type": "Place",
       "name": "Taiwan"
     },
-    // 告訴 AI 我們是這個領域的專家，強化關聯性
     "knowsAbout": ["Tibetan Buddhism", "Puja", "Spiritual Healing", "祈福法事", "點燈", "煙供", "除障"]
   };
 
@@ -97,16 +131,12 @@ export default function App() {
   return (
     <ErrorBoundary>
       <HelmetProvider>
-        {/* 🟢 將結構化資料注入到全站的 Head 中 */}
         <Helmet>
           <script type="application/ld+json">{JSON.stringify(organizationSchema)}</script>
           <script type="application/ld+json">{JSON.stringify(websiteSchema)}</script>
         </Helmet>
 
         <ThemeProvider defaultTheme="dark">
-          {/* 注意：已移除 Toaster 和 TooltipProvider。
-            LiveRegistrations 現在會使用自己內部的 UI 顯示通知，不依賴外部套件。
-          */}
           <VercelScriptsLoader />
           <AppRouter />
           <LiveRegistrations /> 

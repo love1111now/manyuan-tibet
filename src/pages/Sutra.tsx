@@ -8,9 +8,11 @@ import { Separator } from "@/components/ui/separator";
 
 import { ExternalLink } from "lucide-react";
 
-import { DEITIES } from "@/lib/siteData";
+// 🚨 關鍵修正：從模組化後的資料來源獲取 DEITIES，解決 No matching export 錯誤
+import { DEITIES } from "@/data/deities";
 
 export default function Sutra() {
+  // 自動聚合所有本尊的經典語錄
   const quotes = DEITIES.flatMap((d) =>
     d.scripture.map((q, idx) => ({
       key: `${d.key}-${idx}`,

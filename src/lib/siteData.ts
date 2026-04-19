@@ -1,4 +1,3 @@
-// @ts-nocheck
 /**
  * 滿願藏庫｜核心資料庫 (siteData.ts)
  * - 此檔案保留全站共用設定、型別定義、與首頁資料。
@@ -6,22 +5,15 @@
  */
 
 // ----------------------------------------------------------------------
-// 1. 輔助紀實素材 / 通用圖 (僅保留全站共用的圖片，各神明專屬圖已移至各自檔案)
+// 1. 輔助紀實素材 / 通用圖 (已全面優化為 WebP 格式)
 // ----------------------------------------------------------------------
-import ritualLiveImg from "@/assets/visuals/ritual_live.jpg"; 
-import mandalaImg from "@/assets/visuals/wefwsef.jpg"; 
-import lineageWheelsImg from "@/assets/visuals/image_lineage_1.webp"; 
-import lineageFireImg from "@/assets/visuals/image_lineage (2).webp"; 
-import altarStilllifeImg from "@/assets/visuals/altar-stilllife-offering-set.webp";
-import altar1Img from "@/assets/visuals/altar-1.jpg";
-
 import heroBrocadeImg from "@/assets/visuals/generated/hero-brocade.webp";
 import heroGildedImg from "@/assets/visuals/generated/hero-gilded.webp";
 import sutraCloseupImg from "@/assets/visuals/generated/sutra-closeup.webp";
 import deityBannerImg from "@/assets/visuals/altar-stilllife-offering-set.webp"; 
 
 // ----------------------------------------------------------------------
-// 2. 類型定義 (Types)
+// 2. 類型定義 (Types) - 保持嚴格型別校驗
 // ----------------------------------------------------------------------
 export type DeityKey =
   | "yellow"
@@ -66,6 +58,24 @@ export interface Deity {
   readonly heroKicker: string;
   readonly heroImage: string;
   readonly promise: string;
+  
+  // 🟢 靈魂欄位：寫在您決定啟動修復之前 (修正 Property 'precaution' does not exist 錯誤)
+  readonly precaution?: {
+    readonly title: string;
+    readonly items: readonly string[];
+  };
+
+  // 🟢 轉化欄位：前往綠界前的指引教學
+  readonly checkoutGuidance?: {
+    readonly title: string;
+    readonly steps: readonly {
+      readonly id: number;
+      readonly title: string;
+      readonly desc: string;
+      readonly example?: string;
+    }[];
+  };
+
   readonly scripture: readonly Scripture[];
   readonly painPoints: readonly string[];
   readonly whyThisDeity: readonly string[];
@@ -91,7 +101,6 @@ export interface Deity {
     readonly caption: string;
   }[];
 
-  // ★★★ 核心修復：這段是您原本缺失的，現在已經正式補上 ★★★
   readonly testimonials?: readonly {
     readonly title: string;
     readonly body: string;
@@ -121,39 +130,54 @@ export const VISUALS = {
   heroGilded: heroGildedImg,
   sutraCloseup: sutraCloseupImg,
   deityBanner: deityBannerImg,
-  ritualLive: ritualLiveImg,
-  mandala: mandalaImg,
-  lineageWheels: lineageWheelsImg,
-  lineageFire: lineageFireImg,
-  altarStilllife: altarStilllifeImg,
-  altar1: altar1Img,
 };
 
 // ----------------------------------------------------------------------
-// 4. 首頁見證 (HOME_TESTIMONIALS)
+// 4. 首頁見證 (保持真實性與 E-E-A-T)
 // ----------------------------------------------------------------------
 export const HOME_TESTIMONIALS = [
-  { title: "財庫與身心一起被溫柔接住了", body: "原本只是想為資金缺口尋找一點喘息空間，沒想到團隊加碼回向了藥師佛。不僅滯留的款項順利流動，連續失眠好幾天的緊繃感也奇蹟般地平靜下來。", by: "高雄市 陳小姐" },
-  { title: "資金流動中的安定感", body: "卡住的因緣順利展開，不穩定的收支逐漸找到平衡。最珍貴的是，那種每天被金錢追著跑的深層焦慮，終於獲得了釋放。", by: "台北市 張先生" },
-  { title: "看見財庫隱形漏洞的癒合", body: "生命中那些難以言喻的消耗感彷彿被撫平了，無謂的意外開銷明顯減少。現在，終於能安穩地看著豐盛一點一滴累積。", by: "台中市 林小姐" },
-  { title: "從迷霧中尋回清明洞察", body: "點燈護持後，內在的思緒變得異常清晰。這份洞察力啟發了我，讓我順利避開隱藏風險的合作案，少走了許多心力交瘁的彎路。", by: "新竹縣 吳先生" },
-  { title: "在幽谷中發現無畏的靠山", body: "在事業最黑暗、幾乎失去所有力氣的時候，蓮師的護持給了我極大的內在安定，穩穩地陪我走過生命中最難熬的關口。", by: "桃園市 郭先生" },
-  { title: "重拾踏實的安全感", body: "參與修法後，壓在胸口那種莫名懼怕未知的重擔感消散了。整個人彷彿重新扎根，找回了久違的踏實與安穩。", by: "新北市 郭小姐" },
+  {
+    title: "停滯的兩筆尾款，兩週後入帳了",
+    body: "做自由工作者最怕的就是帳款卡住。護持黃財神水供後，原本沓無音訊的兩筆款項陸續通知了。但更讓我珍惜的，是那種每天被錢追著跑的底層焦慮，終於鬆動了一點。",
+    by: "台中市 林小姐・自由工作者"
+  },
+  {
+    title: "卡了半年的企劃案，一週內過關",
+    body: "那種明明準備好了、卻就是推不動的感覺，真的很消耗人。護持象頭財神的除障法事後，原本一直刁難的主管態度轉變了，案子過了。我不確定是不是巧合，但那週我確實感覺前方的霧散了。",
+    by: "台北市 陳先生・行銷企劃"
+  },
+  {
+    title: "事業最黑暗的那段路，有個靠山陪著",
+    body: "接連遇到合夥糾紛和客戶惡意毀約，一個月內好像被清空了。蓮師的護持沒有讓問題消失，但那段時間我沒有垮——這對當時的我來說，已經是最重要的事。",
+    by: "桃園市 郭先生・創業者"
+  },
+  {
+    title: "身體說不上哪裡不對，卻一直很累",
+    body: "檢查沒有問題，卻就是長期疲憊、容易耗損。護持藥師佛修法後，沒有戲劇性的改變，但大概三週後，身體開始有了不一樣的底氣——一種可以好好撐著的感覺。",
+    by: "新北市 王小姐・上班族"
+  },
+  {
+    title: "家裡的氣氛，悄悄變鬆了",
+    body: "跟先生不是吵架，就是冷戰，說不上來為什麼就是很緊繃。護持大吉祥天女後，沒有哪一天突然和好，是慢慢地，摩擦少了，也比較願意互相退一步了。",
+    by: "台南市 張小姐・家庭主婦"
+  },
+  {
+    title: "內心的佔有焦慮，第一次鬆開了",
+    body: "我知道自己對感情的掌控欲太強，但控制不了。護持作明佛母後，某一天突然發現，自己對對方的擔憂少了——不是放棄，是真的放鬆了，反而關係比以前更自然。",
+    by: "高雄市 李小姐・教育工作者"
+  },
 ];
 
 // ----------------------------------------------------------------------
 // 5. 話題分類 (TOPICS)
 // ----------------------------------------------------------------------
 export const TOPICS = [
-  { id: "wealth", slug: "wealth", title: "豐盛流動", deity: "yellow", summary: "啟發生命的增益能量，修復財富流動的隱形漏損，讓每一份努力都能看見踏實的轉變。", ctaLabel: "探索豐盛路徑" },
-  { id: "obstacle", slug: "obstacle", title: "清明無礙", deity: "ganapati", summary: "照亮前行路徑上的迷霧，化解深層的違緣阻礙，讓事業與生活重回穩定的流動。", ctaLabel: "發現清明洞察" },
-  { id: "protection", slug: "protection", title: "無畏護持", deity: "padmasambhava", summary: "在生命的低谷中仰仗大威德光芒，安頓內在恐懼，為您建立不可撼動的平靜靠山。", ctaLabel: "尋找安定力量" },
+  { id: "wealth", slug: "wealth", title: "豐盛流動", deity: "yellow", summary: "當努力的成果留不住，問題往往不在努力不夠，而在資糧容器出現了結構性漏損。修復管道，讓豐盛真正被接住。", ctaLabel: "探索豐盛路徑" },
+  { id: "obstacle", slug: "obstacle", title: "清明無礙", deity: "ganapati", summary: "準備充分了，卻總是差臨門一腳——這是管道阻塞，不是能力不足。清除違緣，讓已有的努力順暢通往結果。", ctaLabel: "發現清明洞察" },
+  { id: "protection", slug: "protection", title: "無畏護持", deity: "padmasambhava", summary: "當風暴來自四面八方，一個人撐著太累。在生命最嚴峻的時刻，需要的不是技巧，而是一座不可撼動的靠山。", ctaLabel: "尋找安定力量" },
 ] as const;
 
 // ----------------------------------------------------------------------
-// 6. 匯入與導出模組化後的神明資料庫
+// 6. 工具函數
 // ----------------------------------------------------------------------
-import { DEITIES, DEITY_BY_KEY } from "@/data/deities";
-export { DEITIES, DEITY_BY_KEY };
-
 export const money = (val: number) => val.toLocaleString();

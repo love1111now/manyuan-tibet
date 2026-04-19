@@ -1,0 +1,113 @@
+import React from "react";
+import { Link } from "wouter";
+import {
+  ArrowLeft,
+  ArrowRight,
+  Layers,
+  ClipboardList,
+  ExternalLink,
+  ShieldCheck,
+  HelpCircle,
+  type LucideIcon,
+} from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
+import {
+  Dialog, DialogContent, DialogHeader,
+  DialogTitle, DialogTrigger,
+} from "@/components/ui/dialog";
+import { type Deity } from "@/lib/siteData";
+
+export default function DeityHero({ d }: { d: Deity }) {
+  const scrollToId = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
+  const anchorBtn = (label: string, targetId: string, Icon: LucideIcon) => (
+    <button type="button" className="block w-full text-left" onClick={() => scrollToId(targetId)}>
+      <Button
+        variant="outline"
+        className="h-12 md:h-11 w-full justify-start gap-3 gold-border bg-card/50 hover:bg-primary/10 transition-all"
+      >
+        <Icon className="h-4 w-4 text-primary" />
+        <span className="font-bold tracking-wider">{label}</span>
+      </Button>
+    </button>
+  );
+
+  return (
+    <section className="mx-auto max-w-6xl px-5 md:px-8 pt-8 md:pt-12 pb-10">
+      <Link href="/" className="inline-flex items-center gap-2 text-xs md:text-sm font-bold tracking-widest uppercase text-muted-foreground hover:text-primary transition-colors">
+        <ArrowLeft className="h-4 w-4" /> 返回系統導航
+      </Link>
+
+      <div className="mt-6 grid gap-8 md:grid-cols-[1.1fr_.9fr] md:items-start">
+        <div>
+          <div className="flex flex-wrap items-center gap-3">
+            <Badge className="bg-primary/10 text-primary border-primary/40 px-3 py-1 text-[10px] md:text-xs tracking-widest font-black uppercase">
+              {d.primaryIntent}
+            </Badge>
+            <Badge className="gold-border bg-card/60 text-muted-foreground px-3 py-1 text-[10px] md:text-xs tracking-widest font-bold">
+              {d.heroKicker}
+            </Badge>
+          </div>
+
+          <h1 className="mt-6 font-display text-4xl sm:text-5xl md:text-6xl tracking-tight leading-[1.1] text-foreground/90">{d.name}</h1>
+          <div className="mt-3 text-lg md:text-xl text-primary font-serif italic tracking-wide">{d.subtitle}</div>
+          <p className="mt-6 readable text-muted-foreground max-w-prose text-base md:text-lg leading-relaxed">{d.promise}</p>
+
+          <div className="mt-8 flex flex-col sm:flex-row gap-4">
+            <button type="button" onClick={() => scrollToId("plans")} className="w-full sm:w-auto">
+              <Button className="h-14 w-full px-8 text-base md:text-lg font-bold tracking-[0.2em] uppercase gold-border shadow-xl">
+                啟動專屬修復計畫 <ArrowRight className="h-5 w-5 ml-2" />
+              </Button>
+            </button>
+          </div>
+
+          <div className="mt-10 grid gap-3 sm:grid-cols-2">
+            {anchorBtn("生命結構與診斷", "pain", Layers)}
+            {anchorBtn("系統修復指引", "process", ClipboardList)}
+            {d.ritual && anchorBtn("經典儀軌與實證", "ritual", ExternalLink)}
+            {anchorBtn("對位修復方案", "plans", ShieldCheck)}
+            {anchorBtn("顧問釋疑 (FAQ)", "faq", HelpCircle)}
+          </div>
+        </div>
+
+        <Card className="gold-border bg-card/70 paper-grain overflow-hidden group">
+          <Dialog>
+            <DialogTrigger asChild>
+              <button type="button" className="block w-full text-left relative cursor-zoom-in">
+                <AspectRatio ratio={4 / 5}>
+                  {/* ✅ 已修正：fetchPriority 大寫 P 以符合 React 屬性規範 */}
+                  <img 
+                    src={d.heroImage} 
+                    alt={d.name} 
+                    className="h-full w-full object-cover bg-background/40 transition-transform duration-1000 group-hover:scale-105" 
+                    loading="eager" 
+                    fetchPriority="high" 
+                  />
+                </AspectRatio>
+                <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-transparent to-transparent pointer-events-none" />
+              </button>
+            </DialogTrigger>
+            <DialogContent className="max-w-4xl bg-background/95 backdrop-blur-xl border-primary/30">
+              <DialogHeader><DialogTitle className="font-display text-2xl text-primary tracking-widest">{d.name}｜經典法相</DialogTitle></DialogHeader>
+              <img src={d.heroImage} alt={d.name} className="w-full h-auto rounded-lg border border-primary/20 shadow-2xl" />
+            </DialogContent>
+          </Dialog>
+          <div className="p-6 md:p-8 relative z-10 -mt-16 backdrop-blur-md bg-background/60 border-t border-primary/20">
+            <blockquote className="mt-3 border-l-2 border-primary/50 pl-4 readable italic text-base md:text-lg text-foreground/90 font-serif">
+              「{d.scripture[0]?.quote}」
+              <footer className="mt-3 text-[10px] text-muted-foreground uppercase not-italic">出處：{d.scripture[0]?.source}</footer>
+            </blockquote>
+          </div>
+        </Card>
+      </div>
+    </section>
+  );
+}
