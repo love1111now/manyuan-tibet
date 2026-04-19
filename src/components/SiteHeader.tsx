@@ -62,8 +62,14 @@ export default function SiteHeader() {
               key={n.href}
               href={n.href}
               className={cn(
-                "py-2 text-center text-xs rounded-md",
-                loc === n.href ? "bg-accent/40 text-foreground" : "text-muted-foreground hover:bg-accent/30"
+                "py-2 text-center text-xs rounded-md font-medium transition-colors",
+                n.href === "/pay"
+                  ? loc === n.href
+                    ? "bg-primary text-primary-foreground font-bold"
+                    : "bg-primary/15 text-primary font-bold hover:bg-primary/25"
+                  : loc === n.href
+                  ? "bg-accent/40 text-foreground"
+                  : "text-muted-foreground hover:bg-accent/30"
               )}
             >
               {n.label}

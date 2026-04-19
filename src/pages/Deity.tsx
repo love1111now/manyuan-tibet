@@ -9,10 +9,14 @@ Design philosophy: Neo-thangka noir (Deep Immersion Engineering)
 
 import React, { useEffect } from "react";
 import { useLocation, Redirect } from "wouter";
+import { Helmet } from "react-helmet-async";
 
 // 🟢 資料來源精準對位
 import { DEITY_BY_KEY } from "@/data/deities"; 
 import type { DeityKey } from "@/lib/siteData";
+
+// OG 圖片（神明頁共用）
+import ogDeityImg from "@/assets/visuals/seo/image_w5504_h3072_page-deity-1.webp";
 
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
@@ -51,17 +55,48 @@ const DeityPage: React.FC<DeityPageProps> = ({ deityKey }) => {
     return <Redirect to="/" replace />;
   }
 
+  // FB Pixel ViewContent — 廣告再行銷池建立的關鍵事件
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const timer = setTimeout(() => {
+      window.fbq?.("track", "ViewContent", {
+        content_ids: [d.key],
+        content_name: d.name,
+        content_type: "product",
+        value: d.plans?.find((p) => p.hot)?.price ?? d.plans?.[0]?.price ?? 0,
+        currency: "TWD",
+      });
+      window.gtag?.("event", "view_item", {
+        currency: "TWD",
+        value: d.plans?.find((p) => p.hot)?.price ?? 0,
+        items: [{ item_id: d.key, item_name: d.name, item_category: d.primaryIntent }],
+      });
+    }, 800);
+    return () => clearTimeout(timer);
+  }, [d.key]);
+
   return (
     <div 
       className="min-h-screen font-sans antialiased text-white selection:bg-white/20 transition-colors duration-700 ease-in-out"
       style={
         {
           backgroundColor: d.themeColor.bg,
-          // 提供全域 CSS 變數供子組件使用
           "--deity-accent": d.themeColor.accent,
         } as React.CSSProperties
       }
     >
+      {/* OG / SEO meta — 讓神明頁分享出去顯示正確大圖 */}
+      <Helmet>
+        <title>{d.name}｜{d.primaryIntent}｜滿願藏庫</title>
+        <meta name="description" content={`${d.heroKicker}。${d.promise.slice(0, 80)}…`} />
+        <meta property="og:title" content={`${d.name}｜${d.primaryIntent}｜滿願藏庫`} />
+        <meta property="og:description" content={d.heroKicker} />
+        <meta property="og:image" content={ogDeityImg} />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:image" content={ogDeityImg} />
+      </Helmet>
+
       {/* 導覽列 */}
       <SiteHeader />
       

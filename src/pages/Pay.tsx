@@ -353,7 +353,8 @@ export default function Pay() {
                             </div>
                             <div className="text-left sm:text-right shrink-0 mt-2 sm:mt-0 pt-3 sm:pt-0 border-t sm:border-t-0 border-border/50">
                               <div className="text-[9px] md:text-[10px] tracking-[0.2em] uppercase text-muted-foreground font-bold mb-1">護持結緣金</div>
-                              <div className="font-display text-3xl md:text-4xl text-primary">{p.price}</div>
+                              <div className="font-display text-3xl md:text-4xl text-primary">{p.price.toLocaleString()}</div>
+                              <div className="mt-1 text-[10px] text-muted-foreground/50">≈ 每日 NT${Math.round(p.price / 30)} · 守護 30 天</div>
                             </div>
                           </div>
 
@@ -371,7 +372,7 @@ export default function Pay() {
                           <Dialog>
                             <DialogTrigger asChild>
                               <Button className="h-14 w-full text-sm md:text-base font-bold tracking-[0.15em] uppercase gold-border bg-primary text-primary-foreground shadow-lg transition-all hover:scale-[1.02] active:scale-95">
-                                確認委託，請志工造冊 <ArrowRight className="h-4 w-4 md:h-5 md:w-5 ml-2" />
+                                護持 NT${p.price.toLocaleString()}，啟動造冊 <ArrowRight className="h-4 w-4 md:h-5 md:w-5 ml-2" />
                               </Button>
                             </DialogTrigger>
                             <DialogContent className="max-w-md w-[95%] p-0 overflow-hidden bg-background border-primary/30 shadow-2xl rounded-xl">
@@ -425,7 +426,7 @@ export default function Pay() {
                                     onClick={() => handleTrackCheckout(p.name, p.price, d.name)}
                                   >
                                     <Button className="w-full h-14 md:h-16 bg-primary hover:bg-primary/90 text-primary-foreground text-sm md:text-lg font-bold shadow-xl transition-all active:scale-95 tracking-[0.1em] md:tracking-[0.15em] group">
-                                      準備好了，前往安全通道 <ArrowRight className="h-4 w-4 md:h-5 md:w-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                                      前往綠界安全通道，護持 NT${p.price.toLocaleString()} <ArrowRight className="h-4 w-4 md:h-5 md:w-5 ml-2 group-hover:translate-x-1 transition-transform" />
                                     </Button>
                                   </a>
                                 </div>
