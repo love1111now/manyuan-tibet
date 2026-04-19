@@ -42,6 +42,21 @@ export default function DeityHero({ d }: { d: Deity }) {
 
   return (
     <section className="mx-auto max-w-6xl px-5 md:px-8 pt-8 md:pt-12 pb-10">
+      {/* 廣告銜接帶：確認廣告訴求與頁面一致性，降低冷流量跳出率 */}
+      <div className="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3 px-4 py-3 rounded-lg bg-primary/5 border border-primary/20">
+        <div className="flex items-center gap-2 text-sm text-foreground/80">
+          <ShieldCheck className="h-4 w-4 text-primary shrink-0" />
+          <span>您正在查看：<strong className="text-foreground">{d.name}</strong> — {d.primaryIntent}</span>
+        </div>
+        <button
+          type="button"
+          onClick={() => scrollToId("plans")}
+          className="text-xs font-bold text-primary tracking-widest uppercase hover:underline underline-offset-4 shrink-0"
+        >
+          直接查看方案與定價 ↓
+        </button>
+      </div>
+
       <Link href="/" className="inline-flex items-center gap-2 text-xs md:text-sm font-bold tracking-widest uppercase text-muted-foreground hover:text-primary transition-colors">
         <ArrowLeft className="h-4 w-4" /> 返回系統導航
       </Link>

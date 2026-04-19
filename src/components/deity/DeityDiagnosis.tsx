@@ -38,6 +38,20 @@ export default function DeityDiagnosis({ d }: { d: Deity }) {
           </ul>
         </Card>
       </div>
+      {/* 誠信承諾：在學理說明結尾，而非購買阻力 */}
+      {d.precaution && (
+        <div className="mt-6 p-5 md:p-7 rounded-xl border border-primary/20 bg-primary/3">
+          <div className="text-[10px] tracking-[0.3em] uppercase text-primary/70 font-bold mb-3">關於這份修復的誠實說明</div>
+          <ul className="space-y-2">
+            {d.precaution.items.map((item: string, i: number) => (
+              <li key={i} className="flex gap-2 text-xs md:text-sm text-muted-foreground readable leading-relaxed">
+                <span className="text-primary/50 shrink-0 mt-0.5">·</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </section>
   );
 }

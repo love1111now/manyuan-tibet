@@ -364,6 +364,9 @@ export default function TreasuryQuiz() {
                     <div className="text-primary font-bold tracking-wider text-xs md:text-sm mb-3 mt-5">
                       <span className="block mb-1 text-muted-foreground">您的能量對位本尊：</span>
                       <span className="text-xl md:text-2xl text-foreground tracking-widest">{deity.name}</span>
+                      <p className="mt-3 text-sm text-muted-foreground readable leading-relaxed max-w-sm">
+                        {deity.whyThisDeity?.[0]}
+                      </p>
                     </div>
                     {/**
                      * 🚨 修正 TS 2322：
@@ -494,7 +497,7 @@ export default function TreasuryQuiz() {
                 <div className="w-full flex flex-col md:flex-row gap-4 items-stretch mt-4">
                   <Link href={`/deity/${primaryDeityKey}`} className="flex-1">
                     <Button className="h-16 md:h-20 w-full text-lg md:text-xl font-bold tracking-[0.2em] uppercase gold-border bg-primary text-primary-foreground shadow-2xl active:scale-95 transition-all group">
-                      啟動我的修復計畫 <ArrowRight className="ml-3 h-6 w-6 group-hover:translate-x-1 transition-transform" />
+                      深入了解這個修復維度 <ArrowRight className="ml-3 h-6 w-6 group-hover:translate-x-1 transition-transform" />
                     </Button>
                   </Link>
                 </div>

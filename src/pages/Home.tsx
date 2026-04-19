@@ -86,23 +86,24 @@ export default function Home() {
           <div className="relative mx-auto max-w-5xl px-4 pt-20 pb-20 flex flex-col items-center text-center">
             <div className="flex flex-wrap justify-center items-center gap-3 mb-8">
               <Badge className="gold-border bg-primary/10 text-primary backdrop-blur px-3 py-1 text-[10px] md:text-xs tracking-widest font-bold">
-                生命能量對位系統 2.0
+                台灣志工不支薪團隊
               </Badge>
               <Badge className="gold-border bg-background/40 text-foreground/80 backdrop-blur px-3 py-1 text-[10px] md:text-xs tracking-widest">
-                今日吉時名額開放中
+                護持金 100% 用於西藏壇城供養
               </Badge>
             </div>
 
             <h1 className="font-display text-5xl sm:text-7xl md:text-8xl leading-[1.1] tracking-tight">
-              我們不高調、不支薪
+              無論多努力，
               <br />
-              <span className="text-primary italic">只依正法力量為您完成儀軌</span>
+              <span className="text-primary italic">總有些坎就是跨不過去</span>
             </h1>
 
-            <p className="mt-8 readable text-muted-foreground max-w-3xl text-base md:text-xl leading-relaxed mx-auto italic">
-              「為什麼無論多努力，生命中總有些坎跨不過去？」
-              <br className="hidden md:block" aria-hidden="true" />
-              這往往非關運氣，而是您的<span className="text-foreground font-bold">資糧容器出現了結構性漏損</span>。我們是志工團隊，旨在透過佛法經典的能量對位，協助您在動盪的時代找回不動的中心。
+            <p className="mt-8 readable text-muted-foreground max-w-3xl text-base md:text-xl leading-relaxed mx-auto">
+              這往往不是意志力的問題。<span className="text-foreground font-semibold">當生命的資糧容器出現了結構性漏損</span>，再多的努力也會在不知不覺中流失。
+            </p>
+            <p className="mt-4 readable text-muted-foreground max-w-3xl text-base md:text-lg leading-relaxed mx-auto italic opacity-80">
+              我們是台灣不支薪志工，依循佛法古老智慧，陪伴您修復那個漏損。不高調，不造神，只如法完成每一道儀軌。
             </p>
 
             <button 
@@ -258,11 +259,12 @@ export default function Home() {
                     <div className="p-8 flex flex-col justify-between">
                       <div>
                         <div className="text-[10px] tracking-[0.25em] uppercase text-primary font-black mb-2 opacity-80">
-                          {d.primaryIntent}
+                          能量解決方案 · {d.primaryIntent}
                         </div>
                         <div className="mt-1 font-display text-4xl group-hover:text-primary transition-colors">{d.name}</div>
                         <div className="mt-2 text-sm text-muted-foreground font-medium tracking-wide">{d.subtitle}</div>
-                        <p className="mt-5 readable text-muted-foreground text-sm line-clamp-3 leading-relaxed opacity-70">「{d.promise}」</p>
+                        <p className="mt-5 readable text-muted-foreground text-sm line-clamp-2 leading-relaxed opacity-70">{d.whyThisDeity?.[0]}</p>
+                        <p className="mt-3 readable text-muted-foreground text-xs line-clamp-2 leading-relaxed opacity-50 italic">「{d.heroKicker}」</p>
                       </div>
                       <div className="mt-8 flex items-center gap-3 text-xs font-bold text-foreground/80 tracking-[0.2em] group-hover:translate-x-2 transition-transform uppercase" aria-hidden="true">
                         對位介紹與修復方案 <ArrowRight className="h-4 w-4 text-primary" />
