@@ -108,12 +108,63 @@ export default function Home() {
 
             <button 
               type="button"
-              onClick={() => scrollToSection("quiz")}
-              aria-label="向下捲動至生命維度測驗"
-              className="mt-16 flex flex-col items-center justify-center opacity-70 hover:opacity-100 transition-opacity animate-bounce cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-4 rounded-lg p-2"
+              onClick={() => scrollToSection("choose-path")}
+              aria-label="向下選擇您的問題類型"
+              className="mt-10 flex flex-col items-center justify-center opacity-70 hover:opacity-100 transition-opacity animate-bounce cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-4 rounded-lg p-2"
             >
-              <span className="text-[10px] tracking-[0.3em] uppercase font-bold text-primary mb-3">向下探索生命維度</span>
+              <span className="text-[10px] tracking-[0.3em] uppercase font-bold text-primary mb-3">選擇您的問題類型</span>
               <ArrowDown className="w-6 h-6 text-primary" aria-hidden="true" />
+            </button>
+          </div>
+        </section>
+
+        {/* 三痛點快速入口：冷流量 5 秒選擇自己的問題，直達對應神明頁 */}
+        <section id="choose-path" className="mx-auto max-w-5xl px-4 pb-4 -mt-4 scroll-mt-20">
+          <div className="grid gap-4 md:grid-cols-3">
+            {/* 痛點一：財富 / 事業 */}
+            <Link href="/deity/yellow" className="group block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-xl">
+              <div className="h-full p-6 md:p-8 rounded-xl border border-primary/20 bg-primary/5 hover:bg-primary/10 hover:border-primary/50 transition-all duration-300 cursor-pointer">
+                <div className="text-2xl mb-3">💰</div>
+                <div className="font-display text-xl md:text-2xl text-foreground/90 mb-2">錢留不住、事業卡關</div>
+                <p className="text-sm text-muted-foreground readable leading-relaxed">
+                  努力了卻總差一步，財富不斷漏失，找不到突破口。
+                </p>
+                <div className="mt-4 flex items-center gap-1 text-xs font-bold text-primary tracking-widest uppercase">
+                  對位黃財神 <ChevronRight className="h-3 w-3" />
+                </div>
+              </div>
+            </Link>
+
+            {/* 痛點二：關係 / 人緣 */}
+            <Link href="/deity/kurukulla" className="group block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-xl">
+              <div className="h-full p-6 md:p-8 rounded-xl border border-primary/20 bg-primary/5 hover:bg-primary/10 hover:border-primary/50 transition-all duration-300 cursor-pointer">
+                <div className="text-2xl mb-3">🌸</div>
+                <div className="font-display text-xl md:text-2xl text-foreground/90 mb-2">感情不順、人緣薄弱</div>
+                <p className="text-sm text-muted-foreground readable leading-relaxed">
+                  感覺社交透明，找不到對的人，職場人際也總是吃力。
+                </p>
+                <div className="mt-4 flex items-center gap-1 text-xs font-bold text-primary tracking-widest uppercase">
+                  對位作明佛母 <ChevronRight className="h-3 w-3" />
+                </div>
+              </div>
+            </Link>
+
+            {/* 痛點三：不確定 / 綜合 → 測驗 */}
+            <button
+              type="button"
+              onClick={() => scrollToSection("quiz")}
+              className="group block text-left w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-xl"
+            >
+              <div className="h-full p-6 md:p-8 rounded-xl border border-border/40 bg-card/50 hover:bg-card/80 hover:border-primary/30 transition-all duration-300 cursor-pointer">
+                <div className="text-2xl mb-3">🔍</div>
+                <div className="font-display text-xl md:text-2xl text-foreground/90 mb-2">說不清楚，就是卡</div>
+                <p className="text-sm text-muted-foreground readable leading-relaxed">
+                  整體感覺不對勁，不知道問題在哪裡，想先做個診斷。
+                </p>
+                <div className="mt-4 flex items-center gap-1 text-xs font-bold text-primary tracking-widest uppercase">
+                  30 秒免費診斷 <ChevronRight className="h-3 w-3" />
+                </div>
+              </div>
             </button>
           </div>
         </section>
