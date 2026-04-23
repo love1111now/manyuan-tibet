@@ -128,7 +128,13 @@ export default function Wallpaper() {
             <Card className="relative p-3 md:p-5 gold-border bg-card/60 backdrop-blur-xl paper-grain shadow-2xl mx-auto max-w-[320px] md:max-w-md transform rotate-1 hover:rotate-0 transition-transform duration-700">
               <div className="absolute top-6 left-1/2 -translate-x-1/2 w-1/3 h-6 bg-background/90 rounded-full z-20 shadow-sm border border-border/50" />
               <div className="relative rounded-[2rem] overflow-hidden border-4 border-background/80 shadow-inner">
-                <img src={wallpaperUrl} alt="黃財神桌布預覽" className="w-full h-auto aspect-[9/19.5] object-cover hover:scale-105 transition-transform duration-1000" loading="eager" />
+                <img
+                  src={wallpaperUrl}
+                  alt="黃財神桌布預覽"
+                  className="w-full h-auto aspect-[9/19.5] object-cover hover:scale-105 transition-transform duration-1000"
+                  loading="eager"
+                  decoding="async"
+                />
                 <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-background/20" />
                 <div className="absolute top-16 left-0 right-0 text-center z-10 pointer-events-none drop-shadow-md">
                   <div className="text-white/90 font-medium text-lg tracking-widest">星期三 18日</div>

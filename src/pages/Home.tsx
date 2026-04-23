@@ -79,6 +79,7 @@ export default function Home() {
               className="h-full w-full object-cover scale-[1.05]"
               loading="eager"
               fetchPriority="high"
+              decoding="async"
             />
           </div>
           <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/80 to-background" aria-hidden="true" />
@@ -305,7 +306,14 @@ export default function Home() {
                   <div className="grid md:grid-cols-[240px_1fr]">
                     <div className="h-56 md:h-full w-full overflow-hidden">
                       {/* 這裡非首屏圖片，保持 lazy loading */}
-                      <img src={d.heroImage} alt="" className="h-full w-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 group-hover:scale-110" loading="lazy" aria-hidden="true" />
+                      <img
+                        src={d.heroImage}
+                        alt=""
+                        className="h-full w-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 group-hover:scale-110"
+                        loading="lazy"
+                        decoding="async"
+                        aria-hidden="true"
+                      />
                     </div>
                     <div className="p-8 flex flex-col justify-between">
                       <div>
@@ -339,7 +347,13 @@ export default function Home() {
             </div>
             <div className="grid md:grid-cols-[320px_1fr]">
               <div className="h-64 md:h-full w-full relative">
-                <img src={VISUALS.sutraCloseup} alt="藥師佛法事意象" className="h-full w-full object-cover opacity-60 grayscale group-hover:grayscale-0 transition-all duration-700" loading="lazy" />
+                <img
+                  src={VISUALS.sutraCloseup}
+                  alt="藥師佛法事意象"
+                  className="h-full w-full object-cover opacity-60 grayscale group-hover:grayscale-0 transition-all duration-700"
+                  loading="lazy"
+                  decoding="async"
+                />
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent to-primary/5" aria-hidden="true" />
               </div>
               <div className="p-8 md:p-14 z-10 flex flex-col justify-center">
@@ -412,6 +426,8 @@ export default function Home() {
                   src={DEITIES.find(d => d.key === 'yellow')?.heroImage} 
                   alt="" 
                   className="h-full w-full object-cover border-l border-border/50 opacity-80" 
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
             </div>

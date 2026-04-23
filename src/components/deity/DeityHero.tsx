@@ -105,6 +105,7 @@ export default function DeityHero({ d }: { d: Deity }) {
                     className="h-full w-full object-cover bg-background/40 transition-transform duration-1000 group-hover:scale-105" 
                     loading="eager" 
                     fetchPriority="high" 
+                    decoding="async"
                   />
                 </AspectRatio>
                 <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-transparent to-transparent pointer-events-none" />
@@ -112,7 +113,13 @@ export default function DeityHero({ d }: { d: Deity }) {
             </DialogTrigger>
             <DialogContent className="max-w-4xl bg-background/95 backdrop-blur-xl border-primary/30">
               <DialogHeader><DialogTitle className="font-display text-2xl text-primary tracking-widest">{d.name}｜經典法相</DialogTitle></DialogHeader>
-              <img src={d.heroImage} alt={d.name} className="w-full h-auto rounded-lg border border-primary/20 shadow-2xl" />
+              <img
+                src={d.heroImage}
+                alt={d.name}
+                className="w-full h-auto rounded-lg border border-primary/20 shadow-2xl"
+                loading="lazy"
+                decoding="async"
+              />
             </DialogContent>
           </Dialog>
           <div className="p-6 md:p-8 relative z-10 -mt-16 backdrop-blur-md bg-background/60 border-t border-primary/20">
