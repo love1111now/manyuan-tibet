@@ -16,7 +16,7 @@ import { DEITY_BY_KEY } from "@/data/deities";
 import type { DeityKey } from "@/lib/siteData";
 
 // OG 圖片（神明頁共用）
-import ogDeityImg from "@/assets/visuals/seo/optimized/og-deity-1200x630.webp";
+import ogDeityImg from "@/assets/visuals/seo/image_w5504_h3072_page-deity-1.webp";
 
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";

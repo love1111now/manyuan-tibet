@@ -1,5 +1,6 @@
 // src/components/deity/DeityPlanSelection.tsx
 import React from "react";
+import pujaImg from "@/assets/visuals/testimonial-puja.png";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -13,6 +14,51 @@ export default function DeityPlanSelection({ d }: { d: Deity }) {
 
   return (
     <section id="plans" className="mx-auto max-w-6xl px-5 md:px-8 pt-12 pb-16 scroll-mt-24">
+      {/* ── P1 真實見證區塊：法事現場照 + 用戶見證文 ── */}
+      <div className="mb-12 grid gap-6 md:grid-cols-[1fr_1.1fr] items-start">
+        {/* 法事現場照片 */}
+        <div className="relative rounded-2xl overflow-hidden border border-primary/20 shadow-2xl">
+          <img
+            src={pujaImg}
+            alt="黃財神祈福法會・滿願藏庫"
+            className="w-full h-auto object-cover"
+            loading="lazy"
+          />
+          <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent">
+            <p className="text-xs text-white/80 tracking-widest uppercase font-bold">黃財神祈福法會・現場實況</p>
+            <p className="text-[10px] text-white/50 mt-1">壇城莊嚴供養・喇嘛如法誦經・造冊信眾同沾法益</p>
+          </div>
+        </div>
+
+        {/* 真實見證文 */}
+        <div className="flex flex-col justify-center">
+          <div className="text-[10px] tracking-[0.3em] uppercase text-primary font-bold mb-4">真實見證</div>
+          <blockquote className="space-y-4 text-muted-foreground readable text-sm md:text-base leading-relaxed">
+            <p className="text-foreground/90 font-medium text-base md:text-lg leading-relaxed">
+              「在參加法會之前，我正面臨著生活的低谷與事業的瓶頸。面對未來的迷茫，我常常在深夜感到焦慮，難以入眠。」
+            </p>
+            <p>
+              法會結束後，我不再病急亂投醫，而是學會了理性規劃人生。我開始更專注於自己的工作。奇妙的是，當我的內心變得充實與篤定，生活和事業似乎也真的有了起色。
+            </p>
+            <p>
+              我開始明白，真正的財富，不僅僅是物質上的豐盛，更是心靈的富足、智慧的開展。
+            </p>
+          </blockquote>
+          <footer className="mt-6 flex items-center gap-3">
+            <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold text-sm shrink-0">林</div>
+            <div>
+              <div className="text-sm font-bold text-foreground">林小姐</div>
+              <div className="text-[10px] text-muted-foreground tracking-wider">參與黃財神如意水供殊勝法會後</div>
+            </div>
+          </footer>
+          <div className="mt-6 p-4 rounded-xl bg-primary/5 border border-primary/20">
+            <p className="text-xs text-muted-foreground leading-relaxed">
+              <span className="text-primary font-bold">✦ 關於這份見證：</span>這是真實參與者在法會後自發撰寫的感謝信。我們不承諾每個人的體驗相同，但我們承諾每一道儀軌都如法如實完成。
+            </p>
+          </div>
+        </div>
+      </div>
+
       {/* 本月限定加碼（移除頂部阻力卡片，直接進入加碼區） */}
       <div className="mb-10 p-6 md:p-8 rounded-xl border border-primary/40 bg-primary/5 relative overflow-hidden group shadow-inner">
         <div className="flex flex-col sm:flex-row sm:items-center gap-3 mb-3">

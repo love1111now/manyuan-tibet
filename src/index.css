@@ -171,8 +171,6 @@
     -webkit-tap-highlight-color: transparent;
     font-feature-settings: "palt" 1;
     position: relative;
-    /* Android / Mobile：降低點擊延遲與誤觸 */
-    touch-action: manipulation;
   }
 
   /* 細緻紙張顆粒 */
@@ -438,19 +436,6 @@
   .p-16, .p-24 { padding: 1.25rem !important; }
   .py-40, .py-32, .py-24 { padding-top: 3.5rem !important; padding-bottom: 3.5rem !important; }
   .btn-gold { padding-top: 0.75rem; padding-bottom: 0.75rem; padding-left: 1.5rem; padding-right: 1.5rem; font-size: 10px; letter-spacing: 0.1em !important; }
-  /* 低階 Android：減少滾動時的過度繪製 */
-  body::before { opacity: 0.08; }
-}
-
-/* 觸控裝置：確保點擊目標 >= 44px（特別是 Android） */
-@media (pointer: coarse) {
-  :where(button, [role='button'], a, input, select, textarea) {
-    touch-action: manipulation;
-  }
-
-  :where(button, [role='button'], a.button-like) {
-    min-height: 44px;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {

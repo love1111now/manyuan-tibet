@@ -77,13 +77,7 @@ export default function Topic({ slug }: { slug: string }) {
         <section className="mt-10">
           <Card className="overflow-hidden gold-border bg-card hover:border-primary/40 transition-colors">
             <div className="grid md:grid-cols-[240px_1fr]">
-              <img
-                src={deity.heroImage}
-                alt={deity.name}
-                className="h-48 w-full object-contain bg-background/30"
-                loading="lazy"
-                decoding="async"
-              />
+              <img src={deity.heroImage} alt={deity.name} className="h-48 w-full object-contain bg-background/30" />
               <div className="p-7 flex flex-col justify-center">
                 <div className="text-xs tracking-[0.24em] uppercase text-muted-foreground">對應本尊</div>
                 <div className="mt-1 font-display text-3xl">{deity.name}</div>

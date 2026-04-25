@@ -34,13 +34,7 @@ export default function About() {
         </p>
 
         <Card className="mt-8 overflow-hidden gold-border bg-card/80 backdrop-blur paper-grain">
-          <img
-            src={bannerArt}
-            alt="傳承與立場示意"
-            className="h-[280px] md:h-[360px] w-full object-cover"
-            loading="eager"
-            decoding="async"
-          />
+          <img src={bannerArt} alt="傳承與立場示意" className="h-[280px] md:h-[360px] w-full object-cover" loading="eager" />
         </Card>
 
         {/* 新增：志工團隊的真實故事 */}

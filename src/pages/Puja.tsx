@@ -70,7 +70,6 @@ export default function Puja() {
                     alt={d.name} 
                     className="h-44 w-full object-contain bg-background/30" 
                     loading="lazy" 
-                    decoding="async"
                   />
                   <div className="p-7 flex flex-col justify-between">
                     <div>

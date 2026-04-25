@@ -9,6 +9,7 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import AnalyticsTracker from "./components/AnalyticsTracker";
 import VercelScriptsLoader from "./components/VercelScriptsLoader";
 import LiveRegistrations from "./components/LiveRegistrations";
+const ExitIntent = React.lazy(() => import("./components/ExitIntent"));
 
 // 頁面組件 — 以 React.lazy 做路由層程式碼分割
 // 每個頁面只在首次導航時才載入，初始 bundle 可縮減約 60%
@@ -139,7 +140,8 @@ export default function App() {
         <ThemeProvider defaultTheme="dark">
           <VercelScriptsLoader />
           <AppRouter />
-          <LiveRegistrations /> 
+          <LiveRegistrations />
+      <ExitIntent /> 
         </ThemeProvider>
       </HelmetProvider>
     </ErrorBoundary>
