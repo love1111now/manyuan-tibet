@@ -48,17 +48,10 @@ export default function ExitIntent() {
       show();
     };
 
-    // 行動：快速向上滑動
-    let lastY = 0;
-    let lastT = 0;
+    // 行動：滑回頁面頂端（y < 80px）且停留時間 > 20 秒
     const onScroll = () => {
       if (!ready) return;
-      const y = window.scrollY;
-      const t = Date.now();
-      const velocity = (lastY - y) / Math.max(t - lastT, 1);
-      if (velocity > 2 && y > 300) show();
-      lastY = y;
-      lastT = t;
+      if (window.scrollY < 80) show();
     };
 
     document.addEventListener("mouseleave", onMouseLeave);

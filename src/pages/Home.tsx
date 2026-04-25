@@ -123,7 +123,7 @@ export default function Home() {
           <div className="grid gap-4 md:grid-cols-3">
             {/* 痛點一：財富 / 事業 */}
             <Link href="/deity/yellow" className="group block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-xl">
-              <div className="h-full p-6 md:p-8 rounded-xl border border-primary/20 bg-primary/5 hover:bg-primary/10 hover:border-primary/50 transition-all duration-300 cursor-pointer">
+              <div className="h-full p-5 md:p-8 rounded-xl border border-primary/20 bg-primary/5 active:bg-primary/15 transition-all duration-200 cursor-pointer">
                 <div className="text-2xl mb-3">💰</div>
                 <div className="font-display text-xl md:text-2xl text-foreground/90 mb-2">錢留不住、事業卡關</div>
                 <p className="text-sm text-muted-foreground readable leading-relaxed">
@@ -137,7 +137,7 @@ export default function Home() {
 
             {/* 痛點二：關係 / 人緣 */}
             <Link href="/deity/kurukulla" className="group block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-xl">
-              <div className="h-full p-6 md:p-8 rounded-xl border border-primary/20 bg-primary/5 hover:bg-primary/10 hover:border-primary/50 transition-all duration-300 cursor-pointer">
+              <div className="h-full p-5 md:p-8 rounded-xl border border-primary/20 bg-primary/5 active:bg-primary/15 transition-all duration-200 cursor-pointer">
                 <div className="text-2xl mb-3">🌸</div>
                 <div className="font-display text-xl md:text-2xl text-foreground/90 mb-2">感情不順、人緣薄弱</div>
                 <p className="text-sm text-muted-foreground readable leading-relaxed">
@@ -155,7 +155,7 @@ export default function Home() {
               onClick={() => scrollToSection("quiz")}
               className="group block text-left w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-xl"
             >
-              <div className="h-full p-6 md:p-8 rounded-xl border border-border/40 bg-card/50 hover:bg-card/80 hover:border-primary/30 transition-all duration-300 cursor-pointer">
+              <div className="h-full p-5 md:p-8 rounded-xl border border-border/40 bg-card/50 active:bg-card/90 transition-all duration-200 cursor-pointer">
                 <div className="text-2xl mb-3">🔍</div>
                 <div className="font-display text-xl md:text-2xl text-foreground/90 mb-2">說不清楚，就是卡</div>
                 <p className="text-sm text-muted-foreground readable leading-relaxed">

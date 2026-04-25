@@ -17,7 +17,7 @@ export default function DeityRitualAndEvidence({ d }: { d: Deity }) {
   if (!d.ritual) return null;
 
   return (
-    <section id="ritual" className="mx-auto max-w-6xl px-5 md:px-8 pt-10 pb-8 scroll-mt-24">
+    <section id="ritual" className="mx-auto max-w-6xl px-4 md:px-8 pt-10 pb-8 scroll-mt-24">
       <div className="text-[10px] tracking-[0.3em] uppercase text-muted-foreground font-bold mb-2">Heritage & Evidence</div>
       <h2 className="font-display text-3xl md:text-4xl text-primary">{d.ritual.title}</h2>
       <p className="mt-4 readable text-muted-foreground max-w-2xl text-base md:text-lg">

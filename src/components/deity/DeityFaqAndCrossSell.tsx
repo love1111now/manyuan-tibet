@@ -22,7 +22,7 @@ export default function DeityFaqAndCrossSell({ d }: DeityFaqAndCrossSellProps) {
   return (
     <>
       {/* FAQ 顧問釋疑區塊 - 完整還原雙欄手風琴邏輯 */}
-      <section id="faq" className="mx-auto max-w-6xl px-5 md:px-8 pt-10 pb-16 scroll-mt-24">
+      <section id="faq" className="mx-auto max-w-6xl px-4 md:px-8 pt-10 pb-16 scroll-mt-24">
         <div className="text-[10px] tracking-[0.3em] uppercase text-muted-foreground font-bold mb-2">
           FAQ Consultation
         </div>
@@ -51,7 +51,7 @@ export default function DeityFaqAndCrossSell({ d }: DeityFaqAndCrossSellProps) {
       </section>
 
       {/* ── L6 終局收割：志工溫度 + 終極 CTA ────────────────────── */}
-      <section className="mx-auto max-w-6xl px-5 md:px-8 pb-10">
+      <section className="mx-auto max-w-6xl px-4 md:px-8 pb-10">
         <div className="relative overflow-hidden rounded-2xl border border-primary/30 bg-primary/5 p-8 md:p-14">
           <div className="absolute -top-8 -right-8 w-48 h-48 rounded-full bg-primary/5 pointer-events-none" />
           
@@ -103,8 +103,8 @@ export default function DeityFaqAndCrossSell({ d }: DeityFaqAndCrossSellProps) {
       </section>
 
       {/* CROSS SELL 維度跳轉區塊 - 1:1 還原對位邏輯 */}
-      <section className="mx-auto max-w-6xl px-5 md:px-8 pb-32">
-        <Card className="p-7 md:p-10 gold-border bg-card/70 paper-grain">
+      <section className="mx-auto max-w-6xl px-4 md:px-8 pb-32">
+        <Card className="p-4 md:p-8 gold-border bg-card/70 paper-grain">
           <div className="text-[10px] tracking-[0.3em] uppercase text-muted-foreground font-bold mb-2">
             Explore Other Dimensions
           </div>

@@ -464,3 +464,60 @@
   from { opacity: 0; transform: translateY(20px); filter: blur(8px); }
   to { opacity: 1; transform: translateY(0); filter: blur(0); }
 }
+/* ── 行動端全域優化 ── */
+
+/* 1. 防止 iOS 自動縮放輸入框 */
+@media (max-width: 768px) {
+  input, select, textarea {
+    font-size: 16px !important;
+  }
+}
+
+/* 2. 觸控目標最小高度 44px（Apple/Google 建議） */
+@media (max-width: 768px) {
+  button, [role="button"], a {
+    min-height: 44px;
+  }
+  /* 例外：純文字連結不需要 */
+  a.inline-link {
+    min-height: unset;
+  }
+}
+
+/* 3. 手機段落行距優化（中文閱讀） */
+@media (max-width: 768px) {
+  .readable {
+    line-height: 1.8;
+    letter-spacing: 0.01em;
+  }
+}
+
+/* 4. 手機底部安全區域（適配 iPhone 底部 Home 橫條） */
+.safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* 5. 手機點擊高亮移除（避免 Android 灰色閃爍） */
+@media (max-width: 768px) {
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+  button:active, a:active {
+    opacity: 0.85;
+    transform: scale(0.98);
+    transition: opacity 0.1s, transform 0.1s;
+  }
+}
+
+/* 6. 滾動慣性（iOS 需要明確宣告） */
+html {
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+}
+
+/* 7. 手機字體渲染優化 */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}

@@ -13,9 +13,9 @@ export default function DeityPlanSelection({ d }: { d: Deity }) {
   };
 
   return (
-    <section id="plans" className="mx-auto max-w-6xl px-5 md:px-8 pt-12 pb-16 scroll-mt-24">
+    <section id="plans" className="mx-auto max-w-6xl px-4 md:px-8 pt-8 md:pt-12 pb-12 md:pb-16 scroll-mt-24">
       {/* ── P1 真實見證區塊：法事現場照 + 用戶見證文 ── */}
-      <div className="mb-12 grid gap-6 md:grid-cols-[1fr_1.1fr] items-start">
+      <div className="mb-10 grid gap-5 md:grid-cols-[1fr_1.1fr] items-start">
         {/* 法事現場照片 */}
         <div className="relative rounded-2xl overflow-hidden border border-primary/20 shadow-2xl">
           <img
@@ -60,7 +60,7 @@ export default function DeityPlanSelection({ d }: { d: Deity }) {
       </div>
 
       {/* 本月限定加碼（移除頂部阻力卡片，直接進入加碼區） */}
-      <div className="mb-10 p-6 md:p-8 rounded-xl border border-primary/40 bg-primary/5 relative overflow-hidden group shadow-inner">
+      <div className="mb-8 p-4 md:p-7 rounded-xl border border-primary/40 bg-primary/5 relative overflow-hidden group shadow-inner">
         <div className="flex flex-col sm:flex-row sm:items-center gap-3 mb-3">
           <Badge className="w-fit bg-primary text-primary-foreground gold-border animate-pulse px-3 py-1 font-bold tracking-widest text-[10px]">本月限定</Badge>
           <span className="font-display text-xl md:text-2xl text-foreground/90">啟動修復，雙重加碼「藥師佛息災煙供」</span>
@@ -71,7 +71,7 @@ export default function DeityPlanSelection({ d }: { d: Deity }) {
       </div>
 
       {/* 直覺導航（解決按鈕擠壓問題） */}
-      <Card className="mb-10 p-6 md:p-8 gold-border bg-card/70 paper-grain">
+      <Card className="mb-8 p-4 md:p-7 gold-border bg-card/70 paper-grain">
         <div className="text-[10px] tracking-[0.3em] uppercase text-muted-foreground font-bold mb-4">直覺導航</div>
         <div className={`grid gap-4 ${d.plans.length === 2 ? 'md:grid-cols-2' : 'md:grid-cols-3'}`}>
           {[...d.plans].sort((a, b) => a.price - b.price).map((p, index, arr) => {
@@ -95,7 +95,7 @@ export default function DeityPlanSelection({ d }: { d: Deity }) {
       {/* 詳細方案卡片 */}
       <div className="grid gap-6 md:grid-cols-2">
         {[...d.plans].sort((a, b) => a.price - b.price).map((p) => (
-          <Card key={p.id} id={`plan-${p.id}`} className="p-7 md:p-10 gold-border bg-card/70 paper-grain scroll-mt-28 flex flex-col justify-between transition-all duration-500 hover:border-primary/80">
+          <Card key={p.id} id={`plan-${p.id}`} className="p-4 md:p-8 gold-border bg-card/70 paper-grain scroll-mt-28 flex flex-col justify-between transition-all duration-500 hover:border-primary/80">
             <div>
               <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
                 <div>

@@ -42,18 +42,18 @@ export default function DeityHero({ d }: { d: Deity }) {
 
   return (
     <section className="mx-auto max-w-6xl px-5 md:px-8 pt-8 md:pt-12 pb-10">
-      {/* 廣告銜接帶：確認廣告訴求與頁面一致性，降低冷流量跳出率 */}
-      <div className="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3 px-4 py-3 rounded-lg bg-primary/5 border border-primary/20">
-        <div className="flex items-center gap-2 text-sm text-foreground/80">
-          <ShieldCheck className="h-4 w-4 text-primary shrink-0" />
-          <span>您正在查看：<strong className="text-foreground">{d.name}</strong> — {d.primaryIntent}</span>
+      {/* 廣告銜接帶 */}
+      <div className="mb-5 flex items-center justify-between gap-2 px-3 py-2.5 rounded-lg bg-primary/5 border border-primary/20">
+        <div className="flex items-center gap-2 text-xs md:text-sm text-foreground/80 min-w-0">
+          <ShieldCheck className="h-3.5 w-3.5 text-primary shrink-0" />
+          <span className="truncate"><strong className="text-foreground">{d.name}</strong> — {d.primaryIntent}</span>
         </div>
         <button
           type="button"
           onClick={() => scrollToId("plans")}
-          className="text-xs font-bold text-primary tracking-widest uppercase hover:underline underline-offset-4 shrink-0"
+          className="text-[10px] md:text-xs font-bold text-primary tracking-widest uppercase hover:underline underline-offset-4 shrink-0 ml-2"
         >
-          直接查看方案與定價 ↓
+          看方案 ↓
         </button>
       </div>
 
@@ -94,21 +94,29 @@ export default function DeityHero({ d }: { d: Deity }) {
             </div>
           </div>
 
-          {/* 快速導覽 */}
-          <div className="mt-8 grid gap-3 sm:grid-cols-2">
+          {/* 快速導覽：桌機完整版 / 手機精簡版 */}
+          <div className="mt-6 hidden md:grid gap-3 sm:grid-cols-2">
             {anchorBtn("生命結構與診斷", "pain", Layers)}
             {anchorBtn("系統修復指引", "process", ClipboardList)}
             {d.ritual && anchorBtn("經典儀軌與實證", "ritual", ExternalLink)}
             {anchorBtn("對位修復方案", "plans", ShieldCheck)}
             {anchorBtn("顧問釋疑 (FAQ)", "faq", HelpCircle)}
           </div>
+          {/* 手機：單一「向下探索」按鈕，不佔空間 */}
+          <button
+            type="button"
+            onClick={() => scrollToId("pain")}
+            className="md:hidden mt-4 w-full text-center text-xs text-muted-foreground/60 tracking-widest uppercase font-bold py-2"
+          >
+            ↓ 查看詳細說明與診斷
+          </button>
         </div>
 
         <Card className="gold-border bg-card/70 paper-grain overflow-hidden group">
           <Dialog>
             <DialogTrigger asChild>
               <button type="button" className="block w-full text-left relative cursor-zoom-in">
-                <AspectRatio ratio={4 / 5}>
+                <AspectRatio ratio={16 / 10} className="md:aspect-[4/5]">
                   {/* ✅ 已修正：fetchPriority 大寫 P 以符合 React 屬性規範 */}
                   <img 
                     src={d.heroImage} 

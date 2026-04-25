@@ -6,9 +6,9 @@ import { type Deity } from "@/lib/siteData";
 
 export default function DeityDiagnosis({ d }: { d: Deity }) {
   return (
-    <section id="pain" className="mx-auto max-w-6xl px-5 md:px-8 pb-8 pt-6 scroll-mt-24">
+    <section id="pain" className="mx-auto max-w-6xl px-4 md:px-8 pb-8 pt-6 scroll-mt-24">
       <div className="grid gap-6 md:grid-cols-2">
-        <Card className="p-7 md:p-10 gold-border bg-card/70 paper-grain hover:border-primary/40 transition-colors">
+        <Card className="p-4 md:p-8 gold-border bg-card/70 paper-grain hover:border-primary/40 transition-colors">
           <div className="text-[10px] tracking-[0.3em] uppercase text-muted-foreground font-bold flex items-center gap-2 mb-3">
             <Flame className="h-4 w-4 text-destructive" /> Diagnosis
           </div>
@@ -23,7 +23,7 @@ export default function DeityDiagnosis({ d }: { d: Deity }) {
           </ul>
         </Card>
 
-        <Card className="p-7 md:p-10 gold-border bg-card/70 paper-grain hover:border-primary/40 transition-colors">
+        <Card className="p-4 md:p-8 gold-border bg-card/70 paper-grain hover:border-primary/40 transition-colors">
           <div className="text-[10px] tracking-[0.3em] uppercase text-muted-foreground font-bold flex items-center gap-2 mb-3">
             <Sparkles className="h-4 w-4 text-primary" /> Solution
           </div>
