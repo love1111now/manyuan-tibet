@@ -6,6 +6,7 @@ Design philosophy: Conversion-first sticky CTA
 */
 
 import { useEffect, useState } from "react";
+import { trackEvent } from "@/lib/tracking";
 import { ArrowUp, MessageCircle, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLocation } from "wouter";
@@ -46,15 +47,12 @@ export default function StickyCta() {
           target="_blank"
           rel="noreferrer"
           onClick={() => {
-            window.gtag?.("event", "begin_checkout", {
+            trackEvent("begin_checkout", {
               currency: "TWD",
               value: hotPlan.price,
+              deity: deity.key,
+              plan_name: hotPlan.name,
               items: [{ item_name: `${deity.name}-${hotPlan.name}`, price: hotPlan.price }],
-            });
-            window.fbq?.("track", "InitiateCheckout", {
-              content_name: hotPlan.name,
-              value: hotPlan.price,
-              currency: "TWD",
             });
           }}
           className="flex items-center gap-3 h-14 px-6 rounded-full gold-border bg-primary text-primary-foreground font-bold tracking-wider text-sm shadow-2xl hover:scale-[1.02] active:scale-95 transition-all"

@@ -1,16 +1,7 @@
 import { useEffect } from "react";
 import { useLocation } from "wouter";
+import { trackPageView } from "@/lib/tracking";
 
-/**
- * 擴充全域 Window 介面，確保 TypeScript 不會報錯
- */
-declare global {
-  interface Window {
-    gtag?: (...args: unknown[]) => void;
-    fbq?: (...args: unknown[]) => void;
-    va?: (...args: unknown[]) => void; // Vercel Analytics
-  }
-}
 
 /**
  * AnalyticsTracker 組件
@@ -32,24 +23,8 @@ export default function AnalyticsTracker() {
      */
     const timer = setTimeout(() => {
       
-      // --- (A) Google Analytics (GA4) 追蹤 ---
-      if (window.gtag) {
-        window.gtag("event", "page_view", {
-          page_path: location,
-          page_location: window.location.href,
-          page_title: document.title,
-        });
-      }
-
-      // --- (B) Meta Pixel (Facebook) 追蹤 ---
-      // 重點修正：針對 Hash 路由，必須明確傳送完整的 window.location.hash
-      // 這樣臉書才能區分 /#/deity/yellow 與 /#/deity/medicine-buddha
-      if (window.fbq) {
-        window.fbq("track", "PageView", {
-          page_path: window.location.hash, 
-          page_title: document.title,
-        });
-      }
+      // GA4 + Meta Pixel 統一由 tracking 模組處理
+      trackPageView(location);
 
       // --- (C) Vercel Analytics 追蹤 ---
       if (window.va) {

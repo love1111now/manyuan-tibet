@@ -16,22 +16,64 @@ export default function Topic({ slug }: { slug: string }) {
   const t = TOPICS.find((x) => x.slug === slug);
 
   if (!t) {
+    // 保底：外部流量（廣告/分享）打到未知 slug 時，不要顯示「未上架」
+    // 目標是：把使用者導回「測驗 → 對位 → 方案」的主漏斗
+    const pretty = decodeURIComponent(slug).replace(/[-_]/g, " ").slice(0, 40);
+
     return (
       <div className="min-h-screen bg-background">
-        <Seo title="主題尚未上架" noIndex />
+        <Seo title={`困境對位｜${pretty || "主題"}`} noIndex />
         <SiteHeader />
-        <main className="mx-auto max-w-5xl px-4 pt-12 pb-32">
-          <h1 className="font-display text-4xl md:text-5xl">主題尚未上架</h1>
-          <p className="mt-4 readable text-muted-foreground">
-            這個主題頁目前還沒寫完。您可以先回首頁用「困境對位」選一尊，或直接前往法事總表。
+        <main className="mx-auto max-w-5xl px-4 pt-10 pb-32">
+          <div className="text-xs tracking-[0.26em] uppercase text-muted-foreground">困境對位｜快速指引</div>
+          <h1 className="mt-2 font-display text-4xl md:text-5xl">先不用多看，先找出你卡在哪裡</h1>
+          <p className="mt-4 readable text-muted-foreground max-w-prose leading-relaxed">
+            你現在的狀態如果很混亂，最容易做錯的是：亂選、亂拜、亂花錢。
+            滿願藏庫的設計是讓你用最短的路徑，先「對位」再決定要不要護持。
           </p>
-          <div className="mt-8 flex gap-3 flex-wrap">
-            <Link href="/" className="underline underline-offset-4 text-primary">回首頁</Link>
-            <span className="text-muted-foreground">·</span>
-            <Link href="/pay" className="underline underline-offset-4 text-muted-foreground">前往法事登記總表</Link>
-          </div>
+
+          <section className="mt-10 grid gap-4">
+            <Card className="p-7 gold-border bg-card/70 paper-grain">
+              <div className="font-semibold text-lg text-primary">30 秒找到方向</div>
+              <div className="mt-2 readable text-muted-foreground">
+                先做「生命能量對位診斷」，系統會把你導向最可能對位的本尊頁。
+              </div>
+              <div className="mt-5 flex flex-col sm:flex-row gap-3">
+                <Link href="/#quiz" className="shrink-0">
+                  <Button className="h-12 px-6 font-bold tracking-[0.22em] uppercase gold-border shadow-sm">
+                    開始 30 秒診斷
+                  </Button>
+                </Link>
+                <Link href="/pay" className="shrink-0">
+                  <Button variant="outline" className="h-12 px-6 gold-border">
+                    我想直接看方案總表
+                  </Button>
+                </Link>
+              </div>
+            </Card>
+
+            <Card className="p-7 gold-border bg-card">
+              <div className="font-semibold">你是從這個主題進來的</div>
+              <div className="mt-2 text-sm text-muted-foreground readable">
+                <span className="text-primary font-bold">{pretty || slug}</span>
+                <span className="opacity-70">（外部連結 / 分享）</span>
+              </div>
+              <div className="mt-4 text-sm text-muted-foreground readable">
+                若你願意，也可以直接私訊志工描述現況，我們會給你「對位方向」建議（無銷售壓力）。
+              </div>
+              <div className="mt-5">
+                <a href="https://m.me/61583749010531" target="_blank" rel="noreferrer">
+                  <Button variant="outline" className="h-12 px-6 gold-border text-[#0866FF] border-[#0866FF]/30 hover:bg-[#0866FF]/10">
+                    私訊志工詢問
+                  </Button>
+                </a>
+              </div>
+            </Card>
+          </section>
         </main>
         <SiteFooter />
+        <FloatingFb />
+        <StickyCta />
       </div>
     );
   }

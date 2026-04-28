@@ -11,6 +11,7 @@
  */
 import { useEffect, useState, useCallback } from "react";
 import { X, MessageCircle, ArrowRight } from "lucide-react";
+import { trackEvent } from "@/lib/tracking";
 import { Button } from "@/components/ui/button";
 import { useLocation } from "wouter";
 import { DEITY_BY_KEY } from "@/data/deities";
@@ -31,8 +32,7 @@ export default function ExitIntent() {
     if (sessionStorage.getItem(SESSION_KEY)) return;
     sessionStorage.setItem(SESSION_KEY, "1");
     setVisible(true);
-    // GA4 追蹤
-    window.gtag?.("event", "exit_intent_shown", {
+    trackEvent("exit_intent_shown", {
       page: location,
       deity: deityKey ?? "none",
     });
@@ -101,8 +101,8 @@ export default function ExitIntent() {
                 target="_blank"
                 rel="noreferrer"
                 onClick={() => {
-                  window.gtag?.("event", "exit_intent_messenger_click", { deity: deityKey });
-                  window.fbq?.("track", "Contact", { content_name: deity.name });
+                  trackEvent("exit_intent_messenger_click", { deity: deityKey });
+                  trackEvent("contact_click", { channel: "messenger", deity: deityKey, content_name: deity.name });
                   setVisible(false);
                 }}
                 className="flex items-center justify-center gap-3 h-14 w-full rounded-xl bg-primary text-primary-foreground font-bold text-base tracking-wider hover:bg-primary/90 transition-all active:scale-95"
@@ -116,8 +116,8 @@ export default function ExitIntent() {
                   target="_blank"
                   rel="noreferrer"
                   onClick={() => {
-                    window.gtag?.("event", "exit_intent_checkout_click", { deity: deityKey });
-                    window.fbq?.("track", "InitiateCheckout", { value: hotPlan.price, currency: "TWD" });
+                    trackEvent("exit_intent_checkout_click", { deity: deityKey });
+                    trackEvent("begin_checkout", { value: hotPlan.price, currency: "TWD", deity: deityKey });
                     setVisible(false);
                   }}
                   className="flex items-center justify-center gap-2 h-12 w-full rounded-xl border border-primary/30 text-foreground text-sm font-bold hover:bg-primary/5 transition-all"
@@ -142,7 +142,8 @@ export default function ExitIntent() {
               target="_blank"
               rel="noreferrer"
               onClick={() => {
-                window.gtag?.("event", "exit_intent_messenger_click", { page: location });
+                trackEvent("exit_intent_messenger_click", { page: location });
+                trackEvent("contact_click", { channel: "messenger", page: location });
                 setVisible(false);
               }}
               className="flex items-center justify-center gap-3 h-14 w-full rounded-xl bg-primary text-primary-foreground font-bold text-base tracking-wider hover:bg-primary/90 transition-all active:scale-95"

@@ -32,6 +32,7 @@ import {
   HeartHandshake
 } from "lucide-react";
 import { Link } from "wouter";
+import { trackEvent } from "@/lib/tracking";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -166,6 +167,10 @@ export default function TreasuryQuiz() {
   };
 
   const handleOptionSelect = (optId: string) => {
+    // 第一次作答視為測驗開始
+    if (step === 0 && Object.keys(answers).length === 0) {
+      trackEvent("quiz_start", { location: window.location.pathname });
+    }
     if (typeof window !== "undefined" && navigator.vibrate) {
       try { navigator.vibrate(50); } catch { /* ignore */ } 
     }
@@ -222,6 +227,7 @@ export default function TreasuryQuiz() {
   const PrimaryIcon = primaryDeityKey ? (DEITY_META[primaryDeityKey]?.icon || Sparkles) : Sparkles;
 
   const handleShare = async () => {
+    trackEvent("quiz_share", { primary_deity_key: primaryDeityKey ?? "unknown" });
     if (!advice) return;
     const shareUrl = "https://zambala-tibetan.com.tw";
     const shareTitle = '滿願藏庫｜生命維度與能量對位測驗';
@@ -247,6 +253,15 @@ export default function TreasuryQuiz() {
         });
     }
   };
+
+  // 出結果那一刻：記錄測驗完成（可做漏斗）
+  useEffect(() => {
+    if (!showResult || !primaryDeityKey) return;
+    trackEvent("quiz_complete", {
+      primary_deity_key: primaryDeityKey,
+      completion_time_iso: isoCompletionTime,
+    });
+  }, [showResult, primaryDeityKey, isoCompletionTime]);
 
   if (questions.length === 0) return null;
 
@@ -495,7 +510,15 @@ export default function TreasuryQuiz() {
                 </div>
 
                 <div className="w-full flex flex-col md:flex-row gap-4 items-stretch mt-4">
-                  <Link href={`/deity/${primaryDeityKey}`} className="flex-1">
+                  <Link
+  href={`/deity/${primaryDeityKey}`}
+  className="flex-1"
+  onClick={() => {
+    trackEvent("quiz_result_click_deity", {
+      primary_deity_key: primaryDeityKey,
+    });
+  }}
+>
                     <Button className="h-16 md:h-20 w-full text-lg md:text-xl font-bold tracking-[0.2em] uppercase gold-border bg-primary text-primary-foreground shadow-2xl active:scale-95 transition-all group">
                       深入了解這個修復維度 <ArrowRight className="ml-3 h-6 w-6 group-hover:translate-x-1 transition-transform" />
                     </Button>

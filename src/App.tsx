@@ -1,13 +1,13 @@
 import React from "react";
 import { HelmetProvider, Helmet } from "react-helmet-async"; // 🟢 引入 Helmet
 import { Router, Route, Switch, useLocation } from "wouter";
+import { useHashLocation } from "wouter/use-hash-location";
 
 // --- 關鍵修正：指向正確的 components 資料夾 ---
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 
 import AnalyticsTracker from "./components/AnalyticsTracker";
-import VercelScriptsLoader from "./components/VercelScriptsLoader";
 import LiveRegistrations from "./components/LiveRegistrations";
 const ExitIntent = React.lazy(() => import("./components/ExitIntent"));
 
@@ -66,7 +66,7 @@ function ScrollToTop() {
 
 function AppRouter() {
   return (
-    <Router>
+    <Router hook={useHashLocation}>
       <AnalyticsTracker />
       <ScrollToTop />
 
@@ -138,7 +138,6 @@ export default function App() {
         </Helmet>
 
         <ThemeProvider defaultTheme="dark">
-          <VercelScriptsLoader />
           <AppRouter />
           <LiveRegistrations />
       <ExitIntent /> 
