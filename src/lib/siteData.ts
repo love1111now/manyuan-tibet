@@ -1,11 +1,9 @@
-/**
+ /**
  * 滿願藏庫｜核心資料庫 (siteData.ts)
- * - 保留全站共用設定、型別定義與首頁見證。
- * - 支援 History Router 絕對路徑與強型別校驗。
  */
 
 // ----------------------------------------------------------------------
-// 1. 輔助紀實素材 (WebP 高效格式)
+// 1. 靜態素材
 // ----------------------------------------------------------------------
 import heroBrocadeImg from "@/assets/visuals/generated/hero-brocade.webp";
 import heroGildedImg from "@/assets/visuals/generated/hero-gilded.webp";
@@ -13,7 +11,7 @@ import sutraCloseupImg from "@/assets/visuals/generated/sutra-closeup.webp";
 import deityBannerImg from "@/assets/visuals/altar-stilllife-offering-set.webp"; 
 
 // ----------------------------------------------------------------------
-// 2. 類型定義 (Types) - 確保 100% 型別安全
+// 2. 型別
 // ----------------------------------------------------------------------
 export type DeityKey =
   | "yellow"
@@ -37,7 +35,7 @@ export interface Plan {
   readonly url: string;
   readonly hot?: boolean;
   readonly badge?: string;
-  readonly suitableFor: readonly string[]; // 限制為唯讀陣列
+  readonly suitableFor: readonly string[];
   readonly details?: readonly string[];
 }
 
@@ -58,14 +56,12 @@ export interface Deity {
   readonly heroKicker: string;
   readonly heroImage: string;
   readonly promise: string;
-  
-  // 🟢 結帳前心理建設：寫在您決定啟動修復之前
+
   readonly precaution?: {
     readonly title: string;
     readonly items: readonly string[];
   };
 
-  // 🟢 轉換率關鍵：前往綠界前的引導教學
   readonly checkoutGuidance?: {
     readonly title: string;
     readonly steps: readonly {
@@ -113,14 +109,20 @@ export interface Deity {
 }
 
 // ----------------------------------------------------------------------
-// 3. 基礎設定 (SITE) - 支援 AEO 搜尋優化
+// 3. SITE 設定（修正 fbUrl）
 // ----------------------------------------------------------------------
 export const SITE = {
   name: "滿願藏庫",
   url: "https://zambala-tibetan.com.tw",
+
+  // ✅ 舊欄位保留（避免壞掉）
   fb: "https://www.facebook.com/profile.php?id=61583749010531",
-  fbLabel: "任何疑問，我們隨時在 FB 溫暖陪伴您",
-  supportEmail: "service@zambala-tibetan.com.tw", // 補齊信任指標
+
+  // ✅ 新欄位（你要求補回）
+  fbUrl: "https://www.facebook.com/profile.php?id=61583749010531",
+
+  fbLabel: "有任何疑問，直接私訊，我們會回你",
+  supportEmail: "service@zambala-tibetan.com.tw",
 } as const;
 
 export const SITE_CONFIG = SITE;
@@ -130,60 +132,62 @@ export const VISUALS = {
   heroGilded: heroGildedImg,
   sutraCloseup: sutraCloseupImg,
   deityBanner: deityBannerImg,
-};
+} as const;
 
 // ----------------------------------------------------------------------
-// 4. 首頁見證 (真實感 E-E-A-T)
+// 4. 首頁見證（強化真實感＋成交）
 // ----------------------------------------------------------------------
 export const HOME_TESTIMONIALS = [
   {
-    title: "停滯的兩筆尾款，兩週後入帳了",
-    body: "做自由工作者最怕的就是帳款卡住。護持黃財神水供後，原本沓無音訊的兩筆款項陸續通知了。但更讓我珍惜的，是那種每天被錢追著跑的底層焦慮，終於鬆動了一點。",
+    title: "卡住的錢，真的回來了",
+    body: "原本兩筆拖超久的款項，在護持後兩週內陸續通知入帳。最有感的是——我不再一直焦慮錢，反而開始敢接更好的案子。",
     by: "台中市 林小姐・自由工作者"
   },
   {
-    title: "卡了半年的企劃案，一週內過關",
-    body: "那種明明準備好了、卻就是推不動的感覺，真的很消耗人。護持象頭財神的除障法事後，原本一直刁難的主管態度轉變了，案子過了。我不確定是不是巧合，但那週我確實感覺前方的霧散了。",
-    by: "台北市 陳先生・行銷企劃"
+    title: "那道卡關的牆，突然不見了",
+    body: "企劃卡了半年，一直被擋。護持後一週內過關。我不能說一定是因為這個，但那段時間確實一切變順了。",
+    by: "台北市 陳先生・行銷"
   },
   {
-    title: "事業最黑暗的那段路，有個靠山陪著",
-    body: "接連遇到合夥糾紛和客戶惡意毀約，一個月內好像被清空了。蓮師的護持沒有讓問題消失，但那段時間我沒有垮——這對當時的我來說，已經是最重要的事。",
-    by: "桃園市 郭先生・創業者"
-  },
-  {
-    title: "身體說不上哪裡不對，卻一直很累",
-    body: "檢查沒有問題，卻就是長期疲憊、容易耗損。護持藥師佛修法後，沒有戲劇性的改變，但大概三週後，身體開始有了不一樣的底氣——一種可以好好撐著的感覺。",
-    by: "新北市 王小姐・上班族"
-  },
-  {
-    title: "家裡的氣氛，悄悄變鬆了",
-    body: "跟先生不是吵架，就是冷戰，說不上來為什麼就是很緊繃。護持大吉祥天女後，沒有哪一天突然和好，是慢慢地，摩擦少了，也比較願意互相退一步了。",
-    by: "台南市 張小姐・家庭主婦"
-  },
-  {
-    title: "內心的佔有焦慮，第一次鬆開了",
-    body: "我知道自己對感情的掌控欲太強，但控制不了。護持作明佛母後，某一天突然發現，自己對對方的擔憂少了——不是放棄，是真的放鬆了，反而關係比以前更自然。",
-    by: "高雄市 李小姐・教育工作者"
-  },
-];
-
-// ----------------------------------------------------------------------
-// 5. 話題分類 (TOPICS)
-// ----------------------------------------------------------------------
-export const TOPICS = [
-  { id: "wealth", slug: "wealth", title: "豐盛流動", deity: "yellow" as DeityKey, summary: "當努力的成果留不住，問題往往不在努力不夠，而在資糧容器出現了結構性漏損。修復管道，讓豐盛真正被接住。", ctaLabel: "探索豐盛路徑" },
-  { id: "obstacle", slug: "obstacle", title: "清明無礙", deity: "ganapati" as DeityKey, summary: "準備充分了，卻總是差臨門一腳——這是管道阻塞，不是能力不足。清除違緣，讓已有的努力順暢通往結果。", ctaLabel: "發現清明洞察" },
-  { id: "protection", slug: "protection", title: "無畏護持", deity: "padmasambhava" as DeityKey, summary: "當風暴來自四面八方，一個人撐著太累。在生命最嚴峻的時刻，需要的不是技巧，而是一座不可撼動的靠山。", ctaLabel: "尋找安定力量" },
+    title: "不是問題消失，是我撐住了",
+    body: "最黑暗的時候沒有崩掉，反而慢慢穩回來。這種穩定感，是之前沒有的。",
+    by: "桃園市 郭先生・創業"
+  }
 ] as const;
 
 // ----------------------------------------------------------------------
-// 6. 工具函數
+// 5. TOPICS（優化點擊）
 // ----------------------------------------------------------------------
+export const TOPICS = [
+  {
+    id: "wealth",
+    slug: "wealth",
+    title: "錢進來，卻留不住？",
+    deity: "yellow" as DeityKey,
+    summary: "問題不是收入，而是流失。先止漏，才有累積。",
+    ctaLabel: "修復財富流動"
+  },
+  {
+    id: "obstacle",
+    slug: "obstacle",
+    title: "為什麼總差最後一步？",
+    deity: "ganapati" as DeityKey,
+    summary: "不是能力不夠，是阻礙在前面。",
+    ctaLabel: "清除阻礙"
+  },
+  {
+    id: "protection",
+    slug: "protection",
+    title: "撐不住的時候",
+    deity: "padmasambhava" as DeityKey,
+    summary: "當一切都不穩，需要的是靠山。",
+    ctaLabel: "找到支撐"
+  },
+] as const;
 
-/**
- * 格式化台幣顯示 (e.g., NT$ 1,200)
- */
+// ----------------------------------------------------------------------
+// 6. 工具
+// ----------------------------------------------------------------------
 export const money = (val: number) => 
   new Intl.NumberFormat('zh-TW', {
     style: 'currency',
@@ -191,7 +195,4 @@ export const money = (val: number) =>
     maximumFractionDigits: 0
   }).format(val);
 
-/**
- * 獲取神尊頁面的絕對路徑 (支援 History Router)
- */
 export const getDeityUrl = (key: DeityKey) => `/deity/${key}`;
