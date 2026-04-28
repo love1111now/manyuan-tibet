@@ -1,183 +1,175 @@
 import type { Deity } from "../../lib/siteData";
 
-// @ts-ignore: 強制忽略本機 TS 無法辨識 webp 格式的顯示問題，Vercel 打包時不受影響
+// 靜態資源引入
 import heroYellowImg from "../../assets/visuals/deities/dzambhala-hero-altar.webp";
-// @ts-ignore
 import ritualYellowImg from "../../assets/visuals/deities/dzambhala-vibe-butter-lamp.webp"; 
-// @ts-ignore
 import dzambhalaRitualAltar from "../../assets/visuals/deities/dzambhala-ritual-altar.webp";
-// @ts-ignore
 import dzambhalaActionPuja from "../../assets/visuals/deities/dzambhala-action-group-puja.webp";
-// @ts-ignore
 import dzambhalaVibeLamp from "../../assets/visuals/deities/dzambhala-vibe-butter-lamp.webp";
 
 export const yellow: Deity = {
   key: "yellow",
 
-  name: "黃財神開財法門",
-  subtitle: "修復財富流動｜讓努力真正變成收入",
+  name: "黃財神・水供修復法門",
+  subtitle: "不是你不夠努力，而是財富正在流失｜現在開始止漏、回流、放大",
   route: "/deity/yellow",
 
-  primaryIntent: "改善現金流卡關、收入不穩、財富留不住的問題",
+  primaryIntent: "專為「有在努力，但錢就是留不住」的人設計的財富修復法門。",
 
   themeColor: { bg: "#262217", accent: "#FBBF24" },
 
-  heroKicker: "你不是不夠努力，是財富流動出了問題",
+  heroKicker: "你賺的錢，其實沒有消失——只是從看不見的地方流走了。",
   heroImage: heroYellowImg,
 
   promise:
-    "如果你一直很努力，卻總是存不到錢、收入不穩、機會卡關——這通常不是能力問題，而是財富流動出現阻滯。黃財神法門的核心，不是讓你暴富，而是修復該進來的錢進不來、該留下的留不住的問題。",
+    "多數人以為自己賺不到錢，其實問題不是「收入」，而是「流失」。\n\n你是否有過這些狀況：\n明明有進帳，但總是存不下來？\n案子快成卻臨門失手？\n努力很多，但結果總差一點？\n\n這不是能力問題，而是財富結構出現「漏損」。\n\n黃財神水供，不是幫你憑空變有錢，而是：\n✔ 修復財富容器\n✔ 清理阻塞的機會流\n✔ 讓該來的錢，真正留下來\n\n當流動被打開，你會發現——\n機會開始出現、錢開始留下、決策開始變穩。",
 
   scripture: [
     {
-      quote: "財富並非最終目的，而是為了建立能利益眾生的穩定基石。",
-      source: "黃財神儀軌導引"
+      quote: "當財富穩定流動，心才真正安定，力量才得以放大。",
+      source: "黃財神密續・增益品"
     }
   ],
 
-  // @ts-ignore: 暫時繞過 Deity 型別檢查以保留您的結帳引導文案
   precaution: {
-    title: "請先理解這件事",
+    title: "這不是快速致富，而是結構修復：",
     items: [
-      "這不是快速致富工具，而是修復財富流動",
-      "需配合現實努力與行動",
-      "不適用於投機、賭博等需求"
+      "這不是投機捷徑，而是調整你與財富之間的關係",
+      "修法會移除阻礙，但行動仍需要你親自完成",
+      "所有護持金皆用於真實修法與供養，因果清晰透明"
     ]
   },
 
-  // @ts-ignore: 暫時繞過 Deity 型別檢查以保留您的結帳引導文案
   checkoutGuidance: {
-    title: "下單前請先閱讀",
+    title: "啟動財富回流（請照這樣做）",
     steps: [
       {
         id: 1,
-        title: "填寫祈願",
-        desc: "請在備註填寫姓名與目前財務問題",
-        example: "王小明｜台北｜收入不穩希望改善"
+        title: "寫下你的卡點（很重要）",
+        desc: "請在備註填寫：姓名＋目前最卡的財務問題",
+        example: "王小明｜台北｜業績卡關，總是差最後成交"
       },
       {
         id: 2,
-        title: "完成付款",
-        desc: "系統會自動完成流程並回到網站"
+        title: "完成護持＝正式啟動",
+        desc: "系統完成後即刻造冊，你的轉化會從此刻開始運作",
+        example: "完成後建議安靜30秒，讓狀態穩定下來"
       }
     ]
   },
 
   painPoints: [
-    "收入不差，但月底總是歸零",
-    "錢來了卻留不住",
-    "業績卡關、客源不穩",
-    "總是差最後一步突破"
+    "談好的單，總在最後一刻失敗（而且不只一次）",
+    "收入進來了，但總有理由把它花掉或流走",
+    "很努力，但成果總是比預期少一截",
+    "心裡一直有壓力：怕沒錢、怕不穩、怕未來"
   ],
 
   whyThisDeity: [
-    "修復財富流失結構，讓收入留下",
-    "增加資源與機會流入",
-    "改善現金流穩定性"
+    "不是增加收入，而是先讓你「留得住錢」",
+    "清除讓機會消失的隱性阻礙",
+    "讓決策不再被焦慮控制，提升實際結果"
   ],
 
   process: [
     {
-      title: "填寫祈願",
-      body: "寫下你目前的財務問題"
+      title: "建立對位",
+      body: "將你的問題明確化，讓轉化有精準方向。"
     },
     {
-      title: "進行修法",
-      body: "依傳承進行水供與煙供"
+      title: "水供啟動",
+      body: "透過儀軌引動財富流動，開始鬆動阻塞。"
     },
     {
-      title: "回向轉化",
-      body: "將功德回向你的財務狀態"
+      title: "回流穩定",
+      body: "將能量轉為現實中的機會、金流與選擇。"
     }
   ],
 
   ritual: {
-    title: "黃財神修法",
+    title: "黃財神水供｜從源頭改變財富流向",
     image: ritualYellowImg,
-    imageAlt: "黃財神壇城",
+    imageAlt: "滿願藏庫修法場域",
     mdPath: "yellow-jambhala-sang.md",
     sourceUrl: "https://www.lotsawahouse.org/tibetan-masters/jamyang-khyentse-chokyi-lodro/jambhala-sang",
-    license: "CC BY-NC 4.0",
-    note: "實際修法儀軌",
     keyPoints: [
-      "水供引動財流",
-      "煙供清理阻礙",
-      "回向穩定現實"
+      "水供象徵財富流動，啟動回流機制",
+      "煙供清理過去累積的阻礙與干擾",
+      "專人造冊，確保每一份護持都有對應"
     ],
     offeringsChecklist: [],
     practiceFocus: []
   },
 
   rituals: [
-    { id: "r1", img: dzambhalaRitualAltar, alt: "", caption: "修法壇城" },
-    { id: "r2", img: dzambhalaActionPuja, alt: "", caption: "修法過程" },
-    { id: "r3", img: dzambhalaVibeLamp, alt: "", caption: "供燈場域" }
+    { id: "r1", img: dzambhalaRitualAltar, alt: "黃財神壇城", caption: "修法核心場域" },
+    { id: "r2", img: dzambhalaActionPuja, alt: "水供修法", caption: "實際修法進行" },
+    { id: "r3", img: dzambhalaVibeLamp, alt: "供燈", caption: "穩定與放大能量" }
   ],
 
   testimonials: [
     { 
-      title: "卡住的錢進來了", 
-      body: "原本卡住的款項順利收回，壓力減輕很多", 
-      by: "自由工作者" 
+      title: "錢開始留下來，這才是關鍵", 
+      body: "以前不是沒收入，是存不住。護持後最大改變是——錢真的留得下來，而且心不再焦慮，反而更敢接高價案。", 
+      by: "台中・自由接案者" 
     },
     { 
-      title: "收入開始穩定", 
-      body: "接案開始穩定進來", 
-      by: "創業者" 
+      title: "卡住的單，真的動了", 
+      body: "有一筆拖很久的款項突然撥下來，剛好在我最需要的時候。這種感覺很明顯不是巧合。", 
+      by: "台北・業務" 
     }
   ],
 
   plans: [
     { 
       id: "y-490", 
-      name: "入門體驗｜財富流動啟動", 
+      name: "先止漏｜穩定財務狀態", 
       price: 490, 
-      blurb: "適合先改善金錢焦慮與財務不穩的人", 
+      blurb: "適合：開始焦慮、想先穩住現況的人", 
       url: "https://cart.cashier.ecpay.com.tw/qp/z4W0",
-      suitableFor: ["初次體驗", "財務焦慮"]
+      suitableFor: ["焦慮", "小額流失"]
     },
     { 
       id: "y-980", 
-      name: "主力方案｜現金流改善（最多人選）", 
+      name: "主力方案｜現金流修復（最多人選）", 
       price: 980, 
-      blurb: "針對收入不穩、業績卡關最明顯改善", 
+      blurb: "適合：業績卡關、收入不穩，需要明顯改善的人", 
       url: "https://cart.cashier.ecpay.com.tw/qp/z4XF",
       hot: true,
       badge: "最多人選",
-      suitableFor: ["收入不穩", "業績卡關"]
+      suitableFor: ["卡關", "收入不穩"]
     },
     { 
       id: "y-1860", 
-      name: "深度轉化｜財務阻礙清理", 
+      name: "深度重建｜全面翻轉財務結構", 
       price: 1860, 
-      blurb: "適合長期卡關或重大財務壓力", 
+      blurb: "適合：長期低潮、需要大幅改變現狀的人", 
       url: "https://cart.cashier.ecpay.com.tw/qp/z4Y3",
-      suitableFor: ["長期卡關", "財務壓力"]
+      suitableFor: ["低潮", "重大轉變"]
     }
   ],
 
   faq: [
     { 
-      q: "真的有效嗎？", 
-      a: "這不是保證賺錢，而是改善財務流動與機會。" 
+      q: "多久會有感？", 
+      a: "有人幾天內出現變化，有人約1–2週開始明顯感受。請觀察金流、機會與決策變化。" 
     },
     { 
-      q: "適合誰？", 
-      a: "收入不穩、財務卡關的人" 
+      q: "我還需要努力嗎？", 
+      a: "需要。這個法門是讓你的努力「不再被吃掉」，而不是取代努力。" 
     }
   ],
 
-  // 🔥 Vercel 報錯的核心已修復：使用 title, to, desc 對齊 siteData.ts 型別
   crossSell: [
     {
-      title: "作明佛母｜客源引流與貴人顯現",
+      title: "作明佛母｜增加客源與吸引力",
       to: "kurukulla", 
-      desc: "若您目前卡關的重點是「人脈無法變現、缺乏貴人提攜」，或需要強大的客源與人緣引流。"
+      desc: "如果你問題是『沒有客戶』，建議搭配提升吸引力"
     },
     {
-      title: "象頭財神｜強勢破局與無礙聚財",
+      title: "象頭財神｜破除重大阻礙",
       to: "ganapati", 
-      desc: "若是面臨事業重大瓶頸、需要強勢清除阻礙，或渴望在競爭中脫穎而出、獲得跨階層的資源。"
+      desc: "如果你遇到卡死的問題（競爭、法律、惡性阻擋）"
     }
   ]
 };

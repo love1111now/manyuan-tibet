@@ -1,11 +1,11 @@
 /**
  * 滿願藏庫｜核心資料庫 (siteData.ts)
- * - 此檔案保留全站共用設定、型別定義、與首頁資料。
- * - 各本尊的詳細資料已模組化拆分至 src/data/deities/ 中。
+ * - 保留全站共用設定、型別定義與首頁見證。
+ * - 支援 History Router 絕對路徑與強型別校驗。
  */
 
 // ----------------------------------------------------------------------
-// 1. 輔助紀實素材 / 通用圖 (已全面優化為 WebP 格式)
+// 1. 輔助紀實素材 (WebP 高效格式)
 // ----------------------------------------------------------------------
 import heroBrocadeImg from "@/assets/visuals/generated/hero-brocade.webp";
 import heroGildedImg from "@/assets/visuals/generated/hero-gilded.webp";
@@ -13,7 +13,7 @@ import sutraCloseupImg from "@/assets/visuals/generated/sutra-closeup.webp";
 import deityBannerImg from "@/assets/visuals/altar-stilllife-offering-set.webp"; 
 
 // ----------------------------------------------------------------------
-// 2. 類型定義 (Types) - 保持嚴格型別校驗
+// 2. 類型定義 (Types) - 確保 100% 型別安全
 // ----------------------------------------------------------------------
 export type DeityKey =
   | "yellow"
@@ -37,8 +37,8 @@ export interface Plan {
   readonly url: string;
   readonly hot?: boolean;
   readonly badge?: string;
-  readonly suitableFor: string[];
-  readonly details?: string[];
+  readonly suitableFor: readonly string[]; // 限制為唯讀陣列
+  readonly details?: readonly string[];
 }
 
 export interface Scripture {
@@ -59,13 +59,13 @@ export interface Deity {
   readonly heroImage: string;
   readonly promise: string;
   
-  // 🟢 靈魂欄位：寫在您決定啟動修復之前 (修正 Property 'precaution' does not exist 錯誤)
+  // 🟢 結帳前心理建設：寫在您決定啟動修復之前
   readonly precaution?: {
     readonly title: string;
     readonly items: readonly string[];
   };
 
-  // 🟢 轉化欄位：前往綠界前的指引教學
+  // 🟢 轉換率關鍵：前往綠界前的引導教學
   readonly checkoutGuidance?: {
     readonly title: string;
     readonly steps: readonly {
@@ -113,14 +113,14 @@ export interface Deity {
 }
 
 // ----------------------------------------------------------------------
-// 3. 基礎設定 (SITE)
+// 3. 基礎設定 (SITE) - 支援 AEO 搜尋優化
 // ----------------------------------------------------------------------
 export const SITE = {
   name: "滿願藏庫",
   url: "https://zambala-tibetan.com.tw",
   fb: "https://www.facebook.com/profile.php?id=61583749010531",
   fbLabel: "任何疑問，我們隨時在 FB 溫暖陪伴您",
-  fbUrl: "https://www.facebook.com/profile.php?id=61583749010531",
+  supportEmail: "service@zambala-tibetan.com.tw", // 補齊信任指標
 } as const;
 
 export const SITE_CONFIG = SITE;
@@ -133,7 +133,7 @@ export const VISUALS = {
 };
 
 // ----------------------------------------------------------------------
-// 4. 首頁見證 (保持真實性與 E-E-A-T)
+// 4. 首頁見證 (真實感 E-E-A-T)
 // ----------------------------------------------------------------------
 export const HOME_TESTIMONIALS = [
   {
@@ -172,12 +172,26 @@ export const HOME_TESTIMONIALS = [
 // 5. 話題分類 (TOPICS)
 // ----------------------------------------------------------------------
 export const TOPICS = [
-  { id: "wealth", slug: "wealth", title: "豐盛流動", deity: "yellow", summary: "當努力的成果留不住，問題往往不在努力不夠，而在資糧容器出現了結構性漏損。修復管道，讓豐盛真正被接住。", ctaLabel: "探索豐盛路徑" },
-  { id: "obstacle", slug: "obstacle", title: "清明無礙", deity: "ganapati", summary: "準備充分了，卻總是差臨門一腳——這是管道阻塞，不是能力不足。清除違緣，讓已有的努力順暢通往結果。", ctaLabel: "發現清明洞察" },
-  { id: "protection", slug: "protection", title: "無畏護持", deity: "padmasambhava", summary: "當風暴來自四面八方，一個人撐著太累。在生命最嚴峻的時刻，需要的不是技巧，而是一座不可撼動的靠山。", ctaLabel: "尋找安定力量" },
+  { id: "wealth", slug: "wealth", title: "豐盛流動", deity: "yellow" as DeityKey, summary: "當努力的成果留不住，問題往往不在努力不夠，而在資糧容器出現了結構性漏損。修復管道，讓豐盛真正被接住。", ctaLabel: "探索豐盛路徑" },
+  { id: "obstacle", slug: "obstacle", title: "清明無礙", deity: "ganapati" as DeityKey, summary: "準備充分了，卻總是差臨門一腳——這是管道阻塞，不是能力不足。清除違緣，讓已有的努力順暢通往結果。", ctaLabel: "發現清明洞察" },
+  { id: "protection", slug: "protection", title: "無畏護持", deity: "padmasambhava" as DeityKey, summary: "當風暴來自四面八方，一個人撐著太累。在生命最嚴峻的時刻，需要的不是技巧，而是一座不可撼動的靠山。", ctaLabel: "尋找安定力量" },
 ] as const;
 
 // ----------------------------------------------------------------------
 // 6. 工具函數
 // ----------------------------------------------------------------------
-export const money = (val: number) => val.toLocaleString();
+
+/**
+ * 格式化台幣顯示 (e.g., NT$ 1,200)
+ */
+export const money = (val: number) => 
+  new Intl.NumberFormat('zh-TW', {
+    style: 'currency',
+    currency: 'TWD',
+    maximumFractionDigits: 0
+  }).format(val);
+
+/**
+ * 獲取神尊頁面的絕對路徑 (支援 History Router)
+ */
+export const getDeityUrl = (key: DeityKey) => `/deity/${key}`;
