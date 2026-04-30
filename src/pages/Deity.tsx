@@ -106,18 +106,21 @@ const DeityPage: React.FC<DeityPageProps> = ({ deityKey }) => {
         
         <div className="relative z-10 -mt-12 space-y-20 md:space-y-32">
           
-          {/* L2: 痛點對位區 - 診斷用戶當下的生命困境 */}
-          <section id="diagnosis" className="scroll-mt-24">
+          {/* L2: 痛點對位區 - 診斷用戶當下的生命困境 
+              (調整 scroll-mt-32 確保點擊錨點時不會被 Header 擋住) */}
+          <section id="diagnosis" className="scroll-mt-32">
             <DeityDiagnosis d={d} />
           </section>
 
-          {/* L3: 儀軌實證區 - 展示西藏壇城現場與師兄姐實修證據 */}
-          <section id="evidence" className="scroll-mt-24">
+          {/* L3: 儀軌實證區 - 展示西藏壇城現場與師兄姐實修證據 
+              (調整 scroll-mt-32) */}
+          <section id="evidence" className="scroll-mt-32">
             <DeityRitualAndEvidence d={d} />
           </section>
 
-          {/* L4: 方案選擇區 - 透明定價與安全登記入口 */}
-          <section id="plans" className="scroll-mt-24">
+          {/* L4: 方案選擇區 - 透明定價與安全登記入口 
+              (調整 scroll-mt-32，解決按鈕下滑未到位問題) */}
+          <section id="plans" className="scroll-mt-32">
             <DeityPlanSelection d={d} />
           </section>
 
