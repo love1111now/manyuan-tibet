@@ -40,40 +40,42 @@ export const yellow: Deity = {
 黃財神水供，不是幫你變有錢
 而是做三件更關鍵的事：
 
-1️⃣ 止漏：讓不該流失的錢停下來  
-2️⃣ 清阻：讓卡住的機會重新動起來  
-3️⃣ 導流：讓收入開始穩定進來  
+1️⃣ 止漏  
+2️⃣ 清阻  
+3️⃣ 導流  
 
-所以很多人的回饋不是「突然暴富」
-而是——
+所以多數人的變化是：
 
 ✔ 錢開始留下來  
-✔ 案子不再卡最後一步  
-✔ 心變穩，決策變準  
-✔ 機會變多，財源清晰了
+✔ 案子開始成交  
+✔ 心變穩  
+
 ——
 
-但這裡也要講清楚：
-
 這不是捷徑  
-不會讓你什麼都不做就有錢  
+也不會讓你什麼都不做就有錢  
 
-它做的是一件更現實的事：
-
-👉 讓你的努力，不再被吃掉
+👉 它做的是一件更現實的事：
+讓你的努力，不再被吃掉
 
 ——
 
 如果你現在還在卡
 
-你可以再撐一段時間試試看  
-（很多人也是這樣）
+你可以再觀察一段時間  
+（很多人一開始也是這樣）
 
-但大多數人最後都會發現一件事：
+但多數人最後會發現一件事：
 
 👉 如果會自己好，早就好了
 
-差別只是——你要拖多久才處理`,
+——
+
+你現在只是在決定一件事：
+
+要不要繼續拖
+
+還是開始處理`,
 
   scripture: [
     {
@@ -85,7 +87,7 @@ export const yellow: Deity = {
   precaution: {
     title: "這不是投機，而是修復：",
     items: [
-      "不保證暴富，而是讓財富開始結果實",
+      "不保證暴富，而是讓財富回到正常狀態",
       "會清除阻礙，但行動仍需要你自己完成",
       "所有護持金皆用於實際修法與供養，因果透明"
     ]
@@ -104,7 +106,7 @@ export const yellow: Deity = {
         id: 2,
         title: "完成護持",
         desc: "完成後即刻造冊，流程會開始運作",
-        example: "完成後靜置30秒，讓狀態穩定"
+        example: "完成後靜置30秒"
       }
     ]
   },
@@ -113,7 +115,7 @@ export const yellow: Deity = {
     "談好的單，總在最後一刻失敗",
     "收入有，但總是存不起來",
     "一直差最後一段，無法突破",
-    "開始對錢產生壓力，影響判斷"
+    "開始對錢產生壓力"
   ],
 
   whyThisDeity: [
@@ -123,18 +125,9 @@ export const yellow: Deity = {
   ],
 
   process: [
-    {
-      title: "對位問題",
-      body: "明確你的卡點，讓轉化有方向"
-    },
-    {
-      title: "啟動流動",
-      body: "開始鬆動阻塞，讓停住的開始動"
-    },
-    {
-      title: "轉為結果",
-      body: "轉化為實際的金流與機會"
-    }
+    { title: "對位問題", body: "明確你的卡點" },
+    { title: "啟動流動", body: "開始鬆動阻塞" },
+    { title: "轉為結果", body: "轉化為金流與機會" }
   ],
 
   ritual: {
@@ -143,11 +136,7 @@ export const yellow: Deity = {
     imageAlt: "修法場域",
     mdPath: "yellow-jambhala-sang.md",
     sourceUrl: "https://www.lotsawahouse.org/tibetan-masters/jamyang-khyentse-chokyi-lodro/jambhala-sang",
-    keyPoints: [
-      "水供象徵流動與回流",
-      "煙供清除累積阻礙",
-      "造冊確保對位"
-    ],
+    keyPoints: ["流動", "清阻", "回流"],
     offeringsChecklist: [],
     practiceFocus: []
   },
@@ -158,16 +147,22 @@ export const yellow: Deity = {
     { id: "r3", img: dzambhalaVibeLamp, alt: "供燈", caption: "穩定放大" }
   ],
 
+  // 🔥 強化：冷流量用見證（更有畫面）
   testimonials: [
     { 
-      title: "不是變多，是開始正常", 
-      body: "以前不是沒收入，是存不住。後來發現錢開始留下來，這才是差別。", 
+      title: "我不是沒賺，是錢留不住", 
+      body: "收入一直有，但月底還是空。護持後最先改變的不是收入，而是錢開始留下來。", 
       by: "台中・接案者" 
     },
     { 
-      title: "卡住的東西真的動了", 
-      body: "一筆拖很久的款項突然入帳，而且是在最需要的時候。", 
+      title: "最奇怪的是每次都差最後一步", 
+      body: "案子常卡成交。做完之後，一個原本沒希望的客戶突然回來成交。", 
       by: "台北・業務" 
+    },
+    { 
+      title: "沒有爆發，但一切開始順", 
+      body: "本來半信半疑，但生活開始變順，錢不再亂掉，心也穩了。", 
+      by: "高雄・自由工作者" 
     }
   ],
 
@@ -176,15 +171,15 @@ export const yellow: Deity = {
       id: "y-490", 
       name: "先止漏｜讓狀態不要繼續惡化", 
       price: 490, 
-      blurb: "適合：開始覺得支出不對勁，想先穩住", 
+      blurb: "適合：開始覺得財務不對勁，先穩住", 
       url: "https://cart.cashier.ecpay.com.tw/qp/z4W0",
-      suitableFor: ["初期異常"]
+      suitableFor: ["初期"]
     },
     { 
       id: "y-980", 
-      name: "現金流回正｜最多人從這裡開始", 
+      name: "現金流回正｜最多人從這裡開始（主力）", 
       price: 980, 
-      blurb: "適合：卡關、停滯、收入不穩", 
+      blurb: "如果你卡住一段時間，這個通常最有感（多數人從這裡開始變順）", 
       url: "https://cart.cashier.ecpay.com.tw/qp/z4XF",
       hot: true,
       badge: "最多人選",
@@ -194,7 +189,7 @@ export const yellow: Deity = {
       id: "y-1860", 
       name: "全面重建｜直接翻轉狀態", 
       price: 1860, 
-      blurb: "適合：長期低潮或想突破困境", 
+      blurb: "適合：長期低潮或想一次突破", 
       url: "https://cart.cashier.ecpay.com.tw/qp/z4Y3",
       suitableFor: ["長期卡死"]
     }
@@ -203,11 +198,11 @@ export const yellow: Deity = {
   faq: [
     { 
       q: "多久會有變化？", 
-      a: "多數人在幾天到兩週內開始感覺變化，通常先從機會或金流鬆動開始。" 
+      a: "多數人在幾天到兩週內開始感覺變化。" 
     },
     { 
       q: "這真的有用嗎？", 
-      a: "如果你是第一次接觸會懷疑很正常。但你可以想一件事——如果現在的方法有效，你早就不會卡在這裡。" 
+      a: "如果現在的方法有效，你不會卡在這裡。" 
     },
     { 
       q: "還需要努力嗎？", 
@@ -224,7 +219,7 @@ export const yellow: Deity = {
     {
       title: "象頭財神｜破除阻礙",
       to: "ganapati", 
-      desc: "適合投資理財需要清晰思維"
+      desc: "適合嚴重卡關"
     }
   ]
 };
