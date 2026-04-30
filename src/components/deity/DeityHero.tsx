@@ -66,8 +66,9 @@ export default function DeityHero({ d }: { d: Deity }) {
             {d.heroKicker}
           </p>
 
-          {/* 🔥 新增：轉換關鍵說明（這段很重要） */}
-          <p className="mt-4 text-sm md:text-base text-muted-foreground/80 max-w-prose leading-relaxed">
+          {/* 🔥 新增：轉換關鍵說明（這段很重要）
+              已加上 whitespace-pre-line 解決文字牆問題 */}
+          <p className="mt-4 text-sm md:text-base text-muted-foreground/80 max-w-prose leading-relaxed whitespace-pre-line">
             {d.promise}
           </p>
 
@@ -89,19 +90,19 @@ export default function DeityHero({ d }: { d: Deity }) {
 
           </div>
 
-          {/* 導覽（保留） */}
+          {/* 導覽（修復了失效的錨點 ID，對齊 Deity.tsx 的 section id） */}
           <div className="mt-6 hidden md:grid gap-3 sm:grid-cols-2">
-            <Button variant="outline" onClick={() => scrollToId("pain")}>
-              <Layers className="mr-2 h-4 w-4" /> 問題分析
+            <Button variant="outline" onClick={() => scrollToId("diagnosis")}>
+              <Layers className="mr-2 h-4 w-4" /> 問題與運作
             </Button>
-            <Button variant="outline" onClick={() => scrollToId("process")}>
-              <ClipboardList className="mr-2 h-4 w-4" /> 運作方式
-            </Button>
-            <Button variant="outline" onClick={() => scrollToId("ritual")}>
-              <ExternalLink className="mr-2 h-4 w-4" /> 儀軌說明
+            <Button variant="outline" onClick={() => scrollToId("evidence")}>
+              <ClipboardList className="mr-2 h-4 w-4" /> 儀軌與實證
             </Button>
             <Button variant="outline" onClick={() => scrollToId("plans")}>
-              <ShieldCheck className="mr-2 h-4 w-4" /> 方案
+              <ShieldCheck className="mr-2 h-4 w-4" /> 方案費用
+            </Button>
+            <Button variant="outline" onClick={() => scrollToId("cross-sell")}>
+              <HelpCircle className="mr-2 h-4 w-4" /> 常見問題
             </Button>
           </div>
 
