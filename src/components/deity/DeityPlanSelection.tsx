@@ -1,5 +1,5 @@
 // src/components/deity/DeityPlanSelection.tsx
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import pujaImg from "@/assets/visuals/testimonial-puja.png";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -8,12 +8,55 @@ import { ArrowRight } from "lucide-react";
 import { type Deity } from "@/lib/siteData";
 
 export default function DeityPlanSelection({ d }: { d: Deity }) {
+  const sectionRef = useRef<HTMLElement>(null);
+  const trackedRef = useRef(false);
+
   const scrollToId = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
+  // ── 滑入方案區時觸發 ViewPlans（建立再行銷池）──────────────────
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !trackedRef.current) {
+          trackedRef.current = true;
+
+          // FB Pixel — 自訂事件：進入方案區
+          window.fbq?.("trackCustom", "ViewPlans", {
+            content_name: d.name,
+            content_ids: d.plans.map((p) => p.id),
+            currency: "TWD",
+          });
+
+          // GA4
+          window.gtag?.("event", "view_item_list", {
+            item_list_name: d.name,
+            items: d.plans.map((p) => ({
+              item_id: p.id,
+              item_name: `${d.name}-${p.name}`,
+              price: p.price,
+              currency: "TWD",
+            })),
+          });
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [d]);
+
   return (
-    <section id="plans" className="mx-auto max-w-6xl px-4 md:px-8 pt-8 md:pt-12 pb-12 md:pb-16 scroll-mt-24">
+    <section
+      id="plans"
+      ref={sectionRef}
+      className="mx-auto max-w-6xl px-4 md:px-8 pt-8 md:pt-12 pb-12 md:pb-16 scroll-mt-24"
+    >
       {/* ── P1 真實見證區塊：法事現場照 + 用戶見證文 ── */}
       <div className="mb-10 grid gap-5 md:grid-cols-[1fr_1.1fr] items-start">
         {/* 法事現場照片 */}
@@ -59,7 +102,7 @@ export default function DeityPlanSelection({ d }: { d: Deity }) {
         </div>
       </div>
 
-      {/* 本月限定加碼（移除頂部阻力卡片，直接進入加碼區） */}
+      {/* 本月限定加碼 */}
       <div className="mb-8 p-4 md:p-7 rounded-xl border border-primary/40 bg-primary/5 relative overflow-hidden group shadow-inner">
         <div className="flex flex-col sm:flex-row sm:items-center gap-3 mb-3">
           <Badge className="w-fit bg-primary text-primary-foreground gold-border animate-pulse px-3 py-1 font-bold tracking-widest text-[10px]">本月限定</Badge>
@@ -70,16 +113,19 @@ export default function DeityPlanSelection({ d }: { d: Deity }) {
         </p>
       </div>
 
-      {/* 直覺導航（解決按鈕擠壓問題） */}
+      {/* 直覺導航 */}
       <Card className="mb-8 p-4 md:p-7 gold-border bg-card/70 paper-grain">
         <div className="text-[10px] tracking-[0.3em] uppercase text-muted-foreground font-bold mb-4">直覺導航</div>
-        <div className={`grid gap-4 ${d.plans.length === 2 ? 'md:grid-cols-2' : 'md:grid-cols-3'}`}>
+        <div className={`grid gap-4 ${d.plans.length === 2 ? "md:grid-cols-2" : "md:grid-cols-3"}`}>
           {[...d.plans].sort((a, b) => a.price - b.price).map((p, index, arr) => {
-            const label = index === 0 ? "溫柔安頓" : (index === arr.length - 1 ? "深耕轉化" : "深切共鳴");
+            const label = index === 0 ? "溫柔安頓" : index === arr.length - 1 ? "深耕轉化" : "深切共鳴";
             const shortName = p.name.split(/[｜|：|:]/)[0].trim();
             return (
               <button key={p.id} onClick={() => scrollToId(`plan-${p.id}`)} className="block text-left h-full group">
-                <Button variant={p.hot ? "default" : "outline"} className={`h-auto py-3 px-4 w-full gold-border flex items-center justify-between gap-3 ${p.hot ? 'bg-primary/10 text-foreground' : ''}`}>
+                <Button
+                  variant={p.hot ? "default" : "outline"}
+                  className={`h-auto py-3 px-4 w-full gold-border flex items-center justify-between gap-3 ${p.hot ? "bg-primary/10 text-foreground" : ""}`}
+                >
                   <div className="flex flex-col gap-1 items-start">
                     <span className="text-[10px] opacity-80 font-bold tracking-widest">{label}</span>
                     <span className="text-sm md:text-base font-bold tracking-widest leading-snug break-words">{shortName}</span>
@@ -95,15 +141,25 @@ export default function DeityPlanSelection({ d }: { d: Deity }) {
       {/* 詳細方案卡片 */}
       <div className="grid gap-6 md:grid-cols-2">
         {[...d.plans].sort((a, b) => a.price - b.price).map((p) => (
-          <Card key={p.id} id={`plan-${p.id}`} className="p-4 md:p-8 gold-border bg-card/70 paper-grain scroll-mt-28 flex flex-col justify-between transition-all duration-500 hover:border-primary/80">
+          <Card
+            key={p.id}
+            id={`plan-${p.id}`}
+            className="p-4 md:p-8 gold-border bg-card/70 paper-grain scroll-mt-28 flex flex-col justify-between transition-all duration-500 hover:border-primary/80"
+          >
             <div>
               <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
                 <div>
                   <div className="flex items-center gap-2 flex-wrap mb-2">
                     <div className="font-display text-2xl md:text-3xl">{p.name}</div>
-                    {p.hot && <Badge className="bg-primary text-primary-foreground text-[10px] px-2 py-0.5 whitespace-nowrap">系統推薦</Badge>}
+                    {p.hot && (
+                      <Badge className="bg-primary text-primary-foreground text-[10px] px-2 py-0.5 whitespace-nowrap">
+                        系統推薦
+                      </Badge>
+                    )}
                   </div>
-                  <div className="text-xs md:text-sm text-primary/80 font-bold">精準對位：{p.suitableFor.join("、")}</div>
+                  <div className="text-xs md:text-sm text-primary/80 font-bold">
+                    精準對位：{p.suitableFor.join("、")}
+                  </div>
                 </div>
                 <div className="text-left sm:text-right">
                   <div className="text-[10px] tracking-[0.25em] uppercase text-muted-foreground font-bold mb-1">修復投資</div>
@@ -126,25 +182,39 @@ export default function DeityPlanSelection({ d }: { d: Deity }) {
               )}
             </div>
 
-            {/* 直達付款 CTA（移除中間層 Dialog，減少流失） */}
+            {/* ── 付款 CTA ── */}
             <div className="mt-8 pt-6 border-t border-border/40 space-y-3">
               <a
                 href={p.url}
                 target="_blank"
                 rel="noreferrer"
                 onClick={() => {
-                  if (typeof window !== "undefined") {
-                    window.gtag?.("event", "begin_checkout", {
-                      currency: "TWD",
-                      value: p.price,
-                      items: [{ item_name: `${d.name}-${p.name}`, price: p.price }],
-                    });
-                    window.fbq?.("track", "InitiateCheckout", {
-                      content_name: p.name,
-                      value: p.price,
-                      currency: "TWD",
-                    });
-                  }
+                  if (typeof window === "undefined") return;
+
+                  // ── GA4：begin_checkout ──────────────────────────────
+                  window.gtag?.("event", "begin_checkout", {
+                    currency: "TWD",
+                    value: p.price,
+                    items: [
+                      {
+                        item_id: p.id,
+                        item_name: `${d.name}-${p.name}`,
+                        price: p.price,
+                        currency: "TWD",
+                        quantity: 1,
+                      },
+                    ],
+                  });
+
+                  // ── FB Pixel：InitiateCheckout（補齊 content_ids）──
+                  window.fbq?.("track", "InitiateCheckout", {
+                    content_ids: [p.id],           // ✅ 再行銷比對關鍵
+                    content_name: p.name,
+                    content_type: "product",
+                    value: p.price,
+                    currency: "TWD",
+                    num_items: 1,
+                  });
                 }}
                 className="block w-full"
               >

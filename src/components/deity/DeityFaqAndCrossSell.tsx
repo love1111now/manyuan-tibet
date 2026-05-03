@@ -1,4 +1,6 @@
 // src/components/deity/DeityFaqAndCrossSell.tsx
+// ✅ v2 改動：終局 CTA「啟動我的修復造冊」加入 FB Pixel + GA4 追蹤
+
 import React from "react";
 import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
@@ -9,8 +11,6 @@ import {
   AccordionTrigger 
 } from "@/components/ui/accordion";
 import { Card } from "@/components/ui/card";
-
-// 🚨 關鍵修正：將 DEITIES 的來源指向新的資料匯總處
 import { DEITIES } from "@/data/deities"; 
 import type { Deity } from "@/lib/siteData";
 
@@ -19,9 +19,43 @@ interface DeityFaqAndCrossSellProps {
 }
 
 export default function DeityFaqAndCrossSell({ d }: DeityFaqAndCrossSellProps) {
+
+  // 終局 CTA 點擊追蹤
+  const handleFinalCta = () => {
+    if (typeof window === "undefined") return;
+
+    const hotPlan = d.plans?.find((p) => p.hot) ?? d.plans?.[0];
+    if (!hotPlan) return;
+
+    // GA4
+    window.gtag?.("event", "begin_checkout", {
+      currency: "TWD",
+      value: hotPlan.price,
+      items: [
+        {
+          item_id: hotPlan.id,
+          item_name: `${d.name}-${hotPlan.name}`,
+          price: hotPlan.price,
+          currency: "TWD",
+          quantity: 1,
+        },
+      ],
+    });
+
+    // FB Pixel
+    window.fbq?.("track", "InitiateCheckout", {
+      content_ids: [hotPlan.id],
+      content_name: hotPlan.name,
+      content_type: "product",
+      value: hotPlan.price,
+      currency: "TWD",
+      num_items: 1,
+    });
+  };
+
   return (
     <>
-      {/* FAQ 顧問釋疑區塊 - 完整還原雙欄手風琴邏輯 */}
+      {/* FAQ 顧問釋疑區塊 */}
       <section id="faq" className="mx-auto max-w-6xl px-4 md:px-8 pt-10 pb-16 scroll-mt-24">
         <div className="text-[10px] tracking-[0.3em] uppercase text-muted-foreground font-bold mb-2">
           FAQ Consultation
@@ -50,7 +84,7 @@ export default function DeityFaqAndCrossSell({ d }: DeityFaqAndCrossSellProps) {
         </div>
       </section>
 
-      {/* ── L6 終局收割：志工溫度 + 終極 CTA ────────────────────── */}
+      {/* ── 終局收割：志工溫度 + 終極 CTA ── */}
       <section className="mx-auto max-w-6xl px-4 md:px-8 pb-10">
         <div className="relative overflow-hidden rounded-2xl border border-primary/30 bg-primary/5 p-8 md:p-14">
           <div className="absolute -top-8 -right-8 w-48 h-48 rounded-full bg-primary/5 pointer-events-none" />
@@ -71,10 +105,12 @@ export default function DeityFaqAndCrossSell({ d }: DeityFaqAndCrossSellProps) {
             </p>
             
             <div className="mt-10 flex flex-col sm:flex-row gap-4">
+              {/* ✅ 終局 CTA：加入追蹤 */}
               <a
-                href={`#plans`}
+                href="#plans"
                 onClick={(e) => {
                   e.preventDefault();
+                  handleFinalCta();
                   document.getElementById("plans")?.scrollIntoView({ behavior: "smooth", block: "start" });
                 }}
                 className="inline-flex items-center justify-center gap-3 h-16 px-10 font-bold tracking-[0.2em] uppercase gold-border bg-primary text-primary-foreground rounded-md shadow-xl hover:scale-[1.02] active:scale-95 transition-all text-base"
@@ -102,7 +138,7 @@ export default function DeityFaqAndCrossSell({ d }: DeityFaqAndCrossSellProps) {
         </div>
       </section>
 
-      {/* CROSS SELL 維度跳轉區塊 - 1:1 還原對位邏輯 */}
+      {/* CROSS SELL 維度跳轉 */}
       <section className="mx-auto max-w-6xl px-4 md:px-8 pb-32">
         <Card className="p-4 md:p-8 gold-border bg-card/70 paper-grain">
           <div className="text-[10px] tracking-[0.3em] uppercase text-muted-foreground font-bold mb-2">
@@ -117,7 +153,6 @@ export default function DeityFaqAndCrossSell({ d }: DeityFaqAndCrossSellProps) {
           
           <div className="mt-8 grid gap-5 md:grid-cols-2">
             {d.crossSell.map((x) => {
-              // 透過 key 從全站資料庫找尋對應的神明資訊
               const t = DEITIES.find((k) => k.key === x.to);
               if (!t) return null;
               

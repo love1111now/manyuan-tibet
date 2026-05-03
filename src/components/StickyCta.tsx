@@ -1,8 +1,9 @@
 /*
-Design philosophy: Conversion-first sticky CTA
-- 在神明頁顯示「立即護持 {神明} ↗」直通最熱門方案付款連結
-- 非神明頁顯示原本的回到頂部 + 聯繫志工
-- passive scroll listener for 60fps mobile
+  StickyCta.tsx
+  ✅ v2 改動：
+  - 神明頁浮動按鈕點擊時同時觸發 FB Pixel InitiateCheckout（補齊 content_ids）
+  - GA4 begin_checkout 補齊 item_id / quantity
+  - 其他邏輯完全不動
 */
 
 import { useEffect, useState } from "react";
@@ -17,11 +18,9 @@ export default function StickyCta() {
   const [isVisible, setIsVisible] = useState(false);
   const [location] = useLocation();
 
-  // 從路由解析當前神明 key
   const deityMatch = location.match(/^\/deity\/([^/]+)/);
   const deityKey = deityMatch?.[1] as DeityKey | undefined;
   const deity = deityKey ? DEITY_BY_KEY[deityKey] : null;
-  // 找出該神明最熱門方案（hot=true）或第一個方案
   const hotPlan = deity?.plans?.find((p) => p.hot) ?? deity?.plans?.[0];
 
   useEffect(() => {
@@ -38,7 +37,7 @@ export default function StickyCta() {
 
   if (!isVisible) return null;
 
-  // 神明頁：顯示直通付款的浮動 CTA
+  // 神明頁：直通付款浮動 CTA
   if (deity && hotPlan) {
     return (
       <div className="fixed bottom-6 left-0 right-0 z-50 flex justify-center px-4 md:hidden pb-[env(safe-area-inset-bottom)] animate-in fade-in slide-in-from-bottom-4 duration-300">
@@ -47,6 +46,34 @@ export default function StickyCta() {
           target="_blank"
           rel="noreferrer"
           onClick={() => {
+            if (typeof window === "undefined") return;
+
+            // ── GA4：begin_checkout ──────────────────────────────────
+            window.gtag?.("event", "begin_checkout", {
+              currency: "TWD",
+              value: hotPlan.price,
+              items: [
+                {
+                  item_id: hotPlan.id,
+                  item_name: `${deity.name}-${hotPlan.name}`,
+                  price: hotPlan.price,
+                  currency: "TWD",
+                  quantity: 1,
+                },
+              ],
+            });
+
+            // ── FB Pixel：InitiateCheckout（補齊 content_ids）────────
+            window.fbq?.("track", "InitiateCheckout", {
+              content_ids: [hotPlan.id],
+              content_name: hotPlan.name,
+              content_type: "product",
+              value: hotPlan.price,
+              currency: "TWD",
+              num_items: 1,
+            });
+
+            // ── 原有 trackEvent（保留不動）───────────────────────────
             trackEvent("begin_checkout", {
               currency: "TWD",
               value: hotPlan.price,
@@ -65,7 +92,7 @@ export default function StickyCta() {
     );
   }
 
-  // 非神明頁：原本的回到頂部 + 聯繫志工
+  // 非神明頁：回到頂部 + 聯繫志工
   return (
     <div className="fixed bottom-6 right-4 z-50 flex flex-col gap-3 md:hidden pb-[env(safe-area-inset-bottom)] animate-in fade-in zoom-in duration-300">
       <a href="https://m.me/61583749010531" target="_blank" rel="noreferrer" aria-label="聯繫志工">

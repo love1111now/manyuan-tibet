@@ -78,7 +78,7 @@ export default function DeityHero({ d }: { d: Deity }) {
           </p>
 
           {/* 主標題 */}
-          <h1 className="mt-4 text-3xl md:text-5xl font-bold leading-tight">
+          <h1 className="mt-4 text-3xl md:text-5xl font-bold leading-tight break-keep">
             {d.name}
           </h1>
 
