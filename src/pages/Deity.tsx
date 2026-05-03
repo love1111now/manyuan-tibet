@@ -1,21 +1,12 @@
-/*
-Design philosophy: Neo-thangka noir (Deep Immersion Engineering)
-- Route Fix: Switched from react-router-dom to wouter to match package.json.
-- Prop Alignment: Component now correctly accepts `deityKey` passed from App.tsx route render function, bypassing `params.id` undefined error.
-- Data Fix: Centralized entity sourcing from @/data/deities.
-- UX: Implemented Dynamic Theme Injection based on deity metadata.
-- 100% Unabbreviated Production Ready Code.
-*/
-
 import React, { useEffect } from "react";
 import { useLocation, Redirect } from "wouter";
 import { Helmet } from "react-helmet-async";
+import { Quote } from "lucide-react";
+import { Card } from "@/components/ui/card";
 
-// 🟢 資料來源精準對位
 import { DEITY_BY_KEY } from "@/data/deities"; 
 import type { DeityKey } from "@/lib/siteData";
 
-// OG 圖片（神明頁共用）
 import ogDeityImg from "@/assets/visuals/seo/image_w5504_h3072_page-deity-1.webp";
 
 import SiteHeader from "@/components/SiteHeader";
@@ -23,39 +14,95 @@ import SiteFooter from "@/components/SiteFooter";
 import StickyCta from "@/components/StickyCta";
 import FloatingFb from "@/components/FloatingFb";
 
-// 子組件
 import DeityHero from "../components/deity/DeityHero";
 import DeityDiagnosis from "../components/deity/DeityDiagnosis";
 import DeityRitualAndEvidence from "../components/deity/DeityRitualAndEvidence";
 import DeityPlanSelection from "../components/deity/DeityPlanSelection";
 import DeityFaqAndCrossSell from "../components/deity/DeityFaqAndCrossSell";
 
-// 🚨 關鍵修正：定義 Props，承接 App.tsx 傳遞過來的 deityKey
+import type { Deity } from "@/lib/siteData";
+
+// ── 顧客見證區塊（內嵌，不需要獨立檔案）──────────────────────────
+function DeityTestimonials({ d }: { d: Deity }) {
+  if (!d.testimonials || d.testimonials.length === 0) return null;
+
+  return (
+    <section className="mx-auto max-w-6xl px-5 md:px-8">
+      <div className="mb-8 text-center">
+        <p className="text-xs font-bold tracking-[0.25em] text-primary uppercase mb-2">
+          真實回饋
+        </p>
+        <h2 className="text-2xl md:text-3xl font-bold">
+          他們是怎麼改變的
+        </h2>
+        <p className="mt-2 text-sm text-muted-foreground">
+          不是廣告詞，是他們自己說的話
+        </p>
+      </div>
+
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {d.testimonials.map((t, i) => (
+          <Card
+            key={i}
+            className="p-5 flex flex-col gap-3 bg-white/[0.04] border border-white/10 hover:border-primary/30 transition-colors"
+          >
+            <Quote
+              className="h-5 w-5 shrink-0"
+              style={{ color: d.themeColor.accent, opacity: 0.6 }}
+            />
+            <p className="text-sm font-semibold text-foreground leading-snug">
+              {t.title}
+            </p>
+            <p className="text-sm text-muted-foreground leading-relaxed flex-1">
+              {t.body}
+            </p>
+            <p
+              className="text-xs font-medium mt-1"
+              style={{ color: d.themeColor.accent, opacity: 0.75 }}
+            >
+              — {t.by}
+            </p>
+          </Card>
+        ))}
+      </div>
+
+      <div className="mt-8 text-center">
+        <p className="text-sm text-muted-foreground">
+          每個人的情況不同，但卡住的感覺是一樣的。
+        </p>
+        <button
+          onClick={() => {
+            const el = document.getElementById("plans");
+            if (el) el.scrollIntoView({ behavior: "smooth" });
+          }}
+          className="mt-3 inline-flex items-center gap-1.5 text-sm font-bold hover:underline"
+          style={{ color: d.themeColor.accent }}
+        >
+          看看適合你的方案 →
+        </button>
+      </div>
+    </section>
+  );
+}
+
+// ── 主頁面組件 ────────────────────────────────────────────────────
 interface DeityPageProps {
   deityKey: DeityKey;
 }
 
-/**
- * 本尊詳情頁主組件
- * 透過 App.tsx 傳入的 deityKey 動態加載對應本尊資料庫
- */
 const DeityPage: React.FC<DeityPageProps> = ({ deityKey }) => {
   const [location] = useLocation();
 
-  // 1. 定位本尊資料實體 (直接使用傳入的 deityKey)
   const d = deityKey ? DEITY_BY_KEY[deityKey] : null;
 
-  // 2. 切換本尊時自動置頂，確保用戶體驗一致性
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [location]);
 
-  // 3. 安全守護：若 URL 的 key 不存在於資料庫，立即導回首頁防止頁面崩潰
   if (!d) {
     return <Redirect to="/" replace />;
   }
 
-  // FB Pixel ViewContent — 廣告再行銷池建立的關鍵事件
   useEffect(() => {
     if (typeof window === "undefined") return;
     const timer = setTimeout(() => {
@@ -76,7 +123,7 @@ const DeityPage: React.FC<DeityPageProps> = ({ deityKey }) => {
   }, [d.key]);
 
   return (
-    <div 
+    <div
       className="min-h-screen font-sans antialiased text-white selection:bg-white/20 transition-colors duration-700 ease-in-out"
       style={
         {
@@ -85,7 +132,6 @@ const DeityPage: React.FC<DeityPageProps> = ({ deityKey }) => {
         } as React.CSSProperties
       }
     >
-      {/* OG / SEO meta — 讓神明頁分享出去顯示正確大圖 */}
       <Helmet>
         <title>{d.name}｜{d.primaryIntent}｜滿願藏庫</title>
         <meta name="description" content={`${d.heroKicker}。${d.promise.slice(0, 80)}…`} />
@@ -97,45 +143,39 @@ const DeityPage: React.FC<DeityPageProps> = ({ deityKey }) => {
         <meta name="twitter:image" content={ogDeityImg} />
       </Helmet>
 
-      {/* 導覽列 */}
       <SiteHeader />
-      
+
       <main className="relative pb-24 overflow-x-hidden">
-        {/* L1: 視覺震撼區 - 展現本尊威德與核心承諾 */}
         <DeityHero d={d} />
-        
+
         <div className="relative z-10 -mt-12 space-y-20 md:space-y-32">
-          
-          {/* L2: 痛點對位區 - 診斷用戶當下的生命困境 
-              (調整 scroll-mt-32 確保點擊錨點時不會被 Header 擋住) */}
+
           <section id="diagnosis" className="scroll-mt-32">
             <DeityDiagnosis d={d} />
           </section>
 
-          {/* L3: 儀軌實證區 - 展示西藏壇城現場與師兄姐實修證據 
-              (調整 scroll-mt-32) */}
           <section id="evidence" className="scroll-mt-32">
             <DeityRitualAndEvidence d={d} />
           </section>
 
-          {/* L4: 方案選擇區 - 透明定價與安全登記入口 
-              (調整 scroll-mt-32，解決按鈕下滑未到位問題) */}
+          {/* ✅ 見證在方案前，建立信任後再請求購買 */}
+          <section id="testimonials" className="scroll-mt-32">
+            <DeityTestimonials d={d} />
+          </section>
+
           <section id="plans" className="scroll-mt-32">
             <DeityPlanSelection d={d} />
           </section>
 
-          {/* L5: 顧問釋疑與交叉對位 - 處理反對意見並引導至其他可能需要的本尊 */}
           <section id="cross-sell" className="pb-20">
             <DeityFaqAndCrossSell d={d} />
           </section>
-          
+
         </div>
 
-        {/* 裝飾性元素：藏式邊緣修飾 */}
         <div className="fixed bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/30 to-transparent z-50 pointer-events-none" />
       </main>
 
-      {/* 功能性組件 */}
       <SiteFooter />
       <StickyCta />
       <FloatingFb />
