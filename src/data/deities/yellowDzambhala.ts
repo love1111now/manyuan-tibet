@@ -1,3 +1,5 @@
+// src/data/deities/yellowDzambhala.ts
+
 import type { Deity } from "../../lib/siteData";
 
 // 靜態資源引入
@@ -117,24 +119,37 @@ export const yellow: Deity = {
     { title: "轉為結果", body: "轉化為金流與實際機會" }
   ],
 
+  // 🟢 徹底豐滿化的儀軌區塊 (解決版面空洞問題)
   ritual: {
     title: "黃財神水供｜啟動財富流動",
     image: ritualYellowImg,
     imageAlt: "修法場域",
     mdPath: "yellow-jambhala-sang.md",
     sourceUrl: "https://www.lotsawahouse.org/tibetan-masters/jamyang-khyentse-chokyi-lodro/jambhala-sang",
-    keyPoints: ["流動", "清阻", "回流"],
-    offeringsChecklist: [],
-    practiceFocus: []
+    note: "水供是藏密極為殊勝的增益法門。藉由清淨之水供養黃財神，象徵洗淨行者的貧窮與匱乏，讓停滯的財富能量如流水般重新啟動。",
+    keyPoints: [
+      "🌊 財富流動：透過水供儀軌，疏通停滯與卡關的財務能量",
+      "✨ 清除阻礙：移除阻擋在機會與成果之間的無形業力淤塞",
+      "🕯️ 資糧回流：讓原本莫名流失的資源，重新安穩回到你的財庫"
+    ],
+    offeringsChecklist: [
+      "清淨無染的供水（象徵財富如水流動不斷）",
+      "無貪求、不帶匱乏感的清淨發心",
+      "祈願一切眾生皆離貧苦的慈悲意念"
+    ],
+    practiceFocus: [
+      "不只求財：重點在於「修復結構性漏損」，把漏財的洞補起來",
+      "如法對位：透過志工造冊，讓修法能量精準對接到您的現實狀況",
+      "耐心守護：財富流動需要時間轉化，保持平靜與篤定是最大的助力"
+    ]
   },
 
   rituals: [
-    { id: "r1", img: dzambhalaRitualAltar, alt: "壇城", caption: "修法核心" },
-    { id: "r2", img: dzambhalaActionPuja, alt: "修法", caption: "實際進行" },
-    { id: "r3", img: dzambhalaVibeLamp, alt: "供燈", caption: "穩定放大" }
+    { id: "r1", img: dzambhalaRitualAltar, alt: "壇城", caption: "修法核心：依循清淨傳承佈置之黃財神壇城" },
+    { id: "r2", img: dzambhalaActionPuja, alt: "修法", caption: "實際進行：由具德僧眾如理如法進行水供儀軌" },
+    { id: "r3", img: dzambhalaVibeLamp, alt: "供燈", caption: "穩定放大：藉由供燈驅除無明，照亮財富的通道" }
   ],
 
-  // ── 顧客證言：移到 plans 上方渲染，請在頁面組件調整順序 ───────
   testimonials: [
     { 
       title: "收入一直有，但錢就是留不住", 
@@ -158,7 +173,6 @@ export const yellow: Deity = {
     }
   ],
 
-  // ── plans：強化文案，降低決策門檻 ───────────────────────────
   plans: [
     { 
       id: "y-490", 
@@ -188,7 +202,6 @@ export const yellow: Deity = {
     }
   ],
 
-  // ── FAQ：補強疑慮，減少流失 ──────────────────────────────────
   faq: [
     { 
       q: "我不太信這個，也可以嗎？", 
@@ -216,7 +229,7 @@ export const yellow: Deity = {
     }
   ],
 
-  // 🟢 已完全修正的跨售欄位 (確保不會發生 TS2353 錯誤)
+  // 🟢 正確定義的 CrossSell
   crossSell: [
     {
       title: "作明佛母｜增加客源與貴人",
