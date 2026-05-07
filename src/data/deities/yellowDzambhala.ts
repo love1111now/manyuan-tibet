@@ -216,6 +216,7 @@ export const yellow: Deity = {
     }
   ],
 
+  // 🟢 已完全修正的跨售欄位 (確保不會發生 TS2353 錯誤)
   crossSell: [
     {
       title: "作明佛母｜增加客源與貴人",
