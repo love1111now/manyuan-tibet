@@ -331,63 +331,8 @@ export default function Home() {
           </div>
         </section>
 
-        {/* L5 [產品包裝]: 藥師佛加碼活動 */}
-        <section aria-labelledby="bonus-heading" className="mx-auto max-w-6xl px-4 pt-10 pb-4">
-          <Card className="gold-border bg-primary/5 overflow-hidden paper-grain border-primary/30 relative group">
-            <div className="absolute top-0 right-0 p-12 opacity-5 font-display text-[15rem] text-primary pointer-events-none group-hover:rotate-12 transition-transform duration-1000" aria-hidden="true">
-              ✦
-            </div>
-            <div className="grid md:grid-cols-[320px_1fr]">
-              <div className="h-64 md:h-full w-full relative">
-                <img src={VISUALS.sutraCloseup} alt="藥師佛法事意象" className="h-full w-full object-cover opacity-60 grayscale group-hover:grayscale-0 transition-all duration-700" loading="lazy" />
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent to-primary/5" aria-hidden="true" />
-              </div>
-              <div className="p-8 md:p-14 z-10 flex flex-col justify-center">
-                <div className="flex items-center gap-3 mb-6">
-                  <Badge className="bg-primary text-primary-foreground gold-border animate-pulse px-4 py-1.5 tracking-widest text-xs font-bold">本月顧問加碼</Badge>
-                  <span className="text-[10px] tracking-[0.3em] uppercase text-muted-foreground font-bold italic" aria-hidden="true">Lapis Lazuli Restoration</span>
-                </div>
-                <h3 id="bonus-heading" className="font-display text-3xl md:text-5xl text-foreground leading-tight tracking-tight">啟動任一主計畫，<br/><span className="text-primary underline underline-offset-8">免費對位每週「藥師佛息災煙供」</span></h3>
-                <p className="mt-8 readable text-muted-foreground text-lg leading-loose max-w-3xl">
-                  我們深知<strong className="text-foreground">「健康與安穩」</strong>是所有福報的底氣。地基不穩，再多資糧也難以受用。
-                  這不是商業贈品，而是為了確保您的修復容器足夠穩固，能真正接住後續降臨的善緣與財富。
-                </p>
-                
-                <div className="mt-12 grid gap-8 md:grid-cols-3">
-                  <div className="space-y-2">
-                    <div className="text-[10px] tracking-[0.22em] uppercase text-primary font-black flex items-center gap-2 italic" aria-hidden="true">Double Protection < Zap className="h-3 w-3" /></div>
-                    <div className="font-display text-2xl">雙重能量守護</div>
-                    <div className="text-[13px] text-muted-foreground readable">補足資糧缺口，同時清淨身心負累。</div>
-                  </div>
-                  <div className="space-y-2">
-                    <div className="text-[10px] tracking-[0.22em] uppercase text-primary font-black flex items-center gap-2 italic" aria-hidden="true">Transparency < ShieldCheck className="h-3 w-3" /></div>
-                    <div className="font-display text-2xl">流程全程透明</div>
-                    <div className="text-[13px] text-muted-foreground readable">每週六結案，並於隔週公佈去識別化造冊。</div>
-                  </div>
-                  <div className="space-y-2">
-                    <div className="text-[10px] tracking-[0.22em] uppercase text-primary font-black flex items-center gap-2 italic" aria-hidden="true">Automatic Entry < Clock className="h-3 w-3" /></div>
-                    <div className="font-display text-2xl">系統自動併入</div>
-                    <div className="text-[13px] text-muted-foreground readable">登記任一法事後，志工將主動為您名冊歸類。</div>
-                  </div>
-                </div>
-
-                <div className="mt-12">
-                  <Link href="/pay" aria-label="前往預約名冊，啟動藥師佛雙重修復" className="inline-block w-full md:w-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-md">
-                    <Button tabIndex={-1} className="h-20 w-full md:w-auto px-12 text-xl md:text-2xl font-bold tracking-[0.4em] uppercase gold-border bg-primary text-primary-foreground shadow-2xl hover:scale-[1.02] active:scale-95 transition-all group pointer-events-none">
-                      立即預約，啟動修復 <ArrowRight className="ml-4 h-8 w-8 group-hover:translate-x-2 transition-transform" aria-hidden="true" />
-                    </Button>
-                  </Link>
-                  <div className="mt-5 text-[11px] text-muted-foreground/60 tracking-widest font-bold uppercase italic text-center md:text-left">
-                    * 本企劃為志工團隊自發加碼，名額將依壇城負載量動態控管。
-                  </div>
-                </div>
-              </div>
-            </div>
-          </Card>
-        </section>
-
         {/* FREE GIFT 黃財神桌布下載區塊 */}
-        <section aria-label="免費贈品區塊" className="mx-auto max-w-6xl px-4 pt-10 pb-2">
+        <section aria-label="免費贈品區塊" className="mx-auto max-w-6xl px-4 pt-10 pb-16">
           <Card className="gold-border bg-card/70 overflow-hidden paper-grain hover:border-primary/40 transition-colors">
             <div className="grid md:grid-cols-[1fr_260px] items-center gap-6">
               <div className="p-7 md:p-10">
@@ -412,6 +357,7 @@ export default function Home() {
                   src={DEITIES.find(d => d.key === 'yellow')?.heroImage} 
                   alt="" 
                   className="h-full w-full object-cover border-l border-border/50 opacity-80" 
+                  loading="lazy"
                 />
               </div>
             </div>
@@ -419,7 +365,7 @@ export default function Home() {
         </section>
 
         {/* L6 [終局收割]: 回饋文 */}
-        <section aria-labelledby="testimonials-heading" className="mx-auto max-w-6xl px-4 pt-20 pb-28">
+        <section aria-labelledby="testimonials-heading" className="mx-auto max-w-6xl px-4 pt-10 pb-28">
           <div className="flex flex-col items-center text-center mb-16">
             <div className="flex items-center gap-3 text-[10px] md:text-xs tracking-[0.3em] uppercase text-primary font-bold mb-4 bg-primary/5 px-3 py-1 rounded" aria-hidden="true">
               <ShieldCheck className="w-4 h-4" /> Real Transformations
