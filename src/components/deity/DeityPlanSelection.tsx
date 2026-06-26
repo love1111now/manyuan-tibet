@@ -102,16 +102,7 @@ export default function DeityPlanSelection({ d }: { d: Deity }) {
         </div>
       </div>
 
-      {/* 本月限定加碼 */}
-      <div className="mb-8 p-4 md:p-7 rounded-xl border border-primary/40 bg-primary/5 relative overflow-hidden group shadow-inner">
-        <div className="flex flex-col sm:flex-row sm:items-center gap-3 mb-3">
-          <Badge className="w-fit bg-primary text-primary-foreground gold-border animate-pulse px-3 py-1 font-bold tracking-widest text-[10px]">本月限定</Badge>
-          <span className="font-display text-xl md:text-2xl text-foreground/90">啟動修復，雙重加碼「藥師佛息災煙供」</span>
-        </div>
-        <p className="text-sm md:text-base text-muted-foreground readable leading-relaxed">
-          現在登記下方任一 {d.name} 方案，系統將自動為您列入每週六的藥師佛煙供名單。
-        </p>
-      </div>
+
 
       {/* 直覺導航 */}
       <Card className="mb-8 p-4 md:p-7 gold-border bg-card/70 paper-grain">

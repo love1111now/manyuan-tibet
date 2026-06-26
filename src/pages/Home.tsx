@@ -103,7 +103,7 @@ export default function Home() {
               這往往不是意志力的問題。<span className="text-foreground font-semibold">當生命的資糧容器出現了結構性漏損</span>，再多的努力也會在不知不覺中流失。
             </p>
             <p className="mt-4 readable text-muted-foreground max-w-3xl text-base md:text-lg leading-relaxed mx-auto italic opacity-80">
-              我們是台灣不支薪志工，依循佛法古老智慧，陪伴您修復那個漏損。不高調，不造神，只如法完成每一道儀軌。
+              我們是台灣不支薪志工，依循佛法古老智慧，陪伴您修復那個漏損。依法不依人，只如法完成每一道儀軌。
             </p>
 
             <button 
@@ -195,7 +195,7 @@ export default function Home() {
                     { label: "資糧流動修復 → 黃財神", to: "yellow", srLabel: "前往黃財神介紹頁面" },
                     { label: "家運地基穩固 → 大吉祥天女", to: "mahashri", srLabel: "前往大吉祥天女介紹頁面" },
                     { label: "決策認知除障 → 象頭財神", to: "ganapati", srLabel: "前往象頭財神介紹頁面" },
-                    { label: "懷愛磁場重建 → 作明佛母", to: "kurukulla", srLabel: "前往作明佛母介紹頁面" },
+                    { label: "情緣磁場重建 → 作明佛母", to: "kurukulla", srLabel: "前往作明佛母介紹頁面" },
                     { label: "身心耗損息災 → 藥師佛", to: "medicine-buddha", srLabel: "前往藥師佛介紹頁面" },
                     { label: "急難突發化解 → 綠度母", to: "green-tara", srLabel: "前往綠度母介紹頁面" },
                     { label: "動盪防禦建構 → 蓮花生大士", to: "padmasambhava", srLabel: "前往蓮花生大士介紹頁面" }
