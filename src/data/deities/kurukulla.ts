@@ -23,7 +23,8 @@ export const kurukulla: Deity = {
   },
 
   // Hero
-  heroKicker: "重新點亮您的吸引力，讓真正適合您的善緣開始靠近。",
+  // 優化：採用精準診斷式標題，引發共鳴；再搭配下方 promise 的溫柔包覆
+  heroKicker: "你不是不夠優秀，而是磁場處於『靜電屏蔽』狀態——讓外界看不見你的光。",
   heroImage: heroKurukullaImg,
   promise:
     "作明佛母，是藏傳佛教蓮華部的重要懷愛本尊，又稱咕嚕咕咧佛母、紅度母。透過溫柔的修法與祝福，陪伴您修復受傷的人際感受、重新建立內在自信，讓愛與善意自然回到生命之中。我們不強求任何人，也不控制感情，只祈願您重新成為值得被珍惜的人。",
@@ -144,7 +145,7 @@ export const kurukulla: Deity = {
     },
   ],
 
-  // 回饋（四種情境）
+  // 回饋（融合您的情境並增強感官深度）
   testimonials: [
     {
       title: "第一次感受到自己值得被喜歡",
@@ -168,7 +169,7 @@ export const kurukulla: Deity = {
     },
   ],
 
-  // 方案
+  // 方案 (補齊 4 個階梯，建立完美的價格錨點)
   plans: [
     {
       id: "k-490",
@@ -190,12 +191,22 @@ export const kurukulla: Deity = {
       suitableFor: ["單身良緣", "感情升溫"],
       details: ["完整懷愛修法", "良緣回向祈福", "不含強求祈願"],
     },
+    { 
+      id: "k-1660", 
+      name: "和諧圓滿 ｜ 雙人關係修復", 
+      price: 1660, 
+      blurb: "專為特定關係（伴侶冷戰、家庭決裂、合夥矛盾）設計：深層淨化彼此的溝通障礙，搭起善意橋樑。", 
+      url: "https://cart.cashier.ecpay.com.tw/qp/2u24", 
+      suitableFor: ["伴侶深度修復", "化解長輩隔閡"], 
+      details: ["特定雙人對位造冊", "懷愛香供特別加持", "僅限正面和諧化解"],
+    },
     {
       id: "k-1860",
       name: "人脈魅力加強",
       price: 1860,
       blurb: "適合創作者、業務、自媒體與需要群眾魅力者。",
       url: "https://cart.cashier.ecpay.com.tw/qp/z5c3",
+      badge: "業務/公眾推薦", // 加入高客單專屬標籤
       suitableFor: ["事業人脈", "人氣提升"],
       details: ["深層懷愛香供", "人際能量回向", "適合需曝光職業"],
     },
