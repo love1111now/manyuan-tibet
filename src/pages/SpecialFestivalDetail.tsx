@@ -1,7 +1,7 @@
 import React from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "wouter";
-import { ArrowLeft, ArrowRight, Flag, Gem, Flame, ShieldCheck, Users, Mountain, Wind, HeartHandshake, Sparkles, BookOpen, CircleCheck } from "lucide-react";
+import { ArrowLeft, ArrowRight, Flag, Gem, Flame, ShieldCheck, Users } from "lucide-react";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import StickyCta from "@/components/StickyCta";
@@ -127,7 +127,7 @@ export default function SpecialFestivalDetail({ slug }: { slug: string }) {
               <p className="mt-5 text-xl font-semibold leading-relaxed text-primary md:text-2xl">{data.kicker}</p>
               <p className="mt-3 text-base leading-8 text-muted-foreground md:text-lg">{data.subtitle}</p>
               <p className="mt-5 text-sm leading-8 text-foreground/75 md:text-base">{data.intro}</p>
-              <div className="mt-7 grid gap-2 sm:grid-cols-2">{data.highlights.map(item => <div key={item} className="flex items-start gap-2 rounded-xl border border-border/60 bg-card/40 px-3 py-3 text-sm"><CircleCheck className="mt-0.5 h-4 w-4 shrink-0 text-primary" /><span>{item}</span></div>)}</div>
+              <div className="mt-7 grid gap-2 sm:grid-cols-2">{data.highlights.map(item => <div key={item} className="flex items-start gap-2 rounded-xl border border-border/60 bg-card/40 px-3 py-3 text-sm"><ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-primary" /><span>{item}</span></div>)}</div>
             </div>
             <div className="order-1 md:order-2">
               <div className="group relative overflow-hidden rounded-3xl border border-primary/20 bg-black/20 shadow-2xl">
@@ -180,17 +180,17 @@ export default function SpecialFestivalDetail({ slug }: { slug: string }) {
       </section>
 
       <section className="mx-auto max-w-6xl px-4 pt-16 md:px-8 md:pt-24">
-        <div className="rounded-3xl border border-primary/20 bg-primary/5 p-6 md:p-10"><div className="flex items-start gap-4"><HeartHandshake className="mt-1 h-7 w-7 shrink-0 text-primary" /><div><p className="text-xs font-bold tracking-[0.28em] text-primary">最適合的參與方式</p><h2 className="mt-2 font-display text-3xl md:text-4xl">一個人發心，也可以五個人同行</h2><p className="mt-4 max-w-3xl text-sm leading-8 text-muted-foreground md:text-base">這項特別祭典目前是網站最高規格的法事方案，因此更適合把它當成「共同發心」來參與，而不是單純個人消費。一次登記最多五人，可以為自己、父母、伴侶、孩子或重要親友共同參與。</p></div></div><div className="mt-7 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">{[["一家人","父母、夫妻、孩子共同參與"],["夫妻","為彼此共同發願與回向"],["兄弟姊妹","一起為父母或家庭發心"],["親朋好友","多年好友共同結下善緣"]].map(([title,text]) => <div key={title} className="rounded-2xl border border-primary/10 bg-background/30 p-4"><p className="font-bold">{title}</p><p className="mt-1 text-xs leading-6 text-muted-foreground">{text}</p></div>)}</div></div>
+        <div className="rounded-3xl border border-primary/20 bg-primary/5 p-6 md:p-10"><div className="flex items-start gap-4"><Users className="mt-1 h-7 w-7 shrink-0 text-primary" /><div><p className="text-xs font-bold tracking-[0.28em] text-primary">最適合的參與方式</p><h2 className="mt-2 font-display text-3xl md:text-4xl">一個人發心，也可以五個人同行</h2><p className="mt-4 max-w-3xl text-sm leading-8 text-muted-foreground md:text-base">這項特別祭典目前是網站最高規格的法事方案，因此更適合把它當成「共同發心」來參與，而不是單純個人消費。一次登記最多五人，可以為自己、父母、伴侶、孩子或重要親友共同參與。</p></div></div><div className="mt-7 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">{[["一家人","父母、夫妻、孩子共同參與"],["夫妻","為彼此共同發願與回向"],["兄弟姊妹","一起為父母或家庭發心"],["親朋好友","多年好友共同結下善緣"]].map(([title,text]) => <div key={title} className="rounded-2xl border border-primary/10 bg-background/30 p-4"><p className="font-bold">{title}</p><p className="mt-1 text-xs leading-6 text-muted-foreground">{text}</p></div>)}</div></div>
       </section>
 
       <section className="mx-auto max-w-6xl px-4 pt-16 md:px-8 md:pt-24">
         <div className="mb-8 text-center"><p className="text-xs font-bold tracking-[0.28em] text-primary">適合誰</p><h2 className="mt-2 font-display text-3xl md:text-4xl">如果你正在為這些事發心</h2></div>
-        <div className="grid gap-3 md:grid-cols-2">{data.suitable.map(item => <div key={item} className="flex items-start gap-3 rounded-2xl border border-border/60 bg-card/35 p-5"><CircleCheck className="mt-0.5 h-5 w-5 shrink-0 text-primary" /><p className="text-sm leading-7">{item}</p></div>)}</div>
+        <div className="grid gap-3 md:grid-cols-2">{data.suitable.map(item => <div key={item} className="flex items-start gap-3 rounded-2xl border border-border/60 bg-card/35 p-5"><ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-primary" /><p className="text-sm leading-7">{item}</p></div>)}</div>
       </section>
 
       <section className="mx-auto max-w-6xl px-4 pt-16 md:px-8 md:pt-24">
         <div className="mb-8 text-center"><p className="text-xs font-bold tracking-[0.28em] text-primary">參與者回饋</p><h2 className="mt-2 font-display text-3xl md:text-4xl">一份法事，真正留下的是什麼？</h2><p className="mx-auto mt-3 max-w-2xl text-sm leading-7 text-muted-foreground">以下先以「共同發心」與「參與感受」呈現回饋區塊；正式上線後可直接替換成你們實際收到的信眾原話。</p></div>
-        <div className="grid gap-5 md:grid-cols-3">{data.feedback.map(([title,body,by]) => <article key={title} className="rounded-3xl border border-border/60 bg-card/40 p-6"><Sparkles className="h-5 w-5 text-primary/70" /><h3 className="mt-4 text-lg font-bold">{title}</h3><p className="mt-3 text-sm leading-8 text-muted-foreground">{body}</p><p className="mt-5 border-t border-border/50 pt-4 text-[11px] tracking-wide text-primary/70">— {by}</p></article>)}</div>
+        <div className="grid gap-5 md:grid-cols-3">{data.feedback.map(([title,body,by]) => <article key={title} className="rounded-3xl border border-border/60 bg-card/40 p-6"><ShieldCheck className="h-5 w-5 text-primary/70" /><h3 className="mt-4 text-lg font-bold">{title}</h3><p className="mt-3 text-sm leading-8 text-muted-foreground">{body}</p><p className="mt-5 border-t border-border/50 pt-4 text-[11px] tracking-wide text-primary/70">— {by}</p></article>)}</div>
       </section>
 
       <section className="mx-auto max-w-6xl px-4 pt-16 md:px-8 md:pt-24"><div className="grid gap-4 md:grid-cols-3"><InfoCard icon={Mountain} title="法門與傳統">以藏傳佛教的經咒、供養、發心與回向脈絡理解，而不是把法事包裝成世俗保證。</InfoCard><InfoCard icon={BookOpen} title="一季為一期">讓願心有足夠時間被憶念與回向，把節日或儀軌的因緣延伸到日常生活。</InfoCard><InfoCard icon={Users} title="最多五人">一筆登記可由最多五人共同參與，尤其適合家庭與親朋好友共同發心。</InfoCard></div></section>
@@ -207,7 +207,7 @@ export default function SpecialFestivalDetail({ slug }: { slug: string }) {
 
       <section className="mx-auto max-w-5xl px-4 pt-12 md:px-8 md:pt-16"><div className="rounded-3xl border border-primary/15 bg-card/30 p-6 md:p-8"><p className="text-xs font-bold tracking-[0.28em] text-primary">參與前請先知道</p><div className="mt-5 grid gap-5 md:grid-cols-2"><div><h3 className="font-bold">我們如何理解「效果」？</h3><p className="mt-2 text-sm leading-7 text-muted-foreground">藏傳佛教的法事重視的是傳承、發心、儀軌、供養、持誦與回向的完整因緣。頁面不以「保證財富、感情、健康或特定事件結果」作為承諾；我們更重視善願、修持與回向本身。</p></div><div><h3 className="font-bold">五人怎麼登記？</h3><p className="mt-2 text-sm leading-7 text-muted-foreground">每一筆 NT$6,000 登記最多可填寫五位參與者。實際姓名及登記資料會在綠界付款頁面完成，請依綠界頁面欄位填寫。</p></div></div></div></section>
 
-      <section className="mx-auto max-w-5xl px-4 pt-14 md:px-8 md:pt-20"><div className="relative overflow-hidden rounded-3xl border border-primary/25 bg-primary/5 p-7 text-center md:p-12"><Wind className="mx-auto h-7 w-7 text-primary" /><p className="mt-4 text-xs font-bold tracking-[0.3em] text-primary">首發 18 席・一季護持・最多五人同行</p><h2 className="mt-3 font-display text-3xl md:text-5xl">一份慎重的發心，值得被好好承接</h2><p className="mx-auto mt-4 max-w-2xl text-sm leading-8 text-muted-foreground md:text-base">如果你希望的不只是一次性的祈福，而是一段能與家人、親友共同參與、共同回向的藏傳佛教護持因緣，這項特別祭典就是為這樣的發心而設。</p><a href={checkoutUrl} target="_blank" rel="noreferrer" className="mt-7 inline-flex items-center rounded-xl bg-primary px-8 py-4 text-sm font-bold text-primary-foreground shadow-xl transition hover:opacity-90">NT$6,000｜前往綠界登記<ArrowRight className="ml-2 h-4 w-4" /></a><p className="mt-4 text-xs text-muted-foreground">付款與登記皆於綠界完成</p></div></section>
+      <section className="mx-auto max-w-5xl px-4 pt-14 md:px-8 md:pt-20"><div className="relative overflow-hidden rounded-3xl border border-primary/25 bg-primary/5 p-7 text-center md:p-12"><ShieldCheck className="mx-auto h-7 w-7 text-primary" /><p className="mt-4 text-xs font-bold tracking-[0.3em] text-primary">首發 18 席・一季護持・最多五人同行</p><h2 className="mt-3 font-display text-3xl md:text-5xl">一份慎重的發心，值得被好好承接</h2><p className="mx-auto mt-4 max-w-2xl text-sm leading-8 text-muted-foreground md:text-base">如果你希望的不只是一次性的祈福，而是一段能與家人、親友共同參與、共同回向的藏傳佛教護持因緣，這項特別祭典就是為這樣的發心而設。</p><a href={checkoutUrl} target="_blank" rel="noreferrer" className="mt-7 inline-flex items-center rounded-xl bg-primary px-8 py-4 text-sm font-bold text-primary-foreground shadow-xl transition hover:opacity-90">NT$6,000｜前往綠界登記<ArrowRight className="ml-2 h-4 w-4" /></a><p className="mt-4 text-xs text-muted-foreground">付款與登記皆於綠界完成</p></div></section>
 
       <div className="mx-auto mt-10 max-w-5xl px-4 md:px-8"><Link href="/special-festivals" className="inline-flex items-center gap-2 text-sm font-bold text-muted-foreground hover:text-primary"><ArrowLeft className="h-4 w-4" /> 返回特別祭典</Link></div>
     </main>
