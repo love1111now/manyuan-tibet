@@ -13,7 +13,7 @@ const SPECIAL_FESTIVAL_CHECKOUT_URLS = {
   "butter-lamp-festival": "https://cart.cashier.ecpay.com.tw/qp/3gC5",
 } as const;
 
-const FESTIVALS = {
+interface FestivalData { title: string; tibetan: string; kicker: string; subtitle: string; icon: React.ElementType; heroImage: string; secondaryImage: string; imageCredit: string; intro: string; powerTitle: string; powerText: string; highlights: string[]; sections: [string, string][]; suitable: string[]; feedback: [string, string, string][]; }\n\nconst FESTIVALS: Record<string, FestivalData> = {
   "wind-horse": {
     title: "風馬旗", tibetan: "རླུང་རྟ་ · Lungta", kicker: "讓願心隨風而行",
     subtitle: "以風馬旗承載經咒與祈願，將一份發心延續為一季的護持",
