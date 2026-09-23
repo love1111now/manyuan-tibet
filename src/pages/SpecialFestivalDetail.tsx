@@ -100,7 +100,6 @@ export default function SpecialFestivalDetail({ slug }: { slug: string }) {
   const data = FESTIVALS[slug as FestivalSlug];
   if (!data) return <div className="min-h-screen bg-background text-foreground"><SiteHeader /><main className="mx-auto max-w-3xl px-5 py-24 text-center"><h1 className="font-display text-4xl">找不到這個祭典</h1><Link href="/special-festivals" className="mt-8 inline-flex items-center gap-2 text-primary"><ArrowLeft className="h-4 w-4" /> 返回特別祭典</Link></main><SiteFooter /></div>;
 
-  const Icon = data.icon;
   const checkoutUrl = SPECIAL_FESTIVAL_CHECKOUT_URLS[slug as FestivalSlug];
 
   return <div className="min-h-screen bg-background text-foreground">
