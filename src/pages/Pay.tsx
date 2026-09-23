@@ -107,7 +107,7 @@ export default function Pay() {
 
       <SiteHeader />
 
-      <main
+      <main className="mx-auto max-w-6xl px-4 pt-10 pb-32">
         {/* 特別祭典入口：與神明方案同層級，但保留獨立的半年護持定位 */}
         <section className="mx-auto max-w-6xl px-4 pt-8 md:pt-12" aria-labelledby="pay-special-festivals-heading">
           <Card className="gold-border bg-card/70 paper-grain shadow-lg overflow-hidden">
