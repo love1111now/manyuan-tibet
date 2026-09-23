@@ -128,11 +128,11 @@ export default function Home() {
                 <div className="text-[10px] md:text-xs tracking-[0.3em] uppercase text-primary font-bold">Special Festivals · 首發限定</div>
                 <h2 id="special-festivals-heading" className="mt-3 font-display text-3xl md:text-4xl text-foreground/90">特別祭典</h2>
                 <p className="mt-4 max-w-2xl text-sm md:text-base leading-relaxed text-muted-foreground">
-                  三項特別祭典首發各限 18 席，以半年為一期的護持安排。風馬旗、瑪尼石、燃燈節，將一份發心延續在更長的時間裡。
+                  三項特別祭典首發各限 18 席，以一季為一期的護持安排。風馬旗、瑪尼石、燃燈節，將一份發心延續在更長的時間裡。
                 </p>
                 <div className="mt-6 flex flex-wrap gap-2 text-xs font-semibold text-primary">
                   <span className="rounded-full border border-primary/25 bg-primary/5 px-3 py-1.5">每項僅 18 席</span>
-                  <span className="rounded-full border border-primary/20 px-3 py-1.5">NT$6,000／半年</span>
+                  <span className="rounded-full border border-primary/20 px-3 py-1.5">NT$6,000／一季</span>
                   <span className="rounded-full border border-primary/20 px-3 py-1.5">綠界完成付款與登記</span>
                 </div>
                 <Link href="/special-festivals" className="mt-7 inline-flex items-center gap-2 rounded-md bg-primary px-6 py-3 text-sm font-bold tracking-widest text-primary-foreground gold-border shadow-lg transition-all hover:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2">
