@@ -107,7 +107,33 @@ export default function Pay() {
 
       <SiteHeader />
 
-      <main className="mx-auto max-w-6xl px-4 pt-10 pb-32">
+      <main
+        {/* 特別祭典入口：與神明方案同層級，但保留獨立的半年護持定位 */}
+        <section className="mx-auto max-w-6xl px-4 pt-8 md:pt-12" aria-labelledby="pay-special-festivals-heading">
+          <Card className="gold-border bg-card/70 paper-grain shadow-lg overflow-hidden">
+            <div className="grid gap-0 md:grid-cols-[1.2fr_.8fr]">
+              <div className="p-6 md:p-9">
+                <div className="text-[10px] md:text-xs tracking-[0.3em] uppercase text-primary font-bold">Special Festivals · 首發限定 18 席</div>
+                <h2 id="pay-special-festivals-heading" className="mt-2 font-display text-3xl md:text-4xl">特別祭典・半年護持</h2>
+                <p className="mt-3 max-w-2xl text-sm md:text-base text-muted-foreground leading-relaxed">
+                  風馬旗、瑪尼石、燃燈節三項特別祭典，每項首發僅 18 席，NT$6,000／半年。付款與登記資料皆於綠界完成。
+                </p>
+                <div className="mt-5 flex flex-wrap gap-2">
+                  <Link href="/special-festivals/wind-horse" className="inline-flex items-center gap-1.5 rounded-md border border-primary/25 bg-background/30 px-3 py-2 text-xs font-bold text-foreground/80 hover:bg-primary/10 hover:text-primary transition-colors">風馬旗 <ChevronRight className="h-3 w-3" /></Link>
+                  <Link href="/special-festivals/mani-stone" className="inline-flex items-center gap-1.5 rounded-md border border-primary/25 bg-background/30 px-3 py-2 text-xs font-bold text-foreground/80 hover:bg-primary/10 hover:text-primary transition-colors">瑪尼石 <ChevronRight className="h-3 w-3" /></Link>
+                  <Link href="/special-festivals/butter-lamp-festival" className="inline-flex items-center gap-1.5 rounded-md border border-primary/25 bg-background/30 px-3 py-2 text-xs font-bold text-foreground/80 hover:bg-primary/10 hover:text-primary transition-colors">燃燈節 <ChevronRight className="h-3 w-3" /></Link>
+                </div>
+              </div>
+              <div className="flex items-center justify-center border-t border-primary/15 bg-primary/5 p-6 md:border-l md:border-t-0 md:p-8">
+                <Link href="/special-festivals" className="flex h-12 w-full max-w-xs items-center justify-center gap-2 rounded-md bg-primary px-6 text-sm font-bold tracking-widest text-primary-foreground gold-border shadow-lg transition-all hover:scale-[1.02]">
+                  查看特別祭典 <ArrowRight className="h-4 w-4" />
+                </Link>
+              </div>
+            </div>
+          </Card>
+        </section>
+
+ className="mx-auto max-w-6xl px-4 pt-10 pb-32">
         {/* 上半部：引言與流程說明 */}
         <div className="grid gap-8 md:grid-cols-[1.1fr_.9fr] md:items-start">
           <div>
