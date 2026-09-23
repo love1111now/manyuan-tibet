@@ -21,6 +21,8 @@ const Wallpaper = React.lazy(() => import("./pages/Wallpaper"));
 const About     = React.lazy(() => import("./pages/About"));
 const Terms     = React.lazy(() => import("./pages/Terms"));
 const NotFound  = React.lazy(() => import("./pages/NotFound"));
+const SpecialFestivals = React.lazy(() => import("./pages/SpecialFestivals"));
+const SpecialFestivalDetail = React.lazy(() => import("./pages/SpecialFestivalDetail"));
 const ExitIntent = React.lazy(() => import("./components/ExitIntent"));
 
 // --- 型別防護網 ---
@@ -104,6 +106,10 @@ function AppRouter() {
           <Route path="/sutra" component={Sutra} />
           <Route path="/puja" component={Puja} />
           <Route path="/wallpaper" component={Wallpaper} />
+          <Route path="/special-festivals" component={SpecialFestivals} />
+          <Route path="/special-festivals/:slug">
+            {(params) => <SpecialFestivalDetail slug={params.slug} />}
+          </Route>
           <Route path="/about" component={About} />
           <Route path="/terms" component={Terms} />
           
