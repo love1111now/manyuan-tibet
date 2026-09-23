@@ -10,35 +10,45 @@ import FloatingFb from "@/components/FloatingFb";
 const FESTIVALS = {
   "wind-horse": {
     title: "風馬旗",
-    subtitle: "祈願、回向與善業功德的傳遞",
+    tibetan: "རླུང་རྟ་ · Lungta",
+    subtitle: "讓發願隨風傳遞的藏地祈願傳統",
     icon: Flag,
-    intro: "風馬旗（Lungta）是藏地文化中極具代表性的祈願象徵之一。旗幟隨風飄揚，承載祈願、祝福與回向的心意。",
+    intro:
+      "「風馬」（Lungta）是藏地文化中極具代表性的祈願象徵。常見的風馬旗印有風馬、咒語、祈願文與吉祥圖像，懸掛於寺院、山口、道路及其他高處。其核心並非裝飾，而是藉由經咒、發願與回向，將善願遍及一切眾生。",
     sections: [
-      ["文化意義", "風馬旗常見於藏地寺院、山口與高原環境，是藏地信仰文化中重要的祈願象徵。"],
-      ["祈願精神", "重點不只在旗幟本身，而在於發願、行善、回向與祝福眾生的心念。"],
-      ["如法觀念", "實際供奉與修持方式應依循傳承與具體儀軌，不宜將其簡化成單純的招財或許願物。"],
+      ["什麼是「風馬」？", "Lungta 直譯為「風馬」。風馬通常位於旗幟中央，周圍可見三寶與其他吉祥象徵。這裡的「馬」不是世俗交通工具的單純意象，而是與活力、力量及善願傳遞相關的宗教象徵。"],
+      ["風馬旗與祈願旗不是完全相同的概念", "藏地有不同形式的旗幟。Lungta 常指與風馬圖像及祈願傳統相關的旗幟；垂直旗幟另有 Darchor 等名稱。因此網站使用「風馬旗」時，特指以 Lungta 傳統為核心的形式，而不把所有藏地旗幟都混稱為風馬旗。"],
+      ["五色旗的象徵", "常見的五色為藍、白、紅、綠、黃。不同傳承與地區對其對應關係的說法可能略有差異；常見解釋與五大元素、方向及佛教象徵相連。實際懸掛方式宜依所屬傳承或寺院指導。"],
+      ["真正重要的是發心", "風馬旗不是用來向某位神明交換願望的物品。藏傳佛教的祈願傳統重視發心、善行、持誦、回向與利益眾生；旗幟隨風飄動所承載的，是這份修持與祈願的象徵。"],
     ],
   },
   "mani-stone": {
     title: "瑪尼石",
-    subtitle: "六字大明咒與石刻祈願文化",
+    tibetan: "མ་ཎི་རྡོ་ · Maṇi Stone",
+    subtitle: "把經咒與祈願刻入山川道路的藏地傳統",
     icon: Gem,
-    intro: "瑪尼石是藏地文化中常見的石刻形式，許多石頭刻有六字大明咒等經咒文字，形成獨特的祈願與功德文化。",
+    intro:
+      "瑪尼石是藏地及喜馬拉雅佛教文化中常見的石刻。石上經常刻有觀世音菩薩六字大明咒「唵嘛呢叭咪吽」（Oṃ Maṇi Padme Hūṃ），也可能刻有其他佛教經咒、偈頌、佛像或供養者的文字。",
     sections: [
-      ["文化意義", "瑪尼石堆與石刻經咒在藏地廣泛可見，反映出藏傳佛教將經咒、祈願與日常生活結合的傳統。"],
-      ["六字大明咒", "「唵嘛呢叭咪吽」是觀世音菩薩相關的重要咒語，在藏地文化中具有深厚的信仰與修持傳統。"],
-      ["功德與回向", "傳統上重視發心與回向，重點在於善念與修持，而非將石刻視為具有世俗魔法功能的物件。"],
+      ["瑪尼石是什麼？", "瑪尼石並不只指刻有六字大明咒的石頭；從研究與田野資料來看，也可泛指帶有經咒、佛教圖像或其他宗教文字的石刻。它們常被排列成瑪尼牆、石堆，或設置於村落、道路、寺院、山口等處。"],
+      ["六字大明咒", "「唵嘛呢叭咪吽」（Oṃ Maṇi Padme Hūṃ）是與觀世音菩薩相關的重要六字真言，在藏地與喜馬拉雅佛教文化中極為普遍。將經咒刻於石上，是把佛法文字融入日常環境的一種宗教與文化表現。"],
+      ["瑪尼牆與繞行", "瑪尼石經常被排列成長牆。傳統上，行經相關宗教空間時會依當地寺院與傳承的規範繞行；若實際參訪寺院或瑪尼牆，應以現場指示及當地傳統為準。"],
+      ["不把瑪尼石神秘化", "瑪尼石的重點應放在經咒、信仰、發心與文化傳承，而不是宣稱石頭本身具有可以保證特定世俗結果的神秘力量。這也是我們介紹瑪尼石時希望保留的佛教脈絡。"],
     ],
   },
   "butter-lamp-festival": {
     title: "燃燈節",
-    subtitle: "以燈明供養，象徵智慧與光明",
+    tibetan: "ཆོ་འཕྲུལ་དུས་ཆེན་ · Chötrul Düchen",
+    subtitle: "神變節・燃燈供養：以光明象徵智慧",
     icon: Flame,
-    intro: "燃燈供佛在藏傳佛教文化中具有重要地位。燈明象徵驅散無明、開顯智慧，也承載著對佛法與眾生的祈願。",
+    intro:
+      "「燃燈節」常用來指藏傳佛教的 Chötrul Düchen（神變節、神變大法會），是藏曆正月十五的重要佛教節日，也是藏傳佛教四大殊勝日之一。傳統上紀念釋迦牟尼佛在舍衛城示現神變、增長眾生信心的故事；節日期間也常見供燈、布施、誦經與回向等善行。",
     sections: [
-      ["供燈象徵", "燈明常被視為智慧與光明的象徵，藉由供燈表達恭敬、發願與回向。"],
-      ["燃燈節", "藏地不同地區與傳承有不同的節日與紀念方式，實際日期及儀軌應以當地傳承或寺院公告為準。"],
-      ["祈願方向", "供燈可以作為善行與發願的一部分，常見回向方向包括智慧增長、障礙消除、家人平安與眾生離苦。"],
+      ["為什麼叫「燃燈節」？", "Chötrul Düchen 的核心是「神變節」本身，而「燃燈節」是因藏地在此期間盛行供燈與燈飾而形成的通俗稱呼。因此網站正式介紹會同時保留「燃燈節」與「Chötrul Düchen／神變節」，避免把它誤解成單純的民俗燈會。"],
+      ["節日的佛教背景", "傳統說法認為，釋迦牟尼佛在舍衛城連續十五日示現神變，以調伏外道並令眾生生起信心；藏曆正月十五為這段紀念期的圓滿日。Chötrul Düchen 也是藏傳佛教四大殊勝日之一。"],
+      ["供燈代表什麼？", "在藏傳佛教中，燈供常以光明象徵智慧，並以驅散黑暗來譬喻去除無明。供燈不是因為佛需要光，而是以供養培養恭敬、布施、發願與智慧的心。"],
+      ["如何理解「功德增長」？", "部分藏傳佛教傳承依佛教經典與傳承教言，認為四大殊勝日善惡業果會大幅增長。不同傳承對倍數的具體說法並不完全一致，因此本網站不寫死單一倍數，而以「殊勝修行與回向日」呈現較為嚴謹。"],
+      ["2026 年日期", "2026 年的 Chötrul Düchen 為 3 月 3 日；節日日期依藏曆計算，每年對應的西曆日期會改變。實際參與法會時，仍應以所依寺院、傳承或法會主辦方公告為準。"],
     ],
   },
 } as const;
@@ -77,10 +87,7 @@ export default function SpecialFestivalDetail({ slug }: { slug: string }) {
       <main className="pb-24">
         <section className="border-b bg-gradient-to-b from-primary/10 to-background">
           <div className="mx-auto max-w-4xl px-5 py-16 md:py-24">
-            <Link
-              href="/special-festivals"
-              className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary"
-            >
+            <Link href="/special-festivals" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary">
               <ArrowLeft className="h-4 w-4" /> 特別祭典
             </Link>
 
@@ -89,17 +96,14 @@ export default function SpecialFestivalDetail({ slug }: { slug: string }) {
                 <Icon className="h-8 w-8" />
               </div>
               <div>
-                <p className="text-xs font-bold tracking-[0.3em] text-primary uppercase">
-                  Special Festival
-                </p>
+                <p className="text-xs font-bold tracking-[0.3em] text-primary uppercase">Special Festival</p>
                 <h1 className="mt-1 font-display text-4xl md:text-6xl">{data.title}</h1>
               </div>
             </div>
 
-            <p className="mt-6 text-lg text-foreground/80">{data.subtitle}</p>
-            <p className="mt-6 max-w-3xl text-base md:text-lg leading-loose text-muted-foreground">
-              {data.intro}
-            </p>
+            <p className="mt-4 text-sm tracking-wide text-primary">{data.tibetan}</p>
+            <p className="mt-4 text-lg text-foreground/80">{data.subtitle}</p>
+            <p className="mt-6 max-w-3xl text-base md:text-lg leading-loose text-muted-foreground">{data.intro}</p>
           </div>
         </section>
 
@@ -114,16 +118,10 @@ export default function SpecialFestivalDetail({ slug }: { slug: string }) {
           </div>
 
           <div className="mt-14 flex flex-col gap-3 sm:flex-row sm:justify-between">
-            <Link
-              href="/special-festivals"
-              className="inline-flex items-center gap-2 text-sm font-bold text-muted-foreground hover:text-primary"
-            >
+            <Link href="/special-festivals" className="inline-flex items-center gap-2 text-sm font-bold text-muted-foreground hover:text-primary">
               <ArrowLeft className="h-4 w-4" /> 返回特別祭典
             </Link>
-            <Link
-              href="/pay"
-              className="inline-flex items-center gap-2 text-sm font-bold text-primary hover:underline"
-            >
+            <Link href="/pay" className="inline-flex items-center gap-2 text-sm font-bold text-primary hover:underline">
               查看法事登記 <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
