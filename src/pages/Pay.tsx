@@ -133,7 +133,6 @@ export default function Pay() {
           </Card>
         </section>
 
- className="mx-auto max-w-6xl px-4 pt-10 pb-32">
         {/* 上半部：引言與流程說明 */}
         <div className="grid gap-8 md:grid-cols-[1.1fr_.9fr] md:items-start">
           <div>
