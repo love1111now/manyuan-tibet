@@ -25,7 +25,7 @@ const FESTIVALS = {
       "NT$6,000／半年護持",
       "以風馬旗祈願傳統為核心，持續發願與回向",
       "適合為自己、家人、事業與生活祈求平安順遂、善緣增長",
-      "一次登記，讓一份善願有較長時間持續承接與回向",
+      "首發限定 18 席，讓每一份發心都被珍惜地承接與回向",
     ],
     sections: [
       ["什麼是「風馬」？", "Lungta 直譯為「風馬」。風馬通常位於旗幟中央，周圍可見三寶與其他吉祥象徵。這裡的「馬」不是世俗交通工具的單純意象，而是與活力、力量及善願傳遞相關的宗教象徵。"],
@@ -44,7 +44,7 @@ const FESTIVALS = {
       "NT$6,000／半年護持",
       "以瑪尼石、經咒與供養傳統承接祈願",
       "適合為自己與家人累積善緣、祈願平安與順遂",
-      "讓一份願心不只是一時起念，而有半年時間持續回向",
+      "首發限定 18 席，讓每一份願心都有半年時間持續回向",
     ],
     sections: [
       ["瑪尼石是什麼？", "瑪尼石並不只指刻有六字大明咒的石頭，也可泛指帶有經咒、佛教圖像或其他宗教文字的石刻。它們常被排列成瑪尼牆、石堆，或設置於村落、道路、寺院、山口等處。"],
@@ -63,7 +63,7 @@ const FESTIVALS = {
       "NT$6,000／半年護持",
       "以燃燈供養象徵智慧、光明與善願",
       "適合為自己、家人與重要心願作長期祈願回向",
-      "以半年為一期，讓一份光明願心持續陪伴日常",
+      "首發限定 18 席，讓一份光明願心持續陪伴半年日常",
     ],
     sections: [
       ["為什麼叫「燃燈節」？", "Chötrul Düchen 的核心是「神變節」本身，而「燃燈節」是因藏地在此期間盛行供燈與燈飾而形成的通俗稱呼。因此正式介紹同時保留「燃燈節」與「Chötrul Düchen／神變節」，避免把它誤解成單純的民俗燈會。"],
@@ -95,6 +95,7 @@ export default function SpecialFestivalDetail({ slug }: { slug: string }) {
 
   const Icon = data.icon;
   const checkoutUrl = SPECIAL_FESTIVAL_CHECKOUT_URLS[slug as FestivalSlug];
+  const openingQuota = 18;
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -117,21 +118,23 @@ export default function SpecialFestivalDetail({ slug }: { slug: string }) {
                 <Icon className="h-8 w-8" />
               </div>
               <div>
-                <p className="text-xs font-bold tracking-[0.3em] text-primary uppercase">Special Festival · 半年護持</p>
+                <p className="text-xs font-bold tracking-[0.3em] text-primary uppercase">Special Festival · 首發限定 18 席 · 半年護持</p>
                 <h1 className="mt-1 font-display text-4xl md:text-6xl">{data.title}</h1>
               </div>
             </div>
 
             <p className="mt-4 text-sm tracking-wide text-primary">{data.tibetan}</p>
+            <div className="mt-4 flex flex-wrap items-center gap-3 text-sm font-semibold text-primary"><span className="rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5">首發限定 18 席</span><span className="rounded-full border border-primary/20 px-4 py-1.5">NT$6,000／半年護持</span></div>
             <p className="mt-4 text-lg text-foreground/80">{data.subtitle}</p>
             <p className="mt-6 max-w-3xl text-base md:text-lg leading-loose text-muted-foreground">{data.intro}</p>
 
             <div className="mt-10 rounded-2xl border border-primary/30 bg-card/70 p-6 md:p-8 shadow-sm">
               <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
                 <div>
-                  <p className="text-xs font-bold tracking-[0.25em] text-primary">特別祭典・半年護持</p>
+                  <p className="text-xs font-bold tracking-[0.25em] text-primary">首發限定・18 席
+                  <span className="mx-2 text-primary/40">｜</span>半年護持</p>
                   <p className="mt-2 font-display text-3xl md:text-4xl">NT$6,000</p>
-                  <p className="mt-2 text-sm text-muted-foreground">一次登記，半年為一期的祈願護持安排</p>
+                  <p className="mt-2 text-sm text-muted-foreground">首發僅開放 18 席｜半年為一期的專屬護持安排</p>
                 </div>
                 <div className="md:w-64">
                   {checkoutUrl ? (
@@ -156,7 +159,8 @@ export default function SpecialFestivalDetail({ slug }: { slug: string }) {
                   </div>
                 ))}
               </div>
-              <p className="mt-5 text-xs leading-relaxed text-muted-foreground/80">
+              <div className="mt-5 rounded-xl border border-primary/15 bg-primary/5 px-4 py-3 text-sm leading-relaxed text-foreground/80"><span className="font-semibold text-primary">為何只開放 18 席？</span> 首發特別祭典希望保留一份難得與莊重，因此本期每一項僅開放 18 個護持名額；名額不是以大量登記為目的，而是珍惜每一位真正願意把願心交付於此的人。</div>
+              <p className="mt-4 text-xs leading-relaxed text-muted-foreground/80">
                 付款與登記資料填寫皆於綠界安全通道完成；本站不另行收集登記資料。
               </p>
             </div>
@@ -174,10 +178,10 @@ export default function SpecialFestivalDetail({ slug }: { slug: string }) {
           </div>
 
           <div className="mt-14 rounded-2xl border border-primary/20 bg-primary/5 p-6 text-center md:p-8">
-            <p className="text-xs font-bold tracking-[0.25em] text-primary">一份心願・半年護持</p>
-            <h2 className="mt-3 font-display text-2xl md:text-3xl">讓這份祈願，不只停留在今天</h2>
+            <p className="text-xs font-bold tracking-[0.25em] text-primary">首發 18 席・一份心願・半年護持</p>
+            <h2 className="mt-3 font-display text-2xl md:text-3xl">不是每一次發心，都有這樣的因緣</h2>
             <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-              NT$6,000，一次完成登記與護持。願這份發心在半年之中持續被憶念、被回向，也讓自己在日常裡持續與善法相應。
+              首發每項僅 18 席，NT$6,000 一次完成登記與半年護持。願真正珍惜這份因緣的人，能在半年之中持續被憶念、被回向，也讓自己在日常裡持續與善法相應。
             </p>
             {checkoutUrl ? (
               <a href={checkoutUrl} target="_blank" rel="noreferrer" className="mt-6 inline-flex items-center gap-2 rounded-md bg-primary px-7 py-3 text-sm font-bold text-primary-foreground shadow-lg transition hover:opacity-90">
