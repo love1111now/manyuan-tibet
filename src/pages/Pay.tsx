@@ -108,15 +108,15 @@ export default function Pay() {
       <SiteHeader />
 
       <main className="mx-auto max-w-6xl px-4 pt-10 pb-32">
-        {/* 特別祭典入口：與神明方案同層級，但保留獨立的半年護持定位 */}
+        {/* 特別祭典入口：與神明方案同層級，但保留獨立的一季護持定位 */}
         <section className="mx-auto max-w-6xl px-4 pt-8 md:pt-12" aria-labelledby="pay-special-festivals-heading">
           <Card className="gold-border bg-card/70 paper-grain shadow-lg overflow-hidden">
             <div className="grid gap-0 md:grid-cols-[1.2fr_.8fr]">
               <div className="p-6 md:p-9">
                 <div className="text-[10px] md:text-xs tracking-[0.3em] uppercase text-primary font-bold">Special Festivals · 首發限定 18 席</div>
-                <h2 id="pay-special-festivals-heading" className="mt-2 font-display text-3xl md:text-4xl">特別祭典・半年護持</h2>
+                <h2 id="pay-special-festivals-heading" className="mt-2 font-display text-3xl md:text-4xl">特別祭典・一季護持</h2>
                 <p className="mt-3 max-w-2xl text-sm md:text-base text-muted-foreground leading-relaxed">
-                  風馬旗、瑪尼石、燃燈節三項特別祭典，每項首發僅 18 席，NT$6,000／半年。付款與登記資料皆於綠界完成。
+                  風馬旗、瑪尼石、燃燈節三項特別祭典，每項首發僅 18 席，NT$6,000／一季。付款與登記資料皆於綠界完成。
                 </p>
                 <div className="mt-5 flex flex-wrap gap-2">
                   <Link href="/special-festivals/wind-horse" className="inline-flex items-center gap-1.5 rounded-md border border-primary/25 bg-background/30 px-3 py-2 text-xs font-bold text-foreground/80 hover:bg-primary/10 hover:text-primary transition-colors">風馬旗 <ChevronRight className="h-3 w-3" /></Link>
