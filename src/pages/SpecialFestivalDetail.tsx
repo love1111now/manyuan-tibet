@@ -95,7 +95,6 @@ export default function SpecialFestivalDetail({ slug }: { slug: string }) {
 
   const Icon = data.icon;
   const checkoutUrl = SPECIAL_FESTIVAL_CHECKOUT_URLS[slug as FestivalSlug];
-  const openingQuota = 18;
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -128,29 +127,39 @@ export default function SpecialFestivalDetail({ slug }: { slug: string }) {
             <p className="mt-4 text-lg text-foreground/80">{data.subtitle}</p>
             <p className="mt-6 max-w-3xl text-base md:text-lg leading-loose text-muted-foreground">{data.intro}</p>
 
-            <div className="mt-10 rounded-2xl border border-primary/30 bg-card/70 p-6 md:p-8 shadow-sm">
-              <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
-                <div>
-                  <p className="text-xs font-bold tracking-[0.25em] text-primary">首發限定・18 席
-                  <span className="mx-2 text-primary/40">｜</span>半年護持</p>
-                  <p className="mt-2 font-display text-3xl md:text-4xl">NT$6,000</p>
-                  <p className="mt-2 text-sm text-muted-foreground">首發僅開放 18 席｜半年為一期的專屬護持安排</p>
+            <div className="mt-10 overflow-hidden rounded-2xl border border-primary/30 bg-card/70 shadow-lg">
+              <div className="flex flex-col md:flex-row">
+                <div className="relative flex min-h-40 items-center justify-center border-b border-primary/20 bg-primary/5 px-8 py-7 md:w-56 md:border-b-0 md:border-r">
+                  <div className="absolute inset-5 rounded-full border border-primary/15" />
+                  <div className="absolute inset-8 rounded-full border border-primary/10" />
+                  <div className="relative text-center">
+                    <p className="text-[10px] font-bold tracking-[0.35em] text-primary">首發席次</p>
+                    <p className="mt-1 font-display text-6xl leading-none text-primary">18</p>
+                    <p className="mt-2 text-xs font-semibold tracking-[0.3em] text-foreground/70">席・圓滿即止</p>
+                  </div>
                 </div>
-                <div className="md:w-64">
-                  {checkoutUrl ? (
-                    <a href={checkoutUrl} target="_blank" rel="noreferrer" className="block">
-                      <button className="w-full rounded-md bg-primary px-6 py-3 text-sm font-bold text-primary-foreground shadow-lg transition hover:opacity-90">
-                        NT$6,000｜立即登記
-                        <ArrowRight className="ml-2 inline-block h-4 w-4" />
-                      </button>
-                    </a>
-                  ) : (
-                    <button disabled className="w-full cursor-not-allowed rounded-md border border-primary/30 px-6 py-3 text-sm font-bold text-muted-foreground">
-                      綠界登記連結準備中
-                    </button>
-                  )}
-                </div>
-              </div>
+                <div className="flex-1 p-6 md:p-8">
+                  <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+                    <div>
+                      <p className="text-xs font-bold tracking-[0.25em] text-primary">首發限定・半年護持</p>
+                      <p className="mt-2 font-display text-3xl md:text-4xl">NT$6,000</p>
+                      <p className="mt-2 text-sm text-muted-foreground">一席一願｜半年為一期的專屬護持安排</p>
+                    </div>
+                    <div className="md:w-64">
+                      {checkoutUrl ? (
+                        <a href={checkoutUrl} target="_blank" rel="noreferrer" className="block">
+                          <button className="w-full rounded-md bg-primary px-6 py-3 text-sm font-bold text-primary-foreground shadow-lg transition hover:opacity-90">
+                            NT$6,000｜立即登記
+                            <ArrowRight className="ml-2 inline-block h-4 w-4" />
+                          </button>
+                        </a>
+                      ) : (
+                        <button disabled className="w-full cursor-not-allowed rounded-md border border-primary/30 px-6 py-3 text-sm font-bold text-muted-foreground">
+                          綠界登記連結準備中
+                        </button>
+                      )}
+                    </div>
+                  </div>
               <div className="mt-6 grid gap-3 border-t border-border/50 pt-5 sm:grid-cols-2">
                 {data.benefits.map((benefit) => (
                   <div key={benefit} className="flex items-start gap-2 text-sm text-muted-foreground">
@@ -159,7 +168,7 @@ export default function SpecialFestivalDetail({ slug }: { slug: string }) {
                   </div>
                 ))}
               </div>
-              <div className="mt-5 rounded-xl border border-primary/15 bg-primary/5 px-4 py-3 text-sm leading-relaxed text-foreground/80"><span className="font-semibold text-primary">為何只開放 18 席？</span> 首發特別祭典希望保留一份難得與莊重，因此本期每一項僅開放 18 個護持名額；名額不是以大量登記為目的，而是珍惜每一位真正願意把願心交付於此的人。</div>
+              <div className="mt-5 rounded-xl border border-primary/15 bg-primary/5 px-4 py-3 text-sm leading-relaxed text-foreground/80"><span className="font-semibold text-primary">為何首發僅 18 席？</span> 首發特別祭典希望保留一份難得與莊重，因此本期每一項僅開放 18 席；「圓滿即止」，不以大量登記為目的，而是珍惜每一位真正願意把願心交付於此的人。</div>
               <p className="mt-4 text-xs leading-relaxed text-muted-foreground/80">
                 付款與登記資料填寫皆於綠界安全通道完成；本站不另行收集登記資料。
               </p>
