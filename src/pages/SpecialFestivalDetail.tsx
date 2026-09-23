@@ -85,7 +85,7 @@ const FESTIVALS: Record<string, FestivalData> = {
       ["替重要的人發一份心","供燈很適合成為送給父母、伴侶或親友的一份善意。不是替對方保證什麼結果，而是替彼此留下一份真誠的善願與回向。","親友共同參與情境整理"],
     ],
   },
-} as const;
+}
 
 type FestivalSlug = keyof typeof FESTIVALS;
 
