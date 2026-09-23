@@ -118,6 +118,48 @@ export default function Home() {
           </div>
         </section>
 
+        {/* 特別祭典入口：維持全站 Neo-thangka noir 視覺語言 */}
+        <section className="mx-auto max-w-6xl px-4 pt-8 pb-4 md:pt-12" aria-labelledby="special-festivals-heading">
+          <Card className="relative overflow-hidden gold-border bg-card/70 paper-grain shadow-lg">
+            <div className="absolute -top-20 -right-20 h-56 w-56 rounded-full border border-primary/10" aria-hidden="true" />
+            <div className="absolute -top-12 -right-12 h-40 w-40 rounded-full border border-primary/10" aria-hidden="true" />
+            <div className="grid gap-0 md:grid-cols-[1.15fr_.85fr]">
+              <div className="p-7 md:p-10">
+                <div className="text-[10px] md:text-xs tracking-[0.3em] uppercase text-primary font-bold">Special Festivals · 首發限定</div>
+                <h2 id="special-festivals-heading" className="mt-3 font-display text-3xl md:text-4xl text-foreground/90">特別祭典</h2>
+                <p className="mt-4 max-w-2xl text-sm md:text-base leading-relaxed text-muted-foreground">
+                  三項特別祭典首發各限 18 席，以半年為一期的護持安排。風馬旗、瑪尼石、燃燈節，將一份發心延續在更長的時間裡。
+                </p>
+                <div className="mt-6 flex flex-wrap gap-2 text-xs font-semibold text-primary">
+                  <span className="rounded-full border border-primary/25 bg-primary/5 px-3 py-1.5">每項僅 18 席</span>
+                  <span className="rounded-full border border-primary/20 px-3 py-1.5">NT$6,000／半年</span>
+                  <span className="rounded-full border border-primary/20 px-3 py-1.5">綠界完成付款與登記</span>
+                </div>
+                <Link href="/special-festivals" className="mt-7 inline-flex items-center gap-2 rounded-md bg-primary px-6 py-3 text-sm font-bold tracking-widest text-primary-foreground gold-border shadow-lg transition-all hover:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2">
+                  進入特別祭典 <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                </Link>
+              </div>
+              <div className="border-t border-primary/15 bg-primary/5 p-7 md:border-l md:border-t-0 md:p-10">
+                <div className="grid gap-3 sm:grid-cols-3 md:grid-cols-1">
+                  {[
+                    ["風馬旗", "Lungta", "/special-festivals/wind-horse"],
+                    ["瑪尼石", "Maṇi Stone", "/special-festivals/mani-stone"],
+                    ["燃燈節", "Chötrul Düchen", "/special-festivals/butter-lamp-festival"],
+                  ].map(([name, en, href]) => (
+                    <Link key={name} href={href} className="group flex items-center justify-between rounded-lg border border-primary/15 bg-background/30 px-4 py-3 transition-all hover:border-primary/40 hover:bg-primary/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">
+                      <div>
+                        <div className="font-display text-lg text-foreground/90">{name}</div>
+                        <div className="mt-0.5 text-[10px] tracking-widest text-muted-foreground">{en}</div>
+                      </div>
+                      <ChevronRight className="h-4 w-4 text-primary transition-transform group-hover:translate-x-1" aria-hidden="true" />
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </Card>
+        </section>
+
         {/* 三痛點快速入口：冷流量 5 秒選擇自己的問題，直達對應神明頁 */}
         <section id="choose-path" className="mx-auto max-w-5xl px-4 pb-4 -mt-4 scroll-mt-20">
           <div className="grid gap-4 md:grid-cols-3">
