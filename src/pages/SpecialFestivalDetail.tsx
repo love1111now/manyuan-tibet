@@ -111,6 +111,7 @@ export default function SpecialFestivalDetail({ slug }: { slug: string }) {
     );
   }
 
+  const Icon = data.icon;
   const checkoutUrl = SPECIAL_FESTIVAL_CHECKOUT_URLS[slug as FestivalSlug];
 
   return (
@@ -123,8 +124,8 @@ export default function SpecialFestivalDetail({ slug }: { slug: string }) {
       <SiteHeader />
 
       <main className="pb-24">
-        <section className="border-b bg-gradient-to-b from-primary/10 to-background">
-          <div className="mx-auto max-w-4xl px-5 py-16 md:py-24">
+        <section className="relative overflow-hidden border-b bg-gradient-to-b from-primary/10 via-background to-background">
+          <div className="mx-auto max-w-6xl px-5 py-12 md:px-8 md:py-20">
             <Link href="/special-festivals" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary">
               <ArrowLeft className="h-4 w-4" /> 特別祭典
             </Link>
@@ -145,7 +146,7 @@ export default function SpecialFestivalDetail({ slug }: { slug: string }) {
             <p className="mt-4 text-lg font-semibold text-primary">{data.kicker}</p>
             <p className="mt-2 text-lg text-foreground/80">{data.subtitle}</p>
             <p className="mt-6 max-w-3xl text-base md:text-lg leading-loose text-muted-foreground">{data.intro}</p>
-            <div className="mt-8 overflow-hidden rounded-2xl border border-primary/15 bg-black/20"><img src={data.heroImage} alt={data.title} className="block aspect-[16/7] w-full object-cover" /><p className="px-4 py-2 text-[10px] text-muted-foreground">法門文化圖像｜Wikimedia Commons</p></div>
+            <div className="mt-8 overflow-hidden rounded-3xl border border-primary/20 bg-black/30 shadow-2xl shadow-black/20"><div className="relative"><img src={data.heroImage} alt={data.title} className="block aspect-[16/7] w-full object-cover md:aspect-[21/8]" /><div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/5 to-transparent" /><div className="absolute bottom-0 left-0 right-0 p-5 md:p-8"><p className="text-xs font-bold tracking-[0.28em] text-primary-foreground/80">藏傳佛教文化・特別祭典</p><p className="mt-2 font-display text-2xl text-white md:text-4xl">{data.kicker}</p></div></div></div>
 
             <div className="mt-10 overflow-hidden rounded-2xl border border-primary/30 bg-card/70 shadow-lg">
               <div className="flex flex-col md:flex-row">
@@ -194,8 +195,8 @@ export default function SpecialFestivalDetail({ slug }: { slug: string }) {
           </div>
         </section>
 
-        <section className="mx-auto max-w-4xl px-5 pt-14 md:pt-20">
-          <div className="mb-12 grid gap-8 rounded-3xl border border-primary/15 bg-primary/5 p-6 md:grid-cols-[.9fr_1.1fr] md:p-8 md:items-center"><div className="overflow-hidden rounded-2xl"><img src={data.secondaryImage} alt={data.title + "法門文化"} className="block aspect-[4/3] w-full object-cover" /></div><div><p className="text-xs font-bold tracking-[0.25em] text-primary">藏傳法門的力量</p><h2 className="mt-2 font-display text-3xl md:text-4xl">{data.kicker}</h2><p className="mt-4 text-sm leading-8 text-muted-foreground">{data.powerText}</p><div className="mt-5 rounded-xl border border-primary/15 bg-background/30 p-4 text-sm leading-7 text-foreground/80">力量不等於世俗保證；真正值得珍惜的是傳承、發心、儀軌、供養、持誦與回向彼此相應。</div></div></div>
+        <section className="mx-auto max-w-6xl px-5 pt-14 md:px-8 md:pt-20">
+          <div className="mb-12 grid gap-8 rounded-3xl border border-primary/15 bg-primary/5 p-6 md:grid-cols-[.85fr_1.15fr] md:p-10 md:items-center"><div className="overflow-hidden rounded-2xl"><img src={data.secondaryImage} alt={data.title + "法門文化"} className="block aspect-[4/3] w-full object-cover" /></div><div><p className="text-xs font-bold tracking-[0.25em] text-primary">藏傳法門的力量</p><h2 className="mt-2 font-display text-3xl md:text-4xl">{data.kicker}</h2><p className="mt-4 text-sm leading-8 text-muted-foreground">{data.powerText}</p><div className="mt-5 rounded-xl border border-primary/15 bg-background/30 p-4 text-sm leading-7 text-foreground/80">力量不等於世俗保證；真正值得珍惜的是傳承、發心、儀軌、供養、持誦與回向彼此相應。</div></div></div>
           <div className="space-y-10">
             {data.sections.map(([title, body]) => (
               <article key={title} className="border-b border-border/50 pb-10">
@@ -207,9 +208,9 @@ export default function SpecialFestivalDetail({ slug }: { slug: string }) {
 
           <div className="mt-14 rounded-2xl border border-primary/15 bg-card/40 p-6 md:p-8"><p className="text-xs font-bold tracking-[0.25em] text-primary">適合誰</p><h2 className="mt-2 font-display text-2xl md:text-3xl">如果你正在為這些事發心</h2><div className="mt-5 grid gap-3 md:grid-cols-2">{data.suitable.map(item => <div key={item} className="rounded-xl border border-border/60 bg-background/30 px-4 py-3 text-sm text-muted-foreground">✓ {item}</div>)}</div></div>
 
-          <div className="mt-10"><div className="mb-6 text-center"><p className="text-xs font-bold tracking-[0.25em] text-primary">參與者回饋</p><h2 className="mt-2 font-display text-2xl md:text-3xl">共同發心之後，最珍貴的是什麼？</h2></div><div className="grid gap-4 md:grid-cols-3">{data.feedback.map(([title,body,by]) => <article key={title} className="rounded-2xl border border-border/60 bg-card/40 p-5"><p className="text-sm font-bold text-primary">{title}</p><p className="mt-3 text-sm leading-7 text-muted-foreground">{body}</p><p className="mt-4 border-t border-border/50 pt-3 text-[10px] text-primary/70">— {by}</p></article>)}</div></div>
+          <div className="mt-14"><div className="mb-7 text-center"><p className="text-xs font-bold tracking-[0.25em] text-primary">發心回饋</p><h2 className="mt-2 font-display text-2xl md:text-3xl">一季護持，讓願心有時間沉澱</h2><p className="mx-auto mt-3 max-w-2xl text-sm leading-7 text-muted-foreground">每一份發心都不同。以下以「共同參與時最常被珍惜的三種感受」呈現，避免把法事效果簡化成單一承諾。</p></div><div className="grid gap-4 md:grid-cols-3">{data.feedback.map(([title,body,by]) => <article key={title} className="rounded-2xl border border-border/60 bg-card/40 p-5"><p className="text-sm font-bold text-primary">{title}</p><p className="mt-3 text-sm leading-7 text-muted-foreground">{body}</p><p className="mt-4 border-t border-border/50 pt-3 text-[10px] text-primary/70">— {by}</p></article>)}</div></div>
 
-          <div className="mt-14 rounded-2xl border border-primary/20 bg-primary/5 p-6 text-center md:p-8">
+          <div className="mt-16 rounded-3xl border border-primary/20 bg-primary/5 p-7 text-center md:p-10">
             <p className="text-xs font-bold tracking-[0.25em] text-primary">首發 18 席・一份心願・一季護持</p>
             <h2 className="mt-3 font-display text-2xl md:text-3xl">不是每一次發心，都有這樣的因緣</h2>
             <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">
