@@ -108,6 +108,29 @@ export default function Pay() {
       <SiteHeader />
 
       <main className="mx-auto max-w-6xl px-4 pt-10 pb-32">
+        <section className="mb-10">
+          <Card className="gold-border bg-card/70 paper-grain overflow-hidden">
+            <div className="grid gap-0 md:grid-cols-[1.15fr_.85fr]">
+              <div className="p-6 md:p-9">
+                <div className="text-[10px] md:text-xs tracking-[0.3em] uppercase text-primary font-bold">Special Festivals · 最高規格 · 首發 18 席</div>
+                <h2 className="mt-2 font-display text-3xl md:text-4xl">特別祭典・一季護持</h2>
+                <p className="mt-3 text-sm md:text-base text-muted-foreground leading-relaxed">
+                  風馬旗、瑪尼石、燃燈節，是目前滿願藏庫最高規格的特別法事方案。每項 NT$6,000／一季，一次登記最多五人，特別適合家人與親朋好友共同發心。
+                </p>
+                <div className="mt-5 flex flex-wrap gap-2 text-xs font-semibold text-primary">
+                  <span className="rounded-full border border-primary/25 bg-primary/5 px-3 py-1.5">每項首發 18 席</span>
+                  <span className="rounded-full border border-primary/20 px-3 py-1.5">一席最多五人</span>
+                  <span className="rounded-full border border-primary/20 px-3 py-1.5">綠界完成付款與登記</span>
+                </div>
+              </div>
+              <div className="flex items-center justify-center border-t border-primary/15 bg-primary/5 p-6 md:border-l md:border-t-0 md:p-8">
+                <Link href="/special-festivals" className="flex h-12 w-full max-w-xs items-center justify-center gap-2 rounded-md bg-primary px-6 text-sm font-bold tracking-widest text-primary-foreground gold-border shadow-lg transition-all hover:scale-[1.02]">
+                  查看最高規格特別祭典 <ArrowRight className="h-4 w-4" />
+                </Link>
+              </div>
+            </div>
+          </Card>
+        </section>
         {/* 上半部：引言與流程說明 */}
         <div className="grid gap-8 md:grid-cols-[1.1fr_.9fr] md:items-start">
           <div>
