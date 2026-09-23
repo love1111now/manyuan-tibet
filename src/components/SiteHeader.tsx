@@ -8,6 +8,7 @@ const nav = [
   { href: "/pay", label: "法事登記" },
   { href: "/proof", label: "回饋文" },
   { href: "/sutra", label: "經典依據" },
+  { href: "/special-festivals", label: "特別祭典" },
 ] as const;
 
 export default function SiteHeader() {
@@ -56,7 +57,7 @@ export default function SiteHeader() {
       </div>
 
       <div className="md:hidden border-t">
-        <div className="mx-auto max-w-6xl px-2 py-2 grid grid-cols-4 gap-1">
+        <div className="mx-auto max-w-6xl px-2 py-2 grid grid-cols-5 gap-1">
           {nav.map((n) => (
             <Link
               key={n.href}
