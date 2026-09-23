@@ -101,6 +101,8 @@ export default function SpecialFestivalDetail({ slug }: { slug: string }) {
   if (!data) return <div className="min-h-screen bg-background text-foreground"><SiteHeader /><main className="mx-auto max-w-3xl px-5 py-24 text-center"><h1 className="font-display text-4xl">找不到這個祭典</h1><Link href="/special-festivals" className="mt-8 inline-flex items-center gap-2 text-primary"><ArrowLeft className="h-4 w-4" /> 返回特別祭典</Link></main><SiteFooter /></div>;
 
   const checkoutUrl = SPECIAL_FESTIVAL_CHECKOUT_URLS[slug as FestivalSlug];
+  const sections = data.sections as readonly (readonly [string, string])[];
+  const feedback = data.feedback as readonly (readonly [string, string, string])[];
 
   return <div className="min-h-screen bg-background text-foreground">
     <Helmet>
@@ -171,7 +173,7 @@ export default function SpecialFestivalDetail({ slug }: { slug: string }) {
 
       <section className="mx-auto max-w-6xl px-4 pt-16 md:px-8 md:pt-24">
         <div className="mb-8"><p className="text-xs font-bold tracking-[0.28em] text-primary">法門背景</p><h2 className="mt-2 font-display text-3xl md:text-4xl">為什麼這項法事值得被慎重對待？</h2></div>
-        <div className="grid gap-5 md:grid-cols-3">{data.sections.map(([title, body], index) => <article key={title} className="relative overflow-hidden rounded-3xl border border-border/60 bg-card/35 p-6 md:p-7"><span className="font-display text-5xl text-primary/20">0{index + 1}</span><h3 className="mt-3 text-xl font-bold">{title}</h3><p className="mt-4 text-sm leading-8 text-muted-foreground">{body}</p></article>)}</div>
+        <div className="grid gap-5 md:grid-cols-3">{sections.map(([title, body], index) => <article key={title} className="relative overflow-hidden rounded-3xl border border-border/60 bg-card/35 p-6 md:p-7"><span className="font-display text-5xl text-primary/20">0{index + 1}</span><h3 className="mt-3 text-xl font-bold">{title}</h3><p className="mt-4 text-sm leading-8 text-muted-foreground">{body}</p></article>)}</div>
       </section>
 
       <section className="mx-auto max-w-6xl px-4 pt-16 md:px-8 md:pt-24">
@@ -190,7 +192,7 @@ export default function SpecialFestivalDetail({ slug }: { slug: string }) {
 
       <section className="mx-auto max-w-6xl px-4 pt-16 md:px-8 md:pt-24">
         <div className="mb-8 text-center"><p className="text-xs font-bold tracking-[0.28em] text-primary">參與者回饋</p><h2 className="mt-2 font-display text-3xl md:text-4xl">一份法事，真正留下的是什麼？</h2><p className="mx-auto mt-3 max-w-2xl text-sm leading-7 text-muted-foreground">以下先以「共同發心」與「參與感受」呈現回饋區塊；正式上線後可直接替換成你們實際收到的信眾原話。</p></div>
-        <div className="grid gap-5 md:grid-cols-3">{data.feedback.map(([title,body,by]) => <article key={title} className="rounded-3xl border border-border/60 bg-card/40 p-6"><ShieldCheck className="h-5 w-5 text-primary/70" /><h3 className="mt-4 text-lg font-bold">{title}</h3><p className="mt-3 text-sm leading-8 text-muted-foreground">{body}</p><p className="mt-5 border-t border-border/50 pt-4 text-[11px] tracking-wide text-primary/70">— {by}</p></article>)}</div>
+        <div className="grid gap-5 md:grid-cols-3">{feedback.map(([title,body,by]) => <article key={title} className="rounded-3xl border border-border/60 bg-card/40 p-6"><ShieldCheck className="h-5 w-5 text-primary/70" /><h3 className="mt-4 text-lg font-bold">{title}</h3><p className="mt-3 text-sm leading-8 text-muted-foreground">{body}</p><p className="mt-5 border-t border-border/50 pt-4 text-[11px] tracking-wide text-primary/70">— {by}</p></article>)}</div>
       </section>
 
       <section className="mx-auto max-w-6xl px-4 pt-16 md:px-8 md:pt-24"><div className="grid gap-4 md:grid-cols-3"><InfoCard icon={Mountain} title="法門與傳統">以藏傳佛教的經咒、供養、發心與回向脈絡理解，而不是把法事包裝成世俗保證。</InfoCard><InfoCard icon={BookOpen} title="一季為一期">讓願心有足夠時間被憶念與回向，把節日或儀軌的因緣延伸到日常生活。</InfoCard><InfoCard icon={Users} title="最多五人">一筆登記可由最多五人共同參與，尤其適合家庭與親朋好友共同發心。</InfoCard></div></section>
