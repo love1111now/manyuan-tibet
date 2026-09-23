@@ -111,7 +111,6 @@ export default function SpecialFestivalDetail({ slug }: { slug: string }) {
     );
   }
 
-  const Icon = data.icon;
   const checkoutUrl = SPECIAL_FESTIVAL_CHECKOUT_URLS[slug as FestivalSlug];
 
   return (
@@ -141,6 +140,7 @@ export default function SpecialFestivalDetail({ slug }: { slug: string }) {
             </div>
 
             <p className="mt-4 text-sm tracking-wide text-primary">{data.tibetan}</p>
+            <div className="mt-4 rounded-xl border border-primary/20 bg-primary/5 px-4 py-3 text-sm leading-7 text-foreground/80"><strong className="text-primary">一筆登記，最多五人共同參與。</strong> 最適合家人、夫妻、父母子女、兄弟姊妹與親朋好友一起發心；每位可各自有願，共同參與同一期護持。</div>
             <div className="mt-4 flex flex-wrap items-center gap-3 text-sm font-semibold text-primary"><span className="rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5">首發限定 18 席</span><span className="rounded-full border border-primary/20 px-4 py-1.5">NT$6,000／一季護持</span></div>
             <p className="mt-4 text-lg font-semibold text-primary">{data.kicker}</p>
             <p className="mt-2 text-lg text-foreground/80">{data.subtitle}</p>
