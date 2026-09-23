@@ -8,9 +8,9 @@ import StickyCta from "@/components/StickyCta";
 import FloatingFb from "@/components/FloatingFb";
 
 const SPECIAL_FESTIVAL_CHECKOUT_URLS = {
-  "wind-horse": "",
-  "mani-stone": "",
-  "butter-lamp-festival": "",
+  "wind-horse": "https://cart.cashier.ecpay.com.tw/qp/3gA9",
+  "mani-stone": "https://cart.cashier.ecpay.com.tw/qp/3gBE",
+  "butter-lamp-festival": "https://cart.cashier.ecpay.com.tw/qp/3gC5",
 } as const;
 
 const FESTIVALS = {
@@ -146,32 +146,30 @@ export default function SpecialFestivalDetail({ slug }: { slug: string }) {
                       <p className="mt-2 text-sm text-muted-foreground">一席一願｜半年為一期的專屬護持安排</p>
                     </div>
                     <div className="md:w-64">
-                      {checkoutUrl ? (
-                        <a href={checkoutUrl} target="_blank" rel="noreferrer" className="block">
-                          <button className="w-full rounded-md bg-primary px-6 py-3 text-sm font-bold text-primary-foreground shadow-lg transition hover:opacity-90">
-                            NT$6,000｜立即登記
-                            <ArrowRight className="ml-2 inline-block h-4 w-4" />
-                          </button>
-                        </a>
-                      ) : (
-                        <button disabled className="w-full cursor-not-allowed rounded-md border border-primary/30 px-6 py-3 text-sm font-bold text-muted-foreground">
-                          綠界登記連結準備中
+                      <a href={checkoutUrl} target="_blank" rel="noreferrer" className="block">
+                        <button className="w-full rounded-md bg-primary px-6 py-3 text-sm font-bold text-primary-foreground shadow-lg transition hover:opacity-90">
+                          NT$6,000｜立即登記
+                          <ArrowRight className="ml-2 inline-block h-4 w-4" />
                         </button>
-                      )}
+                      </a>
                     </div>
                   </div>
-              <div className="mt-6 grid gap-3 border-t border-border/50 pt-5 sm:grid-cols-2">
-                {data.benefits.map((benefit) => (
-                  <div key={benefit} className="flex items-start gap-2 text-sm text-muted-foreground">
-                    <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
-                    <span>{benefit}</span>
+                  <div className="mt-6 grid gap-3 border-t border-border/50 pt-5 sm:grid-cols-2">
+                    {data.benefits.map((benefit) => (
+                      <div key={benefit} className="flex items-start gap-2 text-sm text-muted-foreground">
+                        <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                        <span>{benefit}</span>
+                      </div>
+                    ))}
                   </div>
-                ))}
+                  <div className="mt-5 rounded-xl border border-primary/15 bg-primary/5 px-4 py-3 text-sm leading-relaxed text-foreground/80">
+                    <span className="font-semibold text-primary">為何首發僅 18 席？</span> 首發特別祭典希望保留一份難得與莊重，因此本期每一項僅開放 18 席；「圓滿即止」，不以大量登記為目的，而是珍惜每一位真正願意把願心交付於此的人。
+                  </div>
+                  <p className="mt-4 text-xs leading-relaxed text-muted-foreground/80">
+                    付款與登記資料填寫皆於綠界安全通道完成；本站不另行收集登記資料。
+                  </p>
+                </div>
               </div>
-              <div className="mt-5 rounded-xl border border-primary/15 bg-primary/5 px-4 py-3 text-sm leading-relaxed text-foreground/80"><span className="font-semibold text-primary">為何首發僅 18 席？</span> 首發特別祭典希望保留一份難得與莊重，因此本期每一項僅開放 18 席；「圓滿即止」，不以大量登記為目的，而是珍惜每一位真正願意把願心交付於此的人。</div>
-              <p className="mt-4 text-xs leading-relaxed text-muted-foreground/80">
-                付款與登記資料填寫皆於綠界安全通道完成；本站不另行收集登記資料。
-              </p>
             </div>
           </div>
         </section>
@@ -192,16 +190,10 @@ export default function SpecialFestivalDetail({ slug }: { slug: string }) {
             <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">
               首發每項僅 18 席，NT$6,000 一次完成登記與半年護持。願真正珍惜這份因緣的人，能在半年之中持續被憶念、被回向，也讓自己在日常裡持續與善法相應。
             </p>
-            {checkoutUrl ? (
-              <a href={checkoutUrl} target="_blank" rel="noreferrer" className="mt-6 inline-flex items-center gap-2 rounded-md bg-primary px-7 py-3 text-sm font-bold text-primary-foreground shadow-lg transition hover:opacity-90">
-                NT$6,000｜立即登記
-                <ArrowRight className="h-4 w-4" />
-              </a>
-            ) : (
-              <span className="mt-6 inline-flex items-center gap-2 rounded-md border border-primary/30 px-7 py-3 text-sm font-bold text-muted-foreground">
-                綠界登記連結準備中
-              </span>
-            )}
+            <a href={checkoutUrl} target="_blank" rel="noreferrer" className="mt-6 inline-flex items-center gap-2 rounded-md bg-primary px-7 py-3 text-sm font-bold text-primary-foreground shadow-lg transition hover:opacity-90">
+              NT$6,000｜立即登記
+              <ArrowRight className="h-4 w-4" />
+            </a>
             <p className="mt-4 text-xs text-muted-foreground/80">付款與登記皆於綠界完成</p>
           </div>
 
