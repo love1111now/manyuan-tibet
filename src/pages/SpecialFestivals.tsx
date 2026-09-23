@@ -50,13 +50,13 @@ export default function SpecialFestivals() {
           <div className="absolute inset-0 bg-gradient-to-b from-primary/10 via-background to-background" />
           <div className="relative mx-auto max-w-6xl px-5 py-20 md:py-28 text-center">
             <p className="text-xs font-bold tracking-[0.35em] text-primary uppercase">
-              Special Festivals · 半年護持
+              Special Festivals · 首發限定 18 席 · 半年護持
             </p>
             <h1 className="mt-4 font-display text-5xl md:text-7xl tracking-tight">
               特別祭典
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-muted-foreground text-base md:text-lg leading-relaxed">
-              三項殊勝傳統，皆以半年為一期的祈願護持。一次登記，讓發心、供養與回向不只停留於一日，而延續到日常。
+              這不是大量開放的常態項目。首發三項特別祭典，每項僅開放 18 席，以半年為一期，將一份難得的發心、供養與回向，留給真正珍惜這份因緣的人。
             </p>
 
             <div className="mx-auto mt-8 flex max-w-2xl flex-wrap items-center justify-center gap-x-6 gap-y-3 text-sm text-muted-foreground">
@@ -81,7 +81,7 @@ export default function SpecialFestivals() {
                       <Icon className="h-7 w-7" />
                     </div>
                     <p className="mt-7 text-[10px] font-bold tracking-[0.25em] text-primary uppercase">
-                      半年護持 · NT$6,000
+                      首發 18 席 · NT$6,000／半年
                     </p>
                     <h2 className="mt-2 font-display text-3xl">{item.title}</h2>
                     <p className="mt-3 text-sm font-medium text-foreground/80">
@@ -91,7 +91,7 @@ export default function SpecialFestivals() {
                       {item.description}
                     </p>
                     <div className="mt-8 flex items-center gap-2 text-sm font-bold text-primary">
-                      了解祭典・立即登記
+                      進入專屬登記頁
                       <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                     </div>
                   </Card>
@@ -101,9 +101,10 @@ export default function SpecialFestivals() {
           </div>
 
           <div className="mx-auto mt-12 max-w-3xl rounded-2xl border border-primary/20 bg-primary/5 p-6 text-center md:p-8">
-            <p className="font-display text-xl md:text-2xl">一次 NT$6,000，半年護持</p>
+            <p className="text-xs font-bold tracking-[0.25em] text-primary">首發限定・每項 18 席</p>
+            <p className="mt-2 font-display text-xl md:text-2xl">一次 NT$6,000，半年護持</p>
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-              特別祭典不是單純一次性的祈願項目，而是讓一份願心有時間延續。付款與登記資料填寫皆在綠界安全通道完成，完成後即可依祭典安排參與。
+              三項特別祭典首發各限 18 席。這份限定，不在於製造喧鬧，而是讓每一位參與者都知道：自己選擇的，是一段需要被珍惜的半年護持因緣。付款與登記資料填寫皆在綠界安全通道完成。
             </p>
           </div>
         </section>
