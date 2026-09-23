@@ -1,7 +1,7 @@
 import React from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "wouter";
-import { ArrowRight, Flag, Gem, Flame } from "lucide-react";
+import { ArrowRight, Flag, Gem, Flame, ShieldCheck } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
@@ -12,22 +12,22 @@ const FESTIVALS = [
   {
     slug: "wind-horse",
     title: "風馬旗",
-    subtitle: "祈願、回向與善業功德的傳遞",
-    description: "以藏地傳統風馬旗為主題，介紹風馬旗的文化意義、象徵與如法供奉方式。",
+    subtitle: "祈願隨風而行・半年護持",
+    description: "以藏地風馬旗傳統承接發願與回向，讓一份心願不只停留在一天，而有半年時間持續護持。",
     icon: Flag,
   },
   {
     slug: "mani-stone",
     title: "瑪尼石",
-    subtitle: "六字大明咒與石刻祈願文化",
-    description: "認識藏地瑪尼石堆與六字大明咒的傳統，理解其在藏傳佛教文化中的象徵意義。",
+    subtitle: "經咒入石・願心延續・半年護持",
+    description: "以瑪尼石與經咒供養傳統承接祈願，將供養、發願與回向延續在一段完整的護持週期裡。",
     icon: Gem,
   },
   {
     slug: "butter-lamp-festival",
     title: "燃燈節",
-    subtitle: "以燈明供養，象徵智慧與光明",
-    description: "介紹燃燈供佛與藏地燃燈節的文化脈絡，以及點燈祈願所承載的祝福。",
+    subtitle: "一盞燈明・半年光明護持",
+    description: "以燃燈供養象徵智慧與光明，讓節日當下的一份願心，延續成半年祈願與回向。",
     icon: Flame,
   },
 ] as const;
@@ -36,10 +36,10 @@ export default function SpecialFestivals() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Helmet>
-        <title>特別祭典｜風馬旗・瑪尼石・燃燈節｜滿願藏庫</title>
+        <title>特別祭典｜半年護持・風馬旗・瑪尼石・燃燈節｜滿願藏庫</title>
         <meta
           name="description"
-          content="滿願藏庫特別祭典，介紹風馬旗、瑪尼石與燃燈節的藏地佛教文化、象徵意義與祈願傳統。"
+          content="滿願藏庫特別祭典，風馬旗、瑪尼石、燃燈節，三項特別祭典皆為 NT$6,000 半年護持，付款與登記於綠界完成。"
         />
       </Helmet>
 
@@ -50,14 +50,19 @@ export default function SpecialFestivals() {
           <div className="absolute inset-0 bg-gradient-to-b from-primary/10 via-background to-background" />
           <div className="relative mx-auto max-w-6xl px-5 py-20 md:py-28 text-center">
             <p className="text-xs font-bold tracking-[0.35em] text-primary uppercase">
-              Special Festivals
+              Special Festivals · 半年護持
             </p>
             <h1 className="mt-4 font-display text-5xl md:text-7xl tracking-tight">
               特別祭典
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-muted-foreground text-base md:text-lg leading-relaxed">
-              不同於日常本尊法事，這裡整理藏地傳統中具有特殊文化意義的祭典與供養形式。
+              三項殊勝傳統，皆以半年為一期的祈願護持。一次登記，讓發心、供養與回向不只停留於一日，而延續到日常。
             </p>
+
+            <div className="mx-auto mt-8 flex max-w-2xl flex-wrap items-center justify-center gap-x-6 gap-y-3 text-sm text-muted-foreground">
+              <span className="inline-flex items-center gap-2"><ShieldCheck className="h-4 w-4 text-primary" /> NT$6,000／半年</span>
+              <span className="inline-flex items-center gap-2"><ShieldCheck className="h-4 w-4 text-primary" /> 付款與登記皆於綠界完成</span>
+            </div>
           </div>
         </section>
 
@@ -76,7 +81,7 @@ export default function SpecialFestivals() {
                       <Icon className="h-7 w-7" />
                     </div>
                     <p className="mt-7 text-[10px] font-bold tracking-[0.25em] text-primary uppercase">
-                      Special Festival
+                      半年護持 · NT$6,000
                     </p>
                     <h2 className="mt-2 font-display text-3xl">{item.title}</h2>
                     <p className="mt-3 text-sm font-medium text-foreground/80">
@@ -86,13 +91,20 @@ export default function SpecialFestivals() {
                       {item.description}
                     </p>
                     <div className="mt-8 flex items-center gap-2 text-sm font-bold text-primary">
-                      查看祭典介紹
+                      了解祭典・立即登記
                       <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                     </div>
                   </Card>
                 </Link>
               );
             })}
+          </div>
+
+          <div className="mx-auto mt-12 max-w-3xl rounded-2xl border border-primary/20 bg-primary/5 p-6 text-center md:p-8">
+            <p className="font-display text-xl md:text-2xl">一次 NT$6,000，半年護持</p>
+            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+              特別祭典不是單純一次性的祈願項目，而是讓一份願心有時間延續。付款與登記資料填寫皆在綠界安全通道完成，完成後即可依祭典安排參與。
+            </p>
           </div>
         </section>
       </main>
