@@ -167,11 +167,9 @@ export default function SpecialFestivalDetail({ slug }: { slug: string }) {
                       <p className="mt-2 text-sm text-muted-foreground">一席一願｜一季為一期的專屬護持安排</p>
                     </div>
                     <div className="md:w-64">
-                      <a href={checkoutUrl} target="_blank" rel="noreferrer" className="block">
-                        <button className="w-full rounded-md bg-primary px-6 py-3 text-sm font-bold text-primary-foreground shadow-lg transition hover:opacity-90">
-                          NT$6,000｜立即登記
-                          <ArrowRight className="ml-2 inline-block h-4 w-4" />
-                        </button>
+                      <a href={checkoutUrl} target="_blank" rel="noreferrer" className="flex w-full items-center justify-center rounded-md bg-primary px-6 py-3 text-sm font-bold text-primary-foreground shadow-lg transition hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2">
+                        NT$6,000｜立即登記
+                        <ArrowRight className="ml-2 h-4 w-4" />
                       </a>
                     </div>
                   </div>
@@ -210,7 +208,7 @@ export default function SpecialFestivalDetail({ slug }: { slug: string }) {
 
           <div className="mt-14"><div className="mb-7 text-center"><p className="text-xs font-bold tracking-[0.25em] text-primary">發心回饋</p><h2 className="mt-2 font-display text-2xl md:text-3xl">一季護持，讓願心有時間沉澱</h2><p className="mx-auto mt-3 max-w-2xl text-sm leading-7 text-muted-foreground">每一份發心都不同。以下以「共同參與時最常被珍惜的三種感受」呈現，避免把法事效果簡化成單一承諾。</p></div><div className="grid gap-4 md:grid-cols-3">{data.feedback.map(([title,body,by]) => <article key={title} className="rounded-2xl border border-border/60 bg-card/40 p-5"><p className="text-sm font-bold text-primary">{title}</p><p className="mt-3 text-sm leading-7 text-muted-foreground">{body}</p><p className="mt-4 border-t border-border/50 pt-3 text-[10px] text-primary/70">— {by}</p></article>)}</div></div>
 
-          <div className="mt-16 rounded-3xl border border-primary/20 bg-primary/5 p-7 text-center md:p-10">
+          <div className="mt-14 rounded-3xl border border-primary/15 bg-card/30 p-6 md:p-10"><div className="mb-7"><p className="text-xs font-bold tracking-[0.25em] text-primary">參與須知</p><h2 className="mt-2 font-display text-2xl md:text-3xl">登記前，你需要知道</h2></div><div className="grid gap-4 md:grid-cols-2"><div className="rounded-2xl border border-border/60 p-5"><p className="font-bold">一筆可以幾個人？</p><p className="mt-2 text-sm leading-7 text-muted-foreground">每筆 NT$6,000 登記最多五人共同參與，適合家人或親朋好友一起發心。</p></div><div className="rounded-2xl border border-border/60 p-5"><p className="font-bold">在哪裡完成資料？</p><p className="mt-2 text-sm leading-7 text-muted-foreground">付款與登記資料填寫皆於綠界完成，本站不另設姓名、生日或祈願資料表單。</p></div><div className="rounded-2xl border border-border/60 p-5"><p className="font-bold">18 席代表什麼？</p><p className="mt-2 text-sm leading-7 text-muted-foreground">本次首發每一項開放 18 席，採「圓滿即止」的方式，不以大量登記為主要目的。</p></div><div className="rounded-2xl border border-border/60 p-5"><p className="font-bold">一季護持是什麼？</p><p className="mt-2 text-sm leading-7 text-muted-foreground">以一季作為一期的護持安排，讓發心、供養、儀軌與回向有一段完整時間延續；並非對世俗結果的保證。</p></div></div></div>\n\n          <div className="mt-16 rounded-3xl border border-primary/20 bg-primary/5 p-7 text-center md:p-10">
             <p className="text-xs font-bold tracking-[0.25em] text-primary">首發 18 席・一份心願・一季護持</p>
             <h2 className="mt-3 font-display text-2xl md:text-3xl">不是每一次發心，都有這樣的因緣</h2>
             <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">
