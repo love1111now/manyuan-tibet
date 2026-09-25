@@ -49,6 +49,16 @@ export default function SpecialFestivals() {
         <section className="relative overflow-hidden border-b">
           <div className="absolute inset-0 bg-gradient-to-b from-primary/10 via-background to-background" />
           <div className="relative mx-auto max-w-6xl px-5 py-20 md:py-28 text-center">
+            <div className="mx-auto mb-10 max-w-5xl overflow-hidden rounded-3xl border border-primary/20 shadow-2xl shadow-black/20">
+              <div className="relative">
+                <img src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Ladakh_prayer_flag.jpg" alt="藏地風馬旗與祈願傳統" className="block aspect-[21/8] w-full object-cover" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-5 text-left md:p-8">
+                  <p className="text-xs font-bold tracking-[0.3em] text-white/80">藏傳佛教文化・特別祭典</p>
+                  <p className="mt-2 font-display text-2xl text-white md:text-4xl">三項法門・一季護持・首發限定</p>
+                </div>
+              </div>
+            </div>
             <p className="text-xs font-bold tracking-[0.35em] text-primary uppercase">
               Special Festivals · 首發限定 18 席 · 一季護持
             </p>
@@ -106,6 +116,22 @@ export default function SpecialFestivals() {
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
               三項特別祭典首發各限 18 席。這份限定，不在於製造喧鬧，而是讓每一位參與者都知道：自己選擇的，是一段需要被珍惜的一季護持因緣。付款與登記資料填寫皆在綠界安全通道完成。
             </p>
+          </div>
+        </section>
+
+        <section className="mx-auto max-w-5xl px-5 pt-14 md:px-8 md:pt-20">
+          <div className="rounded-3xl border border-primary/20 bg-card/50 p-7 md:p-10">
+            <p className="text-xs font-bold tracking-[0.25em] text-primary">一席一願・五人同行</p>
+            <h2 className="mt-2 font-display text-3xl md:text-4xl">最適合家人與親朋好友共同發心</h2>
+            <p className="mt-5 text-sm leading-8 text-muted-foreground">
+              一筆 NT$6,000 登記，最多五人共同參與。父母、夫妻、子女、手足或多年好友，都可以在同一期特別祭典裡各自有願、共同回向。
+              付款與五人登記資料填寫皆於綠界完成，本站不另行收集姓名、生日或祈願資料。
+            </p>
+            <div className="mt-7 grid gap-3 sm:grid-cols-3">
+              <div className="rounded-2xl border border-border/60 bg-background/30 p-4 text-sm">一家人：父母、夫妻、子女共同發心</div>
+              <div className="rounded-2xl border border-border/60 bg-background/30 p-4 text-sm">親朋好友：各自有願，共同參與</div>
+              <div className="rounded-2xl border border-border/60 bg-background/30 p-4 text-sm">一季護持：讓願心有時間延續</div>
+            </div>
           </div>
         </section>
       </main>
