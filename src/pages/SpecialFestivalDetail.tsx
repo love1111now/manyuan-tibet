@@ -33,6 +33,12 @@ const FESTIVALS = {
       "適合為自己、家人、事業與生活祈求平安順遂、善緣增長",
       "首發限定 18 席，讓每一份發心都被珍惜地承接與回向",
     ],
+    process: [
+      ["01", "發心登記", "在綠界完成 NT$6,000 登記，最多五人共同參與。"],
+      ["02", "依願承接", "依所選法門的傳統與發心，承接供養、祈願與回向。"],
+      ["03", "一季護持", "以一季作為一期，讓願心不只停留在登記當下。"],
+      ["04", "回向延續", "將善願回向自己、家人與有緣眾生，回到日常繼續行善。"],
+    ],
     sections: [
       ["什麼是「風馬」？", "Lungta 直譯為「風馬」。風馬通常位於旗幟中央，周圍可見三寶與其他吉祥象徵。這裡的「馬」不是世俗交通工具的單純意象，而是與活力、力量及善願傳遞相關的宗教象徵。"],
       ["一季護持的意義", "特別祭典不以一次性的祈願作為終點，而重視發心、持續與回向。以一季為一段護持週期，是希望讓信眾把一份願心安定下來，在較長的時間裡持續憶念善願、培植善緣。"],
@@ -58,6 +64,12 @@ const FESTIVALS = {
       "適合為自己與家人累積善緣、祈願平安與順遂",
       "首發限定 18 席，讓每一份願心都有一季時間持續回向",
     ],
+    process: [
+      ["01", "發心登記", "在綠界完成 NT$6,000 登記，最多五人共同參與。"],
+      ["02", "經咒供養", "以瑪尼石與經咒傳統承接一份可長久安住的善願。"],
+      ["03", "一季護持", "讓供養、發願與回向在一期時間中持續被憶念。"],
+      ["04", "回向延續", "把對重要之人的善意，轉為持續的發心與回向。"],
+    ],
     sections: [
       ["瑪尼石是什麼？", "瑪尼石並不只指刻有六字大明咒的石頭，也可泛指帶有經咒、佛教圖像或其他宗教文字的石刻。它們常被排列成瑪尼牆、石堆，或設置於村落、道路、寺院、山口等處。"],
       ["以石承咒，以願承心", "經咒刻於石上，是把佛法文字融入日常環境的一種宗教與文化表現。對參與者而言，更重要的是藉由供養與發願，提醒自己持續行善、培養慈悲，並將善願回向自己與有緣眾生。"],
@@ -82,6 +94,12 @@ const FESTIVALS = {
       "以燃燈供養象徵智慧、光明與善願",
       "適合為自己、家人與重要心願作長期祈願回向",
       "首發限定 18 席，讓一份光明願心持續陪伴一季日常",
+    ],
+    process: [
+      ["01", "發心登記", "在綠界完成 NT$6,000 登記，最多五人共同參與。"],
+      ["02", "供燈發願", "以燈供養象徵智慧與光明，安住自己的善願。"],
+      ["03", "一季護持", "以一季作為一期，讓節日因緣延續到日常。"],
+      ["04", "回向延續", "將供燈所代表的善願回向自己、家人與有緣眾生。"],
     ],
     sections: [
       ["為什麼叫「燃燈節」？", "Chötrul Düchen 的核心是「神變節」本身，而「燃燈節」是因藏地在此期間盛行供燈與燈飾而形成的通俗稱呼。因此正式介紹同時保留「燃燈節」與「Chötrul Düchen／神變節」，避免把它誤解成單純的民俗燈會。"],
@@ -202,6 +220,23 @@ export default function SpecialFestivalDetail({ slug }: { slug: string }) {
                 <p className="mt-4 text-base leading-loose text-muted-foreground">{body}</p>
               </article>
             ))}
+          </div>
+
+          <div className="mt-14">
+            <div className="mb-7">
+              <p className="text-xs font-bold tracking-[0.25em] text-primary">一季護持・四個階段</p>
+              <h2 className="mt-2 font-display text-2xl md:text-3xl">從發心，到回向</h2>
+              <p className="mt-3 max-w-2xl text-sm leading-7 text-muted-foreground">特別祭典不是單純購買一項物件，而是一段以發心、供養、祈願與回向為核心的參與歷程。</p>
+            </div>
+            <div className="grid gap-4 md:grid-cols-4">
+              {data.process.map(([no,title,body]) => (
+                <article key={no} className="relative rounded-2xl border border-primary/15 bg-card/50 p-5">
+                  <span className="font-display text-4xl text-primary/30">{no}</span>
+                  <h3 className="mt-3 font-bold">{title}</h3>
+                  <p className="mt-2 text-sm leading-7 text-muted-foreground">{body}</p>
+                </article>
+              ))}
+            </div>
           </div>
 
           <div className="mt-14 rounded-2xl border border-primary/15 bg-card/40 p-6 md:p-8"><p className="text-xs font-bold tracking-[0.25em] text-primary">適合誰</p><h2 className="mt-2 font-display text-2xl md:text-3xl">如果你正在為這些事發心</h2><div className="mt-5 grid gap-3 md:grid-cols-2">{data.suitable.map(item => <div key={item} className="rounded-xl border border-border/60 bg-background/30 px-4 py-3 text-sm text-muted-foreground">✓ {item}</div>)}</div></div>
