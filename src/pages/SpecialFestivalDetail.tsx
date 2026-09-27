@@ -7,6 +7,25 @@ import SiteFooter from "@/components/SiteFooter";
 import StickyCta from "@/components/StickyCta";
 import FloatingFb from "@/components/FloatingFb";
 
+function DocumentaryImage({ src, alt, className = "" }: { src: string; alt: string; className?: string }) {
+  return (
+    <div className={`group relative overflow-hidden ${className}`}>
+      <img
+        src={src}
+        alt={alt}
+        className="block h-full w-full object-cover grayscale-[0.14] sepia-[0.08] contrast-[1.08] brightness-[0.94] transition duration-700 group-hover:scale-[1.025]"
+        loading="lazy"
+      />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,transparent_35%,rgba(0,0,0,.28)_100%)]" />
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.20] mix-blend-soft-light"
+        style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.78' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E\")" }}
+      />
+      <div className="pointer-events-none absolute inset-0 border border-white/10" />
+    </div>
+  );
+}
+
 const SPECIAL_FESTIVAL_CHECKOUT_URLS = {
   "wind-horse": "https://cart.cashier.ecpay.com.tw/qp/3gA9",
   "mani-stone": "https://cart.cashier.ecpay.com.tw/qp/3gBE",
@@ -19,7 +38,8 @@ const FESTIVALS = {
     tibetan: "རླུང་རྟ་ · Lungta",
     kicker: "讓願心隨風而行",
     heroImage: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Ladakh_prayer_flag.jpg",
-    secondaryImage: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Olympic_Lungtas.jpg",
+    secondaryImage: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Markah_Chorten_and_Prayer_Flags_(49007791557).jpg",
+    documentaryImage: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Ladakh_Tribal_Art_%26_Rituals_12.jpg",
     powerText: "在藏傳佛教的脈絡裡，真正重要的從來不只是旗幟本身，而是經咒、發心、供養、修持與回向所共同形成的善業因緣。風馬旗讓願心有一個可被憶念的依止，也讓個人的一念延伸到更廣大的善願與回向。",
     suitable: ["為自己與家人祈願平安、順遂與善緣","正在面對人生轉折，希望以佛法因緣安定身心","希望為父母、伴侶、子女或重要親友共同發心","重視長期護持，而不只想做一次性祈福"],
     feedback: [["為家人一起發心","一次登記最多五人，讓父母、夫妻、孩子可以共同參與；各自有願，卻共同回向。","共同發心的典型分享方向"],["把願心安定下來","一季時間讓祈願不必急著在某一天看到結果，而是回到發心、行善與日常。","參與者常見感受整理"],["親友一起同行","多人共同參與，讓一份法事從個人祈願成為共同發心。","親友共同參與情境整理"]],
@@ -50,7 +70,8 @@ const FESTIVALS = {
     tibetan: "མ་ཎི་རྡོ་ · Maṇi Stone",
     kicker: "一石承咒，一願長存",
     heroImage: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Mantra_rocks_along_the_Manasarovar_pilgrimage_trail.jpg",
-    secondaryImage: "https://commons.wikimedia.org/wiki/Special:Redirect/file/British_Museum_Tibetan_Mani_Stone.jpg",
+    secondaryImage: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Char_%E2%80%93_Mani_Stones_%E2%80%93_1.jpg",
+    documentaryImage: "https://commons.wikimedia.org/wiki/Special:Redirect/file/India_-_Ladakh_-_Trekking_-_030_-_prayer-carved_stone_wall_(3909588920).jpg",
     powerText: "瑪尼石把原本看不見的願心，留在一個可以長久存在的載體之中。經咒不是裝飾文字，供養也不只是形式；當發心、供養、經咒與回向彼此相應，便形成提醒自己持續向善、培養慈悲與智慧的修持力量。",
     suitable: ["希望為自己與家人累積善緣、培養慈悲與智慧","對六字大明咒、觀世音菩薩法門有信心","希望為重要人生階段留下長期善願","想邀請家人或親友一起共同供養、共同回向"],
     feedback: [["為父母留下善願","一次登記最多五人，也能讓兄弟姊妹一起參與，把對父母的心意放進同一份護持。","家庭共同發心的典型分享方向"],["從祈求走向發心","有些參與者最深的感受，是更常提醒自己行善、持咒、回向，把外在儀軌慢慢帶回內心。","參與者常見感受整理"],["朋友也可以一起","幾位多年好友共同發心，各自有願望，卻共同參與同一期護持。","親友共同參與情境整理"]],
@@ -81,7 +102,8 @@ const FESTIVALS = {
     tibetan: "ཆོ་འཕྲུལ་དུས་ཆེན་ · Chötrul Düchen",
     kicker: "以一盞燈，供養智慧與光明",
     heroImage: "https://commons.wikimedia.org/wiki/Special:Redirect/file/A_Tibetan_Pilgrim_Lighting_Ghee_Lamps.jpg",
-    secondaryImage: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Light_butter_lamps.jpg",
+    secondaryImage: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Aleksandr_Zykov_Butter_Lamps.jpg",
+    documentaryImage: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Thiksey_Monastery%2C_Buddhism_in_Ladakh%2C_India.jpg",
     powerText: "供燈真正供養的不是佛需要光，而是我們以光明提醒自己向智慧靠近。當供燈與發心、布施、持誦、善行與回向相應，便成為一種強而有力的修持象徵：願破除無明，願智慧增長。",
     suitable: ["希望為自己與家人祈願光明、智慧與平安","正處於人生轉折，希望以供燈與善願安定自己的心","希望為父母、伴侶、孩子或重要親友共同發心","重視供燈、布施、回向與藏傳佛教節日因緣"],
     feedback: [["一家人一起點亮願心","一次登記最多五人，很適合一家人共同參與，各自有願，也共同把一份光明回向給彼此。","家庭共同發心的典型分享方向"],["在忙亂裡留一盞燈","一季護持讓供燈的象徵從節日延續到日常，成為提醒自己不要忘記願心的依止。","參與者常見感受整理"],["替重要的人發一份心","供燈適合成為送給父母、伴侶或親友的一份善意，是一份真誠的善願與回向。","親友共同參與情境整理"]],
@@ -164,7 +186,7 @@ export default function SpecialFestivalDetail({ slug }: { slug: string }) {
             <p className="mt-4 text-lg font-semibold text-primary">{data.kicker}</p>
             <p className="mt-2 text-lg text-foreground/80">{data.subtitle}</p>
             <p className="mt-6 max-w-3xl text-base md:text-lg leading-loose text-muted-foreground">{data.intro}</p>
-            <div className="mt-8 overflow-hidden rounded-3xl border border-primary/20 bg-black/30 shadow-2xl shadow-black/20"><div className="relative"><img src={data.heroImage} alt={data.title} className="block aspect-[16/7] w-full object-cover md:aspect-[21/8]" /><div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/5 to-transparent" /><div className="absolute bottom-0 left-0 right-0 p-5 md:p-8"><p className="text-xs font-bold tracking-[0.28em] text-primary-foreground/80">藏傳佛教文化・特別祭典</p><p className="mt-2 font-display text-2xl text-white md:text-4xl">{data.kicker}</p></div></div></div>
+            <div className="mt-8 overflow-hidden rounded-3xl border border-primary/20 bg-black/30 shadow-2xl shadow-black/20"><div className="relative"><DocumentaryImage src={data.heroImage} alt={data.title} className="aspect-[16/7] md:aspect-[21/8]" /><div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/5 to-transparent" /><div className="absolute bottom-0 left-0 right-0 p-5 md:p-8"><p className="text-xs font-bold tracking-[0.28em] text-primary-foreground/80">藏傳佛教文化・特別祭典</p><p className="mt-2 font-display text-2xl text-white md:text-4xl">{data.kicker}</p></div></div></div>
 
             <div className="mt-10 overflow-hidden rounded-2xl border border-primary/30 bg-card/70 shadow-lg">
               <div className="flex flex-col md:flex-row">
@@ -212,7 +234,7 @@ export default function SpecialFestivalDetail({ slug }: { slug: string }) {
         </section>
 
         <section className="mx-auto max-w-6xl px-5 pt-14 md:px-8 md:pt-20">
-          <div className="mb-12 grid gap-8 rounded-3xl border border-primary/15 bg-primary/5 p-6 md:grid-cols-[.85fr_1.15fr] md:p-10 md:items-center"><div className="overflow-hidden rounded-2xl"><img src={data.secondaryImage} alt={data.title + "法門文化"} className="block aspect-[4/3] w-full object-cover" /></div><div><p className="text-xs font-bold tracking-[0.25em] text-primary">藏傳法門的力量</p><h2 className="mt-2 font-display text-3xl md:text-4xl">{data.kicker}</h2><p className="mt-4 text-sm leading-8 text-muted-foreground">{data.powerText}</p><div className="mt-5 rounded-xl border border-primary/15 bg-background/30 p-4 text-sm leading-7 text-foreground/80">力量不等於世俗保證；真正值得珍惜的是傳承、發心、儀軌、供養、持誦與回向彼此相應。</div></div></div>
+          <div className="mb-12 grid gap-8 rounded-3xl border border-primary/15 bg-primary/5 p-6 md:grid-cols-[.85fr_1.15fr] md:p-10 md:items-center"><DocumentaryImage src={data.secondaryImage} alt={data.title + "法門文化"} className="aspect-[4/3] rounded-2xl" /><div><p className="text-xs font-bold tracking-[0.25em] text-primary">藏傳法門的力量</p><h2 className="mt-2 font-display text-3xl md:text-4xl">{data.kicker}</h2><p className="mt-4 text-sm leading-8 text-muted-foreground">{data.powerText}</p><div className="mt-5 rounded-xl border border-primary/15 bg-background/30 p-4 text-sm leading-7 text-foreground/80">力量不等於世俗保證；真正值得珍惜的是傳承、發心、儀軌、供養、持誦與回向彼此相應。</div></div></div>
           <div className="space-y-10">
             {data.sections.map(([title, body]) => (
               <article key={title} className="border-b border-border/50 pb-10">
@@ -236,6 +258,22 @@ export default function SpecialFestivalDetail({ slug }: { slug: string }) {
                   <p className="mt-2 text-sm leading-7 text-muted-foreground">{body}</p>
                 </article>
               ))}
+            </div>
+          </div>
+
+          <div className="mt-14">
+            <div className="mb-7">
+              <p className="text-xs font-bold tracking-[0.25em] text-primary">FIELD NOTES · 紀實影像</p>
+              <h2 className="mt-2 font-display text-2xl md:text-3xl">不是棚拍，是傳統仍在生活裡</h2>
+              <p className="mt-3 max-w-2xl text-sm leading-7 text-muted-foreground">以真實藏地佛教文化影像作為視覺語言；保留暗部、紙張與銀鹽般的顆粒感，讓頁面更接近一份紀實攝影誌，而不是商品型廣告。</p>
+            </div>
+            <div className="grid gap-5 md:grid-cols-[1.35fr_.65fr]">
+              <DocumentaryImage src={data.documentaryImage} alt={data.title + "紀實影像"} className="min-h-[260px] rounded-2xl md:min-h-[420px]" />
+              <div className="flex flex-col justify-end rounded-2xl border border-primary/15 bg-card/40 p-6">
+                <p className="text-xs font-bold tracking-[0.2em] text-primary">DOCUMENTARY / HIMALAYA</p>
+                <p className="mt-3 font-display text-xl">留下風、石、火與時間的痕跡</p>
+                <p className="mt-3 text-sm leading-7 text-muted-foreground">影像不是用來證明法事效果，而是讓人看見這些傳統真實存在於寺院、道路、山口與日常生活之中。</p>
+              </div>
             </div>
           </div>
 
