@@ -51,7 +51,7 @@ export default function SpecialFestivals() {
           <div className="relative mx-auto max-w-6xl px-5 py-20 md:py-28 text-center">
             <div className="mx-auto mb-10 max-w-5xl overflow-hidden rounded-3xl border border-primary/20 shadow-2xl shadow-black/20">
               <div className="relative">
-                <img src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Ladakh_prayer_flag.jpg" alt="藏地風馬旗與祈願傳統" className="block aspect-[21/8] w-full object-cover" />
+                <img src="/images/special-festivals/wind-horse-documentary.svg" alt="藏地風馬旗與祈願傳統" className="block aspect-[21/8] w-full object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
                 <div className="absolute bottom-0 left-0 right-0 p-5 text-left md:p-8">
                   <p className="text-xs font-bold tracking-[0.3em] text-white/80">藏傳佛教文化・特別祭典</p>
