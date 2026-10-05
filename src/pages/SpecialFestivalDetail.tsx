@@ -140,6 +140,10 @@ export default function SpecialFestivalDetail({ slug }: { slug: string }) {
   if (!data) {
     return (
       <div className="min-h-screen bg-background text-foreground">
+        <Helmet>
+          <title>找不到這個祭典｜滿願藏庫</title>
+          <meta name="robots" content="noindex,nofollow" />
+        </Helmet>
         <SiteHeader />
         <main className="mx-auto max-w-3xl px-5 py-24 text-center">
           <h1 className="font-display text-4xl">找不到這個祭典</h1>
