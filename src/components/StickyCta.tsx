@@ -64,7 +64,7 @@ export default function StickyCta() {
           className="flex items-center justify-center gap-2 min-h-14 w-full max-w-md px-5 rounded-full gold-border bg-primary text-primary-foreground font-bold tracking-wider text-sm shadow-2xl active:scale-[0.98] transition-all"
           aria-label={`前往綠界登記${festival.name}`}
         >
-          ${festival.name} · NT$6,000／一季
+          NT$6,000／一季 · {festival.name}
           <ArrowRight className="w-4 h-4" />
         </a>
       </div>
