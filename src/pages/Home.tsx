@@ -94,9 +94,9 @@ export default function Home() {
             </div>
 
             <h1 className="font-display text-5xl sm:text-7xl md:text-8xl leading-[1.1] tracking-tight">
-              無論多努力，
+              有些人生階段，
               <br />
-              <span className="text-primary italic">總有些坎就是跨不過去</span>
+              <span className="text-primary italic">不是再更用力就能解決</span>
             </h1>
 
             <p className="mt-8 readable text-muted-foreground max-w-3xl text-base md:text-xl leading-relaxed mx-auto">
@@ -105,6 +105,18 @@ export default function Home() {
             <p className="mt-4 readable text-muted-foreground max-w-3xl text-base md:text-lg leading-relaxed mx-auto italic opacity-80">
               我們是台灣不支薪志工，依循佛法古老智慧，陪伴您修復那個漏損。依法不依人，只如法完成每一道儀軌。
             </p>
+            <div className="mt-8 flex w-full flex-col sm:flex-row items-center justify-center gap-3">
+              <Link href="/pay" className="inline-flex min-h-12 w-full sm:w-auto items-center justify-center gap-2 rounded-md bg-primary px-7 py-3 text-sm font-bold tracking-widest text-primary-foreground gold-border shadow-lg transition-all hover:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2">
+                查看法事方案 <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </Link>
+              <button
+                type="button"
+                onClick={() => scrollToSection("choose-path")}
+                className="inline-flex min-h-12 w-full sm:w-auto items-center justify-center gap-2 rounded-md border border-primary/30 bg-background/40 px-7 py-3 text-sm font-bold tracking-widest text-foreground transition-colors hover:bg-primary/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+              >
+                先了解適合的法門
+              </button>
+            </div>
 
             <button 
               type="button"
