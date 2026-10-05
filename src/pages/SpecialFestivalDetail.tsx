@@ -7,14 +7,15 @@ import SiteFooter from "@/components/SiteFooter";
 import StickyCta from "@/components/StickyCta";
 import FloatingFb from "@/components/FloatingFb";
 
-function DocumentaryImage({ src, alt, className = "" }: { src: string; alt: string; className?: string }) {
+function DocumentaryImage({ src, alt, className = "", priority = false }: { src: string; alt: string; className?: string; priority?: boolean }) {
   return (
     <div className={`group relative overflow-hidden ${className}`}>
       <img
         src={src}
         alt={alt}
         className="block h-full w-full object-cover grayscale-[0.14] sepia-[0.08] contrast-[1.08] brightness-[0.94] transition duration-700 group-hover:scale-[1.025]"
-        loading="lazy"
+        loading={priority ? "eager" : "lazy"}
+        fetchPriority={priority ? "high" : "auto"}
       />
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,transparent_35%,rgba(0,0,0,.28)_100%)]" />
       <div
@@ -186,7 +187,7 @@ export default function SpecialFestivalDetail({ slug }: { slug: string }) {
             <p className="mt-4 text-lg font-semibold text-primary">{data.kicker}</p>
             <p className="mt-2 text-lg text-foreground/80">{data.subtitle}</p>
             <p className="mt-6 max-w-3xl text-base md:text-lg leading-loose text-muted-foreground">{data.intro}</p>
-            <div className="mt-8 overflow-hidden rounded-3xl border border-primary/20 bg-black/30 shadow-2xl shadow-black/20"><div className="relative"><DocumentaryImage src={data.heroImage} alt={data.title} className="aspect-[16/7] md:aspect-[21/8]" /><div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/5 to-transparent" /><div className="absolute bottom-0 left-0 right-0 p-5 md:p-8"><p className="text-xs font-bold tracking-[0.28em] text-primary-foreground/80">藏傳佛教文化・特別祭典</p><p className="mt-2 font-display text-2xl text-white md:text-4xl">{data.kicker}</p></div></div></div>
+            <div className="mt-8 overflow-hidden rounded-3xl border border-primary/20 bg-black/30 shadow-2xl shadow-black/20"><div className="relative"><DocumentaryImage src={data.heroImage} alt={`${data.title}・藏地紀實影像`} className="aspect-[16/7] md:aspect-[21/8]" priority /><div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/5 to-transparent" /><div className="absolute bottom-0 left-0 right-0 p-5 md:p-8"><p className="text-xs font-bold tracking-[0.28em] text-primary-foreground/80">藏傳佛教文化・特別祭典</p><p className="mt-2 font-display text-2xl text-white md:text-4xl">{data.kicker}</p></div></div></div>
 
             <div className="mt-10 overflow-hidden rounded-2xl border border-primary/30 bg-card/70 shadow-lg">
               <div className="flex flex-col md:flex-row">
