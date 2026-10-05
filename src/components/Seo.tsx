@@ -13,7 +13,7 @@ export default function Seo({ title, description, path = "", image, noIndex }: S
   const url = `${SITE.url}${path.startsWith("/") ? path : `/${path}`}`.replace(/\/$/, "");
   const desc =
     description ??
-    "滿願藏庫：以《金光明最勝王經》為主軸的線上招財法事入口。選對本尊、選對方案，並導向第三方金流完成護持。";
+    "滿願藏庫提供藏傳佛教相關法事、供養、經典資訊與特別祭典，清楚說明法門、費用與參與流程。";
   const ogImage = image ?? `${SITE.url}/favicon.png`;
 
   return (
@@ -54,11 +54,6 @@ export default function Seo({ title, description, path = "", image, noIndex }: S
             name: SITE.name,
             url: SITE.url,
             inLanguage: "zh-Hant",
-            potentialAction: {
-              "@type": "SearchAction",
-              target: `${SITE.url}/?q={search_term_string}`,
-              "query-input": "required name=search_term_string",
-            },
           },
         ])}
       </script>
