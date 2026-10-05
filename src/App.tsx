@@ -6,7 +6,6 @@ import { Router, Route, Switch, useLocation } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import AnalyticsTracker from "./components/AnalyticsTracker";
-import LiveRegistrations from "./components/LiveRegistrations";
 import VercelScriptsLoader from "./components/VercelScriptsLoader";
 
 // 頁面組件 - 採用 React.lazy 進行程式碼分割，優化 LCP 載入速度
@@ -23,7 +22,6 @@ const Terms     = React.lazy(() => import("./pages/Terms"));
 const NotFound  = React.lazy(() => import("./pages/NotFound"));
 const SpecialFestivals = React.lazy(() => import("./pages/SpecialFestivals"));
 const SpecialFestivalDetail = React.lazy(() => import("./pages/SpecialFestivalDetail"));
-const ExitIntent = React.lazy(() => import("./components/ExitIntent"));
 
 // --- 型別防護網 ---
 const VALID_DEITY_KEYS = [
@@ -133,10 +131,11 @@ export default function App() {
     "@type": "Organization",
     "name": "滿願藏庫 (Zambala Tibetan)",
     "url": "https://zambala-tibetan.com.tw",
-    "logo": "https://zambala-tibetan.com.tw/vite.svg",
-    "description": "由台灣志工團隊維護的專屬祈福法事造冊系統。提供綠界 256-bit SSL 安全金流。",
-    "location": { "@type": "Place", "name": "Taiwan" },
-    "knowsAbout": ["Tibetan Buddhism", "Puja", "Spiritual Healing", "祈福法事", "點燈"]
+    "logo": "https://zambala-tibetan.com.tw/favicon.png",
+    "description": "滿願藏庫提供藏傳佛教相關法事、供養與特別祭典資訊，並透過綠界完成付款與登記。",
+    "sameAs": ["https://www.facebook.com/profile.php?id=61583749010531"],
+    "email": "service@zambala-tibetan.com.tw",
+    "knowsAbout": ["Tibetan Buddhism", "Puja", "祈福法事", "供養", "點燈"]
   };
 
   return (
@@ -151,10 +150,6 @@ export default function App() {
         <ThemeProvider defaultTheme="dark">
           <VercelScriptsLoader />
           <AppRouter />
-          <LiveRegistrations />
-          <Suspense fallback={null}>
-            <ExitIntent />
-          </Suspense>
         </ThemeProvider>
       </HelmetProvider>
     </ErrorBoundary>
