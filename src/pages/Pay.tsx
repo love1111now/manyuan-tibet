@@ -101,7 +101,8 @@ export default function Pay() {
       {/* 🟢 注入總覽頁專屬的 Title, Meta 與 JSON-LD */}
       <Helmet>
         <title>專屬祈福法事登記｜安全造冊系統｜滿願藏庫</title>
-        <meta name="description" content="滿願藏庫全站修復計畫總案冊。提供多種祈福法事方案，透過綠界 256-bit SSL 安全加密系統，讓您的祈願能如實傳達。志工於晚間靜心造冊，隔週公佈透明名錄。" />
+        <meta name="description" content="滿願藏庫法事登記總覽：查看各本尊法事方案、費用與參與流程，付款依方案於綠界完成。" />
+        <link rel="canonical" href="https://zambala-tibetan.com.tw/pay" />
         <script type="application/ld+json">{JSON.stringify(catalogSchema)}</script>
       </Helmet>
 
