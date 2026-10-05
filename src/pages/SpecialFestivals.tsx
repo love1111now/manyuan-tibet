@@ -39,8 +39,9 @@ export default function SpecialFestivals() {
         <title>特別祭典｜一季護持・風馬旗・瑪尼石・燃燈節｜滿願藏庫</title>
         <meta
           name="description"
-          content="滿願藏庫特別祭典，風馬旗、瑪尼石、燃燈節，三項特別祭典皆為 NT$6,000 一季護持，付款與登記於綠界完成。"
+          content="滿願藏庫特別祭典：風馬旗、瑪尼石、燃燈節，三項特別祭典皆為 NT$6,000 一季護持，付款與登記於綠界完成。"
         />
+        <link rel="canonical" href="https://zambala-tibetan.com.tw/special-festivals" />
       </Helmet>
 
       <SiteHeader />
