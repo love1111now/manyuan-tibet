@@ -76,7 +76,8 @@ export default function Proof() {
       {/* 🟢 注入專屬的 Title, Meta 與 JSON-LD */}
       <Helmet>
         <title>生命轉變實證｜絕對透明的造冊機制｜滿願藏庫</title>
-        <meta name="description" content="不賣神話，只提供絕對透明的造冊機制與真實發生的改變。閱覽來自全台各地，透過滿願藏庫祈福法事重獲身心安頓的真實生命見證。" />
+        <meta name="description" content="滿願藏庫真實回饋與透明說明：查看參與者回饋、法門資訊、付款流程與護持須知。" />
+        <link rel="canonical" href="https://zambala-tibetan.com.tw/proof" />
         <script type="application/ld+json">{JSON.stringify(reviewsSchema)}</script>
       </Helmet>
 
