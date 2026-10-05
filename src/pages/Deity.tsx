@@ -99,10 +99,6 @@ const DeityPage: React.FC<DeityPageProps> = ({ deityKey }) => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [location]);
 
-  if (!d) {
-    return <Redirect to="/" replace />;
-  }
-
   useEffect(() => {
     if (typeof window === "undefined") return;
     const timer = setTimeout(() => {
@@ -120,7 +116,11 @@ const DeityPage: React.FC<DeityPageProps> = ({ deityKey }) => {
       });
     }, 800);
     return () => clearTimeout(timer);
-  }, [d.key]);
+  }, [d?.key]);
+
+  if (!d) {
+    return <Redirect to="/" replace />;
+  }
 
   return (
     <div
@@ -139,6 +139,7 @@ const DeityPage: React.FC<DeityPageProps> = ({ deityKey }) => {
         <meta property="og:description" content={d.heroKicker} />
         <meta property="og:image" content={ogDeityImg} />
         <meta property="og:type" content="website" />
+        <link rel="canonical" href={`https://zambala-tibetan.com.tw/deity/${d.key}`} />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:image" content={ogDeityImg} />
       </Helmet>
