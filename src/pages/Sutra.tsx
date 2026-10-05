@@ -1,6 +1,7 @@
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import StickyCta from "@/components/StickyCta";
+import Seo from "@/components/Seo";
 
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -24,6 +25,7 @@ export default function Sutra() {
 
   return (
     <div className="min-h-screen bg-background">
+      <Seo title="經典依據" path="/sutra" description="滿願藏庫整理各本尊相關經典引用與來源，協助理解法門脈絡與修持依據。" />
       <SiteHeader />
 
       <main className="mx-auto max-w-6xl px-4 pt-10 pb-32">
