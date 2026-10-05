@@ -57,13 +57,13 @@ export default function SiteHeader() {
       </div>
 
       <div className="md:hidden border-t">
-        <div className="mx-auto max-w-6xl px-2 py-2 grid grid-cols-5 gap-1">
+        <div className="mx-auto max-w-6xl px-2 py-2 flex gap-1 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {nav.map((n) => (
             <Link
               key={n.href}
               href={n.href}
               className={cn(
-                "py-2 text-center text-xs rounded-md font-medium transition-colors",
+                "min-w-[76px] shrink-0 py-2 text-center text-[11px] whitespace-nowrap rounded-md font-medium transition-colors",
                 n.href === "/pay"
                   ? loc === n.href
                     ? "bg-primary text-primary-foreground font-bold"
