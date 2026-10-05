@@ -36,7 +36,7 @@ import {
   ArrowDown // 🟢 新增向下引導圖示
 } from "lucide-react";
 
-import { HOME_TESTIMONIALS, VISUALS } from "@/lib/siteData";
+import { VISUALS } from "@/lib/siteData";
 import { DEITIES } from "@/data/deities";
 
 export default function Home() {
@@ -61,8 +61,8 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
-        <title>滿願藏庫｜生命能量對位系統｜專屬祈福法事造冊</title>
-        <meta name="description" content="由台灣志工團隊維護，提供黃財神、藥師佛、綠度母等七大本尊祈福法事。透過絕對透明的造冊機制與佛法經典能量對位，修復您的資糧結構與生命困境。" />
+        <title>滿願藏庫｜藏傳佛教法事、供養與特別祭典</title>
+        <meta name="description" content="滿願藏庫提供藏傳佛教相關法事、供養、經典資訊與特別祭典。清楚說明法門、費用與付款流程，付款與登記依方案於綠界完成。" />
         <script type="application/ld+json">{JSON.stringify(itemListSchema)}</script>
       </Helmet>
 
@@ -407,38 +407,36 @@ export default function Home() {
         </section>
 
         {/* L6 [終局收割]: 回饋文 */}
-        <section aria-labelledby="testimonials-heading" className="mx-auto max-w-6xl px-4 pt-10 pb-28">
-          <div className="flex flex-col items-center text-center mb-16">
-            <div className="flex items-center gap-3 text-[10px] md:text-xs tracking-[0.3em] uppercase text-primary font-bold mb-4 bg-primary/5 px-3 py-1 rounded" aria-hidden="true">
-              <ShieldCheck className="w-4 h-4" /> Real Transformations
+        <section aria-labelledby="trust-heading" className="mx-auto max-w-6xl px-4 py-16 md:py-24">
+          <div className="text-center max-w-3xl mx-auto">
+            <div className="inline-flex items-center gap-2 text-[10px] md:text-xs tracking-[0.3em] uppercase text-primary font-bold mb-4 bg-primary/5 px-3 py-1.5 rounded-sm">
+              <ShieldCheck className="w-4 h-4" /> 清楚說明・安心選擇
             </div>
-            <h2 id="testimonials-heading" className="font-display text-4xl md:text-6xl tracking-tight">他們，也曾站在同樣的岔路口</h2>
-            <p className="mt-6 readable text-muted-foreground text-lg max-w-3xl mx-auto italic">
-              我們不賣神話，我們呈現真實的改變。當您把心念放正，世界便會開始對位。
+            <h2 id="trust-heading" className="font-display text-4xl md:text-6xl tracking-tight">在決定之前，先把事情看懂</h2>
+            <p className="mt-6 readable text-muted-foreground text-base md:text-lg leading-relaxed">
+              我們不以個案故事或結果保證催促您。先了解法門、流程、費用與付款方式，再決定是否參與，才是更安心的選擇。
             </p>
           </div>
 
-          <div className="grid gap-6 md:grid-cols-3">
-            {HOME_TESTIMONIALS.map((t, idx) => (
-              <Card key={idx} className="p-8 md:p-10 gold-border bg-card/70 paper-grain hover:bg-accent/10 transition-all duration-500 group relative">
-                <Quote className="absolute top-6 left-6 w-10 h-10 text-primary opacity-5 group-hover:opacity-10 transition-opacity" aria-hidden="true" />
-                <div className="relative z-10">
-                  <div className="font-display text-2xl text-foreground/90 group-hover:text-primary transition-colors mb-5">{t.title}</div>
-                  <p className="readable text-muted-foreground text-sm leading-loose opacity-80">「{t.body}」</p>
-                  <div className="mt-8 pt-6 border-t border-border/30 flex justify-between items-center">
-                    <span className="text-[10px] tracking-[0.25em] uppercase text-primary font-black italic">{t.by}</span>
-                    <Badge variant="outline" className="text-[8px] opacity-40 border-primary/20">Verified Feedback</Badge>
-                  </div>
+          <div className="mt-10 grid gap-5 md:grid-cols-3">
+            {[
+              ["法門先說清楚", "每一項法事都有對應的本尊、經典脈絡與適合情境，先理解再選擇。"],
+              ["付款流程透明", "本站不要求您在網站表單重複填寫祈願資料；需要的登記資訊依各方案說明，在綠界付款流程中完成。"],
+              ["不保證世俗結果", "祈願與修持不是交易或結果保證。網站會清楚區分宗教信仰、文化傳統與可驗證的行政流程。"],
+            ].map(([title, body]) => (
+              <Card key={title} className="p-7 md:p-8 gold-border bg-card/70 paper-grain">
+                <div className="h-10 w-10 rounded-full border border-primary/30 bg-primary/10 flex items-center justify-center text-primary mb-5">
+                  <ShieldCheck className="w-5 h-5" aria-hidden="true" />
                 </div>
+                <h3 className="font-display text-2xl text-foreground/90">{title}</h3>
+                <p className="mt-3 text-sm md:text-base leading-relaxed text-muted-foreground">{body}</p>
               </Card>
             ))}
           </div>
 
-          <div className="mt-16 text-center">
-            <Link href="/proof" aria-label="查看更多護持者的真實見證故事" className="inline-block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-md">
-              <Button variant="outline" tabIndex={-1} className="gold-border h-16 px-12 text-lg font-bold tracking-[0.2em] hover:bg-primary/5 transition-all group pointer-events-none">
-                探索更多真實轉變的故事 <ArrowRight className="ml-3 h-5 w-5 group-hover:translate-x-2 transition-transform opacity-70" aria-hidden="true" />
-              </Button>
+          <div className="mt-10 text-center">
+            <Link href="/proof" className="inline-flex items-center gap-2 text-sm font-bold text-primary hover:underline">
+              查看完整透明說明 <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
         </section>
