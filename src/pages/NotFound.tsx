@@ -1,5 +1,6 @@
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
+import Seo from "@/components/Seo";
 
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -9,6 +10,7 @@ import { Link } from "wouter";
 export default function NotFound() {
   return (
     <div className="min-h-screen bg-background flex flex-col">
+      <Seo title="頁面不存在" path="" noIndex />
       <SiteHeader />
       <main className="flex-1 mx-auto w-full max-w-3xl px-4 py-24 flex items-center justify-center">
         <Card className="p-8 md:p-12 gold-border bg-card/70 paper-grain w-full text-center">
