@@ -6,6 +6,26 @@
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://zambala-tibetan.com.tw/special-festivals</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://zambala-tibetan.com.tw/special-festivals/wind-horse</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://zambala-tibetan.com.tw/special-festivals/mani-stone</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://zambala-tibetan.com.tw/special-festivals/butter-lamp-festival</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://zambala-tibetan.com.tw/pay</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
