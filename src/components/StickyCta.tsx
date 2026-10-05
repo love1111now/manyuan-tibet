@@ -22,6 +22,14 @@ export default function StickyCta() {
   const deityKey = deityMatch?.[1] as DeityKey | undefined;
   const deity = deityKey ? DEITY_BY_KEY[deityKey] : null;
   const hotPlan = deity?.plans?.find((p) => p.hot) ?? deity?.plans?.[0];
+  const festivalMatch = location.match(/^\/special-festivals\/([^/]+)/);
+  const festivalKey = festivalMatch?.[1];
+  const festivalCheckout: Record<string, { name: string; price: number; url: string }> = {
+    "wind-horse": { name: "風馬旗", price: 6000, url: "https://cart.cashier.ecpay.com.tw/qp/3gA9" },
+    "mani-stone": { name: "瑪尼石", price: 6000, url: "https://cart.cashier.ecpay.com.tw/qp/3gBE" },
+    "butter-lamp-festival": { name: "燃燈節", price: 6000, url: "https://cart.cashier.ecpay.com.tw/qp/3gC5" },
+  };
+  const festival = festivalKey ? festivalCheckout[festivalKey] : null;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -36,6 +44,32 @@ export default function StickyCta() {
   };
 
   if (!isVisible) return null;
+
+  // 特別祭典詳細頁：直通綠界，讓手機使用者不必重新找付款入口
+  if (festival) {
+    return (
+      <div className="fixed bottom-4 left-0 right-0 z-50 flex justify-center px-4 md:hidden pb-[env(safe-area-inset-bottom)] animate-in fade-in slide-in-from-bottom-4 duration-300">
+        <a
+          href={festival.url}
+          target="_blank"
+          rel="noreferrer"
+          onClick={() => {
+            trackEvent("begin_checkout", {
+              currency: "TWD",
+              value: festival.price,
+              festival: festival.name,
+              items: [{ item_name: festival.name, price: festival.price, quantity: 1 }],
+            });
+          }}
+          className="flex items-center justify-center gap-2 min-h-14 w-full max-w-md px-5 rounded-full gold-border bg-primary text-primary-foreground font-bold tracking-wider text-sm shadow-2xl active:scale-[0.98] transition-all"
+          aria-label={`前往綠界登記${festival.name}`}
+        >
+          ${festival.name} · NT$6,000／一季
+          <ArrowRight className="w-4 h-4" />
+        </a>
+      </div>
+    );
+  }
 
   // 神明頁：直通付款浮動 CTA
   if (deity && hotPlan) {
