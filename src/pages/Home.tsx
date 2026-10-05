@@ -63,6 +63,7 @@ export default function Home() {
       <Helmet>
         <title>滿願藏庫｜藏傳佛教法事、供養與特別祭典</title>
         <meta name="description" content="滿願藏庫提供藏傳佛教相關法事、供養、經典資訊與特別祭典。清楚說明法門、費用與付款流程，付款與登記依方案於綠界完成。" />
+        <link rel="canonical" href="https://zambala-tibetan.com.tw/" />
         <script type="application/ld+json">{JSON.stringify(itemListSchema)}</script>
       </Helmet>
 
