@@ -160,6 +160,7 @@ export default function SpecialFestivalDetail({ slug }: { slug: string }) {
       <Helmet>
         <title>{data.title}｜一季護持・特別祭典｜滿願藏庫</title>
         <meta name="description" content={data.intro} />
+        <link rel="canonical" href={"https://zambala-tibetan.com.tw/special-festivals/" + slug} />
       </Helmet>
 
       <SiteHeader />
