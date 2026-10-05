@@ -1,8 +1,5 @@
 /*
-Design philosophy: Neo-thangka noir (Professional Consultant Upgrade)
-- L6 [Trust & Social Proof]: Aggregating ALL deity-specific testimonials.
-- Features: Categorized success stories, Transparency declaration, Clear CTAs.
-- 100% Unabbreviated Production Ready Code.
+Design philosophy: Neo-thangka noir — transparent information architecture and trust-first UX.
 */
 
 import SiteHeader from "@/components/SiteHeader";
@@ -13,14 +10,9 @@ import { Helmet } from "react-helmet-async";
 
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 
 import { Link } from "wouter";
-import { 
-  ShieldCheck, 
-  ArrowRight, 
-  Sparkles
-} from "lucide-react";
+import { ShieldCheck, ArrowRight } from "lucide-react";
 
 // 🚨 關鍵修正：將 DEITIES 與 HOME_TESTIMONIALS 的來源精準分開
 
@@ -38,7 +30,6 @@ export default function Proof() {
       <Helmet>
         <title>透明說明｜法門、流程與參與須知｜滿願藏庫</title>
         <meta name="description" content="滿願藏庫透明說明：法門資訊、付款與登記流程、志工角色與宗教修持的結果界線。先理解，再決定是否參與。" />
-        <script type="application/ld+json">{JSON.stringify(reviewsSchema)}</script>
       </Helmet>
 
       <SiteHeader />
