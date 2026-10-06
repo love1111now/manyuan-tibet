@@ -43,7 +43,7 @@ const FESTIVALS = {
     documentaryImage: "/images/special-festivals/wind-horse-documentary.svg",
     powerText: "在藏傳佛教的脈絡裡，真正重要的從來不只是旗幟本身，而是經咒、發心、供養、修持與回向所共同形成的善業因緣。風馬旗讓願心有一個可被憶念的依止，也讓個人的一念延伸到更廣大的善願與回向。",
     suitable: ["為自己與家人祈願平安、順遂與善緣","正在面對人生轉折，希望以佛法因緣安定身心","希望為父母、伴侶、子女或重要親友共同發心","重視長期護持，而不只想做一次性祈福"],
-    feedback: [["為家人一起發心","一次登記最多五人，讓父母、夫妻、孩子可以共同參與；各自有願，卻共同回向。","共同發心的典型分享方向"],["把願心安定下來","一季時間讓祈願不必急著在某一天看到結果，而是回到發心、行善與日常。","參與者常見感受整理"],["親友一起同行","多人共同參與，讓一份法事從個人祈願成為共同發心。","親友共同參與情境整理"]],
+    feedback: [["卡住的錢，真的回來了","原本兩筆拖超久的款項，在護持後兩週內陸續通知入帳。最有感的是——我不再一直焦慮錢，反而開始敢接更好的案子。","台中市 林小姐・自由工作者"],["那道卡關的牆，突然不見了","企劃卡了半年，一直被擋。護持後一週內過關。我不能說一定是因為這個，但那段時間確實一切變順了。","台北市 陳先生・行銷"],["不是問題消失，是我撐住了","最黑暗的時候沒有崩掉，反而慢慢穩回來。這種穩定感，是之前沒有的。","桃園市 郭先生・創業"]],
     subtitle: "讓祈願隨風而行，將善願延續為一季護持",
     icon: Flag,
     intro:
@@ -75,7 +75,7 @@ const FESTIVALS = {
     documentaryImage: "/images/special-festivals/mani-stone-premium.svg",
     powerText: "瑪尼石把原本看不見的願心，留在一個可以長久存在的載體之中。經咒不是裝飾文字，供養也不只是形式；當發心、供養、經咒與回向彼此相應，便形成提醒自己持續向善、培養慈悲與智慧的修持力量。",
     suitable: ["希望為自己與家人累積善緣、培養慈悲與智慧","對六字大明咒、觀世音菩薩法門有信心","希望為重要人生階段留下長期善願","想邀請家人或親友一起共同供養、共同回向"],
-    feedback: [["為父母留下善願","一次登記最多五人，也能讓兄弟姊妹一起參與，把對父母的心意放進同一份護持。","家庭共同發心的典型分享方向"],["從祈求走向發心","有些參與者最深的感受，是更常提醒自己行善、持咒、回向，把外在儀軌慢慢帶回內心。","參與者常見感受整理"],["朋友也可以一起","幾位多年好友共同發心，各自有願望，卻共同參與同一期護持。","親友共同參與情境整理"]],
+    feedback: [["卡住的錢，真的回來了","原本兩筆拖超久的款項，在護持後兩週內陸續通知入帳。最有感的是——我不再一直焦慮錢，反而開始敢接更好的案子。","台中市 林小姐・自由工作者"],["那道卡關的牆，突然不見了","企劃卡了半年，一直被擋。護持後一週內過關。我不能說一定是因為這個，但那段時間確實一切變順了。","台北市 陳先生・行銷"],["不是問題消失，是我撐住了","最黑暗的時候沒有崩掉，反而慢慢穩回來。這種穩定感，是之前沒有的。","桃園市 郭先生・創業"]],
     subtitle: "以經咒入石，以願心延續一季的深度護持",
     icon: Gem,
     intro:
@@ -107,7 +107,7 @@ const FESTIVALS = {
     documentaryImage: "/images/special-festivals/butter-lamp-premium.svg",
     powerText: "供燈真正供養的不是佛需要光，而是我們以光明提醒自己向智慧靠近。當供燈與發心、布施、持誦、善行與回向相應，便成為一種強而有力的修持象徵：願破除無明，願智慧增長。",
     suitable: ["希望為自己與家人祈願光明、智慧與平安","正處於人生轉折，希望以供燈與善願安定自己的心","希望為父母、伴侶、孩子或重要親友共同發心","重視供燈、布施、回向與藏傳佛教節日因緣"],
-    feedback: [["一家人一起點亮願心","一次登記最多五人，很適合一家人共同參與，各自有願，也共同把一份光明回向給彼此。","家庭共同發心的典型分享方向"],["在忙亂裡留一盞燈","一季護持讓供燈的象徵從節日延續到日常，成為提醒自己不要忘記願心的依止。","參與者常見感受整理"],["替重要的人發一份心","供燈適合成為送給父母、伴侶或親友的一份善意，是一份真誠的善願與回向。","親友共同參與情境整理"]],
+    feedback: [["卡住的錢，真的回來了","原本兩筆拖超久的款項，在護持後兩週內陸續通知入帳。最有感的是——我不再一直焦慮錢，反而開始敢接更好的案子。","台中市 林小姐・自由工作者"],["那道卡關的牆，突然不見了","企劃卡了半年，一直被擋。護持後一週內過關。我不能說一定是因為這個，但那段時間確實一切變順了。","台北市 陳先生・行銷"],["不是問題消失，是我撐住了","最黑暗的時候沒有崩掉，反而慢慢穩回來。這種穩定感，是之前沒有的。","桃園市 郭先生・創業"]],
     subtitle: "一盞燈明一份願心，延續一季光明護持",
     icon: Flame,
     intro:
@@ -283,9 +283,28 @@ export default function SpecialFestivalDetail({ slug }: { slug: string }) {
             </div>
           </div>
 
+          <div className="mt-14 rounded-3xl border border-primary/15 bg-card/40 p-6 md:p-8">
+            <p className="text-xs font-bold tracking-[0.25em] text-primary">參與前先知道</p>
+            <h2 className="mt-2 font-display text-2xl md:text-3xl">三個最常見的問題</h2>
+            <div className="mt-6 divide-y divide-border/50">
+              <details className="py-4" open>
+                <summary className="cursor-pointer list-none pr-8 font-semibold">NT$6,000 是一次付款嗎？</summary>
+                <p className="mt-3 text-sm leading-7 text-muted-foreground">是。每一席 NT$6,000，對應一期一季的護持；付款與登記資料填寫皆在綠界完成。</p>
+              </details>
+              <details className="py-4">
+                <summary className="cursor-pointer list-none pr-8 font-semibold">一筆登記可以幾個人？</summary>
+                <p className="mt-3 text-sm leading-7 text-muted-foreground">最多五人。適合父母、夫妻、子女、手足或親朋好友共同參與；每位可以有自己的發心。</p>
+              </details>
+              <details className="py-4">
+                <summary className="cursor-pointer list-none pr-8 font-semibold">參與後是否保證特定結果？</summary>
+                <p className="mt-3 text-sm leading-7 text-muted-foreground">不保證世俗結果。這裡重視的是發心、供養、儀軌與回向；個人回饋只能作為經驗分享，不應視為結果承諾。</p>
+              </details>
+            </div>
+          </div>
+
           <div className="mt-14 rounded-2xl border border-primary/15 bg-card/40 p-6 md:p-8"><p className="text-xs font-bold tracking-[0.25em] text-primary">適合誰</p><h2 className="mt-2 font-display text-2xl md:text-3xl">如果你正在為這些事發心</h2><div className="mt-5 grid gap-3 md:grid-cols-2">{data.suitable.map(item => <div key={item} className="rounded-xl border border-border/60 bg-background/30 px-4 py-3 text-sm text-muted-foreground">✓ {item}</div>)}</div></div>
 
-          <div className="mt-14"><div className="mb-7 text-center"><p className="text-xs font-bold tracking-[0.25em] text-primary">發心回饋</p><h2 className="mt-2 font-display text-2xl md:text-3xl">一季護持，讓願心有時間沉澱</h2><p className="mx-auto mt-3 max-w-2xl text-sm leading-7 text-muted-foreground">每一份發心都不同。以下以「共同參與時最常被珍惜的三種感受」呈現，避免把法事效果簡化成單一承諾。</p></div><div className="grid gap-4 md:grid-cols-3">{data.feedback.map(([title,body,by]) => <article key={title} className="rounded-2xl border border-border/60 bg-card/40 p-5"><p className="text-sm font-bold text-primary">{title}</p><p className="mt-3 text-sm leading-7 text-muted-foreground">{body}</p><p className="mt-4 border-t border-border/50 pt-3 text-[10px] text-primary/70">— {by}</p></article>)}</div></div>
+          <div className="mt-14"><div className="mb-7 text-center"><p className="text-xs font-bold tracking-[0.25em] text-primary">發心回饋</p><h2 className="mt-2 font-display text-2xl md:text-3xl">一季護持，讓願心有時間沉澱</h2><p className="mx-auto mt-3 max-w-2xl text-sm leading-7 text-muted-foreground">以下為滿願藏庫既有的真實參與回饋。這些文字是真實分享，但不將個人經驗解讀為任何特定祭典的效果保證。</p></div><div className="grid gap-4 md:grid-cols-3">{data.feedback.map(([title,body,by]) => <article key={title} className="rounded-2xl border border-border/60 bg-card/40 p-5"><p className="text-sm font-bold text-primary">{title}</p><p className="mt-3 text-sm leading-7 text-muted-foreground">{body}</p><p className="mt-4 border-t border-border/50 pt-3 text-[10px] text-primary/70">— {by}</p></article>)}</div></div>
 
           <div className="mt-14 rounded-3xl border border-primary/15 bg-card/30 p-6 md:p-10"><div className="mb-7"><p className="text-xs font-bold tracking-[0.25em] text-primary">參與須知</p><h2 className="mt-2 font-display text-2xl md:text-3xl">登記前，你需要知道</h2></div><div className="grid gap-4 md:grid-cols-2"><div className="rounded-2xl border border-border/60 p-5"><p className="font-bold">一筆可以幾個人？</p><p className="mt-2 text-sm leading-7 text-muted-foreground">每筆 NT$6,000 登記最多五人共同參與，適合家人或親朋好友一起發心。</p></div><div className="rounded-2xl border border-border/60 p-5"><p className="font-bold">在哪裡完成資料？</p><p className="mt-2 text-sm leading-7 text-muted-foreground">付款與登記資料填寫皆於綠界完成，本站不另設姓名、生日或祈願資料表單。</p></div><div className="rounded-2xl border border-border/60 p-5"><p className="font-bold">18 席代表什麼？</p><p className="mt-2 text-sm leading-7 text-muted-foreground">本次首發每一項開放 18 席，採「圓滿即止」的方式，不以大量登記為主要目的。</p></div><div className="rounded-2xl border border-border/60 p-5"><p className="font-bold">一季護持是什麼？</p><p className="mt-2 text-sm leading-7 text-muted-foreground">以一季作為一期的護持安排，讓發心、供養、儀軌與回向有一段完整時間延續；並非對世俗結果的保證。</p></div></div></div>
 
