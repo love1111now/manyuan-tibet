@@ -15,6 +15,7 @@ const FESTIVALS = [
     subtitle: "祈願隨風而行・一季護持",
     description: "以藏地風馬旗傳統承接發願與回向，讓一份心願不只停留在一天，而有一季時間持續護持。",
     icon: Flag,
+    image: "/images/special-festivals/wind-horse-documentary.svg",
   },
   {
     slug: "mani-stone",
@@ -22,6 +23,7 @@ const FESTIVALS = [
     subtitle: "經咒入石・願心延續・一季護持",
     description: "以瑪尼石與經咒供養傳統承接祈願，將供養、發願與回向延續在一段完整的護持週期裡。",
     icon: Gem,
+    image: "/images/special-festivals/mani-stone-premium.svg",
   },
   {
     slug: "butter-lamp-festival",
@@ -29,6 +31,7 @@ const FESTIVALS = [
     subtitle: "一盞燈明・一季光明護持",
     description: "以燃燈供養象徵智慧與光明，讓節日當下的一份願心，延續成一季祈願與回向。",
     icon: Flame,
+    image: "/images/special-festivals/butter-lamp-premium.svg",
   },
 ] as const;
 
@@ -87,7 +90,15 @@ export default function SpecialFestivals() {
                   href={`/special-festivals/${item.slug}`}
                   className="group block"
                 >
-                  <Card className="h-full overflow-hidden border-primary/20 bg-card/70 p-7 md:p-8 transition-all duration-500 hover:-translate-y-1 hover:border-primary/60 hover:bg-primary/5">
+                  <Card className="h-full overflow-hidden border-primary/20 bg-card/70 p-0 transition-all duration-500 hover:-translate-y-1 hover:border-primary/60 hover:bg-primary/5">
+                    <div className="relative aspect-[4/3] overflow-hidden bg-black">
+                      <img src={item.image} alt={item.title} className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.02]" loading="lazy" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/10 to-transparent" />
+                      <div className="absolute bottom-4 left-5 flex h-11 w-11 items-center justify-center rounded-full border border-white/30 bg-black/35 text-white backdrop-blur-sm">
+                        <Icon className="h-5 w-5" />
+                      </div>
+                    </div>
+                    <div className="p-7 md:p-8">
                     <div className="flex h-14 w-14 items-center justify-center rounded-full border border-primary/30 bg-primary/10 text-primary">
                       <Icon className="h-7 w-7" />
                     </div>
@@ -102,8 +113,9 @@ export default function SpecialFestivals() {
                       {item.description}
                     </p>
                     <div className="mt-8 flex items-center gap-2 text-sm font-bold text-primary">
-                      進入專屬登記頁
+                      進入專屬祭典頁
                       <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    </div>
                     </div>
                   </Card>
                 </Link>
