@@ -99,10 +99,7 @@ export default function SpecialFestivals() {
                       </div>
                     </div>
                     <div className="p-7 md:p-8">
-                    <div className="flex h-14 w-14 items-center justify-center rounded-full border border-primary/30 bg-primary/10 text-primary">
-                      <Icon className="h-7 w-7" />
-                    </div>
-                    <p className="mt-7 text-[10px] font-bold tracking-[0.25em] text-primary uppercase">
+                    <p className="text-[10px] font-bold tracking-[0.25em] text-primary uppercase">
                       首發 18 席 · NT$6,000／一季
                     </p>
                     <h2 className="mt-2 font-display text-3xl">{item.title}</h2>
