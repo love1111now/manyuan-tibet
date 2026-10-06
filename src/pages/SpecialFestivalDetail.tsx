@@ -7,13 +7,13 @@ import SiteFooter from "@/components/SiteFooter";
 import StickyCta from "@/components/StickyCta";
 import FloatingFb from "@/components/FloatingFb";
 
-function DocumentaryImage({ src, alt, className = "", priority = false }: { src: string; alt: string; className?: string; priority?: boolean }) {
+function DocumentaryImage({ src, alt, className = "", priority = false, fit = "cover" }: { src: string; alt: string; className?: string; priority?: boolean; fit?: "cover" | "contain" }) {
   return (
     <div className={`group relative overflow-hidden ${className}`}>
       <img
         src={src}
         alt={alt}
-        className="block h-full w-full object-cover grayscale-[0.14] sepia-[0.08] contrast-[1.08] brightness-[0.94] transition duration-700 group-hover:scale-[1.025]"
+        className={"block w-full " + (fit === "contain" ? "h-auto object-contain" : "h-full object-cover") + " transition duration-700 group-hover:scale-[1.015]"}
         loading={priority ? "eager" : "lazy"}
         fetchPriority={priority ? "high" : "auto"}
       />
@@ -70,9 +70,9 @@ const FESTIVALS = {
     title: "瑪尼石",
     tibetan: "མ་ཎི་རྡོ་ · Maṇi Stone",
     kicker: "一石承咒，一願長存",
-    heroImage: "/images/special-festivals/mani-stone-documentary.svg",
-    secondaryImage: "/images/special-festivals/mani-stone-documentary.svg",
-    documentaryImage: "/images/special-festivals/mani-stone-documentary.svg",
+    heroImage: "/images/special-festivals/mani-stone-premium.svg",
+    secondaryImage: "/images/special-festivals/mani-stone-premium.svg",
+    documentaryImage: "/images/special-festivals/mani-stone-premium.svg",
     powerText: "瑪尼石把原本看不見的願心，留在一個可以長久存在的載體之中。經咒不是裝飾文字，供養也不只是形式；當發心、供養、經咒與回向彼此相應，便形成提醒自己持續向善、培養慈悲與智慧的修持力量。",
     suitable: ["希望為自己與家人累積善緣、培養慈悲與智慧","對六字大明咒、觀世音菩薩法門有信心","希望為重要人生階段留下長期善願","想邀請家人或親友一起共同供養、共同回向"],
     feedback: [["為父母留下善願","一次登記最多五人，也能讓兄弟姊妹一起參與，把對父母的心意放進同一份護持。","家庭共同發心的典型分享方向"],["從祈求走向發心","有些參與者最深的感受，是更常提醒自己行善、持咒、回向，把外在儀軌慢慢帶回內心。","參與者常見感受整理"],["朋友也可以一起","幾位多年好友共同發心，各自有願望，卻共同參與同一期護持。","親友共同參與情境整理"]],
@@ -102,9 +102,9 @@ const FESTIVALS = {
     title: "燃燈節",
     tibetan: "ཆོ་འཕྲུལ་དུས་ཆེན་ · Chötrul Düchen",
     kicker: "以一盞燈，供養智慧與光明",
-    heroImage: "/images/special-festivals/butter-lamp-documentary.svg",
-    secondaryImage: "/images/special-festivals/butter-lamp-documentary.svg",
-    documentaryImage: "/images/special-festivals/butter-lamp-documentary.svg",
+    heroImage: "/images/special-festivals/butter-lamp-premium.svg",
+    secondaryImage: "/images/special-festivals/butter-lamp-premium.svg",
+    documentaryImage: "/images/special-festivals/butter-lamp-premium.svg",
     powerText: "供燈真正供養的不是佛需要光，而是我們以光明提醒自己向智慧靠近。當供燈與發心、布施、持誦、善行與回向相應，便成為一種強而有力的修持象徵：願破除無明，願智慧增長。",
     suitable: ["希望為自己與家人祈願光明、智慧與平安","正處於人生轉折，希望以供燈與善願安定自己的心","希望為父母、伴侶、孩子或重要親友共同發心","重視供燈、布施、回向與藏傳佛教節日因緣"],
     feedback: [["一家人一起點亮願心","一次登記最多五人，很適合一家人共同參與，各自有願，也共同把一份光明回向給彼此。","家庭共同發心的典型分享方向"],["在忙亂裡留一盞燈","一季護持讓供燈的象徵從節日延續到日常，成為提醒自己不要忘記願心的依止。","參與者常見感受整理"],["替重要的人發一份心","供燈適合成為送給父母、伴侶或親友的一份善意，是一份真誠的善願與回向。","親友共同參與情境整理"]],
@@ -192,7 +192,7 @@ export default function SpecialFestivalDetail({ slug }: { slug: string }) {
             <p className="mt-4 text-lg font-semibold text-primary">{data.kicker}</p>
             <p className="mt-2 text-lg text-foreground/80">{data.subtitle}</p>
             <p className="mt-6 max-w-3xl text-base md:text-lg leading-loose text-muted-foreground">{data.intro}</p>
-            <div className="mt-8 overflow-hidden rounded-3xl border border-primary/20 bg-black/30 shadow-2xl shadow-black/20"><div className="relative"><DocumentaryImage src={data.heroImage} alt={`${data.title}・藏地紀實影像`} className="aspect-[16/7] md:aspect-[21/8]" priority /><div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/5 to-transparent" /><div className="absolute bottom-0 left-0 right-0 p-5 md:p-8"><p className="text-xs font-bold tracking-[0.28em] text-primary-foreground/80">藏傳佛教文化・特別祭典</p><p className="mt-2 font-display text-2xl text-white md:text-4xl">{data.kicker}</p></div></div></div>
+            <div className="mt-8 overflow-hidden rounded-3xl border border-primary/20 bg-black/30 shadow-2xl shadow-black/20"><div className="relative"><DocumentaryImage src={data.heroImage} alt={`${data.title}・特別祭典主視覺`} className="bg-black" fit="contain" priority /><div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/5 to-transparent" /><div className="absolute bottom-0 left-0 right-0 p-5 md:p-8"><p className="text-xs font-bold tracking-[0.28em] text-primary-foreground/80">藏傳佛教文化・特別祭典</p><p className="mt-2 font-display text-2xl text-white md:text-4xl">{data.kicker}</p></div></div></div>
 
             <div className="mt-10 overflow-hidden rounded-2xl border border-primary/30 bg-card/70 shadow-lg">
               <div className="flex flex-col md:flex-row">
