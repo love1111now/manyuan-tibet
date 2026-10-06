@@ -100,7 +100,7 @@ export default function Pay() {
     <div className="min-h-screen bg-background">
       {/* 🟢 注入總覽頁專屬的 Title, Meta 與 JSON-LD */}
       <Helmet>
-        <title>專屬祈福法事登記｜安全造冊系統｜滿願藏庫</title>
+        <title>法事方案與登記｜費用、流程與選擇｜滿願藏庫</title>
         <meta name="description" content="滿願藏庫法事登記總覽：查看各本尊法事方案、費用與參與流程，付款依方案於綠界完成。" />
         <link rel="canonical" href="https://zambala-tibetan.com.tw/pay" />
         <script type="application/ld+json">{JSON.stringify(catalogSchema)}</script>
@@ -140,21 +140,21 @@ export default function Pay() {
             </div>
             {/* 🟢 修正手機版標題過大造成的壓迫感 */}
             <h1 className="font-display text-3xl sm:text-4xl md:text-5xl leading-tight">
-              專屬祈福法事登記<br/>
-              <span className="text-foreground/80 text-2xl sm:text-3xl md:text-4xl">（安全造冊系統）</span>
+              法事方案與登記<br/>
+              <span className="text-foreground/80 text-2xl sm:text-3xl md:text-4xl">（費用與參與流程）</span>
             </h1>
             <p className="mt-6 readable text-muted-foreground max-w-prose text-base md:text-lg leading-relaxed">
               這是一個讓您的祈願能如實傳達的所在。
               <span className="text-foreground font-bold">選擇契合的本尊 → 選擇加持方案 → 點擊「確認委託」</span>。
-              完成登記後，名額即刻為您保留。當您處於焦慮與掙扎中，一次清晰且安定的行動，勝過無數的胡思亂想。
+              完成登記後，名額即刻為您保留。把法門、費用與參與流程先看清楚，再依自己的能力與心意做選擇。
             </p>
 
             <div className="mt-8 p-5 md:p-6 rounded-xl bg-primary/5 border border-primary/30 flex items-start gap-4 shadow-inner">
               <Coffee className="w-5 h-5 md:w-6 md:h-6 text-primary shrink-0 mt-0.5" />
               <div>
-                <h3 className="font-bold text-foreground text-base md:text-lg mb-2 tracking-wide">毫無負擔的護持起點：自 NT$490 起</h3>
+                <h3 className="font-bold text-foreground text-base md:text-lg mb-2 tracking-wide">從 NT$490 起，依能力與心意選擇</h3>
                 <p className="text-sm md:text-base text-muted-foreground readable leading-relaxed">
-                  我們堅持不造神、不以恐懼行銷。系統內所有的基礎祈福方案皆從 <strong className="text-foreground font-bold">NT$490</strong> 起。這大概是一頓簡餐的價格，卻能為您點亮一盞長明的護佑之燈。請依循您當下的能力與心意，安心選擇最契合的路徑。
+                  我們堅持不造神、不以恐懼行銷。系統內所有的基礎祈福方案皆從 <strong className="text-foreground font-bold">NT$490</strong> 起。請依循您當下的能力與心意，安心選擇適合自己的方案。請依循您當下的能力與心意，安心選擇最契合的路徑。
                 </p>
               </div>
             </div>
