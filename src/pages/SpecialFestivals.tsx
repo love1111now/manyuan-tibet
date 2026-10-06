@@ -129,6 +129,23 @@ export default function SpecialFestivals() {
           </div>
         </section>
 
+        <section className="mx-auto max-w-6xl px-5 pt-14 md:px-8 md:pt-20">
+          <div className="grid gap-4 md:grid-cols-4">
+            {[
+              ["01","選一項","風馬旗、瑪尼石或燃燈節，依你此刻最想承接的願心選擇。"],
+              ["02","NT$6,000","每項皆為一期一季的特別祭典護持，不是單次商品購買。"],
+              ["03","最多五人","一筆登記最多五人，可以各自有願，共同參與同一期護持。"],
+              ["04","綠界完成","付款與登記資料都在綠界完成，本站不另行收集登記資料。"],
+            ].map(([no,title,body]) => (
+              <article key={no} className="rounded-2xl border border-primary/15 bg-card/40 p-5">
+                <span className="font-display text-4xl text-primary/30">{no}</span>
+                <h2 className="mt-2 font-display text-xl">{title}</h2>
+                <p className="mt-2 text-sm leading-7 text-muted-foreground">{body}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
         <section className="mx-auto max-w-5xl px-5 pt-14 md:px-8 md:pt-20">
           <div className="rounded-3xl border border-primary/20 bg-card/50 p-7 md:p-10">
             <p className="text-xs font-bold tracking-[0.25em] text-primary">一席一願・五人同行</p>
