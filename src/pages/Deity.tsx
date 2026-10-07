@@ -100,7 +100,7 @@ const DeityPage: React.FC<DeityPageProps> = ({ deityKey }) => {
   }, [location]);
 
   useEffect(() => {
-    if (typeof window === "undefined") return;
+    if (typeof window === "undefined" || !d) return;
     const timer = setTimeout(() => {
       window.fbq?.("track", "ViewContent", {
         content_ids: [d.key],
