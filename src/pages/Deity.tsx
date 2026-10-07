@@ -33,7 +33,7 @@ function DeityTestimonials({ d }: { d: Deity }) {
           真實回饋
         </p>
         <h2 className="text-2xl md:text-3xl font-bold">
-          他們是怎麼改變的
+          參與者怎麼說
         </h2>
         <p className="mt-2 text-sm text-muted-foreground">
           不是廣告詞，是他們自己說的話
@@ -68,7 +68,7 @@ function DeityTestimonials({ d }: { d: Deity }) {
 
       <div className="mt-8 text-center">
         <p className="text-sm text-muted-foreground">
-          每個人的情況不同，但卡住的感覺是一樣的。
+          每個人的情況不同，這些回饋只代表個人經驗，不代表特定結果保證。
         </p>
         <button
           onClick={() => {
@@ -99,10 +99,6 @@ const DeityPage: React.FC<DeityPageProps> = ({ deityKey }) => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [location]);
 
-  if (!d) {
-    return <Redirect to="/" replace />;
-  }
-
   useEffect(() => {
     if (typeof window === "undefined") return;
     const timer = setTimeout(() => {
@@ -120,7 +116,11 @@ const DeityPage: React.FC<DeityPageProps> = ({ deityKey }) => {
       });
     }, 800);
     return () => clearTimeout(timer);
-  }, [d.key]);
+  }, [d?.key]);
+
+  if (!d) {
+    return <Redirect to="/" replace />;
+  }
 
   return (
     <div
