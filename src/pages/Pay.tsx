@@ -154,7 +154,7 @@ export default function Pay() {
               <div>
                 <h3 className="font-bold text-foreground text-base md:text-lg mb-2 tracking-wide">從 NT$490 起，依能力與心意選擇</h3>
                 <p className="text-sm md:text-base text-muted-foreground readable leading-relaxed">
-                  我們堅持不造神、不以恐懼行銷。系統內所有的基礎祈福方案皆從 <strong className="text-foreground font-bold">NT$490</strong> 起。請依循您當下的能力與心意，安心選擇適合自己的方案。請依循您當下的能力與心意，安心選擇最契合的路徑。
+                  我們堅持不造神、不以恐懼行銷。系統內所有的基礎祈福方案皆從 <strong className="text-foreground font-bold">NT$490</strong> 起。請依循您當下的能力與心意，安心選擇適合自己的方案。
                 </p>
               </div>
             </div>
