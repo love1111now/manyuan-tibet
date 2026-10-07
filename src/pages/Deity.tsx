@@ -36,7 +36,7 @@ function DeityTestimonials({ d }: { d: Deity }) {
           參與者怎麼說
         </h2>
         <p className="mt-2 text-sm text-muted-foreground">
-          不是廣告詞，是他們自己說的話
+          不是廣告詞，是參與者自己說的話
         </p>
       </div>
 
