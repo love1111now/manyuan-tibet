@@ -100,7 +100,7 @@ const FESTIVALS = {
   },
   "butter-lamp-festival": {
     title: "燃燈節",
-    tibetan: "ཆོ་འཕྲུལ་དུས་ཆེན་ · Chötrul Düchen",
+    tibetan: "དགའ་ལྡན་ལྔ་མཆོད་ · Ganden Ngamchö",
     kicker: "以一盞燈，供養智慧與光明",
     heroImage: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Butter_lamp_offering_to_the_Buddhas%2C_very_worn_and_lovely_brass_with_a_soft_feeling%2C_Mahabuddha_Temple%2C_also_know_as_%22temple_of_thousand_buddhas%22%2C_skikhar_style_buddhist_temple%2C_Kathmandu%2C_Nepal_%285108721032%29.jpg",
     secondaryImage: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Butterlamps_%2831190504713%29.jpg",
@@ -111,7 +111,7 @@ const FESTIVALS = {
     subtitle: "一盞燈明一份願心，延續一季光明護持",
     icon: Flame,
     intro:
-      "燃燈節常用來指藏傳佛教的 Chötrul Düchen（神變節），是藏曆正月十五的重要佛教節日。供燈以光明象徵智慧、以驅散黑暗譬喻去除無明。此次特別祭典以一季護持為期，讓一盞燈所代表的願心，不只停留在節日當下，而能延續為一段持續的祈願與回向。",
+      "燃燈節（甘丹五供／甘丹阿曲）是藏傳佛教格魯派重要的年度宗教紀念儀式，於藏曆十月二十五日舉行，用以紀念宗喀巴大師示寂。燃燈與供燈是這項傳統的重要儀式之一；燈火也常被用來象徵智慧與光明。此次特別祭典以一季護持為期，讓一份供燈與發心不只停留在紀念日當下，而能延續為一段持續的祈願與回向。",
     benefits: [
       "NT$6,000／一季護持",
       "以燃燈供養象徵智慧、光明與善願",
@@ -125,7 +125,7 @@ const FESTIVALS = {
       ["04", "回向延續", "將供燈所代表的善願回向自己、家人與有緣眾生。"],
     ],
     sections: [
-      ["為什麼叫「燃燈節」？", "Chötrul Düchen 的核心是「神變節」本身，而「燃燈節」是因藏地在此期間盛行供燈與燈飾而形成的通俗稱呼。因此正式介紹同時保留「燃燈節」與「Chötrul Düchen／神變節」，避免把它誤解成單純的民俗燈會。"],
+      ["燃燈節是什麼？", "燃燈節又稱「甘丹五供」或「甘丹阿曲」（Ganden Ngamchö），是藏傳佛教格魯派紀念宗喀巴大師示寂的重要宗教儀式，日期為藏曆十月二十五日。寺院與信眾會以供燈、誦經、供養等方式紀念與發願。"],
       ["供燈代表什麼？", "在藏傳佛教中，燈供常以光明象徵智慧，並以驅散黑暗來譬喻去除無明。供燈不是因為佛需要光，而是以供養培養恭敬、布施、發願與智慧的心。"],
       ["一季護持", "燃燈所象徵的不只是眼前的一盞燈，更是提醒自己守住願心、培養智慧與善念。以一季為一期的護持安排，讓這份願心有時間沉澱、持續與回向，將節日的殊勝因緣延續到日常生活之中。"],
     ],
@@ -269,16 +269,16 @@ export default function SpecialFestivalDetail({ slug }: { slug: string }) {
 
           <div className="mt-14">
             <div className="mb-7">
-              <p className="text-xs font-bold tracking-[0.25em] text-primary">FIELD NOTES · 紀實影像</p>
-              <h2 className="mt-2 font-display text-2xl md:text-3xl">不是棚拍，是傳統仍在生活裡</h2>
-              <p className="mt-3 max-w-2xl text-sm leading-7 text-muted-foreground">以真實藏地佛教文化影像作為視覺語言；保留暗部、紙張與銀鹽般的顆粒感，讓頁面更接近一份紀實攝影誌，而不是商品型廣告。</p>
+              <p className="text-xs font-bold tracking-[0.25em] text-primary">文化影像 · 傳統脈絡</p>
+              <h2 className="mt-2 font-display text-2xl md:text-3xl">看見傳統如何走進日常</h2>
+              <p className="mt-3 max-w-2xl text-sm leading-7 text-muted-foreground">透過真實佛教文化影像，認識這項傳統在寺院、道路、山口與日常生活中的樣貌，也更容易理解這份供養與發心所承載的文化脈絡。</p>
             </div>
             <div className="grid gap-5 md:grid-cols-[1.35fr_.65fr]">
-              <DocumentaryImage src={data.documentaryImage} alt={data.title + "紀實影像"} className="min-h-[260px] rounded-2xl md:min-h-[420px]" />
+              <DocumentaryImage src={data.documentaryImage} alt={data.title + "文化影像"} className="min-h-[260px] rounded-2xl md:min-h-[420px]" />
               <div className="flex flex-col justify-end rounded-2xl border border-primary/15 bg-card/40 p-6">
-                <p className="text-xs font-bold tracking-[0.2em] text-primary">DOCUMENTARY / HIMALAYA</p>
-                <p className="mt-3 font-display text-xl">留下風、石、火與時間的痕跡</p>
-                <p className="mt-3 text-sm leading-7 text-muted-foreground">影像不是用來證明法事效果，而是讓人看見這些傳統真實存在於寺院、道路、山口與日常生活之中。</p>
+                <p className="text-xs font-bold tracking-[0.2em] text-primary">藏傳佛教文化</p>
+                <p className="mt-3 font-display text-xl">風、石、火與時間，留下傳統的痕跡</p>
+                <p className="mt-3 text-sm leading-7 text-muted-foreground">這些影像不是法事效果的證明，而是協助理解傳統實際存在於寺院、道路、山口與日常生活中的樣貌。</p>
               </div>
             </div>
           </div>
