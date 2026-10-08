@@ -1,13 +1,6 @@
 /*
-Design philosophy: Neo-thangka noir (Professional Consultant Upgrade)
-- L1 [Attention]: Hero section capturing "structural life crises". Removed buttons to force funnel downwards.
-- L2 [Interest]: Scientific/Sutra-based explanation logic -> Seamlessly enters TreasuryQuiz.
-- L3 [Desire]: Deities as "Systemic Repair Experts" (All 7 Dimensions).
-- L4 [Clarity]: 4-Phase Systemic Restoration visualization.
-- L5 & L6: High-value packaging and scarcity logic.
-- A11y Upgrade: Full ARIA labels, semantic buttons, and keyboard focus management added.
-- LCP Optimization: Fixed fetchPriority casing for React TypeScript compliance.
-- 100% Unabbreviated Production Ready Code.
+  首頁：以「先理解 → 再選擇 → 看清流程 → 決定是否參與」為主軸。
+  視覺維持 Neo-thangka noir，但避免把宗教參與包裝成「系統修復／能量工程」。
 */
 
 import SiteHeader from "@/components/SiteHeader";
@@ -33,10 +26,11 @@ import {
   Layers,
   Download,
   Quote,
+  Quote,
   ArrowDown // 🟢 新增向下引導圖示
 } from "lucide-react";
 
-import { VISUALS } from "@/lib/siteData";
+import { VISUALS, HOME_TESTIMONIALS } from "@/lib/siteData";
 import { DEITIES } from "@/data/deities";
 
 export default function Home() {
@@ -84,7 +78,7 @@ export default function Home() {
           </div>
           <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/80 to-background" aria-hidden="true" />
 
-          <div className="relative mx-auto max-w-5xl px-4 pt-20 pb-20 flex flex-col items-center text-center">
+          <div className="relative mx-auto max-w-5xl px-4 pt-14 pb-14 md:pt-20 md:pb-20 flex flex-col items-center text-center">
             <div className="flex flex-wrap justify-center items-center gap-3 mb-8">
               <Badge className="gold-border bg-primary/10 text-primary backdrop-blur px-3 py-1 text-[10px] md:text-xs tracking-widest font-bold">
                 台灣志工不支薪團隊
@@ -94,17 +88,17 @@ export default function Home() {
               </Badge>
             </div>
 
-            <h1 className="font-display text-5xl sm:text-7xl md:text-8xl leading-[1.1] tracking-tight">
+            <h1 className="font-display text-4xl sm:text-6xl md:text-8xl leading-[1.12] tracking-tight">
               有些人生階段，
               <br />
               <span className="text-primary italic">不是再更用力就能解決</span>
             </h1>
 
             <p className="mt-8 readable text-muted-foreground max-w-3xl text-base md:text-xl leading-relaxed mx-auto">
-              這往往不是意志力的問題。<span className="text-foreground font-semibold">當生命的資糧容器出現了結構性漏損</span>，再多的努力也會在不知不覺中流失。
+              有時候，真正需要的不是再逼自己一點，而是先停下來，看看自己正在面對什麼，再找到相應的法門。
             </p>
             <p className="mt-4 readable text-muted-foreground max-w-3xl text-base md:text-lg leading-relaxed mx-auto italic opacity-80">
-              我們是台灣不支薪志工，依循佛法古老智慧，陪伴您修復那個漏損。依法不依人，只如法完成每一道儀軌。
+              滿願藏庫整理本尊法門、經典脈絡、參與方式與費用，讓你先理解，再依自己的信念與能力選擇。
             </p>
             <div className="mt-8 flex w-full flex-col sm:flex-row items-center justify-center gap-3">
               <Link href="/pay" className="inline-flex min-h-12 w-full sm:w-auto items-center justify-center gap-2 rounded-md bg-primary px-7 py-3 text-sm font-bold tracking-widest text-primary-foreground gold-border shadow-lg transition-all hover:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2">
@@ -141,7 +135,7 @@ export default function Home() {
                 <div className="text-[10px] md:text-xs tracking-[0.3em] uppercase text-primary font-bold">Special Festivals · 首發限定</div>
                 <h2 id="special-festivals-heading" className="mt-3 font-display text-3xl md:text-4xl text-foreground/90">特別祭典</h2>
                 <p className="mt-4 max-w-2xl text-sm md:text-base leading-relaxed text-muted-foreground">
-                  三項特別祭典首發各限 18 席，以一季為一期的護持安排。風馬旗、瑪尼石、燃燈節，將一份發心延續在更長的時間裡。
+                  三項特別祭典首發各限 18 席，以一季為一期的護持安排。風馬旗、瑪尼石、燃燈節，分別承載不同的藏傳佛教文化脈絡與供養形式。
                 </p>
                 <div className="mt-6 flex flex-wrap gap-2 text-xs font-semibold text-primary">
                   <span className="rounded-full border border-primary/25 bg-primary/5 px-3 py-1.5">每項僅 18 席</span>
@@ -157,7 +151,7 @@ export default function Home() {
                   {[
                     ["風馬旗", "Lungta", "/special-festivals/wind-horse"],
                     ["瑪尼石", "Maṇi Stone", "/special-festivals/mani-stone"],
-                    ["燃燈節", "Chötrul Düchen", "/special-festivals/butter-lamp-festival"],
+                    ["燃燈節", "Ganden Ngamchö", "/special-festivals/butter-lamp-festival"],
                   ].map(([name, en, href]) => (
                     <Link key={name} href={href} className="group flex items-center justify-between rounded-lg border border-primary/15 bg-background/30 px-4 py-3 transition-all hover:border-primary/40 hover:bg-primary/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">
                       <div>
@@ -173,8 +167,8 @@ export default function Home() {
           </Card>
         </section>
 
-        {/* 三痛點快速入口：冷流量 5 秒選擇自己的問題，直達對應神明頁 */}
-        <section id="choose-path" className="mx-auto max-w-5xl px-4 pb-4 -mt-4 scroll-mt-20">
+        {/* 三個入口：讓第一次來訪的人先從自己的當下需求開始 */}
+        <section id="choose-path" className="mx-auto max-w-6xl px-4 py-8 md:py-12 scroll-mt-20">
           <div className="grid gap-4 md:grid-cols-3">
             {/* 痛點一：財富 / 事業 */}
             <Link href="/deity/yellow" className="group block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-xl">
@@ -182,7 +176,7 @@ export default function Home() {
                 <div className="text-2xl mb-3">💰</div>
                 <div className="font-display text-xl md:text-2xl text-foreground/90 mb-2">錢留不住、事業卡關</div>
                 <p className="text-sm text-muted-foreground readable leading-relaxed">
-                  努力了卻總差一步，財富不斷漏失，找不到突破口。
+                  如果你正在關注財運、資糧與事業發展，可以先了解黃財神相關法門。
                 </p>
                 <div className="mt-4 flex items-center gap-1 text-xs font-bold text-primary tracking-widest uppercase">
                   對位黃財神 <ChevronRight className="h-3 w-3" />
@@ -196,7 +190,7 @@ export default function Home() {
                 <div className="text-2xl mb-3">🌸</div>
                 <div className="font-display text-xl md:text-2xl text-foreground/90 mb-2">感情不順、人緣薄弱</div>
                 <p className="text-sm text-muted-foreground readable leading-relaxed">
-                  感覺社交透明，找不到對的人，職場人際也總是吃力。
+                  如果你正在關注感情、人緣與關係，可以先了解作明佛母相關法門。
                 </p>
                 <div className="mt-4 flex items-center gap-1 text-xs font-bold text-primary tracking-widest uppercase">
                   對位作明佛母 <ChevronRight className="h-3 w-3" />
@@ -214,10 +208,10 @@ export default function Home() {
                 <div className="text-2xl mb-3">🔍</div>
                 <div className="font-display text-xl md:text-2xl text-foreground/90 mb-2">說不清楚，就是卡</div>
                 <p className="text-sm text-muted-foreground readable leading-relaxed">
-                  整體感覺不對勁，不知道問題在哪裡，想先做個診斷。
+                  如果目前還說不清楚，也可以先花一點時間整理自己的狀況。
                 </p>
                 <div className="mt-4 flex items-center gap-1 text-xs font-bold text-primary tracking-widest uppercase">
-                  30 秒免費診斷 <ChevronRight className="h-3 w-3" />
+                  30 秒免費了解方向 <ChevronRight className="h-3 w-3" />
                 </div>
               </div>
             </button>
@@ -239,9 +233,9 @@ export default function Home() {
                 <Layers className="w-64 h-64 text-primary" />
               </div>
               <div className="text-[10px] md:text-xs tracking-[0.3em] uppercase text-primary font-bold mb-4" aria-hidden="true">Dimension Navigation</div>
-              <h2 id="dimension-nav-heading" className="font-display text-4xl md:text-5xl leading-tight text-foreground/90">生命維度導航：<br/>精準對位您的修復需求</h2>
+              <h2 id="dimension-nav-heading" className="font-display text-4xl md:text-5xl leading-tight text-foreground/90">本尊怎麼選？<br/>先從自己的需求開始了解</h2>
               <p className="mt-6 readable text-muted-foreground text-lg italic">
-                「生命的問題不能僅靠心念解決，必須修復底層的資糧結構。」
+                「不同本尊有不同的願力與法門脈絡，先理解，再選擇與自己相應的方向。」
               </p>
 
               <div className="mt-8 grid gap-4" role="navigation" aria-label="神明對位快速導航">
@@ -270,15 +264,15 @@ export default function Home() {
                   <ul className="text-sm md:text-base text-muted-foreground readable space-y-3">
                     <li className="flex gap-2">
                       <span className="text-primary font-bold" aria-hidden="true">01</span>
-                      <span><strong className="text-foreground">前測對位</strong>：先看本尊介紹頁，確認「能量缺失」是否與現況共鳴。</span>
+                      <span><strong className="text-foreground">前測對位</strong>：先看本尊介紹頁，確認法門所對應的願力與自己目前的需求是否相應。</span>
                     </li>
                     <li className="flex gap-2">
                       <span className="text-primary font-bold" aria-hidden="true">02</span>
-                      <span><strong className="text-foreground">確定方案</strong>：閱讀「如法內容」，了解這份投資如何運作。</span>
+                      <span><strong className="text-foreground">確定方案</strong>：閱讀法門、經典依據、費用與參與方式。</span>
                     </li>
                     <li className="flex gap-2">
                       <span className="text-primary font-bold" aria-hidden="true">03</span>
-                      <span><strong className="text-foreground">啟動造冊</strong>：登記完成後，即日送達名單至西藏排程法事。</span>
+                      <span><strong className="text-foreground">完成登記</strong>：依方案完成登記後，依既定流程安排後續法事。</span>
                     </li>
                   </ul>
                 </div>
@@ -303,15 +297,15 @@ export default function Home() {
             {/* L4 [流程具象化]: 階段性修復計畫表 */}
             <Card className="p-8 md:p-12 gold-border bg-background/30 backdrop-blur paper-grain border-dashed">
               <div className="text-[10px] md:text-xs tracking-[0.3em] uppercase text-muted-foreground font-bold mb-4 italic" aria-hidden="true">Step-by-Step Restoration</div>
-              <h3 className="font-display text-3xl text-foreground/90">四階段系統修復計畫</h3>
-              <p className="mt-4 text-sm text-muted-foreground leading-relaxed">不再是模糊的「祈福」，而是由志工與壇城共同執行的工程進度。</p>
+              <h3 className="font-display text-3xl text-foreground/90">參與流程，清楚知道每一步</h3>
+              <p className="mt-4 text-sm text-muted-foreground leading-relaxed">從了解法門、選擇方案，到完成登記與後續安排，流程都盡量清楚說明。</p>
 
               <div className="mt-10 grid gap-6" role="list">
                 {[
-                  { step: "Phase 1", title: "能量定位 (Diagnosis)", body: "透過深度測驗或私訊溝通，確認目前的因緣卡關點（如：資糧漏損、關係防禦）。" },
-                  { step: "Phase 2", title: "業印清理 (Clearing)", body: "完成登記後 24h 內由志工造冊，送達西藏壇城啟動第一步：障礙清淨儀軌。" },
-                  { step: "Phase 3", title: "結構穩定 (Stabilizing)", body: "持續的如法供養與共振，修補受損的容器邊界，讓您的心神找回做決定的定見。" },
-                  { step: "Phase 4", title: "能量強化 (Fortifying)", body: "在修復完成後注入增益能量。地基穩了，您的努力才會在現實中產生感應力。" },
+                  { step: "Phase 1", title: "了解需求", body: "先整理自己目前最在意的事情，再選擇想進一步了解的本尊法門。" },
+                  { step: "Phase 2", title: "選擇法門", body: "閱讀法門介紹、經典依據與方案內容，確認是否符合自己的信念與需求。" },
+                  { step: "Phase 3", title: "完成登記", body: "選定方案後依頁面說明完成付款與登記，所需資料依方案於綠界流程中填寫。" },
+                  { step: "Phase 4", title: "後續安排", body: "完成登記後，依方案安排後續法事、供養、持誦或回向等內容。" },
                 ].map((s, idx) => (
                   <div key={idx} className="relative flex gap-5 group" role="listitem">
                     <div aria-hidden="true" className="flex-shrink-0 w-12 h-12 rounded-full border gold-border bg-card/80 flex items-center justify-center font-display text-primary text-xs tracking-tighter group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500 z-10">
@@ -330,7 +324,7 @@ export default function Home() {
 
               <div className="mt-12 p-5 rounded bg-destructive/5 border border-destructive/20 text-xs text-destructive/80 leading-relaxed font-bold tracking-wider" role="alert">
                 <Zap className="h-4 w-4 inline mr-2 mb-1" aria-hidden="true" />
-                提醒：護持非交易。我們承諾的是如法完成每一道修復流程。祈願越具體，能量對位越清晰。
+                提醒：宗教修持與祈願不等同於世俗結果保證。請先了解法門與參與方式，再依自己的信念與能力決定。
               </div>
             </Card>
           </div>
@@ -343,7 +337,7 @@ export default function Home() {
               <div className="text-[10px] md:text-xs tracking-[0.3em] uppercase text-muted-foreground font-bold" aria-hidden="true">Expert Alignment</div>
               <h2 id="deities-heading" className="mt-3 font-display text-4xl md:text-6xl tracking-tight">滿願藏庫法事本尊</h2>
               <p className="mt-4 readable text-muted-foreground text-lg max-w-2xl italic">
-                不需要亂拜，對準困境。每一位本尊代表著不同的修復運算法。
+                每一位本尊都有不同的願力、經典脈絡與修持方向。先理解，再選擇適合自己的法門。
               </p>
             </div>
             <Link href="/pay" className="hidden md:block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-md">
@@ -365,7 +359,7 @@ export default function Home() {
                     <div className="p-8 flex flex-col justify-between">
                       <div>
                         <div className="text-[10px] tracking-[0.25em] uppercase text-primary font-black mb-2 opacity-80">
-                          能量解決方案 · {d.primaryIntent}
+                          法門方向 · {d.primaryIntent}
                         </div>
                         <div className="mt-1 font-display text-4xl group-hover:text-primary transition-colors">{d.name}</div>
                         <div className="mt-2 text-sm text-muted-foreground font-medium tracking-wide">{d.subtitle}</div>
@@ -373,7 +367,7 @@ export default function Home() {
                         <p className="mt-3 readable text-muted-foreground text-xs line-clamp-2 leading-relaxed opacity-50 italic">「{d.heroKicker}」</p>
                       </div>
                       <div className="mt-8 flex items-center gap-3 text-xs font-bold text-foreground/80 tracking-[0.2em] group-hover:translate-x-2 transition-transform uppercase" aria-hidden="true">
-                        對位介紹與修復方案 <ArrowRight className="h-4 w-4 text-primary" />
+                        了解法門與參與方式 <ArrowRight className="h-4 w-4 text-primary" />
                       </div>
                     </div>
                   </div>
@@ -383,6 +377,30 @@ export default function Home() {
                 </Card>
               </Link>
             ))}
+          </div>
+        </section>
+
+        {/* 真實回饋：保留原始回饋內容，不改寫、不作結果保證 */}
+        <section aria-labelledby="home-testimonials-heading" className="mx-auto max-w-6xl px-4 pt-10 pb-8 md:pt-16">
+          <div className="text-center max-w-3xl mx-auto">
+            <div className="inline-flex items-center gap-2 text-[10px] md:text-xs tracking-[0.3em] uppercase text-primary font-bold mb-4 bg-primary/5 px-3 py-1.5 rounded-sm">
+              <Quote className="w-4 h-4" /> 真實參與回饋
+            </div>
+            <h2 id="home-testimonials-heading" className="font-display text-3xl md:text-5xl tracking-tight">有人走過，也願意分享</h2>
+            <p className="mt-4 text-sm md:text-base leading-7 text-muted-foreground">以下為滿願藏庫既有的真實參與回饋。個人經驗各有不同，不代表任何特定結果的保證。</p>
+          </div>
+          <div className="mt-8 grid gap-4 md:grid-cols-3">
+            {HOME_TESTIMONIALS.map((item) => (
+              <Card key={item.title} className="p-6 md:p-7 gold-border bg-card/70 paper-grain">
+                <Quote className="h-5 w-5 text-primary/70" aria-hidden="true" />
+                <h3 className="mt-4 font-display text-xl md:text-2xl">{item.title}</h3>
+                <p className="mt-3 text-sm leading-7 text-muted-foreground">{item.body}</p>
+                <p className="mt-5 border-t border-border/50 pt-3 text-xs text-primary/70">— {item.by}</p>
+              </Card>
+            ))}
+          </div>
+          <div className="mt-6 text-center">
+            <Link href="/proof" className="inline-flex items-center gap-2 text-sm font-bold text-primary hover:underline">查看更多回饋與透明說明 <ArrowRight className="h-4 w-4" /></Link>
           </div>
         </section>
 
