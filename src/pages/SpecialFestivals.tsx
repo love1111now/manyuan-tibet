@@ -15,7 +15,7 @@ const FESTIVALS = [
     subtitle: "祈願隨風而行・一季護持",
     description: "以藏地風馬旗傳統承接發願與回向，讓一份心願不只停留在一天，而有一季時間持續護持。",
     icon: Flag,
-    image: "/images/special-festivals/wind-horse-user.webp",
+    image: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Prayer_flag.jpg",
   },
   {
     slug: "mani-stone",
@@ -23,7 +23,7 @@ const FESTIVALS = [
     subtitle: "經咒入石・願心延續・一季護持",
     description: "以瑪尼石與經咒供養傳統承接祈願，將供養、發願與回向延續在一段完整的護持週期裡。",
     icon: Gem,
-    image: "/images/special-festivals/mani-stone-premium.svg",
+    image: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Mani_stone_pile_with_prayer_wheels_in_Tsechu_monastery%2C_Nangq%C3%AAn_county.jpg",
   },
   {
     slug: "butter-lamp-festival",
@@ -31,7 +31,7 @@ const FESTIVALS = [
     subtitle: "一盞燈明・一季光明護持",
     description: "以燃燈供養象徵智慧與光明，讓節日當下的一份願心，延續成一季祈願與回向。",
     icon: Flame,
-    image: "/images/special-festivals/butter-lamp-premium.svg",
+    image: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Butter_lamp_offering_to_the_Buddhas%2C_very_worn_and_lovely_brass_with_a_soft_feeling%2C_Mahabuddha_Temple%2C_also_know_as_%22temple_of_thousand_buddhas%22%2C_skikhar_style_buddhist_temple%2C_Kathmandu%2C_Nepal_%285108721032%29.jpg",
   },
 ] as const;
 
@@ -55,7 +55,7 @@ export default function SpecialFestivals() {
           <div className="relative mx-auto max-w-6xl px-5 py-20 md:py-28 text-center">
             <div className="mx-auto mb-10 max-w-5xl overflow-hidden rounded-3xl border border-primary/20 shadow-2xl shadow-black/20">
               <div className="relative">
-                <img src="/images/special-festivals/wind-horse-user.webp" alt="藏地風馬旗與祈願傳統" className="block aspect-[21/8] w-full object-cover" />
+                <img src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Prayer_flag.jpg" alt="藏地風馬旗與祈願傳統" className="block aspect-[21/8] w-full object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
                 <div className="absolute bottom-0 left-0 right-0 p-5 text-left md:p-8">
                   <p className="text-xs font-bold tracking-[0.3em] text-white/80">藏傳佛教文化・特別祭典</p>
