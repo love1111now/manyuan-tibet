@@ -26,7 +26,7 @@ import {
   Layers,
   Download,
   Quote,
-  ArrowDown // 🟢 新增向下引導圖示
+  ArrowDown
 } from "lucide-react";
 
 import { VISUALS, HOME_TESTIMONIALS } from "@/lib/siteData";
@@ -38,7 +38,6 @@ export default function Home() {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
-  // 🟢 AI SEO (AEO) 核心晶片：動態生成 ItemList (服務清單) 結構化資料
   const itemListSchema = {
     "@context": "https://schema.org",
     "@type": "ItemList",
@@ -63,417 +62,72 @@ export default function Home() {
       <SiteHeader />
 
       <main id="main-content" tabIndex={-1} className="outline-none">
-        {/* L1 [痛點捕捉]: HERO */}
         <section className="relative overflow-hidden section-fade">
           <div className="absolute inset-0 opacity-30 md:opacity-40" aria-hidden="true">
-            {/* ✅ 已修正：將 fetchpriority 改為 fetchPriority 以符合 React 規範 */}
-            <img
-              src={VISUALS.heroGilded}
-              alt="滿願藏庫主視覺"
-              className="h-full w-full object-cover scale-[1.05]"
-              loading="eager"
-              fetchPriority="high"
-            />
+            <img src={VISUALS.heroGilded} alt="滿願藏庫主視覺" className="h-full w-full object-cover scale-[1.05]" loading="eager" fetchPriority="high" />
           </div>
           <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/80 to-background" aria-hidden="true" />
-
           <div className="relative mx-auto max-w-5xl px-4 pt-14 pb-14 md:pt-20 md:pb-20 flex flex-col items-center text-center">
             <div className="flex flex-wrap justify-center items-center gap-3 mb-8">
-              <Badge className="gold-border bg-primary/10 text-primary backdrop-blur px-3 py-1 text-[10px] md:text-xs tracking-widest font-bold">
-                台灣志工不支薪團隊
-              </Badge>
-              <Badge className="gold-border bg-background/40 text-foreground/80 backdrop-blur px-3 py-1 text-[10px] md:text-xs tracking-widest">
-                護持金 100% 用於西藏壇城供養
-              </Badge>
+              <Badge className="gold-border bg-primary/10 text-primary backdrop-blur px-3 py-1 text-[10px] md:text-xs tracking-widest font-bold">台灣志工不支薪團隊</Badge>
+              <Badge className="gold-border bg-background/40 text-foreground/80 backdrop-blur px-3 py-1 text-[10px] md:text-xs tracking-widest">護持金 100% 用於西藏壇城供養</Badge>
             </div>
-
-            <h1 className="font-display text-4xl sm:text-6xl md:text-8xl leading-[1.12] tracking-tight">
-              有些人生階段，
-              <br />
-              <span className="text-primary italic">不是再更用力就能解決</span>
-            </h1>
-
-            <p className="mt-8 readable text-muted-foreground max-w-3xl text-base md:text-xl leading-relaxed mx-auto">
-              有時候，真正需要的不是再逼自己一點，而是先停下來，看看自己正在面對什麼，再找到相應的法門。
-            </p>
-            <p className="mt-4 readable text-muted-foreground max-w-3xl text-base md:text-lg leading-relaxed mx-auto italic opacity-80">
-              滿願藏庫整理本尊法門、經典脈絡、參與方式與費用，讓你先理解，再依自己的信念與能力選擇。
-            </p>
+            <h1 className="font-display text-4xl sm:text-6xl md:text-8xl leading-[1.12] tracking-tight">有些人生階段，<br /><span className="text-primary italic">不是再更用力就能解決</span></h1>
+            <p className="mt-8 readable text-muted-foreground max-w-3xl text-base md:text-xl leading-relaxed mx-auto">有時候，真正需要的不是再逼自己一點，而是先停下來，看看自己正在面對什麼，再找到相應的法門。</p>
+            <p className="mt-4 readable text-muted-foreground max-w-3xl text-base md:text-lg leading-relaxed mx-auto italic opacity-80">滿願藏庫整理本尊法門、經典脈絡、參與方式與費用，讓你先理解，再依自己的信念與能力選擇。</p>
             <div className="mt-8 flex w-full flex-col sm:flex-row items-center justify-center gap-3">
-              <Link href="/pay" className="inline-flex min-h-12 w-full sm:w-auto items-center justify-center gap-2 rounded-md bg-primary px-7 py-3 text-sm font-bold tracking-widest text-primary-foreground gold-border shadow-lg transition-all hover:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2">
-                查看法事方案 <ArrowRight className="h-4 w-4" aria-hidden="true" />
-              </Link>
-              <button
-                type="button"
-                onClick={() => scrollToSection("choose-path")}
-                className="inline-flex min-h-12 w-full sm:w-auto items-center justify-center gap-2 rounded-md border border-primary/30 bg-background/40 px-7 py-3 text-sm font-bold tracking-widest text-foreground transition-colors hover:bg-primary/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
-              >
-                先了解適合的法門
-              </button>
+              <Link href="/pay" className="inline-flex min-h-12 w-full sm:w-auto items-center justify-center gap-2 rounded-md bg-primary px-7 py-3 text-sm font-bold tracking-widest text-primary-foreground gold-border shadow-lg transition-all hover:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2">查看法事方案 <ArrowRight className="h-4 w-4" aria-hidden="true" /></Link>
+              <button type="button" onClick={() => scrollToSection("choose-path")} className="inline-flex min-h-12 w-full sm:w-auto items-center justify-center gap-2 rounded-md border border-primary/30 bg-background/40 px-7 py-3 text-sm font-bold tracking-widest text-foreground transition-colors hover:bg-primary/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2">先了解適合的法門</button>
             </div>
-
-            <button 
-              type="button"
-              onClick={() => scrollToSection("choose-path")}
-              aria-label="向下選擇您的問題類型"
-              className="mt-10 flex flex-col items-center justify-center opacity-70 hover:opacity-100 transition-opacity animate-bounce cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-4 rounded-lg p-2"
-            >
-              <span className="text-[10px] tracking-[0.3em] uppercase font-bold text-primary mb-3">選擇您的問題類型</span>
-              <ArrowDown className="w-6 h-6 text-primary" aria-hidden="true" />
-            </button>
+            <button type="button" onClick={() => scrollToSection("choose-path")} aria-label="向下選擇您的問題類型" className="mt-10 flex flex-col items-center justify-center opacity-70 hover:opacity-100 transition-opacity animate-bounce cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-4 rounded-lg p-2"><span className="text-[10px] tracking-[0.3em] uppercase font-bold text-primary mb-3">選擇您的問題類型</span><ArrowDown className="w-6 h-6 text-primary" aria-hidden="true" /></button>
           </div>
         </section>
 
-        {/* 特別祭典入口：維持全站 Neo-thangka noir 視覺語言 */}
         <section className="mx-auto max-w-6xl px-4 pt-8 pb-4 md:pt-12" aria-labelledby="special-festivals-heading">
           <Card className="relative overflow-hidden gold-border bg-card/70 paper-grain shadow-lg">
-            <div className="absolute -top-20 -right-20 h-56 w-56 rounded-full border border-primary/10" aria-hidden="true" />
-            <div className="absolute -top-12 -right-12 h-40 w-40 rounded-full border border-primary/10" aria-hidden="true" />
-            <div className="grid gap-0 md:grid-cols-[1.15fr_.85fr]">
-              <div className="p-7 md:p-10">
-                <div className="text-[10px] md:text-xs tracking-[0.3em] uppercase text-primary font-bold">Special Festivals · 首發限定</div>
-                <h2 id="special-festivals-heading" className="mt-3 font-display text-3xl md:text-4xl text-foreground/90">特別祭典</h2>
-                <p className="mt-4 max-w-2xl text-sm md:text-base leading-relaxed text-muted-foreground">
-                  三項特別祭典首發各限 18 席，以一季為一期的護持安排。風馬旗、瑪尼石、燃燈節，分別承載不同的藏傳佛教文化脈絡與供養形式。
-                </p>
-                <div className="mt-6 flex flex-wrap gap-2 text-xs font-semibold text-primary">
-                  <span className="rounded-full border border-primary/25 bg-primary/5 px-3 py-1.5">每項僅 18 席</span>
-                  <span className="rounded-full border border-primary/20 px-3 py-1.5">NT$6,000／一季</span>
-                  <span className="rounded-full border border-primary/20 px-3 py-1.5">綠界完成付款與登記</span>
-                </div>
-                <Link href="/special-festivals" className="mt-7 inline-flex items-center gap-2 rounded-md bg-primary px-6 py-3 text-sm font-bold tracking-widest text-primary-foreground gold-border shadow-lg transition-all hover:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2">
-                  進入特別祭典 <ArrowRight className="h-4 w-4" aria-hidden="true" />
-                </Link>
-              </div>
-              <div className="border-t border-primary/15 bg-primary/5 p-7 md:border-l md:border-t-0 md:p-10">
-                <div className="grid gap-3 sm:grid-cols-3 md:grid-cols-1">
-                  {[
-                    ["風馬旗", "Lungta", "/special-festivals/wind-horse"],
-                    ["瑪尼石", "Maṇi Stone", "/special-festivals/mani-stone"],
-                    ["燃燈節", "Ganden Ngamchö", "/special-festivals/butter-lamp-festival"],
-                  ].map(([name, en, href]) => (
-                    <Link key={name} href={href} className="group flex items-center justify-between rounded-lg border border-primary/15 bg-background/30 px-4 py-3 transition-all hover:border-primary/40 hover:bg-primary/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">
-                      <div>
-                        <div className="font-display text-lg text-foreground/90">{name}</div>
-                        <div className="mt-0.5 text-[10px] tracking-widest text-muted-foreground">{en}</div>
-                      </div>
-                      <ChevronRight className="h-4 w-4 text-primary transition-transform group-hover:translate-x-1" aria-hidden="true" />
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            </div>
+            <div className="absolute -top-20 -right-20 h-56 w-56 rounded-full border border-primary/10" aria-hidden="true" /><div className="absolute -top-12 -right-12 h-40 w-40 rounded-full border border-primary/10" aria-hidden="true" />
+            <div className="grid gap-0 md:grid-cols-[1.15fr_.85fr]"><div className="p-7 md:p-10"><div className="text-[10px] md:text-xs tracking-[0.3em] uppercase text-primary font-bold">Special Festivals · 首發限定</div><h2 id="special-festivals-heading" className="mt-3 font-display text-3xl md:text-4xl text-foreground/90">特別祭典</h2><p className="mt-4 max-w-2xl text-sm md:text-base leading-relaxed text-muted-foreground">三項特別祭典首發各限 18 席，以一季為一期的護持安排。風馬旗、瑪尼石、燃燈節，分別承載不同的藏傳佛教文化脈絡與供養形式。</p><div className="mt-6 flex flex-wrap gap-2 text-xs font-semibold text-primary"><span className="rounded-full border border-primary/25 bg-primary/5 px-3 py-1.5">每項僅 18 席</span><span className="rounded-full border border-primary/20 px-3 py-1.5">NT$6,000／一季</span><span className="rounded-full border border-primary/20 px-3 py-1.5">綠界完成付款與登記</span></div><Link href="/special-festivals" className="mt-7 inline-flex items-center gap-2 rounded-md bg-primary px-6 py-3 text-sm font-bold tracking-widest text-primary-foreground gold-border shadow-lg transition-all hover:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2">進入特別祭典 <ArrowRight className="h-4 w-4" aria-hidden="true" /></Link></div><div className="border-t border-primary/15 bg-primary/5 p-7 md:border-l md:border-t-0 md:p-10"><div className="grid gap-3 sm:grid-cols-3 md:grid-cols-1">{[["風馬旗","Lungta","/special-festivals/wind-horse"],["瑪尼石","Maṇi Stone","/special-festivals/mani-stone"],["燃燈節","Ganden Ngamchö","/special-festivals/butter-lamp-festival"]].map(([name,en,href])=><Link key={name} href={href} className="group flex items-center justify-between rounded-lg border border-primary/15 bg-background/30 px-4 py-3 transition-all hover:border-primary/40 hover:bg-primary/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"><div><div className="font-display text-lg text-foreground/90">{name}</div><div className="mt-0.5 text-[10px] tracking-widest text-muted-foreground">{en}</div></div><ChevronRight className="h-4 w-4 text-primary transition-transform group-hover:translate-x-1" aria-hidden="true" /></Link>)}</div></div></div>
           </Card>
         </section>
 
-        {/* 三個入口：讓第一次來訪的人先從自己的當下需求開始 */}
-        <section id="choose-path" className="mx-auto max-w-6xl px-4 py-8 md:py-12 scroll-mt-20">
-          <div className="grid gap-4 md:grid-cols-3">
-            {/* 痛點一：財富 / 事業 */}
-            <Link href="/deity/yellow" className="group block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-xl">
-              <div className="h-full p-5 md:p-8 rounded-xl border border-primary/20 bg-primary/5 active:bg-primary/15 transition-all duration-200 cursor-pointer">
-                <div className="text-2xl mb-3">💰</div>
-                <div className="font-display text-xl md:text-2xl text-foreground/90 mb-2">錢留不住、事業卡關</div>
-                <p className="text-sm text-muted-foreground readable leading-relaxed">
-                  如果你正在關注財運、資糧與事業發展，可以先了解黃財神相關法門。
-                </p>
-                <div className="mt-4 flex items-center gap-1 text-xs font-bold text-primary tracking-widest uppercase">
-                  對位黃財神 <ChevronRight className="h-3 w-3" />
-                </div>
-              </div>
-            </Link>
-
-            {/* 痛點二：關係 / 人緣 */}
-            <Link href="/deity/kurukulla" className="group block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-xl">
-              <div className="h-full p-5 md:p-8 rounded-xl border border-primary/20 bg-primary/5 active:bg-primary/15 transition-all duration-200 cursor-pointer">
-                <div className="text-2xl mb-3">🌸</div>
-                <div className="font-display text-xl md:text-2xl text-foreground/90 mb-2">感情不順、人緣薄弱</div>
-                <p className="text-sm text-muted-foreground readable leading-relaxed">
-                  如果你正在關注感情、人緣與關係，可以先了解作明佛母相關法門。
-                </p>
-                <div className="mt-4 flex items-center gap-1 text-xs font-bold text-primary tracking-widest uppercase">
-                  對位作明佛母 <ChevronRight className="h-3 w-3" />
-                </div>
-              </div>
-            </Link>
-
-            {/* 痛點三：不確定 / 綜合 → 測驗 */}
-            <button
-              type="button"
-              onClick={() => scrollToSection("quiz")}
-              className="group block text-left w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-xl"
-            >
-              <div className="h-full p-5 md:p-8 rounded-xl border border-border/40 bg-card/50 active:bg-card/90 transition-all duration-200 cursor-pointer">
-                <div className="text-2xl mb-3">🔍</div>
-                <div className="font-display text-xl md:text-2xl text-foreground/90 mb-2">說不清楚，就是卡</div>
-                <p className="text-sm text-muted-foreground readable leading-relaxed">
-                  如果目前還說不清楚，也可以先花一點時間整理自己的狀況。
-                </p>
-                <div className="mt-4 flex items-center gap-1 text-xs font-bold text-primary tracking-widest uppercase">
-                  30 秒免費了解方向 <ChevronRight className="h-3 w-3" />
-                </div>
-              </div>
-            </button>
-          </div>
-        </section>
-
-        {/* L2 [學理證明]: 核心測驗入口 */}
-        <div id="quiz" className="scroll-mt-20">
-          <TreasuryQuiz />
-        </div>
-
+        <section id="choose-path" className="mx-auto max-w-6xl px-4 py-8 md:py-12 scroll-mt-20"><div className="grid gap-4 md:grid-cols-3">
+          <Link href="/deity/yellow" className="group block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-xl"><div className="h-full p-5 md:p-8 rounded-xl border border-primary/20 bg-primary/5 active:bg-primary/15 transition-all duration-200 cursor-pointer"><div className="text-2xl mb-3">💰</div><div className="font-display text-xl md:text-2xl text-foreground/90 mb-2">錢留不住、事業卡關</div><p className="text-sm text-muted-foreground readable leading-relaxed">如果你正在關注財運、資糧與事業發展，可以先了解黃財神相關法門。</p><div className="mt-4 flex items-center gap-1 text-xs font-bold text-primary tracking-widest uppercase">對位黃財神 <ChevronRight className="h-3 w-3" /></div></div></Link>
+          <Link href="/deity/kurukulla" className="group block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-xl"><div className="h-full p-5 md:p-8 rounded-xl border border-primary/20 bg-primary/5 active:bg-primary/15 transition-all duration-200 cursor-pointer"><div className="text-2xl mb-3">🌸</div><div className="font-display text-xl md:text-2xl text-foreground/90 mb-2">感情不順、人緣薄弱</div><p className="text-sm text-muted-foreground readable leading-relaxed">如果你正在關注感情、人緣與關係，可以先了解作明佛母相關法門。</p><div className="mt-4 flex items-center gap-1 text-xs font-bold text-primary tracking-widest uppercase">對位作明佛母 <ChevronRight className="h-3 w-3" /></div></div></Link>
+          <button type="button" onClick={() => scrollToSection("quiz")} className="group block text-left w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-xl"><div className="h-full p-5 md:p-8 rounded-xl border border-border/40 bg-card/50 active:bg-card/90 transition-all duration-200 cursor-pointer"><div className="text-2xl mb-3">🔍</div><div className="font-display text-xl md:text-2xl text-foreground/90 mb-2">說不清楚，就是卡</div><p className="text-sm text-muted-foreground readable leading-relaxed">如果目前還說不清楚，也可以先花一點時間整理自己的狀況。</p><div className="mt-4 flex items-center gap-1 text-xs font-bold text-primary tracking-widest uppercase">30 秒免費了解方向 <ChevronRight className="h-3 w-3" /></div></div></button>
+        </div></section>
+        <div id="quiz" className="scroll-mt-20"><TreasuryQuiz /></div>
         <div className="tibetan-divider h-12 opacity-60 mt-6" aria-hidden="true" />
-
-        {/* L3 [解決方案]: 生命維度導航 */}
-        <section aria-labelledby="dimension-nav-heading" className="mx-auto max-w-6xl px-4 pt-16 pb-4">
-          <div className="grid gap-6 md:grid-cols-[1.1fr_.9fr] md:items-stretch">
-            <Card className="p-8 md:p-12 gold-border bg-card/70 paper-grain relative overflow-hidden">
-              <div className="absolute -top-10 -right-10 opacity-5 pointer-events-none" aria-hidden="true">
-                <Layers className="w-64 h-64 text-primary" />
-              </div>
-              <div className="text-[10px] md:text-xs tracking-[0.3em] uppercase text-primary font-bold mb-4" aria-hidden="true">Dimension Navigation</div>
-              <h2 id="dimension-nav-heading" className="font-display text-4xl md:text-5xl leading-tight text-foreground/90">本尊怎麼選？<br/>先從自己的需求開始了解</h2>
-              <p className="mt-6 readable text-muted-foreground text-lg italic">
-                「不同本尊有不同的願力與法門脈絡，先理解，再選擇與自己相應的方向。」
-              </p>
-
-              <div className="mt-8 grid gap-4" role="navigation" aria-label="神明對位快速導航">
-                <div className="flex flex-wrap gap-2">
-                  {[
-                    { label: "資糧流動修復 → 黃財神", to: "yellow", srLabel: "前往黃財神介紹頁面" },
-                    { label: "家運地基穩固 → 大吉祥天女", to: "mahashri", srLabel: "前往大吉祥天女介紹頁面" },
-                    { label: "決策認知除障 → 象頭財神", to: "ganapati", srLabel: "前往象頭財神介紹頁面" },
-                    { label: "情緣磁場重建 → 作明佛母", to: "kurukulla", srLabel: "前往作明佛母介紹頁面" },
-                    { label: "身心耗損息災 → 藥師佛", to: "medicine-buddha", srLabel: "前往藥師佛介紹頁面" },
-                    { label: "急難突發化解 → 綠度母", to: "green-tara", srLabel: "前往綠度母介紹頁面" },
-                    { label: "動盪防禦建構 → 蓮花生大士", to: "padmasambhava", srLabel: "前往蓮花生大士介紹頁面" }
-                  ].map((item) => (
-                    <Link key={item.to} href={`/deity/${item.to}`} aria-label={item.srLabel} className="inline-flex focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-md">
-                      <Badge className="px-3 py-2 text-xs md:text-sm gold-border bg-background/40 hover:bg-primary text-foreground hover:text-primary-foreground transition-all cursor-pointer font-medium">
-                        {item.label} <ChevronRight className="h-3 w-3 ml-1 opacity-50" aria-hidden="true" />
-                      </Badge>
-                    </Link>
-                  ))}
-                </div>
-
-                <div className="mt-8 p-6 rounded-lg bg-primary/5 border-l-4 border-primary/40 space-y-4" role="note" aria-label="本尊引導建議">
-                  <div className="flex items-center gap-3 text-primary font-bold">
-                    <Info className="h-5 w-5" aria-hidden="true" /> 本尊引導建議
-                  </div>
-                  <ul className="text-sm md:text-base text-muted-foreground readable space-y-3">
-                    <li className="flex gap-2">
-                      <span className="text-primary font-bold" aria-hidden="true">01</span>
-                      <span><strong className="text-foreground">前測對位</strong>：先看本尊介紹頁，確認法門所對應的願力與自己目前的需求是否相應。</span>
-                    </li>
-                    <li className="flex gap-2">
-                      <span className="text-primary font-bold" aria-hidden="true">02</span>
-                      <span><strong className="text-foreground">確定方案</strong>：閱讀法門、經典依據、費用與參與方式。</span>
-                    </li>
-                    <li className="flex gap-2">
-                      <span className="text-primary font-bold" aria-hidden="true">03</span>
-                      <span><strong className="text-foreground">完成登記</strong>：依方案完成登記後，依既定流程安排後續法事。</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              <div className="mt-10 flex flex-col md:flex-row gap-4">
-                <button 
-                  type="button"
-                  onClick={() => scrollToSection("choose")}
-                  className="flex-1 h-14 w-full font-bold tracking-[0.2em] uppercase gold-border shadow-xl bg-primary text-primary-foreground hover:scale-[1.02] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-md"
-                >
-                  開始選對位本尊 <ArrowRight className="h-5 w-5 ml-2 inline" aria-hidden="true" />
-                </button>
-                <Link href="/pay" className="flex-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-md">
-                  <Button variant="outline" className="h-14 w-full gold-border text-lg tracking-widest pointer-events-none">
-                    全站神明本尊介紹
-                  </Button>
-                </Link>
-              </div>
-            </Card>
-
-            {/* L4 [流程具象化]: 階段性修復計畫表 */}
-            <Card className="p-8 md:p-12 gold-border bg-background/30 backdrop-blur paper-grain border-dashed">
-              <div className="text-[10px] md:text-xs tracking-[0.3em] uppercase text-muted-foreground font-bold mb-4 italic" aria-hidden="true">Step-by-Step Restoration</div>
-              <h3 className="font-display text-3xl text-foreground/90">參與流程，清楚知道每一步</h3>
-              <p className="mt-4 text-sm text-muted-foreground leading-relaxed">從了解法門、選擇方案，到完成登記與後續安排，流程都盡量清楚說明。</p>
-
-              <div className="mt-10 grid gap-6" role="list">
-                {[
-                  { step: "Phase 1", title: "了解需求", body: "先整理自己目前最在意的事情，再選擇想進一步了解的本尊法門。" },
-                  { step: "Phase 2", title: "選擇法門", body: "閱讀法門介紹、經典依據與方案內容，確認是否符合自己的信念與需求。" },
-                  { step: "Phase 3", title: "完成登記", body: "選定方案後依頁面說明完成付款與登記，所需資料依方案於綠界流程中填寫。" },
-                  { step: "Phase 4", title: "後續安排", body: "完成登記後，依方案安排後續法事、供養、持誦或回向等內容。" },
-                ].map((s, idx) => (
-                  <div key={idx} className="relative flex gap-5 group" role="listitem">
-                    <div aria-hidden="true" className="flex-shrink-0 w-12 h-12 rounded-full border gold-border bg-card/80 flex items-center justify-center font-display text-primary text-xs tracking-tighter group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500 z-10">
-                      {s.step}
-                    </div>
-                    <div>
-                      <div className="font-display text-xl text-foreground/90 group-hover:text-primary transition-colors">
-                        <span className="sr-only">{`階段 ${idx + 1}: `}</span>{s.title}
-                      </div>
-                      <div className="mt-2 text-sm text-muted-foreground readable opacity-80">{s.body}</div>
-                    </div>
-                    {idx < 3 && <div className="absolute left-6 top-12 w-px h-full bg-primary/20 -z-10 hidden md:block" aria-hidden="true" />}
-                  </div>
-                ))}
-              </div>
-
-              <div className="mt-12 p-5 rounded bg-destructive/5 border border-destructive/20 text-xs text-destructive/80 leading-relaxed font-bold tracking-wider" role="alert">
-                <Zap className="h-4 w-4 inline mr-2 mb-1" aria-hidden="true" />
-                提醒：宗教修持與祈願不等同於世俗結果保證。請先了解法門與參與方式，再依自己的信念與能力決定。
-              </div>
-            </Card>
-          </div>
-        </section>
-
-        {/* DEITIES: 產品對位區塊 */}
+        <section aria-labelledby="dimension-nav-heading" className="mx-auto max-w-6xl px-4 pt-16 pb-4"><div className="grid gap-6 md:grid-cols-[1.1fr_.9fr] md:items-stretch"><Card className="p-8 md:p-12 gold-border bg-card/70 paper-grain relative overflow-hidden"><div className="absolute -top-10 -right-10 opacity-5 pointer-events-none" aria-hidden="true"><Layers className="w-64 h-64 text-primary" /></div><div className="text-[10px] md:text-xs tracking-[0.3em] uppercase text-primary font-bold mb-4" aria-hidden="true">Dimension Navigation</div><h2 id="dimension-nav-heading" className="font-display text-4xl md:text-5xl leading-tight text-foreground/90">本尊怎麼選？<br/>先從自己的需求開始了解</h2><p className="mt-6 readable text-muted-foreground text-lg italic">「不同本尊有不同的願力與法門脈絡，先理解，再選擇與自己相應的方向。」</p><div className="mt-8 grid gap-4" role="navigation" aria-label="神明對位快速導航"><div className="flex flex-wrap gap-2">{[{label:"資糧流動修復 → 黃財神",to:"yellow",srLabel:"前往黃財神介紹頁面"},{label:"家運地基穩固 → 大吉祥天女",to:"mahashri",srLabel:"前往大吉祥天女介紹頁面"},{label:"決策認知除障 → 象頭財神",to:"ganapati",srLabel:"前往象頭財神介紹頁面"},{label:"情緣磁場重建 → 作明佛母",to:"kurukulla",srLabel:"前往作明佛母介紹頁面"},{label:"身心耗損息災 → 藥師佛",to:"medicine-buddha",srLabel:"前往藥師佛介紹頁面"},{label:"急難突發化解 → 綠度母",to:"green-tara",srLabel:"前往綠度母介紹頁面"},{label:"動盪防禦建構 → 蓮花生大士",to:"padmasambhava",srLabel:"前往蓮花生大士介紹頁面"}].map(item=><Link key={item.to} href={`/deity/${item.to}`} aria-label={item.srLabel} className="inline-flex focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-md"><Badge className="px-3 py-2 text-xs md:text-sm gold-border bg-background/40 hover:bg-primary text-foreground hover:text-primary-foreground transition-all cursor-pointer font-medium">{item.label} <ChevronRight className="h-3 w-3 ml-1 opacity-50" aria-hidden="true" /></Badge></Link>)}</div><div className="mt-8 p-6 rounded-lg bg-primary/5 border-l-4 border-primary/40 space-y-4" role="note" aria-label="本尊引導建議"><div className="flex items-center gap-3 text-primary font-bold"><Info className="h-5 w-5" aria-hidden="true" /> 本尊引導建議</div><ul className="text-sm md:text-base text-muted-foreground readable space-y-3"><li className="flex gap-2"><span className="text-primary font-bold" aria-hidden="true">01</span><span><strong className="text-foreground">前測對位</strong>：先看本尊介紹頁，確認法門所對應的願力與自己目前的需求是否相應。</span></li><li className="flex gap-2"><span className="text-primary font-bold" aria-hidden="true">02</span><span><strong className="text-foreground">確定方案</strong>：閱讀法門、經典依據、費用與參與方式。</span></li><li className="flex gap-2"><span className="text-primary font-bold" aria-hidden="true">03</span><span><strong className="text-foreground">完成登記</strong>：依方案完成登記後，依既定流程安排後續法事。</span></li></ul></div></div><div className="mt-10 flex flex-col md:flex-row gap-4"><button type="button" onClick={() => scrollToSection("choose")} className="flex-1 h-14 w-full font-bold tracking-[0.2em] uppercase gold-border shadow-xl bg-primary text-primary-foreground hover:scale-[1.02] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-md">開始選對位本尊 <ArrowRight className="h-5 w-5 ml-2 inline" aria-hidden="true" /></button><Link href="/pay" className="flex-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-md"><Button variant="outline" className="h-14 w-full gold-border text-lg tracking-widest pointer-events-none">全站神明本尊介紹</Button></Link></div></Card><Card className="p-8 md:p-12 gold-border bg-background/30 backdrop-blur paper-grain border-dashed"><div className="text-[10px] md:text-xs tracking-[0.3em] uppercase text-muted-foreground font-bold mb-4 italic" aria-hidden="true">Step-by-Step Restoration</div><h3 className="font-display text-3xl text-foreground/90">參與流程，清楚知道每一步</h3><p className="mt-4 text-sm text-muted-foreground leading-relaxed">從了解法門、選擇方案，到完成登記與後續安排，流程都盡量清楚說明。</p><div className="mt-10 grid gap-6" role="list">{[{step:"Phase 1",title:"了解需求",body:"先整理自己目前最在意的事情，再選擇想進一步了解的本尊法門。"},{step:"Phase 2",title:"選擇法門",body:"閱讀法門介紹、經典依據與方案內容，確認是否符合自己的信念與需求。"},{step:"Phase 3",title:"完成登記",body:"選定方案後依頁面說明完成付款與登記，所需資料依方案於綠界流程中填寫。"},{step:"Phase 4",title:"後續安排",body:"完成登記後，依方案安排後續法事、供養、持誦或回向等內容。"}].map((s,idx)=><div key={idx} className="relative flex gap-5 group" role="listitem"><div aria-hidden="true" className="flex-shrink-0 w-12 h-12 rounded-full border gold-border bg-card/80 flex items-center justify-center font-display text-primary text-xs tracking-tighter group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500 z-10">{s.step}</div><div><div className="font-display text-xl text-foreground/90 group-hover:text-primary transition-colors"><span className="sr-only">{`階段 ${idx+1}: `}</span>{s.title}</div><div className="mt-2 text-sm text-muted-foreground readable opacity-80">{s.body}</div></div>{idx<3&&<div className="absolute left-6 top-12 w-px h-full bg-primary/20 -z-10 hidden md:block" aria-hidden="true" />}</div>)}</div><div className="mt-12 p-5 rounded bg-destructive/5 border border-destructive/20 text-xs text-destructive/80 leading-relaxed font-bold tracking-wider" role="alert"><Zap className="h-4 w-4 inline mr-2 mb-1" aria-hidden="true" />提醒：宗教修持與祈願不等同於世俗結果保證。請先了解法門與參與方式，再依自己的信念與能力決定。</div></Card></div></section>
         <section id="choose" aria-labelledby="deities-heading" className="mx-auto max-w-6xl px-4 pt-20 pb-10 scroll-mt-24">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
-            <div className="text-center md:text-left">
-              <div className="text-[10px] md:text-xs tracking-[0.3em] uppercase text-muted-foreground font-bold" aria-hidden="true">Expert Alignment</div>
-              <h2 id="deities-heading" className="mt-3 font-display text-4xl md:text-6xl tracking-tight">滿願藏庫法事本尊</h2>
-              <p className="mt-4 readable text-muted-foreground text-lg max-w-2xl italic">
-                每一位本尊都有不同的願力、經典脈絡與修持方向。先理解，再選擇適合自己的法門。
-              </p>
-            </div>
-            <Link href="/pay" className="hidden md:block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-md">
-              <Button variant="outline" className="gold-border hover:bg-primary/10 px-8 h-14 text-lg pointer-events-none">
-                查看全站登記名冊
-              </Button>
-            </Link>
-          </div>
-
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12"><div className="text-center md:text-left"><div className="text-[10px] md:text-xs tracking-[0.3em] uppercase text-muted-foreground font-bold" aria-hidden="true">Expert Alignment</div><h2 id="deities-heading" className="mt-3 font-display text-4xl md:text-6xl tracking-tight">滿願藏庫法事本尊</h2><p className="mt-4 readable text-muted-foreground text-lg max-w-2xl italic">每一位本尊都有不同的願力、經典脈絡與修持方向。先理解，再選擇適合自己的法門。</p></div><Link href="/pay" className="hidden md:block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-md"><Button variant="outline" className="gold-border hover:bg-primary/10 px-8 h-14 text-lg pointer-events-none">查看全站登記名冊</Button></Link></div>
           <div className="grid gap-6 md:grid-cols-2">
             {DEITIES.map((d) => (
               <Link key={d.key} href={`/deity/${d.key}`} aria-label={`查看 ${d.name}，專注於${d.primaryIntent}`} className="block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-4 rounded-xl">
                 <Card className="overflow-hidden gold-border bg-card/70 hover:bg-accent/20 hover:border-primary transition-all duration-700 paper-grain group cursor-pointer relative">
                   <div className="grid md:grid-cols-[240px_1fr]">
-                    <div className="h-56 md:h-full w-full overflow-hidden">
-                      {/* 這裡非首屏圖片，保持 lazy loading */}
-                      <img src={d.heroImage} alt="" className="h-full w-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 group-hover:scale-110" loading="lazy" aria-hidden="true" />
+                    <div className="relative h-56 md:h-full w-full overflow-hidden bg-background/30">
+                      <img src={d.heroImage} alt="" className="h-full w-full object-cover grayscale opacity-80 transition-all duration-700 ease-out group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105" loading="lazy" aria-hidden="true" />
+                      <div className="absolute inset-0 bg-primary/0 transition-colors duration-700 group-hover:bg-primary/10 pointer-events-none" aria-hidden="true" />
                     </div>
                     <div className="p-8 flex flex-col justify-between">
-                      <div>
-                        <div className="text-[10px] tracking-[0.25em] uppercase text-primary font-black mb-2 opacity-80">
-                          法門方向 · {d.primaryIntent}
-                        </div>
-                        <div className="mt-1 font-display text-4xl group-hover:text-primary transition-colors">{d.name}</div>
-                        <div className="mt-2 text-sm text-muted-foreground font-medium tracking-wide">{d.subtitle}</div>
-                        <p className="mt-5 readable text-muted-foreground text-sm line-clamp-2 leading-relaxed opacity-70">{d.whyThisDeity?.[0]}</p>
-                        <p className="mt-3 readable text-muted-foreground text-xs line-clamp-2 leading-relaxed opacity-50 italic">「{d.heroKicker}」</p>
-                      </div>
-                      <div className="mt-8 flex items-center gap-3 text-xs font-bold text-foreground/80 tracking-[0.2em] group-hover:translate-x-2 transition-transform uppercase" aria-hidden="true">
-                        了解法門與參與方式 <ArrowRight className="h-4 w-4 text-primary" />
-                      </div>
+                      <div><div className="text-[10px] tracking-[0.25em] uppercase text-primary font-black mb-2 opacity-80">法門方向 · {d.primaryIntent}</div><div className="mt-1 font-display text-4xl group-hover:text-primary transition-colors">{d.name}</div><div className="mt-2 text-sm text-muted-foreground font-medium tracking-wide">{d.subtitle}</div><p className="mt-5 readable text-muted-foreground text-sm line-clamp-2 leading-relaxed opacity-70">{d.whyThisDeity?.[0]}</p><p className="mt-3 readable text-muted-foreground text-xs line-clamp-2 leading-relaxed opacity-50 italic">「{d.heroKicker}」</p></div>
+                      <div className="mt-8 flex items-center gap-3 text-xs font-bold text-foreground/80 tracking-[0.2em] group-hover:translate-x-2 transition-transform uppercase" aria-hidden="true">了解法門與參與方式 <ArrowRight className="h-4 w-4 text-primary" /></div>
                     </div>
                   </div>
-                  <div className="absolute top-4 right-4 opacity-10 group-hover:opacity-30 transition-opacity" aria-hidden="true">
-                     <Sparkles className="h-6 w-6 text-primary" />
-                  </div>
+                  <div className="absolute top-4 right-4 opacity-10 group-hover:opacity-30 transition-opacity" aria-hidden="true"><Sparkles className="h-6 w-6 text-primary" /></div>
                 </Card>
               </Link>
             ))}
           </div>
         </section>
 
-        {/* 真實回饋：保留原始回饋內容，不改寫、不作結果保證 */}
-        <section aria-labelledby="home-testimonials-heading" className="mx-auto max-w-6xl px-4 pt-10 pb-8 md:pt-16">
-          <div className="text-center max-w-3xl mx-auto">
-            <div className="inline-flex items-center gap-2 text-[10px] md:text-xs tracking-[0.3em] uppercase text-primary font-bold mb-4 bg-primary/5 px-3 py-1.5 rounded-sm">
-              <Quote className="w-4 h-4" /> 真實參與回饋
-            </div>
-            <h2 id="home-testimonials-heading" className="font-display text-3xl md:text-5xl tracking-tight">有人走過，也願意分享</h2>
-            <p className="mt-4 text-sm md:text-base leading-7 text-muted-foreground">以下為滿願藏庫既有的真實參與回饋。個人經驗各有不同，不代表任何特定結果的保證。</p>
-          </div>
-          <div className="mt-8 grid gap-4 md:grid-cols-3">
-            {HOME_TESTIMONIALS.map((item) => (
-              <Card key={item.title} className="p-6 md:p-7 gold-border bg-card/70 paper-grain">
-                <Quote className="h-5 w-5 text-primary/70" aria-hidden="true" />
-                <h3 className="mt-4 font-display text-xl md:text-2xl">{item.title}</h3>
-                <p className="mt-3 text-sm leading-7 text-muted-foreground">{item.body}</p>
-                <p className="mt-5 border-t border-border/50 pt-3 text-xs text-primary/70">— {item.by}</p>
-              </Card>
-            ))}
-          </div>
-          <div className="mt-6 text-center">
-            <Link href="/proof" className="inline-flex items-center gap-2 text-sm font-bold text-primary hover:underline">查看更多回饋與透明說明 <ArrowRight className="h-4 w-4" /></Link>
-          </div>
-        </section>
+        <section aria-labelledby="home-testimonials-heading" className="mx-auto max-w-6xl px-4 pt-10 pb-8 md:pt-16"><div className="text-center max-w-3xl mx-auto"><div className="inline-flex items-center gap-2 text-[10px] md:text-xs tracking-[0.3em] uppercase text-primary font-bold mb-4 bg-primary/5 px-3 py-1.5 rounded-sm"><Quote className="w-4 h-4" /> 真實參與回饋</div><h2 id="home-testimonials-heading" className="font-display text-3xl md:text-5xl tracking-tight">有人走過，也願意分享</h2><p className="mt-4 text-sm md:text-base leading-7 text-muted-foreground">以下為滿願藏庫既有的真實參與回饋。個人經驗各有不同，不代表任何特定結果的保證。</p></div><div className="mt-8 grid gap-4 md:grid-cols-3">{HOME_TESTIMONIALS.map((item)=><Card key={item.title} className="p-6 md:p-7 gold-border bg-card/70 paper-grain"><Quote className="h-5 w-5 text-primary/70" aria-hidden="true" /><h3 className="mt-4 font-display text-xl md:text-2xl">{item.title}</h3><p className="mt-3 text-sm leading-7 text-muted-foreground">{item.body}</p><p className="mt-5 border-t border-border/50 pt-3 text-xs text-primary/70">— {item.by}</p></Card>)}</div><div className="mt-6 text-center"><Link href="/proof" className="inline-flex items-center gap-2 text-sm font-bold text-primary hover:underline">查看更多回饋與透明說明 <ArrowRight className="h-4 w-4" /></Link></div></section>
 
-        {/* FREE GIFT 黃財神桌布下載區塊 */}
-        <section aria-label="免費贈品區塊" className="mx-auto max-w-6xl px-4 pt-10 pb-16">
-          <Card className="gold-border bg-card/70 overflow-hidden paper-grain hover:border-primary/40 transition-colors">
-            <div className="grid md:grid-cols-[1fr_260px] items-center gap-6">
-              <div className="p-7 md:p-10">
-                <div className="text-[10px] tracking-[0.3em] uppercase text-primary font-bold flex items-center gap-2 mb-2" aria-hidden="true">
-                  <Download className="w-4 h-4" /> Free Gift
-                </div>
-                <h2 className="font-display text-3xl md:text-4xl">黃財神手機桌布免費下載</h2>
-                <p className="mt-4 readable text-muted-foreground text-lg leading-relaxed max-w-2xl">
-                  慶祝 FB 粉絲團成立，我們製作了專屬的高畫質桌布送給您。<br/>
-                  願您每天打開手機，都記得：<strong className="text-foreground">您的財庫正在回正，您值得被善緣與資糧好好照顧。</strong>
-                </p>
-                <div className="mt-8">
-                  <Link href="/wallpaper" aria-label="前往下載黃財神免費手機桌布" className="inline-block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-md">
-                    <Button variant="outline" tabIndex={-1} className="gold-border tracking-[0.2em] font-bold h-14 px-8 text-lg hover:bg-primary/10 pointer-events-none">
-                      前往免費領取 <ArrowRight className="h-4 w-4 ml-2" aria-hidden="true" />
-                    </Button>
-                  </Link>
-                </div>
-              </div>
-              <div className="hidden md:block h-[320px] w-full" aria-hidden="true">
-                <img 
-                  src={DEITIES.find(d => d.key === 'yellow')?.heroImage} 
-                  alt="" 
-                  className="h-full w-full object-cover border-l border-border/50 opacity-80" 
-                  loading="lazy"
-                />
-              </div>
-            </div>
-          </Card>
-        </section>
+        <section aria-label="免費贈品區塊" className="mx-auto max-w-6xl px-4 pt-10 pb-16"><Card className="gold-border bg-card/70 overflow-hidden paper-grain hover:border-primary/40 transition-colors"><div className="grid md:grid-cols-[1fr_260px] items-center gap-6"><div className="p-7 md:p-10"><div className="text-[10px] tracking-[0.3em] uppercase text-primary font-bold flex items-center gap-2 mb-2" aria-hidden="true"><Download className="w-4 h-4" /> Free Gift</div><h2 className="font-display text-3xl md:text-4xl">黃財神手機桌布免費下載</h2><p className="mt-4 readable text-muted-foreground text-lg leading-relaxed max-w-2xl">慶祝 FB 粉絲團成立，我們製作了專屬的高畫質桌布送給您。<br/>願您每天打開手機，都記得：<strong className="text-foreground">您的財庫正在回正，您值得被善緣與資糧好好照顧。</strong></p><div className="mt-8"><Link href="/wallpaper" aria-label="前往下載黃財神免費手機桌布" className="inline-block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-md"><Button variant="outline" tabIndex={-1} className="gold-border tracking-[0.2em] font-bold h-14 px-8 text-lg hover:bg-primary/10 pointer-events-none">前往免費領取 <ArrowRight className="h-4 w-4 ml-2" aria-hidden="true" /></Button></Link></div></div><div className="hidden md:block h-[320px] w-full" aria-hidden="true"><img src={DEITIES.find(d=>d.key==='yellow')?.heroImage} alt="" className="h-full w-full object-cover border-l border-border/50 opacity-80" loading="lazy" /></div></div></Card></section>
 
-        {/* L6 [終局收割]: 回饋文 */}
-        <section aria-labelledby="trust-heading" className="mx-auto max-w-6xl px-4 py-16 md:py-24">
-          <div className="text-center max-w-3xl mx-auto">
-            <div className="inline-flex items-center gap-2 text-[10px] md:text-xs tracking-[0.3em] uppercase text-primary font-bold mb-4 bg-primary/5 px-3 py-1.5 rounded-sm">
-              <ShieldCheck className="w-4 h-4" /> 清楚說明・安心選擇
-            </div>
-            <h2 id="trust-heading" className="font-display text-4xl md:text-6xl tracking-tight">在決定之前，先把事情看懂</h2>
-            <p className="mt-6 readable text-muted-foreground text-base md:text-lg leading-relaxed">
-              我們不以個案故事或結果保證催促您。先了解法門、流程、費用與付款方式，再決定是否參與，才是更安心的選擇。
-            </p>
-          </div>
-
-          <div className="mt-10 grid gap-5 md:grid-cols-3">
-            {[
-              ["法門先說清楚", "每一項法事都有對應的本尊、經典脈絡與適合情境，先理解再選擇。"],
-              ["付款流程透明", "本站不要求您在網站表單重複填寫祈願資料；需要的登記資訊依各方案說明，在綠界付款流程中完成。"],
-              ["不保證世俗結果", "祈願與修持不是交易或結果保證。網站會清楚區分宗教信仰、文化傳統與可驗證的行政流程。"],
-            ].map(([title, body]) => (
-              <Card key={title} className="p-7 md:p-8 gold-border bg-card/70 paper-grain">
-                <div className="h-10 w-10 rounded-full border border-primary/30 bg-primary/10 flex items-center justify-center text-primary mb-5">
-                  <ShieldCheck className="w-5 h-5" aria-hidden="true" />
-                </div>
-                <h3 className="font-display text-2xl text-foreground/90">{title}</h3>
-                <p className="mt-3 text-sm md:text-base leading-relaxed text-muted-foreground">{body}</p>
-              </Card>
-            ))}
-          </div>
-
-          <div className="mt-10 text-center">
-            <Link href="/proof" className="inline-flex items-center gap-2 text-sm font-bold text-primary hover:underline">
-              查看完整透明說明 <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
-        </section>
+        <section aria-labelledby="trust-heading" className="mx-auto max-w-6xl px-4 py-16 md:py-24"><div className="text-center max-w-3xl mx-auto"><div className="inline-flex items-center gap-2 text-[10px] md:text-xs tracking-[0.3em] uppercase text-primary font-bold mb-4 bg-primary/5 px-3 py-1.5 rounded-sm"><ShieldCheck className="w-4 h-4" /> 清楚說明・安心選擇</div><h2 id="trust-heading" className="font-display text-4xl md:text-6xl tracking-tight">在決定之前，先把事情看懂</h2><p className="mt-6 readable text-muted-foreground text-base md:text-lg leading-relaxed">我們不以個案故事或結果保證催促您。先了解法門、流程、費用與付款方式，再決定是否參與，才是更安心的選擇。</p></div><div className="mt-10 grid gap-5 md:grid-cols-3">{[["法門先說清楚","每一項法事都有對應的本尊、經典脈絡與適合情境，先理解再選擇。"],["付款流程透明","本站不要求您在網站表單重複填寫祈願資料；需要的登記資訊依各方案說明，在綠界付款流程中完成。"],["不保證世俗結果","祈願與修持不是交易或結果保證。網站會清楚區分宗教信仰、文化傳統與可驗證的行政流程。"]].map(([title,body])=><Card key={title} className="p-7 md:p-8 gold-border bg-card/70 paper-grain"><div className="h-10 w-10 rounded-full border border-primary/30 bg-primary/10 flex items-center justify-center text-primary mb-5"><ShieldCheck className="w-5 h-5" aria-hidden="true" /></div><h3 className="font-display text-2xl text-foreground/90">{title}</h3><p className="mt-3 text-sm md:text-base leading-relaxed text-muted-foreground">{body}</p></Card>)}</div><div className="mt-10 text-center"><Link href="/proof" className="inline-flex items-center gap-2 text-sm font-bold text-primary hover:underline">查看完整透明說明 <ArrowRight className="w-4 h-4" /></Link></div></section>
       </main>
-
-      <SiteFooter />
-      <StickyCta />
+      <SiteFooter /><StickyCta />
     </div>
   );
 }
