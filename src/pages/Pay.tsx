@@ -324,19 +324,6 @@ export default function Pay() {
             為您完整展開所有本尊法事的專業路徑。
           </p>
 
-          <div className="mt-8 p-5 md:p-8 rounded-xl border border-primary/40 bg-primary/5 relative overflow-hidden group shadow-inner">
-            <div className="absolute top-0 right-0 p-6 opacity-10 font-display text-5xl md:text-7xl text-primary pointer-events-none transition-transform duration-1000 group-hover:scale-110 group-hover:rotate-12">
-              ✦
-            </div>
-            <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 mb-3">
-              <Badge className="bg-primary text-primary-foreground gold-border animate-pulse px-3 py-1 font-bold tracking-widest text-[10px] w-fit">顧問加碼</Badge>
-              <span className="font-display text-lg md:text-2xl text-foreground/90">琉璃護佑：萬願隨行計畫</span>
-            </div>
-            <p className="text-sm md:text-lg text-muted-foreground readable leading-relaxed">
-              我們深知「健康與安穩」是所有福報的底氣。即日起，只要於本站委託<strong className="text-foreground">任一修復計畫</strong>，我們將為您<strong className="text-primary font-bold">免費加碼</strong>列入每週六的「藥師佛健康息災煙供」工程中，為您或家人建立雙重防禦。
-            </p>
-          </div>
-
           <div className="mt-10 grid gap-8">
             {DEITIES.map((d) => (
               <Card key={d.key} id={`deity-section-${d.key}`} className="p-5 md:p-10 gold-border bg-card/70 paper-grain backdrop-blur-sm shadow-lg scroll-mt-24">
