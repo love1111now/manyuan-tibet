@@ -26,7 +26,6 @@ import {
   Layers,
   Download,
   Quote,
-  Quote,
   ArrowDown // 🟢 新增向下引導圖示
 } from "lucide-react";
 
