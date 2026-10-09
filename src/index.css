@@ -521,3 +521,26 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
 }
+
+
+/* 首頁神尊卡片：使用明確 CSS hover selector，確保圖片灰階／彩色切換穩定 */
+@media (hover: hover) and (pointer: fine) {
+  .deity-card .deity-card-image {
+    filter: grayscale(1);
+    opacity: 0.8;
+    transform: scale(1);
+    transition: filter 700ms ease-out, opacity 700ms ease-out, transform 700ms ease-out;
+  }
+  .deity-card:hover .deity-card-image,
+  .deity-card:focus-within .deity-card-image {
+    filter: grayscale(0);
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+@media (hover: none) {
+  .deity-card .deity-card-image {
+    filter: grayscale(0);
+    opacity: 1;
+  }
+}
