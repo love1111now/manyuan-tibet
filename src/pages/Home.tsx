@@ -103,10 +103,10 @@ export default function Home() {
           <div className="grid gap-6 md:grid-cols-2">
             {DEITIES.map((d) => (
               <Link key={d.key} href={`/deity/${d.key}`} aria-label={`查看 ${d.name}，專注於${d.primaryIntent}`} className="block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-4 rounded-xl">
-                <Card className="overflow-hidden gold-border bg-card/70 hover:bg-accent/20 hover:border-primary transition-all duration-700 paper-grain group cursor-pointer relative">
+                <Card className="deity-card overflow-hidden gold-border bg-card/70 hover:bg-accent/20 hover:border-primary transition-all duration-700 paper-grain group cursor-pointer relative">
                   <div className="grid md:grid-cols-[240px_1fr]">
                     <div className="relative h-56 md:h-full w-full overflow-hidden bg-background/30">
-                      <img src={d.heroImage} alt="" className="h-full w-full object-cover grayscale opacity-80 transition-all duration-700 ease-out group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105" loading="lazy" aria-hidden="true" />
+                      <img src={d.heroImage} alt="" className="deity-card-image h-full w-full object-cover grayscale opacity-80 transition-all duration-700 ease-out" loading="lazy" aria-hidden="true" />
                       <div className="absolute inset-0 bg-primary/0 transition-colors duration-700 group-hover:bg-primary/10 pointer-events-none" aria-hidden="true" />
                     </div>
                     <div className="p-8 flex flex-col justify-between">
